@@ -65,3 +65,16 @@ Informacion que debe persistir el sitio:
 #### Home page
 
 ![Home](/Diseño/W_Home.png)
+
+
+#### Portada Sitio Gastronómico
+
+![Home](/Diseño/W_view_Restaurant.png)
+
+#### Portada Plato
+
+![Home](/Diseño/W_view_Plato.png)
+
+#### Busqueda Sitio Gastronómicoss
+
+![Home](/Diseño/W_Busqueda_Restaurantes.png)
