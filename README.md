@@ -61,3 +61,7 @@ Informacion que debe persistir el sitio:
 - Usuarios: Nombre, Mail, listado de Sitios.
 - Comentario: Nombre, Mail, titulo, puntuacion de sabor, puntuacion de precio, puntuacion de ambiente. 
 
+
+#### Home page
+
+![Home](/Diseño/W_Home.png)
