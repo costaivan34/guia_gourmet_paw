@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block head %}
+{{ parent() }}
+
+
+<script src="/public/script/carusel.js"></script>
+<script src="/public/script/tabs.js"></script>
+<link rel="stylesheet" href="/public/css/dashboard.css">
+<link rel="stylesheet" href="/public/css/resultados.css">
+{% endblock %}
+{% block title %}Sitios{% endblock %}
+{% block header %}
+ 
+{% endblock %}
+
+{% block main %}
+
+  
+  <div id="wrapper">
+    <div class="side-bar">
+      {{ include('partials/sidebar-dashboard.html') }}
+      
+    </div>
+    
+    <div class="info">
+      <h3> Mis Restaurantes</h3>
+      <div class="slideshow-places">
+       
+        <div class="fila">
+          {% for a in datos.sitios %}
+          <div class="columna">
+            <div class="tarjeta">
+             
+              <div class="plates-text" >
+                <br>
+                <a ><h3>{{ a.nombre }}</h3></a>
+                <a href="/resto?Sitio={{ a.idSitio }}"><i class=" fa-2x fa fa-eye"></i> </a>
+                <a href="resto/new"><i class=" fa-2x fa fa-pencil"></i> </a>
+                <a href="resto/new"><i class=" fa-2x fa fa-trash "></i> </a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        <div class="columna">
+          <div class="tarjeta">
+            
+            <div class="plates-text" >
+              <br>
+              <a href="/resto/new"><i class=" fa-3x fa fa-plus-circle"></i> </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+  </div>
+   
+
+{% endblock %}

@@ -1,0 +1,182 @@
+
+  /* The Close Button (x) */
+  .closeModal {
+    position: absolute;
+    right: 11%;
+    top: 6%;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+  }
+  
+  .closeModal:hover,
+  .closeModal:focus {
+    color: #F59287;
+    cursor: pointer;
+  }
+  
+/* The Modal (background) */
+.modal-plato {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 60; /* Sit on top */
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+    overflow: auto;
+  }
+  
+  /* Modal Content/Box */
+  .modal-content-plate {
+    background-color: #F5F2E9;
+    margin: -2% auto 20% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 80%; /*  Could be more or less, depending on screen size */
+   
+    
+    border: 3px solid #E7CF7F;
+    box-sizing: border-box;
+  
+  }
+  
+  .title-plato h3{
+  text-align: center;
+  }
+
+  .title-plato{
+    margin-bottom: 3%;
+  }
+
+  
+  .infoBasica-plato{
+    padding: 5%;
+    padding-top: 1%;
+    }
+  
+  .descrip img{
+    width: 40%;
+    height: 40%;
+    margin: 2%;
+    margin-top: 0;
+    margin-left: 0;
+    float:left;
+  }
+  
+  .descrip dt{
+    margin: 0;
+  }
+
+ 
+  
+  .descrip p{
+    padding: 0;
+    font-size: 20px;
+    line-height : 28px;
+    text-align: justify;
+    box-sizing: border-box;
+  }
+  
+  .descrip{
+    box-sizing: border-box;
+  }
+
+  .infonut{
+    box-sizing: border-box;
+    float: left;
+    width: 50%;
+    margin-right: 2%;
+    padding-bottom: 2%;
+    
+  }
+  .infonut h3{
+    text-align: center;
+  }
+  
+  
+  .carta-plato{
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 2% 3%;
+    border: transparent;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+    padding: 10px;
+    text-align: center;
+    background-color: #E7CF7F;
+  }
+
+  .carta-plato img{
+    box-sizing: border-box;
+    background-size: cover;
+    max-width: 100%;
+    max-height: 200px;
+    overflow: hidden;
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
+  }
+  
+dl.caracteristicas {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  overflow: visible;
+  padding-left: 2.5%;
+  padding-right: 2.5%;
+  
+}
+dl.caracteristicas dt {
+  width: 2px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  flex: 0 0 25%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  border-bottom: 1px solid #E7CF7F;
+  
+}
+dl.caracteristicas dd {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  flex: 0 0 75%;
+  border-bottom: 1px solid #E7CF7F;
+}
+
+  .contiene{
+      width: 30%;
+      float: right;
+      margin-right: 20px;
+  }
+  
+  .contiene li:after{
+    margin: 0;
+  }
+
+  .datos  {
+    margin: 10%;
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+  }
+
+  .datos li{
+      height: 80px;
+      width: 80px;
+      margin-left: 10%;
+      margin-top: 10%;
+      
+  }
+
+  .datos img{
+    height: 80px;
+      width: 80px;
+  }
+
+  .secciion{
+   
+    display: flex;
+  }

@@ -1,0 +1,49 @@
+body{
+  overflow: hidden;
+}
+
+
+#mapa {
+  height:100%;
+  width:100%;
+  min-height: 550px;
+ 
+}
+
+#resultado-mapa{
+  position: fixed;
+  border: 2px solid #E7CF7F;
+  width: 94%;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+ 
+}
+.actualPosition{
+  background-image: url('/public/res/location.svg');
+  background-size: cover;
+ 
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  
+}
+
+.marker {
+  background-image: url('/public/res/map.svg');
+  background-size: cover;
+  
+  background-color: rgb(1 1 512 512);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.mapboxgl-popup {
+  max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}

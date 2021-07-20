@@ -1,0 +1,463 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanalei+Fill&display=swap');
+
+html {
+  min-height: 150%;
+  position: relative;
+}
+
+main{
+  margin-top: 70px;
+  margin-bottom: 20px;
+  
+  min-height: 100%;
+}
+
+body {
+  background: #F5F2E9;
+  margin: 0;
+ 
+  
+}
+
+#footer {
+  
+}
+
+
+
+footer{
+  /*
+  height: 81px;
+  position: relative;
+  top: 60%;*/
+  width: 100%;
+  box-shadow: 0px 0px 10px 0px #F59287;
+  background-color: #E7CF7F;
+  float: left;
+  clear: left;
+}
+
+
+  
+footer section{
+  margin-top:20px ;
+  margin-left: 120px;
+  display:inline;
+  padding-right:20px;
+  
+} 
+
+.topnav {
+  box-shadow:   0px 0px 7px 0px #F59287;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  padding-left: 300px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  width: 99%;
+  height: 70px;
+  background-color: #e7cf7f;
+
+
+  float: left;
+}
+
+.topnav img{
+  margin-top: 15px;
+  height:35px;
+  width: 35px;
+}
+
+.nav-logo{  
+  margin-left: 90px;
+  height:40px;
+  width: 40px;
+}
+
+.nav-logo img{
+  top:0px;
+  left: 20px;
+  position: absolute;
+  height:70px;
+  width: 200px;
+  margin: 0;
+  padding: 0;
+}
+
+
+.topnav a {
+  -webkit-text-stroke: 0.4px black;
+  float: left;
+  color: black;
+  font-family: 'Hanalei Fill', cursive;
+  
+  text-align: center;
+  padding: 25px 20px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+
+.topnav a:hover {
+  color: grey; 
+  color: #F59287;
+}
+
+
+
+.aviso{
+  background-color: #E7CF7F;
+
+}
+
+
+.aviso h4{
+  margin-left: 20px;
+  padding-left:20px;
+}
+
+.caja{
+  display: flex;
+  position: relative;
+    bottom: 0;
+    list-style-type: none;
+  background-color: #E7CF7F;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  
+  text-align: center;
+
+}
+
+.footer-logo{
+  position: relative;
+  
+  left: -10px;
+  height: 150px;
+  width: 150px;
+}
+
+.footer-logo-box{
+margin: 0;
+padding: 0;
+}
+  
+footer h3 {
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    color: black;
+      
+}
+  
+h3 {
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  color: black;
+    
+}
+
+#redesSociales li{
+  list-style-type: none;
+   display: inline;
+   padding-right: 5px;
+}
+
+.redes img{
+  fill:#efc411;
+  height: 40px;
+  width: 40px;
+}
+
+.redes img:hover{
+  background-color: #F59287;
+  height: 40px;
+  width: 40px;
+}
+  
+
+
+#contactanos li {
+  
+  margin: 10px 0;
+}
+  
+  
+#contactanos img {
+    width: 10px;
+    margin-right: 4px;
+}
+    
+#ToTheTop {
+   
+    height: 1;
+    width: 1;
+    color: #E7CF7F;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 50px solid gray;
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    cursor: pointer;
+   
+ 
+}
+  
+#ToTheTop:hover{
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-bottom: 50px solid #F59287;
+
+}
+.linea{
+  border: 2px solid #F5F2E9;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+#tope{
+  margin: 0;
+  padding: 0;
+}
+
+.links a{
+  
+  font-family: 'Hanalei Fill', cursive;
+  float: left;
+  color: black;
+  text-align: center;
+  padding:10px 20px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+
+.links a:hover{
+  color: #F59287;
+}
+
+
+hr {
+  margin: 0;
+  border-top: 1px solid #E7CF7F;
+}
+
+.loginico{
+margin-top: 15px;
+}
+
+.loginico:hover{
+  border-radius: 50%;
+  color: #F59287;
+}
+
+
+input[type=text]:before, input[type=password]:before{
+  font-family: 'FontAwesome';
+  color:red;
+  position: relative;
+  left: -5px;
+  content: "\f007";
+
+}
+
+/* Full-width input fields */
+.caja-login {
+  font-family: 'FontAwesome';
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  margin-top: 20px;
+ 
+  display: flex;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+ 
+}
+
+/* Set a style for all buttons */
+.modal-content button {
+  background-color: #E7CF7F;
+  color: black;
+  padding: 14px 20px;
+  margin: 15px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+
+
+  -webkit-text-stroke: 0.4px black;
+  float: left;
+  color: black;
+  font-family: 'Hanalei Fill', cursive;
+  
+  
+}
+
+button:hover {
+ 
+  color: grey; 
+  color: #F59287;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #E7CF7F;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 25px;
+  padding-bottom: 25%;
+  padding-top: 0px;
+}
+
+span.psw {
+  float: right;
+ 
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 60; /* Sit on top */
+  top: 0;
+  width: 100%; /* Full width */
+  height: auto; /* Full height */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+  
+}
+
+/* Modal Content/Box */
+.modal-content {
+  
+  background-color: #F5F2E9;
+  margin: -2% auto 20% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 30%; /* Could be more or less, depending on screen size */
+  height: 60%;
+  padding: 20px;
+
+  border: 3px solid #E7CF7F;
+  
+
+}
+
+
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+  
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+}
+
+/* Style the form icons */
+.icon {
+  padding: 10px;
+  background: #F59287;
+  color: white;
+  min-width: 50px;
+  text-align: center;
+}
+
+
+.logout-button{
+  font-family: 'Hanalei Fill', cursive;
+  text-align: center;
+  margin-top: 1.3%;
+  margin-left: -1%;
+  padding: 0.5%;
+  padding-right: 1%;
+  padding-left: 1%;
+  background-color: black;
+  color: white;
+  border: 1px solid transparent;
+	border-radius: .25rem;
+}
+
+.logout-button:hover{
+  background: #F59287;
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #F59287;
+  cursor: pointer;
+}
+
+
+
+.alert {
+	position: relative;
+	padding: .75rem 1.25rem;
+	border: 1px solid transparent;
+	border-radius: .25rem;
+  text-align: center;
+  margin-top:8px;
+}
+
+.alert-success {
+	color: #155724;
+	background-color: #d4edda;
+	border-color: #c3e6cb;
+}
+
+.alert-danger {
+	color: #721c24;
+	background-color: #f8d7da;
+	border-color: #f5c6cb;
+}

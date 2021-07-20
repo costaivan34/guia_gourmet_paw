@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{ parent() }}
+    <meta name="keywords" content="PAW,2018,Templates,PHP">
+    <link rel="stylesheet" href="/public/css/search-bar.css">
+    
+    <link rel="stylesheet" href="/public/css/resultados.css">
+    <link rel="stylesheet" href="/public/css/paginacion.css">
+{% endblock %}
+
+{% block title %}Buscador{% endblock %}
+
+{% block header %}
+    
+{% endblock %}
+{% block nav %}
+  {{ include('partials/nav.html') }}
+  {% endblock %}
+{% block main %}
+<article>
+<section id="search">
+       <script>
+        
+            var clave = "{{datos.clave}}";
+            var  categoria = "{{datos.categoria}}";
+            var provincia = "{{datos.provincia}}"; 
+          </script>
+  <script src="/public/script/busqueda.js"></script>
+<form class="barra-busqueda" action="" method="GET">  
+  <h3>Encuentra al mejor restaurante para ti</h3>
+      <input class="selectClave" id="palabraClave" stype="text" placeholder="Palabra Clave" name="clave" >
+        <select name="categorias" id="categorias" class="selectClave" required >
+          <option value="0">Selecionar Categoria:</option>
+        </select>
+        <select name="provincias" id="provincias" class="selectClave" required>
+          <option value="0">Selecionar Ubicación:</option>
+        </select>
+      <button  onclick="getDatos();" type="submit">BUSCAR</button>
+  </form>
+</section>
+
+<section id="resultados">
+  <div class="slideshow-places">
+    <h3> Resultados de la busqueda</h3>
+    <div id="fila">
+
+      
+    </div>
+    <ul class="paginacion" id="paginacionPlatos">
+    
+    </ul>
+  </div>
+      
+  
+</section>
+</article>
+
+{% endblock %}
+
