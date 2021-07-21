@@ -50,7 +50,6 @@ El sistema cuenta con las siguientes **secciones**:
 - Login 
 - Nuevo Usuario.
 
-### Tareas
 
 #### Modelo de datos
 
