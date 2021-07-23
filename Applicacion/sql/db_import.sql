@@ -23,11 +23,11 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
-CREATE SCHEMA foodapp;
+
 --
 -- Estructura de tabla para la tabla `caracteristicaplato`
 --
-USE foodapp;
+
 CREATE TABLE `caracteristicaplato` (
   `idCaracteristica` int(11) NOT NULL,
   `nombre` varchar(30) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
