@@ -21,7 +21,7 @@
     $router->get('resto/new', 'PagesController@newOne');
     $router->get('platos', 'SitioController@getPlatos');
     $router->get('plato', 'PlatoController@getOne');
-    $router->get('platosPaginacion', 'SitioController@getPlatoPage');
+    $router->get('paginacionPlatos', 'SitioController@getPlatoPage');
     $router->get('categorias', 'SitioController@getCategorias');
     $router->get('cerca', 'SitioController@cerca');
     $router->get('marcadores', 'SitioController@getMarcadores');
@@ -30,7 +30,7 @@
     $router->get('buscador', 'SitioController@buscador');
     $router->get('buscar', 'SitioController@buscar');
     
-    $router->get('comentariosPaginacion', 'SitioController@getComentarioPage');
+    $router->get('paginacionComentarios', 'SitioController@getComentarioPage');
     $router->get('comentarios', 'SitioController@getComentarios');
     $router->post('sendComentario', 'SitioController@sendComentario');
     $router->get('not_found', 'PagesController@notFound');

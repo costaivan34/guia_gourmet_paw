@@ -21,7 +21,6 @@ body{
 .actualPosition{
   background-image: url('/public/res/location.svg');
   background-size: cover;
- 
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -31,7 +30,6 @@ body{
 .marker {
   background-image: url('/public/res/map.svg');
   background-size: cover;
-  
   background-color: rgb(1 1 512 512);
   width: 40px;
   height: 40px;
@@ -41,9 +39,27 @@ body{
 
 .mapboxgl-popup {
   max-width: 200px;
+
 }
 
-.mapboxgl-popup-content {
+.imagen_pop{
+  max-width: 200px;
+}
+
+#mapa .mapboxgl-popup-content {
   text-align: center;
   font-family: 'Open Sans', sans-serif;
+  border-radius: 10%;
+  background-color: #E7CF7F;
+}
+
+#mapa .mapboxgl-popup-tip{
+  border-top-color: #E7CF7F;
+}
+
+#mapa .mapboxgl-popup-close-button{
+  margin-top: 4%;
+  margin-right: 2%;
+  width: 15%;
+  height: 15% ;
 }

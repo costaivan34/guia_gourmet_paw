@@ -1,9 +1,5 @@
-
 window.addEventListener("DOMContentLoaded", function () {
-
   currentPosition();
- // cargarMarcadores("navarro","buenos aires");
-  
 });
 
 function agregarMarcador(datosMarcador){
@@ -15,28 +11,25 @@ function agregarMarcador(datosMarcador){
    new mapboxgl.Marker(el,{'color': '#00000F'})
    .setLngLat([datosMarcador.Y, datosMarcador.X])
    .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-     .setHTML('<h3>' + datosMarcador.nombre + '</h3><a href="/resto?Sitio='  + datosMarcador.idSitio + '></a>'))
-   .addTo(map);
+     .setHTML('<a href="/resto?Sitio='+ datosMarcador.idSitio + '"><h3>' + datosMarcador.nombre +
+      '</h3></a> <img class="imagen_pop" src="'+ datosMarcador.path+
+      '" ><p>' + datosMarcador.cat + '</p>  '))
+     .addTo(map);
+
  }
 
 function cargarMarcadores(ciudad,provincia){
   var xmlHttpRequest=new XMLHttpRequest();
 	xmlHttpRequest.onreadystatechange=function() {
 		if (xmlHttpRequest.readyState==4 && xmlHttpRequest.status==200) { 
- //    console.log( xmlHttpRequest.responseText );
       var respuesta =JSON.parse(  xmlHttpRequest.responseText );
-      console.log( respuesta );
-     //currentPosition(longitud,latitud);
       for (cat of respuesta) {
         agregarMarcador(cat);
-       console.log(cat);
       }
 		}else{
-    //  alert("ME CAGO EN LA PUTA");
+ 
     }  
 	}
- // console.log( provincia +"-------"+ciudad );
-
   xmlHttpRequest.open("GET","marcadores?Provincia="+provincia+"&Ciudad="+ciudad,true);
 	xmlHttpRequest.send();
 	event.preventDefault();
@@ -60,11 +53,9 @@ function currentPosition(){
   datos= datos.replaceAll(':', '":"');
   datos= datos.replaceAll('}', '"}');
  var respuesta =JSON.parse( datos );*/
- //var elemento  = document.getElementById("nombreUsuario");
-  // elemento.text=respuesta.user;
  //console.log(respuesta);
  loadmapa(longitud,latitud);
- cargarMarcadores(ciudad,region);
+ //cargarMarcadores(ciudad,region);
  cargarMarcadores("navarro","buenos aires");
   
 }

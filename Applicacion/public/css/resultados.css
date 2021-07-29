@@ -1,9 +1,11 @@
 /* Float four columns side by side */
-.columna {
-  float: left;
-  width: 100%;
-  padding: 0 10px;
-  
+#columna {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: auto;
+  grid-gap: 1rem;
+  width:100%;
+  float:none;
 }
 
 /* Remove extra left and right margins, due to padding in columns */
@@ -26,7 +28,7 @@
   padding: 4px;
   text-align: center;
   background-color: #f1f1f1 ;
-  width: 22%;
+ 
   margin: 2%;
   margin-right: 0%;
   border-top-left-radius: 5%;
@@ -72,6 +74,7 @@ text-decoration: none;
   }
   
   .slideshow-places h3{
+    font-family: 'Shadows Into Light', cursive;
     margin-bottom: 2%;
       text-align: center;
   }

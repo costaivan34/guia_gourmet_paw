@@ -148,47 +148,47 @@ function agregarSitioPaginacion(respuesta,clave,categoria,provincia,pagina){
 
 
 function agregarSitio(respuesta){
+
   var pMarker=document.createElement("p");
   var i=document.createElement("i");
   i.className="fa fa-map-marker";
   pMarker.appendChild(i);
   var textNode1 = document.createTextNode(respuesta.ciudad+", "+respuesta.provincia);
   pMarker.appendChild(textNode1);
+
   var pComent=document.createElement("p");
   var i1=document.createElement("i");
   i1.className="fa fa-commenting";
   pComent.appendChild(i1);
   var textNode2 = document.createTextNode(respuesta.Ncomentarios);
   pComent.appendChild(textNode2);
+
   var img= document.createElement("img");
   img.src=respuesta.path;
-  var divIMG = document.createElement("div");
-  divIMG.appendChild(img);
+
   var aNombre =document.createElement("a");
   aNombre.href="/resto?Sitio="+respuesta.idSitio;
   var h3nombre = document.createElement("h3");
   var textNode = document.createTextNode(respuesta.nombre);
   h3nombre.appendChild(textNode);
   aNombre.appendChild(h3nombre);
+
   var divPlates = document.createElement("div");
   divPlates.className="plates-text";
+  divPlates.appendChild(img);
   divPlates.appendChild(aNombre);
   divPlates.appendChild(pMarker);
   divPlates.appendChild(pComent);
   var divTarjeta = document.createElement("div");
   divTarjeta.className="tarjeta";
-  divTarjeta.appendChild(divIMG);
   divTarjeta.appendChild(divPlates);
-  var divColumna = document.createElement("div");
-  divColumna.className="columna";
-  divColumna.appendChild(divTarjeta);
-  document.getElementById("fila").appendChild(divColumna);
+  document.getElementById("columna").appendChild(divTarjeta);
 
 }
 
 function buscadorBuscame(clave,categoria,provincia,pagina){
   var xmlHttpRequest=new XMLHttpRequest();
-  var elemento  = document.getElementById("fila");
+  var elemento  = document.getElementById("columna");
   var elemento2  = document.getElementById("paginacionPlatos");
   var pR=document.createElement("p");
   pR.className="error";

@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="/public/css/platoSingle.css">
 <link rel="stylesheet" href="/public/css/comentarios.css">
 <link rel="stylesheet" href="/public/css/carrusel.css">
+<link rel="stylesheet" href="/public/css/partials.css">
 <link rel="stylesheet" href="/public/css/paginacion.css">
 <script src="/public/script/carusel.js"></script>
 <script src="/public/script/tabs.js"></script>
@@ -36,6 +37,13 @@
     {% endfor %}
       <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
       <a class="next" onclick="plusSlides(1)">&#10095;</a>
+          <!-- The dots/circles -->
+<div style="text-align:center">
+  {% for N in datos.Imagenes %}
+  <span class="dot" onclick="currentSlide( {{ datos.loop.index-1 }} )"></span>
+
+  {% endfor %}
+</div>
     </div>
     
     <div class="nombre-block">
@@ -144,11 +152,14 @@
              
             </ul>
         </section>
-        <form method="post" action="sendComentario" class="deja-comentario">
+        
+        <form  name="comentario" method="post" action="sendComentario" class="deja-comentario">
+          <div id="messageBoxResult"></div>
           <h3>¡Deja un comentario!</h3>
+          
           <textarea id="textoComent" name="COMMENT" rows="10" cols="50" wrap="soft" placeholder="Máximo 1000 carácteres" maxlength="1000" required></textarea>*
-          <input id="nombreComent" type="text" name="NAME" value="" size="20" maxlength="20" placeholder="Nombre (requerido)" required />     *
-          <input id="mailComent" type="text" name="EMAIL" value="" size="20" maxlength="20" placeholder="Correo electrónico" />*
+          <input id="nombreComent" type="text" name="NAME" value="" size="20" maxlength="100" placeholder="Nombre (requerido)" required />     *
+          <input id="mailComent" type="text" name="EMAIL" value="" size="20" maxlength="100" placeholder="Correo electrónico" />*
           <ul class="valoracion2">
             <li> <h4>Precio</h4>
               <div class="valoracionPrecio clasificacion">
