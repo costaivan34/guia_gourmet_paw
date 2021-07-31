@@ -1,0 +1,67 @@
+input{
+  display: block;
+  background-color:  rgb(245, 255, 240);
+  border: 0.5px solid #E7CF7F;
+  padding: 1%;
+
+  width: 90%;
+  margin-left: 4%;
+  margin-top: 0.5%;
+  margin-bottom: 2%;
+  margin-right: 0%;
+}
+select{
+  display: block;
+  background-color:  rgb(245, 255, 240);
+  border: 0.5px solid #E7CF7F;
+  padding: 1%;
+
+  width: 90%;
+  margin-left: 4%;
+  margin-top: 0.5%;
+  margin-bottom: 2%;
+  margin-right: 0%;
+}
+
+input[type="button"]{
+  padding: 3%;
+  margin-top: 3%;
+  margin-left: 5%;
+  border: 0.5px solid  #F5F2E9 ;
+  background-color:#E7CF7F;
+}
+
+fieldset{
+  padding: 1%;
+  margin-top: 2%;
+  background-color: rgb(245, 255, 240);
+}
+
+ label{
+  margin-left: 4%;
+}
+
+fieldset p{
+  margin-left: 4%;
+}
+
+
+form {
+  padding:2%;
+  padding-left: 5%;
+  margin-top: 2%;
+  margin-left: 15%;
+  border: 2px solid #E7CF7F;
+  width: 60%;
+}
+
+h3{
+  text-align: center;
+}
+
+
+
+form legend{
+  padding-bottom: 2%;
+  background-color:  rgb(245, 255, 240);
+}

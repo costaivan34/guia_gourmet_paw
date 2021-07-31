@@ -105,30 +105,10 @@ class SitioController extends Controller{
         //var_dump($datos);
         return  $this->model->getCategorias();
     }
-    
-    public function getRealIP() {
-        if (!empty($_SERVER['HTTP_CLIENT_IP']))
-            return $_SERVER['HTTP_CLIENT_IP'];
-           
-        if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
-            return $_SERVER['HTTP_X_FORWARDED_FOR'];
-        return $_SERVER['REMOTE_ADDR'];
-    }
+ 
 
     public function cerca(){
         session_start();
-        $ip = $this->getRealIP();
-        $ip = "190.50.95.168";
-        //$ip = '108.62.211.172';
-        $informacionSolicitud = file_get_contents("http://www.geoplugin.net/json.gp?ip=".$ip);
-        $dataSolicitud = json_decode($informacionSolicitud);
-        $datos["latitud"] = $dataSolicitud->geoplugin_latitude;
-        $datos["longitud"] = $dataSolicitud->geoplugin_longitude;
-        $datos["latitud"] =-35.0007752 ;
-        $datos["longitud"] =-59.276512 ;
-        $datos["ciudad"]= $dataSolicitud->geoplugin_city;
-        $datos["region"]= $dataSolicitud->geoplugin_region;
-       
         if (isset($_SESSION["user"])){
             $datos["user"] = $_SESSION["user"];
         }else{
@@ -141,9 +121,8 @@ class SitioController extends Controller{
 
 
     public function getMarcadores(){
-        $Ciudad = htmlspecialchars($_GET['Ciudad']);
-        $Provincia = htmlspecialchars($_GET['Provincia']);
-        $Datos=$this->model->getMarcadores($Ciudad,$Provincia);
+
+        $Datos=$this->model->getMarcadores();
       //  $data = json_encode( $Datos, JSON_FORCE_OBJECT);
        return  $Datos;
     }

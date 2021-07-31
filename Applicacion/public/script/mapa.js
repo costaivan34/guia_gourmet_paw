@@ -1,5 +1,14 @@
 window.addEventListener("DOMContentLoaded", function () {
-  currentPosition();
+  if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      currentPosition(position.coords.latitude, position.coords.longitude);
+    }, function(error){
+      const mensaje = document.getElementById("messageBox");
+      mensaje.innerHTML = `<div class="alert alert-danger" role="alert">
+      Es necesario habilitar la ubicacion para utilizar esta función</div>`;
+  
+    })
+  }
 });
 
 function agregarMarcador(datosMarcador){
@@ -15,24 +24,48 @@ function agregarMarcador(datosMarcador){
       '</h3></a> <img class="imagen_pop" src="'+ datosMarcador.path+
       '" ><p>' + datosMarcador.cat + '</p>  '))
      .addTo(map);
+     // add markers to map
+   // create a HTML element for each feature
+   var el = document.createElement('div');
+   el.className = 'marker';
+   // make a marker for each feature and add to the map
+   new mapboxgl.Marker(el,{'color': '#00000F'})
+   .setLngLat([datosMarcador.Y+6, datosMarcador.X+5])
+   .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+     .setHTML('<a href="/resto?Sitio='+ datosMarcador.idSitio + '"><h3>' + datosMarcador.nombre +
+      '</h3></a> <img class="imagen_pop" src="'+ datosMarcador.path+
+      '" ><p>' + datosMarcador.cat + '</p>  '))
+     .addTo(map);
+ 
+  // add markers to map
+   // create a HTML element for each feature
+   var el = document.createElement('div');
+   el.className = 'marker';
+   // make a marker for each feature and add to the map
+   new mapboxgl.Marker(el,{'color': '#00000F'})
+   .setLngLat([datosMarcador.X, datosMarcador.Y])
+   .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+     .setHTML('<a href="/resto?Sitio='+ datosMarcador.idSitio + '"><h3>' + datosMarcador.nombre +
+      '</h3></a> <img class="imagen_pop" src="'+ datosMarcador.path+
+      '" ><p>' + datosMarcador.cat + '</p>  '))
+     .addTo(map);
 
  }
 
-function cargarMarcadores(ciudad,provincia){
+function cargarMarcadores(){
   var xmlHttpRequest=new XMLHttpRequest();
 	xmlHttpRequest.onreadystatechange=function() {
 		if (xmlHttpRequest.readyState==4 && xmlHttpRequest.status==200) { 
       var respuesta =JSON.parse(  xmlHttpRequest.responseText );
+      console.log(respuesta)
       for (cat of respuesta) {
         agregarMarcador(cat);
       }
-		}else{
- 
-    }  
+		}
 	}
-  xmlHttpRequest.open("GET","marcadores?Provincia="+provincia+"&Ciudad="+ciudad,true);
+  xmlHttpRequest.open("GET","marcadores",true);
 	xmlHttpRequest.send();
-	event.preventDefault();
+
 }
 
 function loadmapa(longitud,latitud) {
@@ -45,7 +78,7 @@ function loadmapa(longitud,latitud) {
       new mapboxgl.Marker(el,{'color': '#00000F'}).setLngLat([longitud,latitud]).addTo(map);
 }
 
-function currentPosition(){
+function currentPosition(latitude,longitude){
 /*  console.log(datos);
   datos= datos.replaceAll('&quot;', '');
   datos= datos.replaceAll('{', '{"');
@@ -54,9 +87,9 @@ function currentPosition(){
   datos= datos.replaceAll('}', '"}');
  var respuesta =JSON.parse( datos );*/
  //console.log(respuesta);
- loadmapa(longitud,latitud);
+ loadmapa(longitude,latitude);
  //cargarMarcadores(ciudad,region);
- cargarMarcadores("navarro","buenos aires");
+ cargarMarcadores();
   
 }
 

@@ -89,10 +89,15 @@ class QueryBuilder{
         return $statement->fetchColumn();
     }
 
-   
-
-
-
+    public function agregarUsuario($mail ,$nombreUsuario ,$nombre ,$apellido ,$pais ,$telefono,$password,$path_img){
+        $statement = $this->pdo->prepare("INSERT INTO  usuarios (mail,nombreUsuario,nombre,apellido,pais,telefono,password,fotoPerfil) VALUES ('$mail' ,'$nombreUsuario' ,'$nombre' ,'$apellido','$pais' ,'$telefono','$password', '$path_img')");
+        $statement->execute();
+        if($statement->rowCount() > 0){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
 
 public function selectSitio($idSitio){
     /*
@@ -250,14 +255,13 @@ public function selectDestacados(){
     return $statement->fetchAll(PDO::FETCH_CLASS);
 }
 
-public function selectCerca($Ciudad,$Provincia){ 
-
+public function selectCerca(){ 
     $statement = $this->pdo->prepare("SELECT s.idSitio,s.nombre,u.ciudad, u.provincia, u.X, u.Y,count(idComentario)
     as Ncomentarios, i.path, ca.nombre as cat FROM sitios s INNER JOIN comentariositios cs ON  s.idSitio = cs.idSitio
     INNER JOIN ubicacion u  ON  s.idSitio = u.idSitio
     INNER JOIN imagenessitios i ON  s.idSitio = i.idSitio
     INNER JOIN categorias ca ON s.idCategoria= ca.idCategoria
-    WHERE u.ciudad like CONCAT('%','$Ciudad','%') AND u.provincia like CONCAT('%','$Provincia','%') ");
+     ");
 
 
     /*$statement = $this->pdo->prepare("SELECT s.idSitio, s.nombre, s.idCategoria, u.X, u.Y 

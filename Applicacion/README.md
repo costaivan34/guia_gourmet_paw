@@ -1,7 +1,7 @@
 ## Instalación
 
  - Clonar el repositorio
- - Crear un schema de base de datos con algun cliente MySQL
+ - Crear un schema de base de datos con algun cliente MySQL(el schema debe tener codificacion de tipo "latin")
  - Ejecutar los migrations del directorio `sql/` en orden
  - Crear un archivo `config.php` (Hay un ejemplo para copiar en `config.php.example`)
   - Configurar la base de datos creada y los usuarios correspondientes

@@ -118,9 +118,8 @@ class Sitio extends Model{
    
     }
 
-
-    public function getMarcadores($Ciudad,$Provincia){
-        $Marcadores = $this->db->selectCerca($Ciudad,$Provincia);
+    public function getMarcadores(){
+        $Marcadores = $this->db->selectCerca();
         $basicMarcadores = json_encode($Marcadores);
         return $basicMarcadores;
     }

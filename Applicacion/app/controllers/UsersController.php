@@ -26,11 +26,23 @@ class UsersController extends Controller{
      * Store a new user in the database.
      */
     public function store(){
-        $user = [
-            'name' => $_POST['name']
+       $path_img = "/private/usuarios/1/perfil.jpg";
+        $user = [ 
+            'nameUser'  => $_POST['nameUser'],
+            'nombreUser'  => $_POST['nombreUser'],
+            'apellidoUser'  => $_POST['apellidoUser'],
+            'mailUser'  => $_POST['mailUser'],
+            'paisUser'  => $_POST['paisUser'],
+            'telefonoUser'  => $_POST['telefonoUser'],
+            'passwordNueva' => $_POST['passwordNueva'],
         ];
-        $this->model->insert($user);
-        return redirect('users');
+        $statement= $this->model->agregarUsuario($_POST['nameUser'],$_POST['nombreUser'],$_POST['apellidoUser'],
+        $_POST['mailUser'],$_POST['paisUser'],$_POST['telefonoUser'],$_POST['passwordNueva'],$path_img );
+         if(($statement)==1){
+         return 1;
+         }else{
+        return 0;
+       }
     }
 
     public function validarLogin(){
@@ -44,7 +56,6 @@ class UsersController extends Controller{
             $_SESSION["user"]=$s[0]->nombreUsuario;
             return 1;
         }else{
-            unset($_SESSION["user"]);
             return 0;
         }       
     }
@@ -129,5 +140,8 @@ class UsersController extends Controller{
         }
     }
 
-
+    public function new_user(){
+            $datos="";
+            return view('/users/create_user', compact('datos'));
+    }
 }

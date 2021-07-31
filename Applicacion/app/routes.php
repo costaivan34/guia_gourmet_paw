@@ -12,6 +12,9 @@
     $router->get('dashboard/sitios', 'UsersController@dash_sitios');
     $router->get('dashboard/password', 'UsersController@dash_password');
     $router->get('dashboard/setting', 'PagesController@dash');
+    $router->get('user/new', 'UsersController@new_user' );
+    $router->post('user/CreateUser', 'UsersController@store' );
+
 
     $router->post('actualizarPerfil', 'UsersController@actualizarPerfil');
     $router->post('cambioPassword', 'UsersController@actualizarPassword');
@@ -25,8 +28,6 @@
     $router->get('categorias', 'SitioController@getCategorias');
     $router->get('cerca', 'SitioController@cerca');
     $router->get('marcadores', 'SitioController@getMarcadores');
-    $router->get('currentPosition', 'SitioController@currentPosition');
-
     $router->get('buscador', 'SitioController@buscador');
     $router->get('buscar', 'SitioController@buscar');
     

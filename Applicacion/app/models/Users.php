@@ -13,6 +13,13 @@ class Users extends Model
         $this->db->insert($this->table, $user);
     }
 
+    public function agregarUsuario($nombreUsuario ,$nombre ,$apellido ,$mail ,$pais ,$telefono,$password,$path_img){
+        $password= md5($password,false);
+        $datos = $this->db->agregarUsuario($mail ,$nombreUsuario ,$nombre ,$apellido ,$pais ,$telefono,$password,$path_img);
+        return $datos;
+    }
+
+
     public function updateUsuario($mail, $nombre, $apellido, $ubicacion, $telefono){
         $datos = $this->db->updateUsuario($mail, $nombre, $apellido, $ubicacion, $telefono);
         return $datos;
