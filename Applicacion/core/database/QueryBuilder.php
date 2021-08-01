@@ -99,6 +99,17 @@ class QueryBuilder{
         }
     }
 
+    public function agregarConsulta($nombre ,$apellido ,$mail ,$ftexto){
+        $statement = $this->pdo->prepare("INSERT INTO  consultas (mail,nombre,apellido,mensaje) VALUES ('$mail','$nombre' ,'$apellido','$ftexto' )");
+        $statement->execute();
+        if($statement->rowCount() > 0){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
+
 public function selectSitio($idSitio){
     /*
     $statement = $this->pdo->prepare("SELECT idsitio, nombre, descripcion, telefono, sitioweb, valoracionPrecio,

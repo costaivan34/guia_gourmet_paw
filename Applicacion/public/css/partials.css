@@ -298,7 +298,7 @@ input[type=text]:before, input[type=password]:before{
 
 
   -webkit-text-stroke: 0.4px black;
-  float: left;
+ 
   color: black;
   font-family: 'Hanalei Fill', cursive;
   
@@ -321,7 +321,7 @@ button:hover {
 /* Center the image and position the close button */
 .imgcontainer {
   text-align: center;
-  margin: 24px 0 12px 0;
+  margin: 5px 0 12px 0;
   position: relative;
   padding-bottom: 20px;
   border-bottom: 2px solid #E7CF7F;
@@ -334,7 +334,7 @@ img.avatar {
 
 .container {
   padding: 25px;
-  padding-bottom: 25%;
+  padding-bottom: 0%;
   padding-top: 0px;
 }
 
@@ -359,7 +359,6 @@ span.psw {
 
 /* Modal Content/Box */
 .modal-content {
-  
   background-color: #F5F2E9;
   margin: -2% auto 20% auto; /* 5% from the top, 15% from the bottom and centered */
   border: 1px solid #888;

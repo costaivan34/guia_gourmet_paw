@@ -19,7 +19,6 @@ class Users extends Model
         return $datos;
     }
 
-
     public function updateUsuario($mail, $nombre, $apellido, $ubicacion, $telefono){
         $datos = $this->db->updateUsuario($mail, $nombre, $apellido, $ubicacion, $telefono);
         return $datos;

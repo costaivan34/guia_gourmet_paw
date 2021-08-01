@@ -192,7 +192,7 @@ function buscadorBuscame(clave,categoria,provincia,pagina){
   var elemento2  = document.getElementById("paginacionPlatos");
   var pR=document.createElement("p");
   pR.className="error";
-  var textNode2 = document.createTextNode("----------------No hay resultados---------------- ");
+  var textNode2 = document.createTextNode("--------------No hay resultados--------------");
   pR.appendChild(textNode2);
   while (elemento.firstChild) {
     elemento.removeChild(elemento.firstChild);

@@ -98,6 +98,11 @@ class Sitio extends Model{
     }
 
 
+    public function agregarConsulta($nombre ,$apellido ,$mail ,$texto){
+        $datos = $this->db->agregarConsulta($nombre ,$apellido ,$mail ,$texto);
+        return $datos;
+    }
+
 
 
 

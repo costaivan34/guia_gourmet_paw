@@ -30,6 +30,7 @@
   background-color: #f1f1f1 ;
  
   margin: 2%;
+  margin-bottom: 10%;
   margin-right: 0%;
   border-top-left-radius: 5%;
   border-top-right-radius: 5%;
@@ -67,7 +68,8 @@ text-decoration: none;
   padding-left: 8%;
   padding-right: 5%;
   margin-left: 2.50%;
-  margin-top: 5%;
+  margin-top: 2%;
+  margin-bottom: 5%;
   border: 2px solid #E7CF7F;
   width: 81%;
   
@@ -80,6 +82,9 @@ text-decoration: none;
   }
 
   .error{
+    padding: 50%;
+    margin-left:100%;
     text-align: center;
     color: #F59287;
+    width: 100%;
   }

@@ -4,7 +4,7 @@ function validarDatos(nameUser,nombreUser,apellidoUser,mailUser,paisUser,telefon
   telefonoRegex = /^[2-9]\d{2}[2-9]\d{2}\d{4}$/;
   passwordRegex =  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
 
-  if (nameUser.length<0 && nombreUser.length<0 && apellidoUser.length<0){
+  if (nameUser.length<0 || nombreUser.length<0 || apellidoUser.length<0){
     mensaje="El nombre de usuario o nombre y apellido ingresados no es valido. Por favor, revisa los datos e inténtalo de nuevo."
     return false;
   }

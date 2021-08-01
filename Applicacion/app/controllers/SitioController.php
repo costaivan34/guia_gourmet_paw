@@ -41,6 +41,26 @@ class SitioController extends Controller{
     return $this->model->getPaginacionComentarios($_POST['sitio']);
    }
 
+   public function sendConsulta(){	
+        $comentario = [ 
+            'nombre' => $_POST['nombre'],
+            'apellido' => $_POST['apellido'],
+            'mail' => $_POST['mail'],
+            'texto' => $_POST['texto'],
+        ];
+        $statement= $this->model->agregarConsulta($_POST['nombre'],$_POST['apellido'],$_POST['mail'],
+        $_POST['texto']);
+        if(($statement)==1){
+            return 1;
+        }else{
+            return 0;
+        }
+   }
+
+
+
+
+
     public function getOne(){
         session_start();
         $datos["user"] = " ";

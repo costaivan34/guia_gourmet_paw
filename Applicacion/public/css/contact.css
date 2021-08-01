@@ -5,9 +5,8 @@
 
 
 .contenido{
-
-  margin-top: 8%;
-  background-image: url("/public/res/background.png");
+  margin-top: 6%;
+  background-color: #F5F2E9;
 }
 
 .titulo{
@@ -16,6 +15,7 @@
   padding-top: 1%;
   padding-bottom: 1%;
   background-color: #F5F2E9;
+  width: 98.5%;
 }
 
 .contenido h1{
@@ -27,9 +27,7 @@ text-transform: uppercase;
 color: black;
 }
 
-.contenido p{
-  
-}
+
 
 .contenido label{
   margin-left: 2%;
@@ -43,6 +41,7 @@ color: black;
   margin-top: 6px;
   margin-bottom: 16px;
   resize: vertical;
+  background-color:  rgb(245, 255, 240);
 }
 
 .contenido input[type="submit"] {
@@ -76,7 +75,7 @@ color: black;
 .column {
   float: left;
   width: 50%;
-  margin-top: 12px;
+  margin-top: 0px;
   padding: 20px;
 }
 
@@ -89,7 +88,7 @@ color: black;
 
 
 .row img{
-  margin-top: 10%;
+  margin-top: 4%;
   margin-left: 25%;
   height: 60%;
   width:60% ;
@@ -114,4 +113,16 @@ color: black;
 	color: #721c24;
 	background-color: #f8d7da;
 	border-color: #f5c6cb;
+}
+
+#subject{
+  margin-left: 4%;
+  height: 10%;
+}
+
+
+#contact-form{
+padding: 4%;
+margin-left: -4%;
+width: auto;
 }

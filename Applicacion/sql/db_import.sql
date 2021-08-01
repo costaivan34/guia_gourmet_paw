@@ -677,6 +677,21 @@ ALTER TABLE `ubicacion`
 ALTER TABLE `valornutricional`
   ADD CONSTRAINT `valornutricional_ibfk_1` FOREIGN KEY (`idInfo`) REFERENCES `infonutricional` (`idInfo`),
   ADD CONSTRAINT `valornutricional_ibfk_2` FOREIGN KEY (`idPlato`) REFERENCES `platos` (`idPlato`);
+
+CREATE TABLE `consultas` (
+  `idConsulta` int(11) NOT NULL,
+  `mail` text CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `nombre` text CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `apellido` text CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `mensaje` text CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `consultas`
+  ADD PRIMARY KEY (`idConsulta`);
+
+ALTER TABLE `consultas`
+  MODIFY `idConsulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
