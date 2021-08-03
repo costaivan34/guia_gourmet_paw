@@ -18,6 +18,7 @@ class PagesController{
         return view ('index.home',compact('datos'));
         }
     }*/
+    
         return view('/home/index');
     }
 
@@ -61,6 +62,10 @@ class PagesController{
     }*/
 
     public function newOne(){
+        $datos["user"] = " ";
+        if (isset($_SESSION["user"])){
+            $datos["user"] =  $_SESSION["user"];
+        }
             //funcion busqueda 
             return view('/sitios/NewSitio');
       

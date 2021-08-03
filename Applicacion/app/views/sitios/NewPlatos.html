@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block head %}
+{{ parent() }}
+<link rel="stylesheet" href="/public/css/restauranteSingle.css">
+<link rel="stylesheet" href="/public/css/platoSingle.css">
+<link rel="stylesheet" href="/public/css/comentarios.css">
+<link rel="stylesheet" href="/public/css/formulario_newuser.css">
+<script src="/public/script/tabs.js"></script>
+<script src="/public/script/modal.js"></script>
+<script src="/public/script/modal.js"></script>
+
+{% endblock %}
+{% block title %}NUEVO PLATO{% endblock %}
+{% block header %}
+
+{% endblock %} 
+
+{% block main %}
+<form id="regForm" method="post">
+  <h3>NUEVO PLATO:</h3>
+  <div id="messageBox"></div>
+
+  <fieldset>
+    <legend>Información del Plato</legend>
+    <label for="nameUser">Nombre del Plato:</label>
+    <input class="caja-texto" id="nameSitio" type="text" name="nameSitio" value="" placeholder="Nombre de Sitio" required />
+    <label for="subject">Descripcion:*</label>
+    <textarea id="subject" name="subject" placeholder="Escriba algo" style="height:170px" required></textarea>
+  </fieldset>
+Información
+  <fieldset>
+    <legend>Información Nutricional</legend>
+    <label for="DireccionSitio">Peso:</label>
+    <input class="caja-texto" id="InformaciónPeso" type="text" name="InformaciónPeso" value="" placeholder="Peso" required />
+    <label for="UbicacionSitio">Energia:</label>
+    <input class="caja-texto" id="InformaciónEnergia" type="text" name="InformaciónEnergia" value="" placeholder="Energia" required />
+    <label for="UbicacionSitio">Carbohidratos:</label>
+    <input class="caja-texto" id="InformaciónCarbohidratos" type="text" name="InformaciónCarbohidratos" value="" placeholder="Carbohidratos" required />
+    <label for="MailSitio">Proteina:</label>
+    <input class="caja-texto" id="InformaciónProteina" type="text" name="InformaciónProteina" value="" placeholder="Proteina" required />
+    <label for="TelefonoSitio">Grasas Totales:</label>
+    <input class="caja-texto" id="InformaciónGrasas" type="text" name="InformaciónGrasas" value="" placeholder="Grasas Totales" required />
+    <label for="TelefonoSitio">Sodio:</label>
+    <input class="caja-texto" id="InformaciónSodio" type="text" name="InformaciónSodio" value="" placeholder="Sodio" required />
+  </fieldset>
+
+
+  <fieldset>
+    <legend>Ingredientes</legend>
+    <label class="heading">Seleccione los servicios disponibles:</label>
+    <div class="checkbox">
+      <label><input type="checkbox" name="check_lista[]" value="C++">Contiene Sal</label>
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox" name="check_lista[]" value="Java">Con Tacc</label>
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox" name="check_lista[]" value="PHP7">Alto Contenido de Azucares </label>
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox" name="check_lista[]" value="HTML5/CSS">Plato Vegetariano</label>
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox" name="check_lista[]" value="JavaScript/jQuery">Contiene Picante</label>
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox" name="check_lista[]" value="JavaScript/jQuery">Contiene Lacteos</label>
+    </div>
+  </fieldset>
+  
+  <fieldset>
+    <legend>Imagenes</legend>
+    <label for="archivosubido">Imagenes del Sitio:</label>
+        <input id="archivosubido[]" type="file" name="archivosubido[]"  multiple="" accept="image/jpeg">
+  </fieldset>
+  
+  <input class="input-enviar" onclick="validarRegistro();" type="button" value="Enviar" name="Enviar" />
+</form>
+  {% endblock %}

@@ -96,14 +96,19 @@ class Sitio extends Model{
         $basicDestacados = json_encode($Destacados);
         return $Destacados;
     }
-
+    
 
     public function agregarConsulta($nombre ,$apellido ,$mail ,$texto){
         $datos = $this->db->agregarConsulta($nombre ,$apellido ,$mail ,$texto);
         return $datos;
     }
 
-
+    public function agregarSitio($nameSitio,$subject, $TelefonoSitio,$MailSitio,$user,$cat){
+/*        $datos = $this->db->agregarSitio($nameSitio,$subject, $TelefonoSitio,$MailSitio,$user,$cat);
+        return $datos;*/
+        $datos = $this->db->findIDforUserName($user);
+        return $datos;
+    }
 
 
     public function getPaginacionBuscador($idSitio){

@@ -109,6 +109,27 @@ class QueryBuilder{
         }
     }
 
+    public function findIDforUserName($user){
+        $statement = $this->pdo->prepare("
+        SELECT idUsuario FROM usuarios WHERE nombreUsuario='$user'");
+        $statement->execute();
+        return $statement->fetchColumn();
+    }
+
+
+    public function agregarSitio($nameSitio,$subject, $TelefonoSitio,$MailSitio,$user,$cat){
+        $user = findIDforUserName($user);
+        $statement = $this->pdo->prepare("
+        INSERT INTO sitios(nombre, descripcion, telefono, sitioWeb,idUsuario, idCategoria)
+         VALUES ('$nameSitio','$subject', '$TelefonoSitio','$MailSitio','$user,'$cat')");
+        $statement->execute();
+        if($statement->rowCount() > 0){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
 
 public function selectSitio($idSitio){
     /*
@@ -403,9 +424,11 @@ public function getUsuario($user){
 
 
 public function getSitiosUsuario($user){ 
-    $statement = $this->pdo->prepare(" SELECT s.idSitio, s.nombre
+    $statement = $this->pdo->prepare(" SELECT  s.idSitio, s.nombre, i.path 
      FROM usuarios u INNER JOIN sitios s on s.idUsuario= u.idUsuario 
-     WHERE u.nombreUsuario='$user' " );
+     LEFT JOIN imagenessitios i ON  s.idSitio = i.idSitio
+     WHERE u.nombreUsuario='$user'
+     GROUP BY idSitio " );
    $statement->execute();
    return $statement->fetchAll(PDO::FETCH_CLASS);
 }

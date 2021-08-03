@@ -41,6 +41,17 @@ class SitioController extends Controller{
     return $this->model->getPaginacionComentarios($_POST['sitio']);
    }
 
+
+   public function newOne(){
+    session_start();
+        $datos["user"] = " ";
+        if (isset($_SESSION["user"])){
+            $datos["user"] =  $_SESSION["user"];
+        }
+        //funcion busqueda 
+        return view('/sitios/NewSitio',compact('datos'));
+}
+
    public function sendConsulta(){	
         $comentario = [ 
             'nombre' => $_POST['nombre'],
@@ -57,7 +68,25 @@ class SitioController extends Controller{
         }
    }
 
-
+   public function store(){
+    /*$dest_path = "./private/users/default/perfil.jpg";
+    if ((isset($_FILES['archivosubido']) && is_uploaded_file($_FILES['archivosubido']['tmp_name']) )){
+        $fileTmpPath = $_FILES['archivosubido']['tmp_name'];
+        $mail = $_POST['mailUser'];
+        $uploadFileDir = "./private/users/".$mail."/";
+        mkdir($uploadFileDir, 0777, true);
+        $dest_path =  $uploadFileDir."/perfil.jpg";
+        move_uploaded_file($fileTmpPath, $dest_path);
+    }
+    $dest_path = substr( $dest_path, 1);*/
+    $statement= $this->model->agregarSitio($_POST['nameSitio'],$_POST['subject'], $_POST['TelefonoSitio'],
+    $_POST['MailSitio'],$datos["user"],1);
+    /* if(($statement)==1){
+     return 1;
+     }else{*/
+    return $statement;
+    //} 
+}
 
 
 
@@ -117,6 +146,7 @@ class SitioController extends Controller{
             $datos["user"] =  $_SESSION["user"];
         }
        // var_dump($datos);
+       
         return view('/home/index', compact('datos'));
     }
 

@@ -26,23 +26,23 @@ class UsersController extends Controller{
      * Store a new user in the database.
      */
     public function store(){
-       $path_img = "/private/usuarios/1/perfil.jpg";
-        $user = [ 
-            'nameUser'  => $_POST['nameUser'],
-            'nombreUser'  => $_POST['nombreUser'],
-            'apellidoUser'  => $_POST['apellidoUser'],
-            'mailUser'  => $_POST['mailUser'],
-            'paisUser'  => $_POST['paisUser'],
-            'telefonoUser'  => $_POST['telefonoUser'],
-            'passwordNueva' => $_POST['passwordNueva'],
-        ];
+        $dest_path = "./private/users/default/perfil.jpg";
+        if ((isset($_FILES['archivosubido']) && is_uploaded_file($_FILES['archivosubido']['tmp_name']) )){
+            $fileTmpPath = $_FILES['archivosubido']['tmp_name'];
+            $mail = $_POST['mailUser'];
+            $uploadFileDir = "./private/users/".$mail."/";
+            mkdir($uploadFileDir, 0777, true);
+            $dest_path =  $uploadFileDir."/perfil.jpg";
+            move_uploaded_file($fileTmpPath, $dest_path);
+        }
+        $dest_path = substr( $dest_path, 1);
         $statement= $this->model->agregarUsuario($_POST['nameUser'],$_POST['nombreUser'],$_POST['apellidoUser'],
-        $_POST['mailUser'],$_POST['paisUser'],$_POST['telefonoUser'],$_POST['passwordNueva'],$path_img );
+        $_POST['mailUser'],$_POST['paisUser'],$_POST['telefonoUser'],$_POST['passwordNueva'],$dest_path);
          if(($statement)==1){
          return 1;
          }else{
         return 0;
-       }
+        } 
     }
 
     public function validarLogin(){

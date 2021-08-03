@@ -15,13 +15,15 @@
     $router->get('user/new', 'UsersController@new_user' );
     $router->post('user/CreateUser', 'UsersController@store' );
 
+    $router->get('plato/new', 'PlatoController@new_plato' );
 
     $router->post('actualizarPerfil', 'UsersController@actualizarPerfil');
     $router->post('cambioPassword', 'UsersController@actualizarPassword');
     
     
     $router->get('resto', 'SitioController@getOne');
-    $router->get('resto/new', 'PagesController@newOne');
+    $router->get('resto/new', 'SitioController@newOne');
+    $router->post('resto/CreateResto', 'SitioController@store' );
     $router->get('platos', 'SitioController@getPlatos');
     $router->get('plato', 'PlatoController@getOne');
     $router->get('paginacionPlatos', 'SitioController@getPlatoPage');

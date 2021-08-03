@@ -12,10 +12,7 @@ function validarDatos(nameUser,nombreUser,apellidoUser,mailUser,paisUser,telefon
     mensaje="El correo electronico ingresado no es valido. Por favor, revisa los datos e inténtalo de nuevo."
     return false;
   }
-  if (!telefonoRegex.test(telefonoUser)) {
-    mensaje="El telefono ingresado no es valido. Por favor, revisa los datos e inténtalo de nuevo."
-    return false;
-  }
+
   if (!passwordRepeat===passwordNueva) {
     mensaje="Las contraseñas ingresadas no coinciden. Por favor, revisa los datos e inténtalo de nuevo."
     return false;
@@ -46,7 +43,7 @@ function validarRegistro(){
         m.innerHTML = `<div class="alert alert-danger" role="alert"> Ocurrio un error en el servidor.
          Por favor, inténtalo de nuevo más tarde.</div>`; 
         document.getElementById( 'info' ).scrollIntoView();
-        setTimeout(function(){ mensaje.innerHTML = "" }, 2500);
+        setTimeout(function(){ m.innerHTML = "" }, 2500);
 			}
 		}
 	}
@@ -57,14 +54,17 @@ function validarRegistro(){
   mailUser = document.getElementById('mailUser').value;
   paisUser = document.getElementById('paisUser').value;
   telefonoUser = document.getElementById('telefonoUser').value;
+  console.log(telefonoUser)
   archivosubido = document.getElementById('archivosubido').value;
   passwordNueva = document.getElementById('passwordNueva').value;
   passwordRepeat =document.getElementById('passwordRepeat').value;
   if (validarDatos(nameUser,nombreUser,apellidoUser,mailUser,paisUser,telefonoUser,passwordNueva,passwordRepeat, archivosubido)){
+    oData = new FormData(document.forms.namedItem("formCuenta"));
+   for(let [name, value] of oData) {
+      console.log(`${name} = ${value}`); // key1 = value1, luego key2 = value2
+    }
     xmlHttpRequest.open("POST","/user/CreateUser",true);
-    xmlHttpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlHttpRequest.send("nameUser="+nameUser+"&nombreUser="+nombreUser+"&apellidoUser="+apellidoUser+"&mailUser="+
-    mailUser+"&paisUser="+paisUser+"&telefonoUser="+telefonoUser +"&passwordNueva="+passwordNueva);
+    xmlHttpRequest.send(oData);
     event.preventDefault();
   }else{
     console.log("error form")
@@ -77,3 +77,5 @@ function validarRegistro(){
 
   
 }
+
+

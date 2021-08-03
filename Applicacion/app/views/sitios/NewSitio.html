@@ -4,78 +4,163 @@
 <link rel="stylesheet" href="/public/css/restauranteSingle.css">
 <link rel="stylesheet" href="/public/css/platoSingle.css">
 <link rel="stylesheet" href="/public/css/comentarios.css">
-<link rel="stylesheet" href="/public/css/form-newSitio.css">
+<link rel="stylesheet" href="/public/css/formulario_newuser.css">
 <script src="/public/script/tabs.js"></script>
 <script src="/public/script/modal.js"></script>
-
+<script src="/public/script/formNewSitio.js"></script>
 {% endblock %}
 {% block title %}NUEVO SITIO{% endblock %}
 {% block header %}
- 
-{% endblock %}
+
+{% endblock %} 
 
 {% block main %}
-<form id="regForm" action="">
-
+<form id="regForm" name="regForm"  enctype="multipart/form-data" method="post">
   <h3>NUEVO SITIO:</h3>
-  
-  <!-- One "tab" for each step in the form: -->
-  <div class="tab"><h3>Nombre</h3><hr class="separador">
-    <dl class="detalles">
-      <dt><label for="fname">Nombre*</label></dt>
-      <dd> <input type="text" name="NAME" value="" size="20" maxlength="20" placeholder="Nombre (requerido)" required />       </dd>
-      <dt><label for="fname">Descripcion*</label></dt>
-      <dd class="ultimo"><textarea name="COMMENT" rows="10" cols="50" wrap="soft" placeholder="Máximo 1000 carácteres" maxlength="1000" required></textarea> </dd>
-    </dl>
-  </div>
-  
-  <div class="tab"> <h3>Contacto</h3><hr class="separador"> 
-    <section >
-        <dl class="detalles">
-          <dt>Direccion</dt>
-          <dd> <input type="text" name="NAME" value="" size="20" maxlength="20" placeholder="Nombre (requerido)" required />     </dd>
-          <dt>Ubicacion</dt>
-          <dd> <input type="text" name="NAME" value="" size="20" maxlength="20" placeholder="Nombre (requerido)" required />     </dd>
-          <dt>Horario</dt>
-          <dd> <input type="text" name="NAME" value="" size="20" maxlength="20" placeholder="Nombre (requerido)" required />     </dd>
-          <dt>Telefono</dt>
-          <dd class="ultimo"> <input type="text" name="NAME" value="" size="20" maxlength="20" placeholder="Nombre (requerido)" required />     </dd>
-        </dl>
-    </section>      
-  </div>
-  
-  <div class="tab">Imagenes:
-    <label>Choose Images</label>
-    <input type="file" name="images[]" id="fileInput" multiple >
-    <input type="submit" name="submit" value="UPLOAD"/>
-  </div>
-  
-  <div class="tab">Locaclizacion:
-    <div class="mapa">
-      <iframe class="iframe"src="https://www.openstreetmap.org/export/embed.html?bbox=-59.319992065429695%2C-35.02085912032271%2C-59.25424575805664%2C-34.98078374541327"></iframe>
-    </div>
-  </div>
+  <div id="messageBox"></div>
 
-  <div class="tab">Locaclizacion:
-    <div class="mapa">
-      <iframe class="iframe"src="https://www.openstreetmap.org/export/embed.html?bbox=-59.319992065429695%2C-35.02085912032271%2C-59.25424575805664%2C-34.98078374541327"></iframe>
+  <fieldset>
+    <legend>Información del Sitio</legend>
+    <label for="nameSitio">Nombre de Sitio:</label>
+    <input class="caja-texto" id="nameSitio" type="text" name="nameSitio" value="" placeholder="Nombre de Sitio" required />
+    <label for="subject">Descripcion:*</label>
+    <textarea id="subject" name="subject" placeholder="Escriba algo" style="height:170px" required></textarea>
+  </fieldset>
+
+  <fieldset>
+    <legend>Información de Contacto</legend>
+    <label for="DireccionSitio">Direccion:</label>
+    <input class="caja-texto" id="DireccionSitio" type="text" name="DireccionSitio" value="" placeholder="Direccion" required />
+    <label for="UbicacionSitio">Ubicacion:</label>
+    <input class="caja-texto" id="UbicacionSitio" type="text" name="UbicacionSitio" value="" placeholder="Ubicacion" required />
+    <label for="MailSitio">Mail:</label>
+    <input class="caja-texto" id="MailSitio" type="text" name="MailSitio" value="" placeholder="Mail" required />
+    <label for="TelefonoSitio">Telefono:</label>
+    <input class="caja-texto" id="TelefonoSitio" type="text" name="TelefonoSitio" value="" placeholder="Telefono" required />
+  </fieldset>
+  <fieldset>
+    <legend>Localización</legend>
+    <p class="heading">Ingrese las coordenadas geograficas del lugar:</p>
+
+    <label for="Longitud">X:</label>
+    <input id="Longitud" type="number" name="Longitud" value="" placeholder="Longitud" required />
+    <label for="Latitud">Y:</label>
+    <input id="Latitud" type="number" name="Latitud" value="" placeholder="Latitud" required />
+
+  </fieldset>
+
+  <fieldset>
+    <legend>Servicios</legend>
+    <label class="heading">Seleccione los servicios disponibles:</label>
+    <div class="checkbox">
+      <label><input type="checkbox" name="check_lista[]" value="WIFI">WIFI</label>
     </div>
-  </div>
-  
-  <div style="overflow:auto;">
-    <div style="float:right;">
-      <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-      <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+    <div class="checkbox">
+      <label><input type="checkbox" name="check_lista[]" value="Discapacidad">Acceso Personas con Discapacidad</label>
     </div>
-  </div>
+    <div class="checkbox">
+      <label><input type="checkbox" name="check_lista[]" value="Aire">Aire Acondicionado </label>
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox" name="check_lista[]" value="Estacionamiento">Estacionamiento</label>
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox" name="check_lista[]" value="TV">TV</label>
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox" name="check_lista[]" value="Juegos">Juegos para niños</label>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Horarios</legend>
+    <div class="horario">
+      <label for="">De :</label>
+      <select id="Dia-Inicio" name="Dia-Inicio">
+        <option value="A">Selecionar día:</option>
+        <option value="Lunes">Lunes</option>
+        <option value="Martes">Martes</option>
+        <option value="Miercoles">Miercoles</option>
+        <option value="Jueves">Jueves</option>
+        <option value="Viernes">Viernes</option>
+        <option value="Sabado">Sabado</option>
+        <option value="Domingo">Domingo</option>
+      </select>
+      <label for="">A:</label>
+      <select  id="Dia-Fin" name="Dia-Fin">
+        <option value="A">Selecionar día:</option>
+        <option value="Lunes">Lunes</option>
+        <option value="Martes">Martes</option>
+        <option value="Miercoles">Miercoles</option>
+        <option value="Jueves">Jueves</option>
+        <option value="Viernes">Viernes</option>
+        <option value="Sabado">Sabado</option>
+        <option value="Domingo">Domingo</option>
+      </select>
+      <label for="">De:</label>
+      <select class="heading" id="De-Inicio" name="De-Inicio">
+        <option value="A">Selecionar hora:</option>
+        <option value="00">00:00</option>
+        <option value="01">01:00</option>
+        <option value="02">02:00</option>
+        <option value="03">03:00</option>
+        <option value="04">04:00</option>
+        <option value="05">05:00</option>
+        <option value="06">06:00</option>
+        <option value="07">07:00</option>
+        <option value="08">08:00</option>
+        <option value="09">09:00</option>
+        <option value="10">10:00</option>
+        <option value="11">11:00</option>
+        <option value="12">12:00</option>
+        <option value="12">12:00</option>
+        <option value="14">14:00</option>
+        <option value="15">15:00</option>
+        <option value="16">16:00</option>
+        <option value="17">17:00</option>
+        <option value="18">18:00</option>
+        <option value="19">19:00</option>
+        <option value="20">20:00</option>
+        <option value="21">21:00</option>
+        <option value="22">22:00</option>
+        <option value="23">23:00</option>
+      </select>
+      
+      <label for="">A:</label>
+      <select class="heading" id="Hasta-Fin" name="Hasta-Fin">
+        <option value="A">Selecionar hora:</option>
+        <option value="00">00:00</option>
+        <option value="01">01:00</option>
+        <option value="02">02:00</option>
+        <option value="03">03:00</option>
+        <option value="04">04:00</option>
+        <option value="05">05:00</option>
+        <option value="06">06:00</option>
+        <option value="07">07:00</option>
+        <option value="08">08:00</option>
+        <option value="09">09:00</option>
+        <option value="10">10:00</option>
+        <option value="11">11:00</option>
+        <option value="12">12:00</option>
+        <option value="12">12:00</option>
+        <option value="14">14:00</option>
+        <option value="15">15:00</option>
+        <option value="16">16:00</option>
+        <option value="17">17:00</option>
+        <option value="18">18:00</option>
+        <option value="19">19:00</option>
+        <option value="20">20:00</option>
+        <option value="21">21:00</option>
+        <option value="22">22:00</option>
+        <option value="23">23:00</option>
+      </select>
+    </div> 
+  </fieldset>
+  <fieldset>
+    <legend>Imagenes</legend>
+    <label for="archivosubido">Imagenes del Sitio:</label>
+        <input id="archivosubido[]" type="file" name="archivosubido[]"  multiple="" accept="image/jpeg">
+  </fieldset>
   
-  <!-- Circles which indicates the steps of the form: -->
-  <div style="text-align:center;margin-top:40px;">
-    <span class="step"></span>
-    <span class="step"></span>
-    <span class="step"></span>
-    <span class="step"></span>
-  </div>
-  
-  </form>
-{% endblock %}
+  <input class="input-enviar" onclick="validarRegistro();" type="button" value="Enviar" name="Enviar" />
+</form>
+  {% endblock %}

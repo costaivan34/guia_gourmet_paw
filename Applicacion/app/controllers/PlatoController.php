@@ -11,7 +11,7 @@ class PlatoController extends Controller{
     protected $idPlato;
     public function __construct(){
         $this->model = new Plato();
-        session_start();
+
     }
     
     public function index(){
@@ -26,6 +26,16 @@ class PlatoController extends Controller{
         $idPlato = htmlspecialchars($_GET['Plato']);
         $plato = $this->model->getOne($idSitio,$idPlato);
         return  $plato;
+    }
+
+    public function new_plato(){
+        session_start();
+        $datos["user"] = " ";
+        if (isset($_SESSION["user"])){
+            $datos["user"] =  $_SESSION["user"];
+        }
+        $idSitio = htmlspecialchars($_GET['Sitio']);
+        return view('/sitios/NewPlatos', compact('datos'));
     }
 
     public function getAll(){

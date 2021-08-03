@@ -23,7 +23,7 @@ function callLogin(){
 				Bienvenido!</div>`; 
 				setTimeout(function(){ mensaje.innerHTML = "" }, 2500);
 
-				window.location.replace("dashboard/account");
+				window.location.replace("/dashboard/account");
 			} else {
 				const mensaje = document.getElementById("messageBoxId");
       	mensaje.innerHTML = `<div class="alert alert-danger" role="alert">
@@ -37,7 +37,7 @@ var mail = document.getElementById("userName").value;
 var psw = document.getElementById("password").value;
 console.log(mail);
 console.log(psw);
-xmlHttpRequest.open("POST","login",true);
+xmlHttpRequest.open("POST","/login",true);
 xmlHttpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xmlHttpRequest.send("userName="+mail+"&password="+psw);
 event.preventDefault();
