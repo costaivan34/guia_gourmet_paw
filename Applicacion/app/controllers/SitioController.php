@@ -69,25 +69,18 @@ class SitioController extends Controller{
    }
 
    public function store(){
-    /*$dest_path = "./private/users/default/perfil.jpg";
-    if ((isset($_FILES['archivosubido']) && is_uploaded_file($_FILES['archivosubido']['tmp_name']) )){
-        $fileTmpPath = $_FILES['archivosubido']['tmp_name'];
-        $mail = $_POST['mailUser'];
-        $uploadFileDir = "./private/users/".$mail."/";
-        mkdir($uploadFileDir, 0777, true);
-        $dest_path =  $uploadFileDir."/perfil.jpg";
-        move_uploaded_file($fileTmpPath, $dest_path);
+    $idSitio= $this->model->agregarSitio($_POST['nameSitio'],$_POST['subject'], $_POST['TelefonoSitio'],
+    $_POST['MailSitio'],$_POST["username"],1);
+    if ($idSitio>0){
+       $this->model->agregarImagenes($_FILES,$idSitio);
+       $this->model->agregarServicios($_POST['servicios'],$idSitio);
+       $this->model->agregarHorarios($_POST['Dia-Inicio'],$_POST['Dia-Fin'],$_POST['De-Inicio'],$_POST['Hasta-Fin'],$idSitio);
+       $this->model->agregarUbicacion($idSitio, $_POST['DireccionSitio'],$_POST['LocalidadSitio'],$_POST['ProvinciaSitio'],$_POST['Longitud'],$_POST['Latitud']);
+       return 1;   
+    }else{
+        return 0;   
     }
-    $dest_path = substr( $dest_path, 1);*/
-    $statement= $this->model->agregarSitio($_POST['nameSitio'],$_POST['subject'], $_POST['TelefonoSitio'],
-    $_POST['MailSitio'],$datos["user"],1);
-    /* if(($statement)==1){
-     return 1;
-     }else{*/
-    return $statement;
-    //} 
 }
-
 
 
     public function getOne(){

@@ -24,8 +24,12 @@
     $router->get('resto', 'SitioController@getOne');
     $router->get('resto/new', 'SitioController@newOne');
     $router->post('resto/CreateResto', 'SitioController@store' );
+    
     $router->get('platos', 'SitioController@getPlatos');
     $router->get('plato', 'PlatoController@getOne');
+    $router->get('plato/new', 'PlatoController@newOne');
+    $router->post('plato/CreatePlato', 'PlatoController@store' );
+
     $router->get('paginacionPlatos', 'SitioController@getPlatoPage');
     $router->get('categorias', 'SitioController@getCategorias');
     $router->get('cerca', 'SitioController@cerca');

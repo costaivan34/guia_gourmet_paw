@@ -122,27 +122,42 @@ function getProvincias(){
 }
 
 function agregarSitioPaginacion(respuesta,clave,categoria,provincia,pagina){
-  
-  clave2='" '+clave+'"';
-   var ElementoPagina = document.createElement("li");
-   ElementoPagina.innerHTML = "<input type='button' id='inicio' onclick='buscadorBuscame("+clave2+","+categoria+","+provincia+","+1+")' value='<<'>";
-   document.getElementById("paginacionPlatos").appendChild(ElementoPagina);
-   for (var i=1;i<=respuesta.Paginacion;i++) {
-     if(pagina==i){
-       ElementoPagina = document.createElement("li");
-       ElementoPagina.innerHTML = "<input type='button' id='page-active' onclick='buscadorBuscame("+clave2+","+categoria+","+provincia+","+ i+")' value='"+i+"'>";
-       document.getElementById("paginacionPlatos").appendChild(ElementoPagina);
-     }else{
-       ElementoPagina = document.createElement("li");
-       ElementoPagina.innerHTML = "<input type='button' id='inicio' onclick='buscadorBuscame("+clave2+","+categoria+","+provincia+","+i+")' value='"+i+"'>";
-       document.getElementById("paginacionPlatos").appendChild(ElementoPagina);
-     } 
-   }
-   ElementoPagina = document.createElement("li");
-   ElementoPagina.innerHTML = "<input type='button' id='inicio' onclick='buscadorBuscame("+clave2+","+categoria+","+provincia+","+respuesta.Paginacion+")' value='>>'>";
-   document.getElementById("paginacionPlatos").appendChild(ElementoPagina);
+  clave2='"'+clave+'"';
+  provincia2 ='"'+provincia+'"';
+  console.log(clave);
+  console.log(clave2);
+  if (respuesta.Paginacion > "0"){
+    var ElementoPagina = document.createElement("li");
+    ElementoPagina.innerHTML = "<input type='button' id='inicio' onclick='buscadorBuscame("+clave2+","+categoria+","+provincia2+","+1+")' value='<<'>";
+    document.getElementById("paginacionPlatos").appendChild(ElementoPagina);
+      if (pagina!=1){
+        var ElementoPagina = document.createElement("li");
+        ElementoPagina.innerHTML = "<input type='button' id='inicio' onclick='buscadorBuscame("+clave2+","+categoria+","+provincia2+","+(pagina-1)+")'  value='<'>";
+        document.getElementById("paginacionPlatos").appendChild(ElementoPagina);
+      }
+      for (var i=1;i<=respuesta.Paginacion;i++) {
+        if(pagina==i){
+          ElementoPagina = document.createElement("li");
+          ElementoPagina.innerHTML = "<input type='button' id='page-active' onclick='buscadorBuscame("+clave2+","+categoria+","+provincia2+","+ i+")' value='"+i+"'>";
+          document.getElementById("paginacionPlatos").appendChild(ElementoPagina);
+        }else{
+          if(i>=(pagina-3)&&(i<=(pagina+3)) ){
+            ElementoPagina = document.createElement("li");
+            ElementoPagina.innerHTML = "<input type='button' id='inicio' onclick='buscadorBuscame("+clave2+","+categoria+","+provincia2+","+ i+")' value='"+i+"'>";
+            document.getElementById("paginacionPlatos").appendChild(ElementoPagina);
+          }
+        }
+      }
+        if (pagina!=respuesta.Paginacion){
+          ElementoPagina = document.createElement("li");
+          ElementoPagina.innerHTML = "<input type='button' id='inicio' onclick='buscadorBuscame("+clave2+","+categoria+","+provincia2+","+(pagina+1)+")' value='>'>";
+          document.getElementById("paginacionPlatos").appendChild(ElementoPagina);
+        }
+        ElementoPagina = document.createElement("li");
+        ElementoPagina.innerHTML = "<input type='button' id='inicio' onclick='buscadorBuscame("+clave2+","+categoria+","+provincia2+","+respuesta.Paginacion+")'  value='>>'>";
+        document.getElementById("paginacionPlatos").appendChild(ElementoPagina);
+  }
 
-  
  }
 
 
@@ -197,26 +212,23 @@ function buscadorBuscame(clave,categoria,provincia,pagina){
   while (elemento.firstChild) {
     elemento.removeChild(elemento.firstChild);
   }
-  
   while (elemento2.firstChild) {
     elemento2.removeChild(elemento2.firstChild);
   }
 	xmlHttpRequest.onreadystatechange=function() {
 		if (xmlHttpRequest.readyState==4 && xmlHttpRequest.status==200) {
-      
-        //console.log( xmlHttpRequest.responseText); 
+        console.log( xmlHttpRequest.responseText); 
         var respuesta =JSON.parse( xmlHttpRequest.responseText );
      //   console.log( respuesta.AllSitios);
       if(respuesta.Paginacion=="0"){
         elemento.appendChild(pR);
       }else{
-        agregarSitioPaginacion(respuesta,clave,categoria,provincia,pagina);
         for( r in respuesta.AllSitios){
           agregarSitio(respuesta.AllSitios[r]);
         }
-       
+        agregarSitioPaginacion(respuesta,clave,categoria,provincia,pagina);
       }
-      
+     
 		}else if ( (xmlHttpRequest.readyState==4 && xmlHttpRequest.status==400 ) || (xmlHttpRequest.readyState==4 && xmlHttpRequest.status==500 )){
       elemento.appendChild(pR);
     }

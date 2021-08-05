@@ -1,22 +1,16 @@
 .slideshow-container {
   background-color:#E7CF7F;
   margin-left: 2.5%;
-  position: relative;
+ position: relative;
   align-content: center;
+  
   width: 94%;
   height: 550px;
   padding-bottom: 20px;
   
 }
 
-/* Hide the images by default */
-.diapositiva {
-  border-top: 1px solid #E7CF7F;
-  border-radius: 100px;
-  display: none;
-  object-fit: contain;
-      object-position: center center;
-}
+
 
 /* Next & previous buttons */
 .prev, .next {
@@ -42,7 +36,6 @@
 
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover {
-  
   background-color: rgba(245, 146, 135, 0.8)
 }
 
@@ -60,7 +53,7 @@
 }
 
 .activo, .dot:hover {
-  background-color: #F59287;
+  background-color: #b6a4a2;
 }
 
 /* Fading animation */

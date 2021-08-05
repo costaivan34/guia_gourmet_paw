@@ -102,12 +102,58 @@ class Sitio extends Model{
         $datos = $this->db->agregarConsulta($nombre ,$apellido ,$mail ,$texto);
         return $datos;
     }
-
+    
     public function agregarSitio($nameSitio,$subject, $TelefonoSitio,$MailSitio,$user,$cat){
-/*        $datos = $this->db->agregarSitio($nameSitio,$subject, $TelefonoSitio,$MailSitio,$user,$cat);
-        return $datos;*/
-        $datos = $this->db->findIDforUserName($user);
+        $datos = $this->db->agregarSitio($nameSitio,$subject, $TelefonoSitio,$MailSitio,$user,$cat);
         return $datos;
+       
+    }
+    public function agregarServicios($_servicios,$idSitio){
+        foreach ($_servicios as $value) {
+            $datos = $this->db->agregarServicio($value,$idSitio);
+        }
+        return $datos;
+    }
+
+    public function agregarHorarios($Inicio,$Fin,$De,$Hasta,$idSitio){
+        for ($x = $Inicio; $x <= $Fin; $x++) {
+            $datos = $this->db->agregarHorarios($idSitio, $x, $De, $Hasta);
+          }
+        return $datos;
+    }
+
+
+    public function agregarUbicacion($idSitio, $direccion, $ciudad, $provincia, $X, $Y){
+            $datos = $this->db->agregarUbicacion($idSitio, $direccion, $ciudad, $provincia, $X, $Y);
+        return $datos;
+    }
+
+    public function agregarImagenes($Archivos,$idSitio){
+	//Como el elemento es un arreglos utilizamos foreach para extraer todos los valores
+	foreach($Archivos['archivosubido']['tmp_name'] as $key => $tmp_name){
+		//Validamos que el archivo exista
+		if($Archivos['archivosubido']["name"][$key]) {
+			$filename = $Archivos['archivosubido']["name"][$key]; //Obtenemos el nombre original del archivo
+			$source = $Archivos['archivosubido']["tmp_name"][$key]; //Obtenemos un nombre temporal del archivo
+			$directorio = "./private/sites/".$idSitio."/";//Declaramos un  variable con la ruta donde guardaremos los archivos
+			//Validamos si la ruta de destino existe, en caso de no existir la creamos
+			if(!file_exists($directorio)){
+				mkdir($directorio, 0777) or die("No se puede crear el directorio de extracci&oacute;n");	
+			}
+			$dir=opendir($directorio); //Abrimos el directorio de destino
+			$target_path = $directorio.'/'.$filename; //Indicamos la ruta de destino, así como el nombre del archivo
+			//Movemos y validamos que el archivo se haya cargado correctamente
+			//El primer campo es el origen y el segundo el destino
+			if(move_uploaded_file($source, $target_path)) {	
+                $target_path = substr( $target_path, 1);
+                $this->db->agregarImagenes($idSitio,$target_path);
+				echo "El archivo $filename se ha almacenado en forma exitosa.<br>";
+				} else {	
+				echo "Ha ocurrido un error, por favor inténtelo de nuevo.<br>";
+			}
+			closedir($dir); //Cerramos el directorio de destino
+		}
+	}
     }
 
 

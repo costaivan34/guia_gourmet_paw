@@ -28,14 +28,27 @@ class PlatoController extends Controller{
         return  $plato;
     }
 
-    public function new_plato(){
+    public function newOne(){
         session_start();
         $datos["user"] = " ";
         if (isset($_SESSION["user"])){
             $datos["user"] =  $_SESSION["user"];
         }
-        $idSitio = htmlspecialchars($_GET['Sitio']);
+        $datos["idSitio"] = htmlspecialchars($_GET['Sitio']);
+        $datos["NameSitio"] = htmlspecialchars($_GET['Name']);
         return view('/sitios/NewPlatos', compact('datos'));
+    }
+
+    public function store(){
+        $idPlato = $this->model->agregarPlato($_POST['namePlato'],$_POST['subject'], $_POST['namePrecio'],$_POST["idSitio"]);
+        if ($idPlato>0){
+            $this->model->agregarImagenes($_FILES,$idPlato);
+             $this->model->agregarCaracteristicas($_POST['caracteristicas'],$idPlato);
+            $this->model->agregarInfor($_POST['InformaciónPeso'],$_POST['InformaciónEnergia'],$_POST['InformaciónCarbohidratos'],$_POST['InformaciónProteina'],$_POST['InformaciónGrasas'],$_POST['InformaciónSodio'],$idPlato);
+           return 1;   
+        }else{
+           return 0;   
+        }
     }
 
     public function getAll(){

@@ -1,7 +1,7 @@
 
 .encabezado{
   background-color: #F5F2E9;
-  position: relative;
+
 }
 
 .encabezado img {
@@ -20,7 +20,8 @@
 .nombre-block {
   width: 90%;
   position: absolute;
-  bottom: 20px;
+  top: 25%;
+  
   background-color: rgba(255, 255, 255, 0.8) ;
   color: #F59287;
   padding-left: 10%;

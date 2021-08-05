@@ -14,7 +14,7 @@
       {% if  datos.user == " "  %}
         <li><i class="fa fa-user-circle-o fa-2x loginico" aria-hidden="true" alt="" onclick="openLoginModal();"></i></li>
       {% else %}
-      <li><a id="nombreUsuario" href="/dashboard/account"> {{datos.user}} </a>
+      <li><a id="nombreUsuario" href="/dashboard/account">{{datos.user}}</a>
         <i class="fa fa-sign-out logout-button" aria-hidden="true" onclick="closeSession();"></i>
         
       </li>

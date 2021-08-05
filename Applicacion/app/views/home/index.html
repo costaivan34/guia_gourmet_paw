@@ -3,15 +3,15 @@
 {% block title %}Inicio{% endblock %}
 
 {% block head %}
-    {{ parent() }}
-    <meta name="keywords" content="PAW,2018,Templates,PHP">
-    <link rel="stylesheet" href="/public/css/index.css">
-    <link rel="stylesheet" href="/public/css/carrusel.css">
-    <link rel="stylesheet" href="/public/css/search-bar.css">
-    <link rel="stylesheet" href="/public/css/resultados.css">
-    <link rel="stylesheet" href="/public/css/platoSingle.css">
-    <script src="/public/script/carusel.js"></script>
-   
+{{ parent() }}
+<meta name="keywords" content="PAW,2018,Templates,PHP">
+<link rel="stylesheet" href="/public/css/index.css">
+<link rel="stylesheet" href="/public/css/carrusel.css">
+<link rel="stylesheet" href="/public/css/search-bar.css">
+<link rel="stylesheet" href="/public/css/resultados.css">
+<link rel="stylesheet" href="/public/css/platoSingle.css">
+<script src="/public/script/carusel.js"></script>
+
 {% endblock %}
 
 {% block main %}
@@ -21,64 +21,58 @@
 <div class="slideshow-container index">
     <!-- Full-width images with number and caption text -->
     <div class="mySlides fade">
-      <div class="numbertext"></div>
-      <img src="public/res/home-banner-1.jpg" >
+      <img src="public/res/home-banner-1.jpg">
     </div>
     <div class="mySlides fade">
-      <div class="numbertext"></div>
-      <img src="public/res/home-banner-2.jpg" >
-    </div>
-
-    <div class="mySlides fade">
-      <div class="numbertext"></div>
-      <img src="public/res/home-banner-4.jpg" >
+      <img src="public/res/home-banner-2.jpg">
     </div>
     <div class="mySlides fade">
-      <div class="numbertext"></div>
-      <img src="public/res/home-banner-5.jpg" >
+      <img src="public/res/home-banner-4.jpg">
     </div>
     <div class="mySlides fade">
-      <div class="numbertext"></div>
-      <img src="public/res/home-banner-6.jpg" >
+      <img src="public/res/home-banner-5.jpg">
     </div>
-    <!-- Next and previous buttons -->
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-    <!-- The dots/circles -->
-<div style="text-align:center">
-  <span class="dot" onclick="currentSlide(1)"></span>
-  <span class="dot" onclick="currentSlide(2)"></span>
-  <span class="dot" onclick="currentSlide(3)"></span>
-  <span class="dot" onclick="currentSlide(4)"></span>
-  <span class="dot" onclick="currentSlide(5)"></span>
-</div>
-</div>
-
+    <div class="mySlides fade">
+      <img src="public/res/home-banner-6.jpg">
+    </div>
+  <!-- Next and previous buttons -->
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+  <!-- The dots/circles -->
+  </div>
+  <div class="circles" style="text-align:center" >
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+    <span class="dot" onclick="currentSlide(5)"></span>
+  </div>
 
 <!-- search  module-->
-<div >
+<div>
   <section id="search">
     {{ include('partials/search-bar.html') }}
   </section>
 
-<div class="slideshow-places">
-  <h3> Restaurantes Destacados</h3>
-  <div class="fila">
-    <div id="columna">
-    {% for a in datos.Destacados %}
-      <div class="tarjeta">
-        <div class="plates-text" >
-          <img src="{{ a.path }}" alt="Denim Jeans">
-          <a href="/resto?Sitio={{ a.idSitio }}"><h3>{{ a.nombre }}</h3></a>
-          <p><i class=" fa fa-map-marker  "></i> {{ a.ciudad }},{{ a.provincia }}</p>
-          <p><i class=" fa fa-commenting  "></i> {{ a.Ncomentarios }}</p>
+  <div class="slideshow-places">
+    <h3> Restaurantes Destacados</h3>
+    <div class="fila">
+      <div id="columna">
+        {% for a in datos.Destacados %}
+        <div class="tarjeta">
+          <div class="plates-text">
+            <img src="{{ a.path }}" alt="Denim Jeans">
+            <a href="/resto?Sitio={{ a.idSitio }}">
+              <h3>{{ a.nombre }}</h3>
+            </a>
+            <p><i class=" fa fa-map-marker  "></i> {{ a.ciudad }},{{ a.provincia }}</p>
+            <p><i class=" fa fa-commenting  "></i> {{ a.Ncomentarios }}</p>
+          </div>
         </div>
+        {% endfor %}
       </div>
-    {% endfor %}
+    </div>
   </div>
-  </div>
-</div>
- 
 
-{% endblock %}
 
+  {% endblock %}

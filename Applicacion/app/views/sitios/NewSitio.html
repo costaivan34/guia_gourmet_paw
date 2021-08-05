@@ -31,8 +31,10 @@
     <legend>Información de Contacto</legend>
     <label for="DireccionSitio">Direccion:</label>
     <input class="caja-texto" id="DireccionSitio" type="text" name="DireccionSitio" value="" placeholder="Direccion" required />
-    <label for="UbicacionSitio">Ubicacion:</label>
-    <input class="caja-texto" id="UbicacionSitio" type="text" name="UbicacionSitio" value="" placeholder="Ubicacion" required />
+    <label for="ProvinciaSitio">Provincia:</label>
+    <input class="caja-texto" id="ProvinciaSitio" type="text" name="ProvinciaSitio" value="" placeholder="Provincia" required />
+    <label for="LocalidadSitio">Localidad:</label>
+    <input class="caja-texto" id="LocalidadSitio" type="text" name="LocalidadSitio" value="" placeholder="Localidad" required />
     <label for="MailSitio">Mail:</label>
     <input class="caja-texto" id="MailSitio" type="text" name="MailSitio" value="" placeholder="Mail" required />
     <label for="TelefonoSitio">Telefono:</label>
@@ -53,22 +55,22 @@
     <legend>Servicios</legend>
     <label class="heading">Seleccione los servicios disponibles:</label>
     <div class="checkbox">
-      <label><input type="checkbox" name="check_lista[]" value="WIFI">WIFI</label>
+      <label><input type="checkbox" name="servicios[]" value="1">WIFI</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="check_lista[]" value="Discapacidad">Acceso Personas con Discapacidad</label>
+      <label><input type="checkbox" name="servicios[]" value="2">Acceso Personas con Discapacidad</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="check_lista[]" value="Aire">Aire Acondicionado </label>
+      <label><input type="checkbox" name="servicios[]" value="3">Aire Acondicionado </label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="check_lista[]" value="Estacionamiento">Estacionamiento</label>
+      <label><input type="checkbox" name="servicios[]" value="4">Estacionamiento</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="check_lista[]" value="TV">TV</label>
+      <label><input type="checkbox" name="servicios[]" value="5">TV</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="check_lista[]" value="Juegos">Juegos para niños</label>
+      <label><input type="checkbox" name="servicios[]" value="6">Juegos para niños</label>
     </div>
   </fieldset>
   <fieldset>
@@ -76,29 +78,29 @@
     <div class="horario">
       <label for="">De :</label>
       <select id="Dia-Inicio" name="Dia-Inicio">
-        <option value="A">Selecionar día:</option>
-        <option value="Lunes">Lunes</option>
-        <option value="Martes">Martes</option>
-        <option value="Miercoles">Miercoles</option>
-        <option value="Jueves">Jueves</option>
-        <option value="Viernes">Viernes</option>
-        <option value="Sabado">Sabado</option>
-        <option value="Domingo">Domingo</option>
+        <option value="0">Selecionar día:</option>
+        <option value="1">Lunes</option>
+        <option value="2">Martes</option>
+        <option value="3">Miercoles</option>
+        <option value="4">Jueves</option>
+        <option value="5">Viernes</option>
+        <option value="6">Sabado</option>
+        <option value="7">Domingo</option>
       </select>
       <label for="">A:</label>
       <select  id="Dia-Fin" name="Dia-Fin">
-        <option value="A">Selecionar día:</option>
-        <option value="Lunes">Lunes</option>
-        <option value="Martes">Martes</option>
-        <option value="Miercoles">Miercoles</option>
-        <option value="Jueves">Jueves</option>
-        <option value="Viernes">Viernes</option>
-        <option value="Sabado">Sabado</option>
-        <option value="Domingo">Domingo</option>
+        <option value="0">Selecionar día:</option>
+        <option value="1">Lunes</option>
+        <option value="2">Martes</option>
+        <option value="3">Miercoles</option>
+        <option value="4">Jueves</option>
+        <option value="5">Viernes</option>
+        <option value="6">Sabado</option>
+        <option value="7">Domingo</option>
       </select>
       <label for="">De:</label>
       <select class="heading" id="De-Inicio" name="De-Inicio">
-        <option value="A">Selecionar hora:</option>
+        <option value="-1">Selecionar hora:</option>
         <option value="00">00:00</option>
         <option value="01">01:00</option>
         <option value="02">02:00</option>
@@ -127,7 +129,7 @@
       
       <label for="">A:</label>
       <select class="heading" id="Hasta-Fin" name="Hasta-Fin">
-        <option value="A">Selecionar hora:</option>
+        <option value="-1">Selecionar hora:</option>
         <option value="00">00:00</option>
         <option value="01">01:00</option>
         <option value="02">02:00</option>

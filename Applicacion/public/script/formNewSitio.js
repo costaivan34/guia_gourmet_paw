@@ -1,5 +1,4 @@
-
-function validarDatos(nameSitio,descripcion,direccion,ubicacion,mail,telefono, Dia_Inicio,Dia_Fin , De_Inicio, Hasta_Fin ){
+function validarDatos(nameSitio,descripcion,direccion,localidad,provincia,mail,telefono,X,Y, Dia_Inicio,Dia_Fin , De_Inicio, Hasta_Fin ){
   emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
   telefonoRegex = /^[2-9]\d{2}[2-9]\d{2}\d{4}$/;
   passwordRegex =  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
@@ -8,6 +7,11 @@ function validarDatos(nameSitio,descripcion,direccion,ubicacion,mail,telefono, D
     return false;
   }
   
+  if (X<(-90) || X>(90) || Y<(-180) || Y>(180)){
+    mensaje="Las coordenadas ingresadas no son validas. Por favor, revisa los datos e inténtalo de nuevo."
+    return false;
+  }
+
   if (nameSitio.length<0 ){
     mensaje="El nombre ingresado no es valido. Por favor, revisa los datos e inténtalo de nuevo."
     return false;
@@ -16,11 +20,15 @@ function validarDatos(nameSitio,descripcion,direccion,ubicacion,mail,telefono, D
     mensaje="La descripción ingresada no es valida. Por favor, revisa los datos e inténtalo de nuevo."
     return false;
   }
-  if (ubicacion.length<0){
-    mensaje="La Ubicación ingresada no es valida. Por favor, revisa los datos e inténtalo de nuevo."
+  if (localidad.length<0){
+    mensaje="La localidad ingresada no es valida. Por favor, revisa los datos e inténtalo de nuevo."
     return false;
   } 
-  if (Dia_Inicio=="A" ||Dia_Fin=="A" ||De_Inicio=="A" || Hasta_Fin=="A" ){
+  if (provincia.length<0){
+    mensaje="La provincia ingresada no es valida. Por favor, revisa los datos e inténtalo de nuevo."
+    return false;
+  } 
+  if (Dia_Inicio=="0" || Dia_Fin=="0" || De_Inicio=="-1" || Hasta_Fin=="-1" || Dia_Inicio>Dia_Fin || De_Inicio>Hasta_Fin){
     mensaje="El horario ingresado no es valido. Por favor, revisa los datos e inténtalo de nuevo."
     return false;
   }
@@ -38,14 +46,14 @@ function validarRegistro(){
 	xmlHttpRequest.onreadystatechange=function() {
 		if (xmlHttpRequest.readyState==4 && xmlHttpRequest.status==200) {
 			var response = xmlHttpRequest.responseText;
-      console.log(response)
-			/*if(xmlHttpRequest.responseText == 1) {
+   //   console.log("RESPEUSTA DEL SERVER:"+response)
+			if(xmlHttpRequest.responseText == 1) {
         document.getElementById( 'regForm' ).scrollIntoView();
 				const m = document.getElementById("messageBox");
 				m.innerHTML = `<div class="alert alert-success" role="alert">
 				Cuenta creada con exito. Bienvenido!</div>`; 
 				setTimeout(function(){ mensaje.innerHTML = "" }, 2500);
-      //  setTimeout(function(){ window.location.replace("/"); }, 2500);
+        setTimeout(function(){ window.location.replace("/dashboard/sitios"); }, 2500);
 			} else {
         document.getElementById( 'regForm' ).scrollIntoView();
         const m = document.getElementById("messageBox");
@@ -53,7 +61,7 @@ function validarRegistro(){
          Por favor, inténtalo de nuevo más tarde.</div>`; 
         document.getElementById( 'regForm' ).scrollIntoView();
         setTimeout(function(){ m.innerHTML = "" }, 2500);
-			}*/
+			}
 		}
 	}
 
@@ -61,7 +69,8 @@ function validarRegistro(){
   descripcion = document.getElementById('subject').value;
 
   direccion= document.getElementById('DireccionSitio').value;
-  ubicacion= document.getElementById('UbicacionSitio').value;
+  localidad= document.getElementById('LocalidadSitio').value;
+  provincia= document.getElementById('ProvinciaSitio').value;
   mail= document.getElementById('MailSitio').value;
   telefono= document.getElementById('TelefonoSitio').value;
 
@@ -72,10 +81,10 @@ function validarRegistro(){
   Dia_Fin = document.getElementById('Dia-Fin').value;
   De_Inicio = document.getElementById('De-Inicio').value;
   Hasta_Fin = document.getElementById('Hasta-Fin').value;
-  Usuario =  document.getElementById('nombreUsuario').value;
-  if (validarDatos(nameSitio,descripcion,direccion,ubicacion,mail,telefono,X,Y, Dia_Inicio,Dia_Fin , De_Inicio, Hasta_Fin )){
+  Usuario =  document.getElementById('nombreUsuario').textContent;
+  if (validarDatos(nameSitio,descripcion,direccion,localidad,provincia,mail,telefono,X,Y, Dia_Inicio,Dia_Fin , De_Inicio, Hasta_Fin )){
     oData = new FormData(document.forms.namedItem("regForm"));
-    oData.append('username', 'Chris');
+    oData.append('username', Usuario);
    for(let [name, value] of oData) {
       console.log(`${name} = ${value}`); // key1 = value1, luego key2 = value2
     }

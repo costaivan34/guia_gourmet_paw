@@ -109,27 +109,99 @@ class QueryBuilder{
         }
     }
 
-    public function findIDforUserName($user){
-        $statement = $this->pdo->prepare("
-        SELECT idUsuario FROM usuarios WHERE nombreUsuario='$user'");
+    public function agregarCaracteristicas($value,$idPlato){
+        $statement = $this->pdo->prepare("INSERT INTO listacaractplato (idPlato,idCaract) VALUES ($idPlato,$value)");
         $statement->execute();
-        return $statement->fetchColumn();
-    }
-
-
-    public function agregarSitio($nameSitio,$subject, $TelefonoSitio,$MailSitio,$user,$cat){
-        $user = findIDforUserName($user);
-        $statement = $this->pdo->prepare("
-        INSERT INTO sitios(nombre, descripcion, telefono, sitioWeb,idUsuario, idCategoria)
-         VALUES ('$nameSitio','$subject', '$TelefonoSitio','$MailSitio','$user,'$cat')");
-        $statement->execute();
-        if($statement->rowCount() > 0){
-            return 1;
+        if($statement->rowCount()> 0){
+            return $this->pdo->lastInsertId();
         }else{
             return 0;
         }
     }
 
+    public function agregarInfor($Info,$Valor,$idPlato){
+        $statement = $this->pdo->prepare("INSERT INTO valornutricional (idPlato,idInfo, valor) VALUES ($Info,$Valor,$idPlato)");
+        $statement->execute();
+        if($statement->rowCount()> 0){
+            return $this->pdo->lastInsertId();
+        }else{
+            return 0;
+        }
+    }
+
+    
+    public function  agregarPlato($namePlato,$subject, $namePrecio,$idSitio){
+        $statement = $this->pdo->prepare("INSERT INTO platos(nombre, descripcion, precio,idSitio) VALUES ('$namePlato','$subject', $namePrecio,$idSitio)");
+        $statement->execute();
+        if($statement->rowCount()> 0){
+            return $this->pdo->lastInsertId();
+        }else{
+            return 0;
+        }
+    }
+
+
+    public function agregarSitio($nameSitio,$subject, $TelefonoSitio,$MailSitio,$user,$cat){
+        $statement = $this->pdo->prepare("INSERT INTO sitios (nombre, descripcion, telefono, sitioWeb,idUsuario, idCategoria) 
+        VALUES ('$nameSitio','$subject', '$TelefonoSitio','$MailSitio', (SELECT idUsuario FROM usuarios WHERE nombreUsuario='$user') ,$cat )");
+        $statement->execute();
+        if($statement->rowCount()> 0){
+            return $this->pdo->lastInsertId();
+        }else{
+            return 0;
+        }
+    }
+
+    public function agregarServicio($nameServicio,$idSitio){
+        $statement = $this->pdo->prepare("INSERT INTO listacaractsitio(idSitio, idCaract) VALUES ($idSitio,$nameServicio)");
+        $statement->execute();
+        if($statement->rowCount()> 0){
+            return $this->pdo->lastInsertId();
+        }else{
+            return 0;
+        }
+    }
+
+    public function agregarHorarios($idSitio, $idDia, $HDesde, $HHasta){
+        $statement = $this->pdo->prepare("INSERT INTO horario (idSitio, idDia, HDesde, HHasta) VALUES ($idSitio, $idDia, $HDesde, $HHasta)");
+        $statement->execute();
+        if($statement->rowCount()> 0){
+            return $this->pdo->lastInsertId();
+        }else{
+            return 0;
+        }
+    }
+
+    public function agregarUbicacion($idSitio, $direccion, $ciudad, $provincia, $X, $Y){
+        $statement = $this->pdo->prepare("INSERT INTO ubicacion(idSitio, direccion, ciudad, provincia, X, Y) VALUES ($idSitio, '$direccion', '$ciudad', '$provincia',$X, $Y)");
+        $statement->execute();
+        if($statement->rowCount()> 0){
+            return $this->pdo->lastInsertId();
+        }else{
+            return 0;
+        }
+    }
+    
+    public function agregarImagenes($idSitio, $path){
+        $statement = $this->pdo->prepare("INSERT INTO imagenessitios(idSitio, path) VALUES ($idSitio,'$path')");
+        $statement->execute();
+        if($statement->rowCount()> 0){
+            return $this->pdo->lastInsertId();
+        }else{
+            return 0;
+        }
+    }
+    
+    public function agregarImagenes1($idPlato, $path){
+        $statement = $this->pdo->prepare("INSERT INTO imagenesplatos(idPlato, path) VALUES ($idPlato,'$path')");
+        $statement->execute();
+        if($statement->rowCount()> 0){
+            return $this->pdo->lastInsertId();
+        }else{
+            return 0;
+        }
+    }
+    
 
 public function selectSitio($idSitio){
     /*
