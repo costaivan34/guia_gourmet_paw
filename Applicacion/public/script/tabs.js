@@ -318,11 +318,6 @@ function setPlatoModal(respuesta,info,img,lista,caract){
         var lista =JSON.parse( respuesta.lista ); 
         var caract =JSON.parse( respuesta.caract ); 
         setPlatoModal(respuesta,info,img,lista,caract); 
-      }else{
-        const m = document.getElementById("messageBox");
-        m.innerHTML = `<div class="alert alert-danger" role="alert"> Ocurrio un error en el servidor.
-         Por favor, inténtalo de nuevo más tarde.</div>`; 
-        setTimeout(function(){ m.innerHTML = "" }, 2500);
       }
     }
   xmlHttpRequest.open("GET","plato?Sitio="+sitio+"&Plato="+plato,true);

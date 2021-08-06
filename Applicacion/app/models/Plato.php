@@ -64,7 +64,7 @@ class Plato extends Model{
     public function agregarInfor($InformaciónPeso,$InformaciónEnergia,$InformaciónCarbohidratos,$InformaciónProteina,$InformaciónGrasas,$InformaciónSodio,$idPlato){
         $this->db->agregarInfor(1,$InformaciónPeso,$idPlato);
         $this->db->agregarInfor(2,$InformaciónEnergia,$idPlato);
-        $this->db->agregarInfor(3,$InformaciónCarbohidratos,$idPlato);
+        $this->db->agregarInfor(3,$InformaciónCarbohidratos,$idPlato); 
         $this->db->agregarInfor(4,$InformaciónProteina,$idPlato);
         $this->db->agregarInfor(5,$InformaciónGrasas,$idPlato);
         $this->db->agregarInfor(6,$InformaciónSodio,$idPlato);   
@@ -77,11 +77,11 @@ class Plato extends Model{
         $listaValor= $this->db->selectInfo($idPlato);
         $imagen = $this->db->selectImagenPlato($idPlato);
         $caract =$this->db->selectListaCaract($idPlato);
-        $basicPlato["info"] =json_encode($Plato);
+        $basicPlato['info'] =(json_encode($Plato));
         $basicPlato['img'] =json_encode($imagen);
         $basicPlato['caract'] =json_encode($caract);
         $basicPlato['lista'] =json_encode($listaValor);
-        return  (json_encode($Plato));
+        return  (json_encode($basicPlato));
     }
 
 

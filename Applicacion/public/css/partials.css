@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
 
 html {
-  min-height: 150%;
+  min-height: 100%;
   position: relative;
 }
 
@@ -129,7 +129,7 @@ footer section{
     list-style-type: none;
   background-color: #E7CF7F;
   padding-right: 20px;
-  padding-left: 20px;
+  padding-left: 130px;
   padding-bottom: 20px;
   
   text-align: center;

@@ -236,6 +236,211 @@ INSERT INTO `imagenesplatos` (`idImagen`, `idPlato`, `nombre`, `path`) VALUES
 (28, 28, 0, '/private/plates/7/flan.jpg');
 
 
+--
+-- Volcado de datos para la tabla `comentariositios`
+--
+--
+INSERT INTO `comentariositios` (`idComentario`, `idSitio`, `nombre`, `mail`, `descripcion`, `fecha`, `valoracionSabor`, `valoracionPrecio`, `valoracionAmbiente`) VALUES
+(1, 1, 'Carlos', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam.', '2021-06-06', 1, 1, 3),
+(2, 1, 'Abigail', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-02-02', 1, 3, 2),
+(3, 2, 'Susana', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-02-12', 4, 4, 4),
+(4, 1, 'Aurora', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 3, 3, 3),
+(5, 1, 'Gaspar', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 2, 2, 2),
+(6, 1, 'Ivan ', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 4, 4, 4),
+(7, 1, 'Renato', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-06-06', 5, 5, 5),
+(8, 1, 'Carina', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 5, 2, 2),
+(9, 1, 'Ludmila', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-06-06', 1, 1, 1),
+(10, 1, 'Felipe', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 1, 1, 1),
+
+(11, 2, 'Carlos', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam.', '2021-06-06', 1, 1, 3),
+(12, 2, 'Abigail', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-02-02', 1, 3, 2),
+(13, 2, 'Susana', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-02-12', 4, 4, 4),
+(14, 2, 'Aurora', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 3, 3, 3),
+(15, 2, 'Gaspar', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 2, 2, 2),
+(16, 2, 'Ivan ', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 4, 4, 4),
+(17, 2, 'Renato', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-06-06', 5, 5, 5),
+(18, 2, 'Carina', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 5, 2, 2),
+(19, 2, 'Ludmila', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-06-06', 1, 1, 1),
+(20,2, 'Felipe', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 1, 1, 1),
+
+(21, 3, 'Carlos', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam.', '2021-06-06', 1, 1, 3),
+(22, 3, 'Abigail', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-02-02', 1, 3, 2),
+(23, 3, 'Susana', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-02-12', 4, 4, 4),
+(24, 3, 'Aurora', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 3, 3, 3),
+(25, 3, 'Gaspar', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 2, 2, 2),
+(26, 3, 'Ivan ', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 4, 4, 4),
+(27, 3, 'Renato', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-06-06', 5, 5, 5),
+(28, 3, 'Carina', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 5, 2, 2),
+(29, 3, 'Ludmila', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-06-06', 1, 1, 1),
+(30, 3, 'Felipe', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 1, 1, 1),
+
+(31, 4, 'Carlos', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam.', '2021-06-06', 1, 1, 3),
+(32, 4, 'Abigail', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-02-02', 1, 3, 2),
+(33, 4, 'Susana', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-02-12', 4, 4, 4),
+(34, 4, 'Aurora', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 3, 3, 3),
+(35, 4, 'Gaspar', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 2, 2, 2),
+(36, 4, 'Ivan ', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 4, 4, 4),
+(37, 4, 'Renato', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-06-06', 5, 5, 5),
+(38, 4, 'Carina', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 5, 2, 2),
+(39, 4, 'Ludmila', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-06-06', 1, 1, 1),
+(40,4, 'Felipe', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 1, 1, 1),
+
+(41, 5, 'Carlos', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam.', '2021-06-06', 1, 1, 3),
+(42, 5, 'Abigail', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-02-02', 1, 3, 2),
+(43, 5, 'Susana', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-02-12', 4, 4, 4),
+(44, 5, 'Aurora', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 3, 3, 3),
+(45, 5, 'Gaspar', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 2, 2, 2),
+(46, 5, 'Ivan ', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 4, 4, 4),
+(47, 5, 'Renato', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-06-06', 5, 5, 5),
+(48, 5, 'Carina', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 5, 2, 2),
+(49, 5, 'Ludmila', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-06-06', 1, 1, 1),
+(50, 5, 'Felipe', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 1, 1, 1),
+
+(61, 6, 'Carlos', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam.', '2021-06-06', 1, 1, 3),
+(62, 6, 'Abigail', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-02-02', 1, 3, 2),
+(63, 6, 'Susana', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-02-12', 4, 4, 4),
+(64, 6, 'Aurora', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 3, 3, 3),
+(65, 6, 'Gaspar', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 2, 2, 2),
+(66, 6, 'Ivan ', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 4, 4, 4),
+(67, 6, 'Renato', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-06-06', 5, 5, 5),
+(68, 6, 'Carina', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 5, 2, 2),
+(69, 6, 'Ludmila', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-06-06', 1, 1, 1),
+(70, 6, 'Felipe', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 1, 1, 1),
+
+(71, 7, 'Carlos', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam.', '2021-06-06', 1, 1, 3),
+(72, 7, 'Abigail', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-02-02', 1, 3, 2),
+(73, 7, 'Susana', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-02-12', 4, 4, 4),
+(74, 7, 'Aurora', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 3, 3, 3),
+(75, 7, 'Gaspar', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 2, 2, 2),
+(76, 7, 'Ivan ', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 4, 4, 4),
+(77, 7, 'Renato', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-06-06', 5, 5, 5),
+(78, 7, 'Carina', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 5, 2, 2),
+(79, 7, 'Ludmila', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam', '2021-06-06', 1, 1, 1),
+(80, 7, 'Felipe', '', 'Et iure eius vel rerum fuga id eligendi harum vel ratione numquam',  '2021-06-06', 1, 1, 1);
+
+--
+--
+-- Volcado de datos para la tabla `valornutricional`
+--
+
+INSERT INTO `valornutricional` (`idValor`, `idPlato`, `idInfo`, `valor`) VALUES
+(1, 1, 2, 1102),
+(2, 1, 3, 20),
+(3, 1, 5, 17),
+(4, 1, 1, 60),
+(5, 1, 4, 6),
+(6, 1, 6, 193),
+
+(7, 2, 2, 1102),
+(8, 2, 3, 20),
+(9, 2, 5, 17),
+(10, 2, 1, 60),
+(11, 2, 4, 6),
+(12, 2, 6, 193),
+
+(13, 3, 2, 1102),
+(14, 3, 3, 20),
+(15, 3, 5, 17),
+(16, 3, 1, 60),
+(17, 3, 4, 6),
+(18, 3, 6, 193),
+(19, 4, 2, 1102),
+(20, 4, 3, 20),
+(21, 4, 5, 17),
+(22, 4, 1, 60),
+(23, 4, 4, 6),
+(24, 4, 6, 193),
+(25, 5, 2, 1102),
+(26, 5, 3, 20),
+(27, 5, 5, 17),
+(28, 5, 1, 60),
+(19, 5, 4, 6),
+(30, 5, 6, 193),
+
+(31, 6, 2, 1102),
+(32, 6, 3, 20),
+(33, 6, 5, 17),
+(34, 6, 1, 60),
+(35, 6, 4, 6),
+(36, 6, 6, 193),
+
+(37, 7, 2, 1102),
+(38, 7, 3, 20),
+(39, 7, 5, 17),
+(40, 7, 1, 60),
+(41, 7, 4, 6),
+(42, 7, 6, 193),
+
+(43, 8, 2, 1102),
+(44, 8, 3, 20),
+(45, 8, 5, 17),
+(46, 8, 1, 60),
+(47, 8, 4, 6),
+(48, 8, 6, 193),
+
+(49, 9, 2, 1102),
+(50, 9, 3, 20),
+(51, 9, 5, 17),
+(52, 9, 1, 60),
+(53, 9, 4, 6),
+(54, 9, 6, 193),
+
+
+
+(55, 10, 2, 1102),
+(56,10, 3, 20),
+(57, 10, 5, 17),
+(58, 10, 1, 60),
+(59, 10, 4, 6),
+(60, 10, 6, 193),
+
+
+
+(61, 11, 2, 1102),
+(62, 11, 3, 20),
+(63, 11, 5, 17),
+(64, 11, 1, 60),
+(65,11, 4, 6),
+(66, 11, 6, 193),
+
+
+
+(67, 12, 2, 1102),
+(68, 12, 3, 20),
+(69, 12, 5, 17),
+(70, 12, 1, 60),
+(71, 12, 4, 6),
+(72, 12, 6, 193),
+
+
+(73, 12, 2, 1102),
+(74, 12, 3, 20),
+(75, 12, 5, 17),
+(76, 12, 1, 60),
+(77, 12, 4, 6),
+(78, 12, 6, 193);
+
+
+--
+--
+-- Volcado de datos para la tabla `listacaractplato`
+--
+INSERT INTO `listacaractplato`(`idPlato`, `idCaract`) VALUES 
+(1,1),
+(2,2),
+(3,1),
+(4,4),
+(5,1),
+(6,1),
+(7,5),
+(8,1),
+(9,2),
+(10,1),
+(11,3),
+(12,2),
+(13,1);
+
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

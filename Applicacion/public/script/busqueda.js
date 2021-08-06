@@ -193,7 +193,7 @@ function agregarSitio(respuesta){
   divPlates.appendChild(img);
   divPlates.appendChild(aNombre);
   divPlates.appendChild(pMarker);
-  divPlates.appendChild(pComent);
+  
   var divTarjeta = document.createElement("div");
   divTarjeta.className="tarjeta";
   divTarjeta.appendChild(divPlates);
