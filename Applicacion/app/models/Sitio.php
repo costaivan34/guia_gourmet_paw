@@ -7,14 +7,19 @@ use App\Core\Model;
 class Sitio extends Model{
     protected $table;
     protected $idSitio;
-    protected $n_per_plato = 2;
-    protected $n_per_coment = 2;
-    protected $n_per_page = 2;
+    protected $n_per_plato = 4;
+    protected $n_per_coment = 4;
+    protected $n_per_page = 4;
 
     public function getAll(){
         $todos = $this->db->selectAllSitios();
         $All = json_decode(json_encode($todos), True);
         return $All; 
+    }
+
+    public function tienePlatos($idSitio){
+        $basic = $this->db->selectPlatosList($idSitio);
+        return $basic;
     }
 
     public function getOne($idSitio){
@@ -96,11 +101,34 @@ class Sitio extends Model{
         $basicDestacados = json_encode($Destacados);
         return $Destacados;
     }
-    
+   
 
     public function agregarConsulta($nombre ,$apellido ,$mail ,$texto){
         $datos = $this->db->agregarConsulta($nombre ,$apellido ,$mail ,$texto);
         return $datos;
+    }
+  
+    public function  deleteSitio($idSitio ){
+        $op1 =  $this->db->eliminarCaractSitio($idSitio);
+        if ($op1==1){
+            $op2 =    $this->db->eliminarComentarioSitios($idSitio);
+            if ($op2==1){
+                $op3 =     $this->db->eliminarImagenesSitios($idSitio);
+                if ($op3==1){
+                    $op4 =    $this->db->eliminarUbicacion($idSitio);
+                    if ($op4==1){
+                        $op5 =  $this->db->eliminarSitio($idSitio);
+                        if ($op5==1){
+                            $op6 = $this->db->eliminarHorario($idSitio);
+                        if ($op6==1){
+                            return 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return 0;
     }
     
     public function agregarSitio($nameSitio,$subject, $TelefonoSitio,$MailSitio,$user,$cat){

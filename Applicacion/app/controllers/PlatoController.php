@@ -51,6 +51,15 @@ class PlatoController extends Controller{
         }
     }
 
+    public function delete(){
+        $idSitio= $this->model->deletePlato($_POST['idPlato']);
+        if ($idSitio>0){
+        return 1;   
+        }else{
+        return 0;   
+        }
+    }
+
     public function getAll(){
         $idSitio = htmlspecialchars($_GET['Sitio']);
         $datos['OneSitio'] = $this->model->getOne($idSitio);

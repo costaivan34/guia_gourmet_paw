@@ -221,7 +221,30 @@ background: rgba(245, 242, 233, 0.3) ;
 
 .fa-plus-circle{
   padding-top: 40%;
+  color: #F5F2E9;
 }
+
+.fa-plus-circle:hover{
+  padding-top: 40%;
+  color: #F59287;
+  
+  
+}
+
+#mailUser{
+  pointer-events: none;
+}
+
+
+.icons{
+  color: grey;
+}
+
+
+.icons:hover{
+  color: #F59287;
+}
+
 #wrapper {
   min-height: 100%;
   position: relative;

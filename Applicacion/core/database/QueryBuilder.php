@@ -120,7 +120,7 @@ class QueryBuilder{
     }
 
     public function agregarInfor($Info,$Valor,$idPlato){
-        $statement = $this->pdo->prepare("INSERT INTO valornutricional (idPlato,idInfo, valor) VALUES ($Info,$Valor,$idPlato)");
+        $statement = $this->pdo->prepare("INSERT INTO valornutricional (idPlato,idInfo, valor) VALUES ($idPlato,$Info,$Valor)");
         $statement->execute();
         if($statement->rowCount()> 0){
             return $this->pdo->lastInsertId();
@@ -131,7 +131,8 @@ class QueryBuilder{
 
     
     public function  agregarPlato($namePlato,$subject, $namePrecio,$idSitio){
-        $statement = $this->pdo->prepare("INSERT INTO platos(nombre, descripcion, precio,idSitio) VALUES ('$namePlato','$subject', $namePrecio,$idSitio)");
+        $statement = $this->pdo->prepare("INSERT INTO platos(nombre, descripcion, precio,idSitio) 
+        VALUES ('$namePlato','$subject', $namePrecio,$idSitio)");
         $statement->execute();
         if($statement->rowCount()> 0){
             return $this->pdo->lastInsertId();
@@ -159,6 +160,17 @@ class QueryBuilder{
             return $this->pdo->lastInsertId();
         }else{
             return 0;
+        }
+    }
+    public function selectPlatosList($idSitio){
+        $statement = $this->pdo->prepare
+        ("SELECT p.nombre, p.descripcion, p.precio
+         FROM platos p WHERE p.idSitio = $idSitio");
+        $statement->execute();
+        if($statement->rowCount()> 0){
+            return 0;
+        }else{
+            return 1;
         }
     }
 
@@ -282,6 +294,15 @@ public function selectAllPlatos($idSitio,$offset, $per_page){
     return $statement->fetchAll(PDO::FETCH_CLASS);
 }
 
+public function selectPlatos($idSitio){ 
+     $statement = $this->pdo->prepare(" SELECT p.idPlato, p.nombre, p.precio, ip.path FROM platos p 
+     INNER JOIN imagenesplatos ip ON p.idPlato= ip.idPlato 
+      WHERE p.idSitio=$idSitio ORDER BY p.idPlato" );
+    $statement->execute();
+    return $statement->fetchAll(PDO::FETCH_CLASS);
+}
+
+
 public function getPages($idSitio,$tabla){ 
     $total_pages_sql =  $this->pdo->prepare(" SELECT count(*) 
     FROM $tabla p WHERE p.idSitio=$idSitio" );
@@ -350,18 +371,16 @@ public function selectInfo($idPlato){
 }
 
 public function selectDestacados(){ 
-    $statement = $this->pdo->prepare("SELECT  s.idSitio,s.nombre,u.ciudad, u.provincia,count(idComentario)
-    as Ncomentarios, i.path FROM sitios s INNER JOIN comentariositios cs ON  s.idSitio = cs.idSitio
+    $statement = $this->pdo->prepare("SELECT  s.idSitio,s.nombre,u.ciudad, u.provincia, i.path FROM sitios s 
     INNER JOIN ubicacion u  ON  s.idSitio = u.idSitio
     RIGHT JOIN imagenessitios i ON  s.idSitio = i.idSitio
-    GROUP BY idSitio  LIMIT 0, 9");
+    GROUP BY idSitio  LIMIT 0, 4");
     $statement->execute();
     return $statement->fetchAll(PDO::FETCH_CLASS);
 }
 
 public function selectCerca(){ 
-    $statement = $this->pdo->prepare("SELECT s.idSitio,s.nombre,u.ciudad, u.provincia, u.X, u.Y,count(idComentario)
-    as Ncomentarios, i.path, ca.nombre as cat FROM sitios s INNER JOIN comentariositios cs ON  s.idSitio = cs.idSitio
+    $statement = $this->pdo->prepare("SELECT s.idSitio,s.nombre,u.ciudad, u.provincia, u.X, u.Y, i.path, ca.nombre as cat FROM sitios s 
     INNER JOIN ubicacion u  ON  s.idSitio = u.idSitio
     INNER JOIN imagenessitios i ON  s.idSitio = i.idSitio
     INNER JOIN categorias ca ON s.idCategoria= ca.idCategoria
@@ -377,9 +396,112 @@ public function selectCerca(){
 
 
 
+public function eliminarCaracPlatos($idPlato){
+    $statement = $this->pdo->prepare("DELETE FROM listacaractplato WHERE idPlato =$idPlato");
+    $statement->execute();
+    if($statement->rowCount()> 0){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+public function eliminarValorPlatos($idPlato){
+    $statement = $this->pdo->prepare("DELETE FROM valornutricional WHERE idPlato =$idPlato");
+    $statement->execute();
+    if($statement->rowCount()> 0){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
+public function eliminarImagenesPlatos($idPlato){
+    $statement = $this->pdo->prepare("DELETE FROM imagenesplatos WHERE idPlato =$idPlato");
+    $statement->execute();
+    if($statement->rowCount()> 0){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
+public function eliminarPlatos($idPlato){
+    $statement = $this->pdo->prepare("DELETE FROM platos WHERE idPlato =$idPlato");
+    $statement->execute();
+    if($statement->rowCount()> 0){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
+
+
+
+public function eliminarCaractSitio($idSitio){
+    $statement = $this->pdo->prepare("DELETE FROM listacaractsitio WHERE idSitio =$idSitio");
+    $statement->execute();
+    if($statement->rowCount()> 0){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
+public function eliminarComentarioSitios($idSitio){
+    $statement = $this->pdo->prepare("DELETE FROM comentariositios WHERE idSitio =$idSitio");
+    $statement->execute();
+    if($statement->rowCount()> 0){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
+public function eliminarHorario($idSitio){
+    $statement = $this->pdo->prepare("DELETE FROM horario WHERE idSitio =$idSitio");
+    $statement->execute();
+    if($statement->rowCount()> 0){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
+public function eliminarImagenesSitios($idSitio){
+    $statement = $this->pdo->prepare("DELETE FROM imagenessitios WHERE idSitio =$idSitio");
+    $statement->execute();
+    if($statement->rowCount()> 0){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
+public function eliminarUbicacion($idSitio){
+    $statement = $this->pdo->prepare("DELETE FROM ubicacion WHERE idSitio =$idSitio");
+    $statement->execute();
+    if($statement->rowCount()> 0){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
+public function eliminarSitio($idSitio){
+    $statement = $this->pdo->prepare("DELETE FROM sitio WHERE idSitio =$idSitio");
+    $statement->execute();
+    if($statement->rowCount()> 0){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
+
+
 public function selectSitioBuscar($Clave,$Provincia,$Categoria,$offset,$per_page){    
-    $statement = $this->pdo->prepare("SELECT s.idSitio,s.nombre,u.ciudad, u.provincia,count(idComentario)
-    as Ncomentarios, i.path FROM sitios s INNER JOIN comentariositios cs ON  s.idSitio = cs.idSitio
+    $statement = $this->pdo->prepare("SELECT s.idSitio,s.nombre,u.ciudad, u.provincia, i.path FROM sitios s 
     INNER JOIN ubicacion u  ON  s.idSitio = u.idSitio
     INNER JOIN imagenessitios i ON  s.idSitio = i.idSitio
     WHERE s.nombre like CONCAT('%','$Clave','%') AND u.provincia like CONCAT('%','$Provincia','%') AND idCategoria=$Categoria
@@ -391,8 +513,7 @@ public function selectSitioBuscar($Clave,$Provincia,$Categoria,$offset,$per_page
 
 
 public function selectSitioBuscarProvincia($Clave,$Provincia,$offset,$per_page){
-    $statement = $this->pdo->prepare("SELECT s.idSitio,s.nombre,u.ciudad, u.provincia,count(idComentario)
-    as Ncomentarios, i.path FROM sitios s INNER JOIN comentariositios cs ON  s.idSitio = cs.idSitio
+    $statement = $this->pdo->prepare("SELECT s.idSitio,s.nombre,u.ciudad, u.provincia, i.path FROM sitios s 
     INNER JOIN ubicacion u  ON  s.idSitio = u.idSitio
     INNER JOIN imagenessitios i ON  s.idSitio = i.idSitio
     WHERE s.nombre like CONCAT('%','$Clave','%') AND u.provincia like CONCAT('%','$Provincia','%')
@@ -403,8 +524,7 @@ public function selectSitioBuscarProvincia($Clave,$Provincia,$offset,$per_page){
 }
 
 public function selectSitioBuscarCategoria($Clave,$Categoria,$offset,$per_page){
-    $statement = $this->pdo->prepare("SELECT s.idSitio,s.nombre,u.ciudad, u.provincia,count(idComentario)
-    as Ncomentarios, i.path FROM sitios s INNER JOIN comentariositios cs ON  s.idSitio = cs.idSitio
+    $statement = $this->pdo->prepare("SELECT s.idSitio,s.nombre,u.ciudad, u.provincia, i.path FROM sitios s
     INNER JOIN ubicacion u  ON  s.idSitio = u.idSitio
     INNER JOIN imagenessitios i ON  s.idSitio = i.idSitio
     WHERE s.nombre like CONCAT('%','$Clave','%')  AND idCategoria=$Categoria
@@ -416,8 +536,7 @@ public function selectSitioBuscarCategoria($Clave,$Categoria,$offset,$per_page){
 
  //recuperar listado de todos los sitios
  public function selectSitioBuscarAllSitios($Clave,$offset,$per_page){ 
-    $statement = $this->pdo->prepare("SELECT s.idSitio,s.nombre,u.ciudad, u.provincia,count(idComentario)
-    as Ncomentarios, i.path FROM sitios s INNER JOIN comentariositios cs ON  s.idSitio = cs.idSitio
+    $statement = $this->pdo->prepare("SELECT s.idSitio,s.nombre,u.ciudad, u.provincia, i.path FROM sitios s 
     INNER JOIN ubicacion u  ON  s.idSitio = u.idSitio
     RIGHT JOIN imagenessitios i ON  s.idSitio = i.idSitio
     WHERE s.nombre like CONCAT('%','$Clave','%')
@@ -434,8 +553,8 @@ public function selectSitioBuscarCategoria($Clave,$Categoria,$offset,$per_page){
 
 
 public function PAGselectSitioBuscar($Clave,$Provincia,$Categoria){    
-    $statement = $this->pdo->prepare("SELECT count(*) as cantidad FROM (SELECT s.idSitio,s.nombre,u.ciudad, u.provincia,count(idComentario)
-    as Ncomentarios, i.path FROM sitios s INNER JOIN comentariositios cs ON  s.idSitio = cs.idSitio
+    $statement = $this->pdo->prepare("SELECT count(*) as cantidad FROM (SELECT s.idSitio,s.nombre,u.ciudad, u.provincia
+    , i.path FROM sitios s
     INNER JOIN ubicacion u  ON  s.idSitio = u.idSitio
     INNER JOIN imagenessitios i ON  s.idSitio = i.idSitio
     WHERE s.nombre like CONCAT ('%','$Clave','%') AND u.provincia like CONCAT('%','$Provincia','%') AND idCategoria=$Categoria
@@ -447,8 +566,8 @@ public function PAGselectSitioBuscar($Clave,$Provincia,$Categoria){
 
 
 public function PAGselectSitioBuscarProvincia($Clave,$Provincia){
-    $statement = $this->pdo->prepare("SELECT count(*) as cantidad FROM (SELECT s.idSitio,s.nombre,u.ciudad, u.provincia,count(idComentario)
-    as Ncomentarios, i.path FROM sitios s INNER JOIN comentariositios cs ON  s.idSitio = cs.idSitio
+    $statement = $this->pdo->prepare("SELECT count(*) as cantidad FROM (SELECT s.idSitio,s.nombre,u.ciudad, u.provincia
+    , i.path FROM sitios s 
     INNER JOIN ubicacion u  ON  s.idSitio = u.idSitio
     INNER JOIN imagenessitios i ON  s.idSitio = i.idSitio
     WHERE s.nombre like CONCAT('%','$Clave','%') AND u.provincia like CONCAT('%','$Provincia','%') 
@@ -458,8 +577,8 @@ public function PAGselectSitioBuscarProvincia($Clave,$Provincia){
 }
 
 public function PAGselectSitioBuscarCategoria($Clave,$Categoria){
-    $statement = $this->pdo->prepare("SELECT count(*) as cantidad FROM (SELECT s.idSitio,s.nombre,u.ciudad, u.provincia,count(idComentario)
-    as Ncomentarios, i.path FROM sitios s INNER JOIN comentariositios cs ON  s.idSitio = cs.idSitio
+    $statement = $this->pdo->prepare("SELECT count(*) as cantidad FROM (SELECT s.idSitio,s.nombre,u.ciudad, u.provincia
+    , i.path FROM sitios s 
     INNER JOIN ubicacion u  ON  s.idSitio = u.idSitio
     INNER JOIN imagenessitios i ON  s.idSitio = i.idSitio
     WHERE s.nombre like CONCAT('%','$Clave','%')  AND idCategoria=$Categoria GROUP BY idSitio) AS Pasd
@@ -470,8 +589,8 @@ public function PAGselectSitioBuscarCategoria($Clave,$Categoria){
 
  //recuperar listado de todos los sitios
  public function PAGselectSitioBuscarAllSitios($Clave){ 
-    $statement = $this->pdo->prepare("SELECT count(*) as cantidad FROM (SELECT s.idSitio,s.nombre,u.ciudad, u.provincia,count(idComentario)
-    as Ncomentarios, i.path FROM sitios s INNER JOIN comentariositios cs ON  s.idSitio = cs.idSitio
+    $statement = $this->pdo->prepare("SELECT count(*) as cantidad FROM (SELECT s.idSitio,s.nombre,u.ciudad, u.provincia,
+     i.path FROM sitios s 
     INNER JOIN ubicacion u  ON  s.idSitio = u.idSitio
     RIGHT JOIN imagenessitios i ON  s.idSitio = i.idSitio
     WHERE s.nombre like CONCAT('%','$Clave','%')

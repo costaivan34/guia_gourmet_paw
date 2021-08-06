@@ -47,7 +47,7 @@
   </div>
   <div style="text-align:center">
     {% for N in datos.Imagenes %}
-    <span class="dot" onclick="currentSlide( {{ datos.loop.index-1 }} )"></span>
+    <span class="dot" onclick="currentSlide( '{{ datos.loop.index-1 }}' )"></span>
 
     {% endfor %}
   </div>
@@ -271,6 +271,7 @@
   <div class="modal-content-plate animate">
     <article class=" infoBasica-plato">
       <span onclick="closeModal()" class="closeModal" title="Close Modal">&times;</span>
+      <div id="messageBox"></div>
       <section class="title-plato">
         <h3 id="titulo"></h3>
         <hr class="separador">

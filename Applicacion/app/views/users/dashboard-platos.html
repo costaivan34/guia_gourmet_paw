@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block head %}
+{{ parent() }}
+
+
+<script src="/public/script/tabs.js"></script>
+<script src="/public/script/dashboard.js"></script>
+<link rel="stylesheet" href="/public/css/dashboard.css">
+<link rel="stylesheet" href="/public/css/resultados.css">
+
+<link rel="stylesheet" href="/public/css/index.css">
+<link rel="stylesheet" href="/public/css/carrusel.css">
+<link rel="stylesheet" href="/public/css/search-bar.css">
+<link rel="stylesheet" href="/public/css/resultados.css">
+<link rel="stylesheet" href="/public/css/platoSingle.css">
+
+
+{% endblock %}
+{% block title %}Sitios{% endblock %}
+{% block header %}
+
+{% endblock %}
+
+{% block main %}
+
+
+<div id="wrapper">
+  <div class="side-bar">
+    {{ include('partials/sidebar-dashboard.html') }}
+
+  </div>
+  <div class="info">
+    <h3 id="idSitio">{{ datos.idSitio }} </h3>
+    <h3 id="nameSitio">{{ datos.NameSitio }}</h3>
+    <h3> PLATOS:</h3>
+    <div class="fila">
+      <div id="columna">
+        {% for a in datos.platos %}
+        <div class="tarjeta">
+          <div class="plates-text">
+            <img src="{{ a.path }}" alt="Denim Jeans">
+              <h3>{{ a.nombre }}</h3>
+              <i class=" fa-2x fa fa-trash icons" onclick="openModal('{{ a.idPlato }}');"></i> 
+          </div>
+        </div>
+        {% endfor %}
+        <div class="tarjeta">
+          <div class="plus-text">
+            <a href="/plato/new?Sitio={{ datos.idSitio }}&Name={{ datos.NameSitio }}"><i class=" fa-3x fa fa-plus-circle icons"></i> </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div id="id02" class="modal delete" >
+
+    <!-- Modal Content for login-->
+    <form class="modal-content animate" method="POST" id="formDelete">  
+      <div class="imgcontainer">
+        <h3 id="Mensaje">ATENCIÓN</h3>
+        <span onclick="closeModal()" class="close" title="Close Modal">&times;</span>
+      </div>
+      <div class="container">
+        <div id="messageBox"></div>
+        <p> ¿Esta seguro de eliminar el sitio?</p>
+        <button onclick="eliminarPlatos();" type="submit" >Aceptar</button>
+      </div>
+      <button onclick="closeModal();">Cancelar</button>
+    </form>
+  </div>
+
+
+
+
+  {% endblock %}

@@ -51,7 +51,7 @@ function validarRegistro(){
         document.getElementById( 'regForm' ).scrollIntoView();
 				const m = document.getElementById("messageBox");
 				m.innerHTML = `<div class="alert alert-success" role="alert">
-				Cuenta creada con exito. Bienvenido!</div>`; 
+				Sitio registrado con exito.</div>`; 
 				setTimeout(function(){ mensaje.innerHTML = "" }, 2500);
         setTimeout(function(){ window.location.replace("/dashboard/sitios"); }, 2500);
 			} else {

@@ -10,8 +10,10 @@
 
     $router->get('dashboard/account', 'UsersController@dash');
     $router->get('dashboard/sitios', 'UsersController@dash_sitios');
+    $router->get('dashboard/plato', 'UsersController@dash_platos');
     $router->get('dashboard/password', 'UsersController@dash_password');
     $router->get('dashboard/setting', 'PagesController@dash');
+
     $router->get('user/new', 'UsersController@new_user' );
     $router->post('user/CreateUser', 'UsersController@store' );
 
@@ -24,11 +26,13 @@
     $router->get('resto', 'SitioController@getOne');
     $router->get('resto/new', 'SitioController@newOne');
     $router->post('resto/CreateResto', 'SitioController@store' );
+    $router->post('resto/DeleteResto', 'SitioController@delete' );
     
     $router->get('platos', 'SitioController@getPlatos');
     $router->get('plato', 'PlatoController@getOne');
     $router->get('plato/new', 'PlatoController@newOne');
     $router->post('plato/CreatePlato', 'PlatoController@store' );
+    $router->post('plato/DeletePlato', 'PlatoController@delete' );
 
     $router->get('paginacionPlatos', 'SitioController@getPlatoPage');
     $router->get('categorias', 'SitioController@getCategorias');

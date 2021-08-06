@@ -24,32 +24,6 @@ function agregarMarcador(datosMarcador){
       '</h3></a> <img class="imagen_pop" src="'+ datosMarcador.path+
       '" ><p>' + datosMarcador.cat + '</p>  '))
      .addTo(map);
-     // add markers to map
-   // create a HTML element for each feature
-   var el = document.createElement('div');
-   el.className = 'marker';
-   // make a marker for each feature and add to the map
-   new mapboxgl.Marker(el,{'color': '#00000F'})
-   .setLngLat([datosMarcador.Y+6, datosMarcador.X+5])
-   .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-     .setHTML('<a href="/resto?Sitio='+ datosMarcador.idSitio + '"><h3>' + datosMarcador.nombre +
-      '</h3></a> <img class="imagen_pop" src="'+ datosMarcador.path+
-      '" ><p>' + datosMarcador.cat + '</p>  '))
-     .addTo(map);
- 
-  // add markers to map
-   // create a HTML element for each feature
-   var el = document.createElement('div');
-   el.className = 'marker';
-   // make a marker for each feature and add to the map
-   new mapboxgl.Marker(el,{'color': '#00000F'})
-   .setLngLat([datosMarcador.X, datosMarcador.Y])
-   .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-     .setHTML('<a href="/resto?Sitio='+ datosMarcador.idSitio + '"><h3>' + datosMarcador.nombre +
-      '</h3></a> <img class="imagen_pop" src="'+ datosMarcador.path+
-      '" ><p>' + datosMarcador.cat + '</p>  '))
-     .addTo(map);
-
  }
 
 function cargarMarcadores(){

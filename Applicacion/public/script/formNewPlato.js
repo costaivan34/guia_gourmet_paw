@@ -1,9 +1,5 @@
 function validarDatos(namePlato,descripcion,Peso,Energia,Carbohidratos,Proteina,Grasas,Sodio){
-  if (!Peso.isInteger() ){
-    mensaje="El peso ingresado no es valido. Por favor, revisa los datos e inténtalo de nuevo."
-    return false;
-  }
-
+ 
   if (namePlato.length<0 ){
     mensaje="El nombre ingresado no es valido. Por favor, revisa los datos e inténtalo de nuevo."
     return false;
@@ -34,7 +30,7 @@ function validarRegistro(){
         document.getElementById( 'regForm' ).scrollIntoView();
 				const m = document.getElementById("messageBox");
 				m.innerHTML = `<div class="alert alert-success" role="alert">
-				Cuenta creada con exito. Bienvenido!</div>`; 
+				Plato registrado con exito.</div>`; 
 				setTimeout(function(){ m.innerHTML = "" }, 2500);
         setTimeout(function(){ window.location.replace("/dashboard/sitios"); }, 2500);
 			} else {

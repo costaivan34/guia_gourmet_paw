@@ -419,7 +419,7 @@ span.psw {
   color: white;
   border: 1px solid transparent;
 	border-radius: .25rem;
-}
+} 	
 
 .logout-button:hover{
   background: #F59287;

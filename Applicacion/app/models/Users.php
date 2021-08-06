@@ -54,6 +54,12 @@ class Users extends Model
         //return json_decode(json_encode($datos),true);
         return$datos;
     }
+
+    public function getPlatosFromSitios($idSitio){
+        $datos = $this->db->selectPlatos($idSitio);
+        //return json_decode(json_encode($datos),true);
+        return$datos;
+    }
 }
 
 

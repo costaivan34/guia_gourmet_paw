@@ -66,8 +66,8 @@ class UsersController extends Controller{
         $apellido= $_POST["apellidoUser"];
         $ubicacion= $_POST["paisUser"];
         $telefono= $_POST["telefonoUser"];
-        return  $this->model->updatePassword( $user, $nombre,$apellido,$ubicacion, $telefono );
-
+        $this->model->updateUsuario( $user, $nombre,$apellido,$ubicacion, $telefono );
+      return  $this-> dash();
     }
 
     public function actualizarPassword(){
@@ -126,6 +126,28 @@ class UsersController extends Controller{
             exit();
         }
     }
+
+    public function dash_platos(){
+        session_start();
+        $datos["user"] =" ";
+        if (isset($_SESSION["user"])){
+            if (isset($_GET['Name'])){
+                $datos["NameSitio"] = htmlspecialchars($_GET['Name']);
+                }
+            $datos["user"] =  $_SESSION["user"];
+            //$datos["data"]= $this->model->getUsuario($_SESSION["user"]);
+            $datos["data"]= $this->model->getUsuario($_SESSION["user"]);
+            $datos["platos"]= $this->model->getPlatosFromSitios($_GET['Sitio']);
+            $datos["idSitio"] = htmlspecialchars($_GET['Sitio']);
+           
+            return view('/users/dashboard-platos', compact('datos'));
+        }else{
+            header("Location: /");
+            exit();
+        }
+    }
+
+
 
     public function dash_password(){
         session_start();

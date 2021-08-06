@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% block head %}
 {{ parent() }}
-<script src="/public/script/carusel.js"></script>
-<script src="/public/script/tabs.js"></script>
 <link rel="stylesheet" href="/public/css/dashboard.css">
 {% endblock %}
 {% block title %} Cuenta{% endblock %}
@@ -32,7 +30,7 @@
      <input id="apellidoUser" type="text" name="apellidoUser" value="{{datos.data[0].apellido}}" placeholder="Nombre" required />
      <br>
      <label for="mailUser">Correo Electronico</label>
-     <input id="mailUser" type="text" name="mailUser" value="{{datos.data[0].mail}}" placeholder="Nombre" disabled/>
+     <input id="mailUser" type="text" name="mailUser" value="{{datos.data[0].mail}}" placeholder="Nombre" />
      <br>
      <label for="paisUser">Ubicacion</label> 
      <input id="paisUser" type="text" name="paisUser" value="{{datos.data[0].pais}}" placeholder="Nombre" required />

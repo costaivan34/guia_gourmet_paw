@@ -311,16 +311,21 @@ function setPlatoModal(respuesta,info,img,lista,caract){
     var xmlHttpRequest=new XMLHttpRequest();
     xmlHttpRequest.onreadystatechange=function() {         
       if (xmlHttpRequest.readyState==4 && xmlHttpRequest.status==200) {
+        console.log(xmlHttpRequest.responseText);
         var respuesta =JSON.parse( xmlHttpRequest.responseText );
         var info =JSON.parse( respuesta.info ); 
         var img =JSON.parse( respuesta.img ); 
         var lista =JSON.parse( respuesta.lista ); 
         var caract =JSON.parse( respuesta.caract ); 
         setPlatoModal(respuesta,info,img,lista,caract); 
-        console.log(caract);
+      }else{
+        const m = document.getElementById("messageBox");
+        m.innerHTML = `<div class="alert alert-danger" role="alert"> Ocurrio un error en el servidor.
+         Por favor, inténtalo de nuevo más tarde.</div>`; 
+        setTimeout(function(){ m.innerHTML = "" }, 2500);
       }
     }
-    xmlHttpRequest.open("GET","plato?Sitio="+sitio+"&Plato="+plato,true);
+  xmlHttpRequest.open("GET","plato?Sitio="+sitio+"&Plato="+plato,true);
   xmlHttpRequest.send();
   event.preventDefault();
   

@@ -3,8 +3,8 @@
 {{ parent() }}
 
 
-<script src="/public/script/carusel.js"></script>
 <script src="/public/script/tabs.js"></script>
+<script src="/public/script/dashboard.js"></script>
 <link rel="stylesheet" href="/public/css/dashboard.css">
 <link rel="stylesheet" href="/public/css/resultados.css">
 
@@ -30,7 +30,6 @@
 
   </div>
   <div class="info">
-
     <h3> Mis Restaurantes</h3>
     <div class="fila">
       <div id="columna">
@@ -41,21 +40,36 @@
             <a href="/resto?Sitio={{ a.idSitio }}">
               <h3>{{ a.nombre }}</h3>
             </a>
-            <a href="resto/new"><i class=" fa-2x fa fa-pencil"></i> </a>
-            <a href="resto/new"><i class=" fa-2x fa fa-trash "></i> </a>
-            <a href="/plato/new?Sitio={{ a.idSitio }}&Name={{ a.nombre }}"><i class=" fa-2x fa fa-plus"></i> </a>
+            <i class=" fa-2x fa fa-trash icons" onclick="openModal('{{ a.idSitio }}');"></i> 
+            <a href="/dashboard/plato?Sitio={{ a.idSitio }}&Name={{ a.nombre }}"><i class=" fa-2x fa fa-plus icons"></i> </a>
           </div>
         </div>
         {% endfor %}
         <div class="tarjeta">
           <div class="plus-text">
-            <a href="/resto/new"><i class=" fa-3x fa fa-plus-circle"></i> </a>
+            <a href="/resto/new"><i class=" fa-3x fa fa-plus-circle icons"></i> </a>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+  <div id="id02" class="modal delete" >
+
+    <!-- Modal Content for login-->
+    <form class="modal-content animate" method="POST" id="formDelete">  
+      <div class="imgcontainer">
+        <h3 id="Mensaje">ATENCIÓN</h3>
+        <span onclick="closeModal()" class="close" title="Close Modal">&times;</span>
+      </div>
+      <div class="container">
+        <div id="messageBox"></div>
+        <p> ¿Esta seguro de eliminar el sitio?</p>
+        <button onclick="eliminarSitio();" type="submit" >Aceptar</button>
+      </div>
+      <button onclick="closeModal();">Cancelar</button>
+    </form>
+  </div>
 
 
 
