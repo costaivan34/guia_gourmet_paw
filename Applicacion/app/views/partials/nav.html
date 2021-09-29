@@ -3,7 +3,7 @@
 
     <ul class="topnav">
         <li> <a class="nav-logo" href="/">
-            <img src="/public/res/logo-full.png" >
+            <img src="/public/res/logo-full.png" alt="Guia Gourmet">
           </a>
         </li>
         <li><a href="/">Inicio</a></li>
@@ -34,17 +34,17 @@
       </div>
 
       <div class="container">
-        <div id="messageBoxId"></div>
-        <input class="caja-login" type="text" placeholder="&#xf0e0;Usuario" name="userName" id="userName" required>
+        <div id="LoginMessageBox"></div>
+        <input class="caja-login" type="text" placeholder="&#xf0e; Usuario" name="userName" id="userName" required>
        
-        <input class="caja-login" type="password" placeholder="&#xf084;Contraseña" name="password" id="password" required>
+        <input class="caja-login" type="password" placeholder="&#xf084; Contraseña" name="password" id="password" required>
         <label>
             <input type="checkbox" checked="checked" name="remember">Recordar mi usuario
           </label>
         <button onclick="callLogin();" type="submit" >Login</button>
         
         <span class="psw"><a href="#">¿Has olvidado tu contraseña?</a></span>
-        <button><a href="/user/new">Registrate</a></button>
+        <a class="boton" href="/user/new">Registrate</a>
       </div>
 
     </form>

@@ -18,14 +18,14 @@ function callLogin(){
 			var response = xmlHttpRequest.responseText;
 			console.log(response);
 			if(xmlHttpRequest.responseText == 1) {
-				const mensaje = document.getElementById("messageBoxId");
+				const mensaje = document.getElementById("LoginMessageBox");
 				mensaje.innerHTML = `<div class="alert alert-success" role="alert">
 				Bienvenido!</div>`; 
 				setTimeout(function(){ mensaje.innerHTML = "" }, 2500);
 
 				window.location.replace("/dashboard/account");
 			} else {
-				const mensaje = document.getElementById("messageBoxId");
+				const mensaje = document.getElementById("LoginMessageBox");
       	mensaje.innerHTML = `<div class="alert alert-danger" role="alert">
       	El nombre de usuario y la contraseña que ingresaste no coinciden con nuestros registros. Por favor, revisa e inténtalo de nuevo.
     		</div>`;

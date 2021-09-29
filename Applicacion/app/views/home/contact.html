@@ -4,43 +4,43 @@
 
 
 {% block head %}
-    {{ parent() }}
-    <meta name="keywords" content="PAW,2018,Templates,PHP">
-    <link rel="stylesheet" href="/public/css/contact.css">
-    <link rel="stylesheet" href="/public/css/formulario_newuser.css">
-    <script src='/public/script/enviarconsulta.js'></script>
+{{ parent() }}
+<meta name="keywords" content="PAW,2018,Templates,PHP">
+<link rel="stylesheet" href="/public/css/contact.css">
+<link rel="stylesheet" href="/public/css/formulario_newuser.css">
+<script src='/public/script/enviarconsulta.js'></script>
 {% endblock %}
 
 {% block main %}
 
 
 <div id="topof" class="contenido">
-  
-    <div class="titulo">
-      <h1>¿Tenes Alguna Consulta?  </h1>
-      <p>Comunicate con nosotros</p>
+
+  <div class="titulo">
+    <h1>¿Tenes Alguna Consulta? </h1>
+    <p>Comunicate con nosotros</p>
+  </div>
+  <div id="mensaje"></div>
+  <div class="row">
+    <div class="column">
+      <img src="/public/res/contacto.png" alt="imagen de contacto">
     </div>
-    <div id="mensaje"></div>
-    <div class="row">
-      <div class="column">
-        <img src="/public/res/contacto.png" >
-      </div>
-      
-      <div class="column">
-        <form id="contact-form">
-          <label for="fname">Nombre*</label>
-          <input type="text" id="fname" name="firstname" placeholder="Nombre" required  >
-          <label for="aname">Apellido*</label>
-          <input type="text" id="aname" name="lastname" placeholder="Apellido" required >
-          <label for="mail">Email*</label>
-          <input type="email" id="mail" name="firstname" placeholder="Mail" required >
-         
-          <label for="subject">Mensaje*</label>
-          <textarea id="subject" name="subject" placeholder="Escriba algo" style="height:170px" required ></textarea>
-          <input class="input-enviar" type="button" value="Enviar" onclick="guardarConsulta();">
-          
-        </form>
-      </div>
+
+    <div class="column">
+      <form id="contact-form">
+        <label for="fname">Nombre*</label>
+        <input type="text" id="fname" name="firstname" placeholder="Nombre" required>
+        <label for="aname">Apellido*</label>
+        <input type="text" id="aname" name="lastname" placeholder="Apellido" required>
+        <label for="mail">Email*</label>
+        <input type="email" id="mail" name="firstname" placeholder="Mail" required>
+
+        <label for="subject">Mensaje*</label>
+        <textarea id="subject" name="subject" placeholder="Escriba algo" style="height:170px" required></textarea>
+        <input class="input-enviar" type="button" value="Enviar" onclick="guardarConsulta();">
+
+      </form>
     </div>
   </div>
+</div>
 {% endblock %}

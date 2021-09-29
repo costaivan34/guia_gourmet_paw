@@ -36,9 +36,9 @@
     <label for="LocalidadSitio">Localidad:</label>
     <input class="caja-texto" id="LocalidadSitio" type="text" name="LocalidadSitio" value="" placeholder="Localidad" required />
     <label for="MailSitio">Mail:</label>
-    <input class="caja-texto" id="MailSitio" type="text" name="MailSitio" value="" placeholder="Mail" required />
+    <input class="caja-texto" id="MailSitio" type="email" name="MailSitio" value="" placeholder="Mail" required />
     <label for="TelefonoSitio">Telefono:</label>
-    <input class="caja-texto" id="TelefonoSitio" type="text" name="TelefonoSitio" value="" placeholder="Telefono" required />
+    <input class="caja-texto" id="TelefonoSitio" type="tel" name="TelefonoSitio" value="" placeholder="Telefono" required />
   </fieldset>
   <fieldset>
     <legend>Localización</legend>
@@ -76,7 +76,7 @@
   <fieldset>
     <legend>Horarios</legend>
     <div class="horario">
-      <label for="">De :</label>
+      <label for="Dia-Inicio">De :</label>
       <select id="Dia-Inicio" name="Dia-Inicio">
         <option value="0">Selecionar día:</option>
         <option value="1">Lunes</option>
@@ -87,7 +87,7 @@
         <option value="6">Sabado</option>
         <option value="7">Domingo</option>
       </select>
-      <label for="">A:</label>
+      <label for="Dia-Fin">A:</label>
       <select  id="Dia-Fin" name="Dia-Fin">
         <option value="0">Selecionar día:</option>
         <option value="1">Lunes</option>
@@ -98,7 +98,7 @@
         <option value="6">Sabado</option>
         <option value="7">Domingo</option>
       </select>
-      <label for="">De:</label>
+      <label for="De-Inicio">De:</label>
       <select class="heading" id="De-Inicio" name="De-Inicio">
         <option value="-1">Selecionar hora:</option>
         <option value="00">00:00</option>
@@ -127,7 +127,7 @@
         <option value="23">23:00</option>
       </select>
       
-      <label for="">A:</label>
+      <label for="Hasta-Fin">A:</label>
       <select class="heading" id="Hasta-Fin" name="Hasta-Fin">
         <option value="-1">Selecionar hora:</option>
         <option value="00">00:00</option>
@@ -159,7 +159,7 @@
   </fieldset>
   <fieldset>
     <legend>Imagenes</legend>
-    <label for="archivosubido">Imagenes del Sitio:</label>
+    <label for="archivosubido[]">Imagenes del Sitio:</label>
         <input id="archivosubido[]" type="file" name="archivosubido[]"  multiple="" accept="image/jpeg">
   </fieldset>
   

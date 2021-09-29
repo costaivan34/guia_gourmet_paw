@@ -1,73 +1,67 @@
-{% extends "base.html" %}
-{% block head %}
-{{ parent() }}
-<link rel="stylesheet" href="/public/css/formulario_newuser.css">
+{% extends "base.html" %} {% block head %} {{ parent() }}
+<link rel="stylesheet" href="/public/css/formulario_newuser.css" />
 <script src="/public/script/validarRegistro.js"></script>
-{% endblock %}
-{% block title %}Registro de Nuevo Usuario{% endblock %}
-{% block header %}
-
-{% endblock %}
-
-{% block main %}
-
+{% endblock %} {% block title %}Registro de Nuevo Usuario{% endblock %} {% block
+header %} {% endblock %} {% block main %}
 
 <div id="info">
-  <form  id="formCuenta" enctype="multipart/form-data" method="post" name="formCuenta">
+  <form id="formCuenta" enctype="multipart/form-data" method="post" name="formCuenta">
     <h3>REGISTRATE EN LA GUIA GOURMET Y DISFRUTA DEL CONTENIDO</h3>
     <div id="messageBox"></div>
-      <fieldset>
-        <legend>Información del Usuario</legend>
-        <label for="nameUser">Nombre de Usuario:</label>
-        <input  class="caja-texto" id="nameUser" type="text" name="nameUser" value=""
-          placeholder="Nombre de Usuario" required />
+    <fieldset>
+      <legend>Información del Usuario</legend>
+      <label for="nameUser">Nombre de Usuario:</label>
+      <input class="caja-texto" id="nameUser" type="text" name="nameUser" value="" placeholder="Nombre de Usuario"
+        required />
 
-        <label for="nombreUser">Nombre:</label>
-        <input  class="caja-texto" id="nombreUser" type="text" name="nombreUser" value="" placeholder="Nombre"
-          required />
+      <label for="nombreUser">Nombre:</label>
+      <input class="caja-texto" id="nombreUser" type="text" name="nombreUser" value="" placeholder="Nombre" required />
 
-        <label for="apellidoUser">Apellido:</label>
-        <input  class="caja-texto" id="apellidoUser" type="text" name="apellidoUser" value="" placeholder="Apellido"
-          required />
+      <label for="apellidoUser">Apellido:</label>
+      <input class="caja-texto" id="apellidoUser" type="text" name="apellidoUser" value="" placeholder="Apellido"
+        required />
+    </fieldset>
+    <fieldset>
+      <legend>Información de Contacto</legend>
+      <label for="mailUser">Correo Electronico:</label>
+      <input class="caja-texto" id="mailUser" type="email" name="mailUser" value="" placeholder="Correo Electronico"
+        required />
 
-      </fieldset>
-      <fieldset>
-        <legend>Información de Contacto</legend>
-        <label for="mailUser">Correo Electronico:</label>
-        <input  class="caja-texto" id="mailUser" type="mail" name="mailUser" value="" placeholder="Correo Electronico"
-          required />
-
-        <label for="paisUser">Ubicacion:</label>
-          <select  class="caja-texto" id="paisUser" name="paisUser">
-            <option value="A">Selecionar Ubicación:</option>
-            <option value="AR">Argentina</option>
-            <option value="BO">Bolivia</option>
-            <option value="BR">Brasil</option>
-            <option value="CL">Chile</option>
-            <option value="CO">Colombia</option>
-            <option value="EC">Ecuador</option>
-            <option value="MX">México</option>
-            <option value="PY">Paraguay</option>
-            <option value="PE">Perú</option>
-            <option value="UY">Uruguay</option>
-            <option value="VE">Venezuela</option>
-            </select>
-        <label for="telefonoUser">Telefono:</label>
-        <input  class="caja-texto" id="telefonoUser" type="tel" name="telefonoUser" value="" placeholder="Telefono"
-          required />
-
-      </fieldset>
-      <fieldset>
+      <label for="paisUser">Ubicacion:</label>
+      <select class="caja-texto" id="paisUser" name="paisUser">
+        <option value="A">Selecionar Ubicación:</option>
+        <option value="AR">Argentina</option>
+        <option value="BO">Bolivia</option>
+        <option value="BR">Brasil</option>
+        <option value="CL">Chile</option>
+        <option value="CO">Colombia</option>
+        <option value="EC">Ecuador</option>
+        <option value="MX">México</option>
+        <option value="PY">Paraguay</option>
+        <option value="PE">Perú</option>
+        <option value="UY">Uruguay</option>
+        <option value="VE">Venezuela</option>
+      </select>
+      <label for="telefonoUser">Telefono:</label>
+      <input class="caja-texto" id="telefonoUser" type="tel" name="telefonoUser" value="" placeholder="Telefono"
+        required />
+    </fieldset>
+    <fieldset>
       <label for="archivosubido">Imagen de perfil:</label>
-        <input  class="caja-texto" id="archivosubido" type="file" name="archivosubido" accept="image/jpeg">
+      <input class="caja-texto" id="archivosubido" type="file" name="archivosubido" accept="image/jpeg" />
 
-      <label for="passwordNueva">Contraseña: </label>
-      <input  class="caja-texto" id="passwordNueva" type="password" name="passwordNueva" value="" placeholder="" required />
+      <label for="passwordNueva">Contraseña:</label>
+      <input class="caja-texto" id="passwordNueva" type="password" name="passwordNueva" value="" placeholder=""
+        required />
 
-      <label for="passwordRepeat">Confirmar Contraseña: </label>
-      <input  class="caja-texto" id="passwordRepeat" type="password" name="passwordRepeat" value="" placeholder="" required />
-      <p> Nota: La contraseña debe contener entre 6 y 20 caracteres, una Mayuscula, una minuscula y al menos un digito.</p>
-      </fieldset>
+      <label for="passwordRepeat">Confirmar Contraseña:</label>
+      <input class="caja-texto" id="passwordRepeat" type="password" name="passwordRepeat" value="" placeholder=""
+        required />
+      <p>
+        Nota: La contraseña debe contener entre 6 y 20 caracteres, una
+        Mayuscula, una minuscula y al menos un digito.
+      </p>
+    </fieldset>
     <input class="input-enviar" onclick="validarRegistro();" type="button" value="Enviar" name="Enviar" />
   </form>
 </div>

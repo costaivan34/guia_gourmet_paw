@@ -5,42 +5,46 @@
 {% endblock %}
 {% block title %} Cuenta{% endblock %}
 {% block header %}
- 
+
 {% endblock %}
 
 {% block main %}
 
-  
-  <div id="wrapper">
-    <div class="side-bar">
-      {{ include('partials/sidebar-dashboard.html') }}
-      
-    </div>
- 
-    <div class="info">
-      <div id="messageBoxId"></div>
-      <form id="formCuenta" method="post" action="/actualizarPerfil" class="deja-comentario">
-      <label for="nameUser">Nombre de Usuario</label>
-     <input id="nameUser" type="text" name="nameUser" value="{{datos.data[0].nombreUsuario}}" placeholder="Nombre" disabled />
-     <br>
-     <label for="nombreUser">Nombre</label>
-     <input id="nombreUser" type="text" name="nombreUser" value="{{datos.data[0].nombre}}" placeholder="Nombre" required />
-     <br>
-     <label for="apellidoUser">Apellido</label> 
-     <input id="apellidoUser" type="text" name="apellidoUser" value="{{datos.data[0].apellido}}" placeholder="Nombre" required />
-     <br>
-     <label for="mailUser">Correo Electronico</label>
-     <input id="mailUser" type="text" name="mailUser" value="{{datos.data[0].mail}}" placeholder="Nombre" />
-     <br>
-     <label for="paisUser">Ubicacion</label> 
-     <input id="paisUser" type="text" name="paisUser" value="{{datos.data[0].pais}}" placeholder="Nombre" required />
-     <br>
-     <label for="telefonoUser">Telefono</label> 
-     <input id="telefonoUser" type="text" name="telefonoUser" value="{{datos.data[0].telefono}}" placeholder="Nombre" required />
-     <input type="submit" value="Guardar" name="Enviar"  />
-    </form>
-    </div>
+
+<div id="wrapper">
+  <div class="side-bar">
+    {{ include('partials/sidebar-dashboard.html') }}
+
   </div>
-   
+
+  <div class="info">
+    <div id="messageBoxId"></div>
+    <form id="formCuenta" method="post" action="/actualizarPerfil" class="deja-comentario">
+      <label for="nameUser">Nombre de Usuario</label>
+      <input id="nameUser" type="text" name="nameUser" value="{{datos.data[0].nombreUsuario}}"
+        placeholder="Nombre de Usuario" disabled />
+      <br>
+      <label for="nombreUser">Nombre</label>
+      <input id="nombreUser" type="text" name="nombreUser" value="{{datos.data[0].nombre}}" placeholder="Nombre"
+        required />
+      <br>
+      <label for="apellidoUser">Apellido</label>
+      <input id="apellidoUser" type="text" name="apellidoUser" value="{{datos.data[0].apellido}}" placeholder="Apellido"
+        required />
+      <br>
+      <label for="mailUser">Correo Electronico</label>
+      <input id="mailUser" type="email" name="mailUser" value="{{datos.data[0].mail}}" placeholder="example@mail.com" />
+      <br>
+      <label for="paisUser">Ubicacion</label>
+      <input id="paisUser" type="text" name="paisUser" value="{{datos.data[0].pais}}" placeholder="Pais" required />
+      <br>
+      <label for="telefonoUser">Telefono</label>
+      <input id="telefonoUser" type="tel" name="telefonoUser" value="{{datos.data[0].telefono}}" placeholder="telefono"
+        required />
+      <input type="submit" value="Guardar" name="Enviar" />
+    </form>
+  </div>
+</div>
+
 
 {% endblock %}

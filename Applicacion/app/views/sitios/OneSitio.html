@@ -26,11 +26,11 @@
     {% for N in datos.Imagenes %}
     {% if loop.index-1 == 0 %}
     <div class="mySlides fade" style="display:block;">
-      <img src="{{ datos.Imagenes[ loop.index-1 ].path }}">
+      <img src="{{ datos.Imagenes[ loop.index-1 ].path }}" alt="">
     </div>
     {% endif %}
     <div class="mySlides fade" style="display:none;">
-      <img src="{{ datos.Imagenes[ loop.index-1 ].path }}">
+      <img src="{{ datos.Imagenes[ loop.index-1 ].path }}"  alt="">
     </div>
     {% endfor %}
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -278,7 +278,7 @@
         <hr class="separador">
       </section>
       <section class="descrip">
-        <img id="imagen-modal" src="/public/res/2.jpg" alt="Denim Jeans">
+        <img id="imagen-modal" src="/public/res/2.jpg" alt="">
         <h3 class="descrip-t">Descripcion</h3>
         <p id="descripcion"></p>
       </section>
@@ -307,15 +307,14 @@
           <h3>Contiene</h3>
           <hr class="separador">
           <ul class="datos">
-            <li><img id="Lacteos" src="/public/svg/leche (1).svg" alt="Lacteos"></li>
-            <li><img id="Gluten" src="/public/svg/gluten (1).svg" alt="Gluten"></li>
-            <li><img id="Picante" src="/public/svg/chile (1).svg" alt="Picante"></li>
-            <li><img id="Vegano" src="/public/svg/tomate (1).svg" alt="Vegano"></li>
-            <li><img id="Azucar" src="/public/svg/sugar (1).svg" alt="Azucar"></li>
-            <li><img id="Sal" src="/public/svg/dietetico (1).svg" alt="Sal"></li>
+            <li><img id="Lacteos" src="/public/svg/leche(1).svg" alt="Lacteos"></li>
+            <li><img id="Gluten" src="/public/svg/gluten(1).svg" alt="Gluten"></li>
+            <li><img id="Picante" src="/public/svg/chile(1).svg" alt="Picante"></li>
+            <li><img id="Vegano" src="/public/svg/tomate(1).svg" alt="Vegano"></li>
+            <li><img id="Azucar" src="/public/svg/sugar(1).svg" alt="Azucar"></li>
+            <li><img id="Sal" src="/public/svg/dietetico(1).svg" alt="Sal"></li>
           </ul>
         </section>
-      </section>
     </article>
   </div>
 </div>

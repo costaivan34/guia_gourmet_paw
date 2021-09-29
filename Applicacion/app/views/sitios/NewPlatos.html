@@ -35,17 +35,17 @@
   <fieldset>
     <legend>Información Nutricional</legend>
     <label for="InformaciónPeso">Peso:</label>
-    <input class="caja-texto" id="InformaciónPeso" type="text" name="InformaciónPeso" value="" placeholder="Peso" required />
+    <input class="caja-texto" id="InformaciónPeso" type="number" name="InformaciónPeso" value="" placeholder="Peso" required />
     <label for="InformaciónEnergia">Energia:</label>
-    <input class="caja-texto" id="InformaciónEnergia" type="text" name="InformaciónEnergia" value="" placeholder="Energia" required />
+    <input class="caja-texto" id="InformaciónEnergia" type="number" name="InformaciónEnergia" value="" placeholder="Energia" required />
     <label for="InformaciónCarbohidratos">Carbohidratos:</label>
-    <input class="caja-texto" id="InformaciónCarbohidratos" type="text" name="InformaciónCarbohidratos" value="" placeholder="Carbohidratos" required />
+    <input class="caja-texto" id="InformaciónCarbohidratos" type="number" name="InformaciónCarbohidratos" value="" placeholder="Carbohidratos" required />
     <label for="InformaciónProteina">Proteina:</label>
-    <input class="caja-texto" id="InformaciónProteina" type="text" name="InformaciónProteina" value="" placeholder="Proteina" required />
+    <input class="caja-texto" id="InformaciónProteina" type="number" name="InformaciónProteina" value="" placeholder="Proteina" required />
     <label for="InformaciónGrasas">Grasas Totales:</label>
-    <input class="caja-texto" id="InformaciónGrasas" type="text" name="InformaciónGrasas" value="" placeholder="Grasas Totales" required />
+    <input class="caja-texto" id="InformaciónGrasas" type="number" name="InformaciónGrasas" value="" placeholder="Grasas Totales" required />
     <label for="InformaciónSodio">Sodio:</label>
-    <input class="caja-texto" id="InformaciónSodio" type="text" name="InformaciónSodio" value="" placeholder="Sodio" required />
+    <input class="caja-texto" id="InformaciónSodio" type="number" name="InformaciónSodio" value="" placeholder="Sodio" required />
   </fieldset>
 
   <fieldset>
@@ -73,7 +73,7 @@
 
   <fieldset>
     <legend>Imagenes</legend>
-    <label for="archivosubido">Imagenes del Sitio:</label>
+    <label for="archivosubido[]">Imagenes del Sitio:</label>
         <input id="archivosubido[]" type="file" name="archivosubido"  accept="image/jpeg">
   </fieldset>
   <input class="input-enviar" onclick="validarRegistro();" type="button" value="Enviar" name="Enviar" />
