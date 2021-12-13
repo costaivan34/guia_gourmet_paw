@@ -1,45 +1,27 @@
-{% extends "base.html" %}
-{% block head %}
-{{ parent() }}
-<link rel="stylesheet" href="/public/css/restauranteSingle.css">
-<link rel="stylesheet" href="/public/css/platoSingle.css">
-<link rel="stylesheet" href="/public/css/comentarios.css">
-<link rel="stylesheet" href="/public/css/search-bar.css">
-<link rel="stylesheet" href="/public/css/near-sitios.css">
-
+{% extends "base.html" %} {% block head %} {{ parent() }}
+<link rel="stylesheet" href="/public/css/near-sitios.css" />
 <script src="/public/script/mapa.js"></script>
 
+<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
+<link
+  href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css"
+  rel="stylesheet"
+/>
+{% endblock %} {% block title %}Lugares cerca de mi{% endblock %} {% block main
+%}
 
-
-   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
-{% endblock %}
-{% block title %}Lugares cerca de mi{% endblock %}
-{% block header %}
- 
-{% endblock %}
-
-{% block main %}
-
-<!-- search  module-->
-<div >
   <div id="messageBox"></div>
-<section id="resultado-mapa">
+  <section class="contenedor" id="resultado-mapa">
+    <div id="mapa">
+      <script>
+        var d = '{{M}}'
+        var latitud = '{{datos.latitud}}'
+        var longitud = '{{datos.longitud}}'
+        var ciudad = '{{datos.ciudad}}'
+        var region = '{{datos.region}}'
+      </script>
+    </div>
+  </section>
 
-  <div id="mapa">
-  
-    <script>
-     var d= '{{M}}';
-      var latitud  = '{{datos.latitud}}';
-      var longitud  = '{{datos.longitud}}';
-      var ciudad  = '{{datos.ciudad}}';
-      var region  = '{{datos.region}}';
 
-    </script>
-  </div>
-</section>
-
-</div>
-{% block footer %}
-{% endblock %}
 {% endblock %}

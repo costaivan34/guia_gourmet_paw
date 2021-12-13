@@ -3,63 +3,54 @@
 {{ parent() }}
 
 <script src="/public/script/dashboard.js"></script>
-<link rel="stylesheet" href="/public/css/dashboard.css">
-<link rel="stylesheet" href="/public/css/resultados.css">
-<link rel="stylesheet" href="/public/css/index.css">
 
 {% endblock %}
 {% block title %}Sitios{% endblock %}
-{% block header %}
 
-{% endblock %}
 
 {% block main %}
 
 
-<div id="wrapper">
-  <div class="side-bar">
-    {{ include('partials/sidebar-dashboard.html') }}
+<div class="side-bar">
+  {{ include('partials/sidebar-dashboard.html') }}
 
-  </div>
 </div>
-<div class="info">
-  <h3> Mis Restaurantes</h3>
+<div id="contact-form" class="contenedor  dash">
+  <h3 class="title"> Mis Restaurantes</h3>
   <div class="fila">
     <div id="columna">
       {% for a in datos.sitios %}
       <div class="tarjeta">
         <img src="{{ a.path }}" alt="{{ a.nombre }}">
         <a href="/resto?Sitio={{ a.idSitio|url_encode(true) }}">
-          <h3>{{ a.nombre }}</h3>
+          <h3 class="title">{{ a.nombre }}</h3>
         </a>
-        <i class=" fa-2x fa fa-trash icons" onclick="openModal('{{ a.idSitio }}');"></i>
+        <i class="fa-2x fa fa-trash icons" onclick="openModal('{{ a.idSitio }}');"></i>
         <a href="/dashboard/plato?Sitio={{ a.idSitio|url_encode(true) }}&Name={{ a.nombre |url_encode(true)}}"><i
-            class=" fa-2x fa fa-plus icons"></i> </a>
+            class="fa-2x fa fa-plus icons" ></i> </a>
       </div>
       {% endfor %}
       <div class="tarjeta">
         <div class="plus-text">
-          <a href="/resto/new"><i class=" fa-3x fa fa-plus-circle icons"></i> </a>
+          <a href="/resto/new"><i class=" fa-5x fa fa-plus-circle icons"></i> </a>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<div id="id02" class="modal delete">
+<div id="id02" class="modal delete formulario">
 
   <!-- Modal Content for delete-->
-  <form class="modal-content animate" method="POST" id="formDelete">
+  <form class="contenedor animate" method="POST" id="formDelete">
     <div class="imgcontainer">
-      <h3 id="MensajeAtencion">ATENCIÓN</h3>
+      <h3 class="title" id="MensajeAtencion">ATENCIÓN</h3>
       <span onclick="closeModal()" class="close" title="Close Modal">&times;</span>
-    </div>
-    <div class="container">
+
       <div id="messageBox"></div>
-      <p> ¿Esta seguro de eliminar el sitio?</p>
-      <button onclick="eliminarSitio();" type="submit">Aceptar</button>
-    </div>
-    <button onclick="closeModal();">Cancelar</button>
+      <p class="title"> ¿Esta seguro de eliminar el sitio?</p>
+      <button  class="input-enviar" onclick="eliminarSitio();" type="submit">Aceptar</button>
+
+      <button   onclick="closeModal();">Cancelar</button>
   </form>
 </div>
 

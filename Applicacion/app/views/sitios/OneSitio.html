@@ -1,89 +1,135 @@
-{% extends "base.html" %}
-{% block head %}
-{{ parent() }}
-<link rel="stylesheet" href="/public/css/restauranteSingle.css">
-<link rel="stylesheet" href="/public/css/platoSingle.css">
-<link rel="stylesheet" href="/public/css/comentarios.css">
-<link rel="stylesheet" href="/public/css/carrusel.css">
-<link rel="stylesheet" href="/public/css/partials.css">
-<link rel="stylesheet" href="/public/css/paginacion.css">
+{% extends "base.html" %} {% block head %} {{ parent() }}
 <script src="/public/script/carusel.js"></script>
 <script src="/public/script/tabs.js"></script>
+
+<link rel="stylesheet" href="/public/css/one-sitios.css" />
+<link rel="stylesheet" href="/public/css/near-sitios.css" />
+<link rel="stylesheet" href="/public/css/comentarios.css" />
+
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.0/mapbox-gl.js"></script>
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.1.0/mapbox-gl.css" />
-{% endblock %}
-{% block title %}{{ datos.OneSitio[0].nombre }}{% endblock %}
-{% block header %}
-
-{% endblock %}
-
-{% block main %}
+{% endblock %} {% block title %}{{ datos.OneSitio[0].nombre }}{% endblock %} {%
+block main %}
 
 <div class="encabezado">
-
-  <div class="slideshow-container">
+  <div class="slideshow-sitio slideshow-container contenedor">
     <!-- Full-width images with number and caption text -->
-    {% for N in datos.Imagenes %}
-    {% if loop.index-1 == 0 %}
-    <div class="mySlides fade" style="display:block;">
-      <img src="{{ datos.Imagenes[ loop.index-1 ].path }}" alt="">
+    {% for N in datos.Imagenes %} {% if loop.index-1 == 0 %}
+    <div class="mySlides fade" style="display: block;">
+      <img src="{{ datos.Imagenes[ loop.index-1 ].path }}" alt="" />
+    </div>
+    {% else %}
+    <div class="mySlides fade" style="display: none;">
+      <img src="{{ datos.Imagenes[ loop.index-1 ].path }}" alt="" />
     </div>
     {% endif %}
-    <div class="mySlides fade" style="display:none;">
-      <img src="{{ datos.Imagenes[ loop.index-1 ].path }}"  alt="">
-    </div>
     {% endfor %}
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
     <a class="next" onclick="plusSlides(1)">&#10095;</a>
     <!-- The dots/circles -->
-    
+    <div style="text-align: center;">
+      {% for N in datos.Imagenes %} {% if loop.index-1 == 0 %}
+      <span class="dot activo" onclick="currentSlide( '{{ datos.loop.index-1 }}' )"></span>
+      {% else %}
+      <span class="dot" onclick="currentSlide( '{{ datos.loop.index-1}}' )"></span>
+      {% endif %}
+      {% endfor %}
+    </div>
   </div>
-  <div class="circles" style="text-align:center" >
-    <span class="dot" onclick="currentSlide(1)"></span>
-    <span class="dot" onclick="currentSlide(2)"></span>
-    <span class="dot" onclick="currentSlide(3)"></span>
-    <span class="dot" onclick="currentSlide(4)"></span>
-    <span class="dot" onclick="currentSlide(5)"></span>
-  </div>
-  <div style="text-align:center">
-    {% for N in datos.Imagenes %}
-    <span class="dot" onclick="currentSlide( '{{ datos.loop.index-1 }}' )"></span>
 
-    {% endfor %}
-  </div>
-  <div class="nombre-block">
-    <h3>{{ datos.OneSitio[0].nombre }}</h3>
+  <div class="contenedor">
+    <h3 class="title">{{ datos.OneSitio[0].nombre }}</h3>
+    <section class=" caracteristicas">
+      <h4 title>
+        <i class="fa fa-briefcase"></i>
+        Servicios
+      </h4>
+      <ul class="fa-ul caract">
+        {% if "wifi" in datos.Caract %}
+        <li>
+          <i class="fa fa-wifi enable"></i>
+          WI-FI
+        </li>
+        {% endif %} {% if "wheelchair" in datos.Caract %}
+        <li>
+          <i class="fa fa-wheelchair enable"></i>
+          Acceso Personas con Discapacidad
+        </li>
+        {% endif %} {% if "aireacondicionado" in datos.Caract %}
+        <li>
+          <i class="fa fa-snowflake-o enable"></i>
+          Aire Acondicionado
+        </li>
+        {% endif %} {% if "estacionamiento" in datos.Caract %}
+        <li>
+          <i class="fa fa-car enable"></i>
+          Estacionamiento
+        </li>
+        {% endif %} {% if "tv" in datos.Caract %}
+        <li>
+          <i class="fa fa-television enable"></i>
+          TV
+        </li>
+        {% endif %} {% if "juegos" in datos.Caract %}
+        <li>
+          <i class="fa fa-child enable"></i>
+          Juegos para niños
+        </li>
+        {% endif %}
+      </ul>
+    </section>
+    <section class=" horarios">
+      <h4 title>
+        <i class="fa fa-clock-o"></i>
+        Horario
+      </h4>
+      <dl class="detalles">
+        {% for N in datos.Horario %}
+        <dt>{{ datos.Horario[loop.index-1].nombre }}</dt>
+        <dd>
+          {{ datos.Horario[loop.index-1].HDesde }}hs  - {{ datos.Horario[loop.index-1].HHasta  }}hs
+        </dd>
+        {% endfor %}
+      </dl>
+    </section>
   </div>
 </div>
-<div id="wrapper">
+<div class="contenedor">
   <div class="info">
     <!-- Tab links -->
     <div class="tab">
-      <button class="tablinks active" onclick="openTab(event, 'Descripcion')"> <i
-          class="tab-title fa fa-home">Descripcion</i></button>
-      <button class="tablinks " onclick="openTab(event, 'Ubicacion')"><i
-          class="tab-title fa fa-map-marker">Localizacion</i></button>
-      <button class="tablinks" onclick="openTab(event, 'Platos')"><i class="tab-title fa fa-cutlery">Platos</i></button>
-      <button class="tablinks" onclick="openTab(event, 'Valoracion')"><i
-          class=" tab-title fa fa-star-o ">Opiniones</i></button>
+      <button class="tablinks active" onclick="openTab(event, 'Descripcion')">
+        <i class="tab-title fa fa-home">Descripcion</i>
+      </button>
+      <button class="tablinks" onclick="openTab(event, 'Ubicacion')">
+        <i class="tab-title fa fa-map-marker">Localizacion</i>
+      </button>
+      <button class="tablinks" onclick="openTab(event, 'Platos')">
+        <i class="tab-title fa fa-cutlery">Platos</i>
+      </button>
+      <button class="tablinks" onclick="openTab(event, 'Valoracion')">
+        <i class="tab-title fa fa-star-o">Opiniones</i>
+      </button>
     </div>
 
     <!-- Tab content Descripcion-->
-    <div id="Descripcion" class="tabcontent active" style="display:block;">
-      <article class=" infoBasica">
+    <div id="Descripcion" class="tabcontent active" style="display: block;">
+      <article class="infoBasica">
         <section>
-          <h3>Descripcion</h3>
-          <hr class="separador">
-          <p>{{ datos.OneSitio[0].descripcion}}</p>
+          <h3 class="title">Descripcion</h3>
+          <hr class="separador" />
+          <p class="parrafo">{{ datos.OneSitio[0].descripcion}}</p>
         </section>
-        <section>
-          <h3>Contacto</h3>
-          <hr class="separador">
+        <section id="contact-form" >
+          <h3 class="title">Contacto</h3>
+          <hr class="separador" />
           <dl class="detalles">
             <dt>Direccion</dt>
             <dd>{{ datos.Ubicacion[0].direccion }}</dd>
             <dt>Ubicacion</dt>
-            <dd>{{ datos.Ubicacion[0].ciudad }} {{ datos.Ubicacion[0].provincia }} </dd>
+            <dd>
+              {{ datos.Ubicacion[0].ciudad }} {{ datos.Ubicacion[0].provincia }}
+            </dd>
             <dt>Mail</dt>
             <dd>{{ datos.OneSitio[0].sitioWeb }}</dd>
             <dt>Telefono</dt>
@@ -97,224 +143,204 @@
     <div id="Ubicacion" class="tabcontent noactive">
       <div id="mapa"></div>
       <script>
-        var longitud = '{{ datos.Ubicacion[0].y}}';
-        var latitud = '{{ datos.Ubicacion[0].x}}';
-        var sitio = '{{datos.OneSitio[0].idSitio}}';
+        var longitud = '{{ datos.Ubicacion[0].y}}'
+        var latitud = '{{ datos.Ubicacion[0].x}}'
+        var sitio = '{{datos.OneSitio[0].idSitio}}'
       </script>
     </div>
     <!-- Tab content Platos-->
     <div id="Platos" class="tabcontent noactive">
       <div id="fila">
-
+        <div id="columna"></div>
       </div>
-      <ul class="paginacion" id="paginacionPlatos">
 
-      </ul>
+      <ul class="paginacion" id="paginacionPlatos"></ul>
     </div>
 
     <!-- Tab content Valoracion-->
     <div id="Valoracion" class="tabcontent noactive">
-      <h3>Valoracion </h3>
-      <hr class="separador">
+      <h3 class="title">Valoracion</h3>
+      <hr class="separador" />
       <ul class="valoracion2">
         <li>
           <h4>Precio</h4>
           <p class="clasificacion1">
-            {% for d in 1..5 %}
-            {% if datos.Valoracion[0].valoracionPrecio >= d %}
+            {% for d in 1..5 %} {% if datos.Valoracion[0].valoracionPrecio >= d
+            %}
             <span class="fa fa-star fa-2x checked"></span>
             {% else %}
-            <span class="fa fa-star fa-2x "></span>
-            {% endif %}
-            {% endfor %}
+            <span class="fa fa-star fa-2x"></span>
+            {% endif %} {% endfor %}
           </p>
         </li>
         <li>
           <h4>Sabor</h4>
           <p class="clasificacion1">
-            {% for d in 1..5 %}
-            {% if datos.Valoracion[0].valoracionSabor >= d %}
+            {% for d in 1..5 %} {% if datos.Valoracion[0].valoracionSabor >= d
+            %}
             <span class="fa fa-star fa-2x checked"></span>
             {% else %}
-            <span class="fa fa-star fa-2x "></span>
-            {% endif %}
-            {% endfor %}
+            <span class="fa fa-star fa-2x"></span>
+            {% endif %} {% endfor %}
           </p>
         </li>
         <li>
           <h4>Ambiente</h4>
           <p class="clasificacion1">
-            {% for d in 1..5 %}
-            {% if datos.Valoracion[0].valoracionAmbiente >= d %}
+            {% for d in 1..5 %} {% if datos.Valoracion[0].valoracionAmbiente >=
+            d %}
             <span class="fa fa-star fa-2x checked"></span>
             {% else %}
-            <span class="fa fa-star fa-2x "></span>
-            {% endif %}
-            {% endfor %}
+            <span class="fa fa-star fa-2x"></span>
+            {% endif %} {% endfor %}
           </p>
         </li>
       </ul>
       <section>
-        <h3>Comentarios </h3>
-        <hr class="separador">
-        <ul id="lista-coment">
-
-        </ul>
-        <ul class="paginacion" id="paginacionComentarios">
-
-        </ul>
+        <h3 class="title">Comentarios</h3>
+        <hr class="separador" />
+        <ul id="lista-coment"></ul>
+        <ul class="paginacion" id="paginacionComentarios"></ul>
       </section>
 
       <form name="comentario" method="post" action="sendComentario" class="deja-comentario">
         <div id="messageBoxResult"></div>
         <h3>¡Deja un comentario!</h3>
-
+        *
         <textarea id="textoComent" name="COMMENT" rows="10" cols="50" wrap="soft" placeholder="Máximo 1000 carácteres"
-          maxlength="1000" required></textarea>*
+          maxlength="1000" required></textarea> 
+       
+         *
         <input id="nombreComent" type="text" name="NAME" value="" size="20" maxlength="100"
-          placeholder="Nombre (requerido)" required /> *
+          placeholder="Nombre (requerido)" required />
+       
+          *
         <input id="mailComent" type="text" name="EMAIL" value="" size="20" maxlength="100"
-          placeholder="Correo electrónico" />*
+          placeholder="Correo electrónico" />
+      
         <ul class="valoracion2">
           <li>
             <h4>Precio</h4>
             <div class="valoracionPrecio clasificacion">
-              <input id="Precio1" type="radio" name="Precio" value="5">*
+              <input id="Precio1" type="radio" name="Precio" value="5" />
+              *
               <label for="Precio1">★</label>
-              <input id="Precio2" type="radio" name="Precio" value="4">
+              <input id="Precio2" type="radio" name="Precio" value="4" />
               <label for="Precio2">★</label>
-              <input id="Precio3" type="radio" name="Precio" value="3">
+              <input id="Precio3" type="radio" name="Precio" value="3" />
               <label for="Precio3">★</label>
-              <input id="Precio4" type="radio" name="Precio" value="2">
+              <input id="Precio4" type="radio" name="Precio" value="2" />
               <label for="Precio4">★</label>
-              <input id="Precio5" type="radio" name="Precio" value="1">
+              <input id="Precio5" type="radio" name="Precio" value="1" />
               <label for="Precio5">★</label>
             </div>
-
           </li>
           <li>
             <h4>Sabor</h4>
             <div class="valoracionSabor clasificacion">
-              <input id="Sabor1" type="radio" name="Sabor" value="5">*
+              <input id="Sabor1" type="radio" name="Sabor" value="5" />
+              *
               <label for="Sabor1">★</label>
-              <input id="Sabor2" type="radio" name="Sabor" value="4">
+              <input id="Sabor2" type="radio" name="Sabor" value="4" />
               <label for="Sabor2">★</label>
-              <input id="Sabor3" type="radio" name="Sabor" value="3">
+              <input id="Sabor3" type="radio" name="Sabor" value="3" />
               <label for="Sabor3">★</label>
-              <input id="Sabor4" type="radio" name="Sabor" value="2">
+              <input id="Sabor4" type="radio" name="Sabor" value="2" />
               <label for="Sabor4">★</label>
-              <input id="Sabor5" type="radio" name="Sabor" value="1">
+              <input id="Sabor5" type="radio" name="Sabor" value="1" />
               <label for="Sabor5">★</label>
             </div>
           </li>
           <li>
             <h4>Ambiente</h4>
             <div class="valoracionAmbiente clasificacion">
-              <input id="Ambiente1" type="radio" name="Ambiente" value="5">*
+              <input id="Ambiente1" type="radio" name="Ambiente" value="5" />
+              *
               <label for="Ambiente1">★</label>
-              <input id="Ambiente2" type="radio" name="Ambiente" value="4">
+              <input id="Ambiente2" type="radio" name="Ambiente" value="4" />
               <label for="Ambiente2">★</label>
-              <input id="Ambiente3" type="radio" name="Ambiente" value="3">
+              <input id="Ambiente3" type="radio" name="Ambiente" value="3" />
               <label for="Ambiente3">★</label>
-              <input id="Ambiente4" type="radio" name="Ambiente" value="2">
+              <input id="Ambiente4" type="radio" name="Ambiente" value="2" />
               <label for="Ambiente4">★</label>
-              <input id="Ambiente5" type="radio" name="Ambiente" value="1">
+              <input id="Ambiente5" type="radio" name="Ambiente" value="1" />
               <label for="Ambiente5">★</label>
             </div>
           </li>
         </ul>
-        <input type="button" value="Enviar" name="Enviar" onclick="guardarComentario()" />
+        <input class="input-enviar" type="button" value="Enviar" name="Enviar" onclick="guardarComentario()" />
       </form>
     </div>
   </div>
 
-  <div class="side-bar">
-    <section class="caracteristicas">
-      <h4><i class=" fa fa-briefcase "></i>Servicios</h4>
-      <ul class="fa-ul caract">
-        {% if "wifi" in datos.Caract %}
-        <li> <i class=" fa fa-wifi enable"></i>WI-FI </li>
-        {% endif %}
-        {% if "wheelchair" in datos.Caract %}
-        <li> <i class=" fa fa-wheelchair enable"></i>Acceso Personas con Discapacidad</li>
-        {% endif %}
-        {% if "aireacondicionado" in datos.Caract %}
-        <li> <i class=" fa fa-snowflake-o enable"></i>Aire Acondicionado </li>
-        {% endif %}
-        {% if "estacionamiento" in datos.Caract %}
-        <li> <i class=" fa fa-car enable"></i>Estacionamiento </li>
-        {% endif %}
-        {% if "tv" in datos.Caract %}
-        <li> <i class=" fa fa-television enable"></i>TV </li>
-        {% endif %}
-        {% if "juegos" in datos.Caract %}
-        <li> <i class=" fa fa-child enable"></i>Juegos para niños </li>
-        {% endif %}
-      </ul>
-    </section>
-    <section class="horarios">
-      <h4><i class=" fa fa-clock-o "></i>Horario</h4>
-      <dl class="detalles">
-        {% for N in datos.Horario %}
-        <dt>{{ datos.Horario[loop.index-1].nombre }} </dt>
-        <dd>{{ datos.Horario[loop.index-1].HDesde }} a {{ datos.Horario[loop.index-1].HHasta }}</dd>
-        {% endfor %}
-
-      </dl>
-    </section>
-  </div>
+  <aside class="side-bar">
+   
+  </aside>
 </div>
 
 <!-- The Modal for plato -->
-<div id="plato" class="modal-plato">
+<div id="plato" class=" modal-plato">
   <!-- Modal Content for plato-->
-  <div class="modal-content-plate animate">
-    <article class=" infoBasica-plato">
-      <span onclick="closeModal()" class="closeModal" title="Close Modal">&times;</span>
+  <div class=" contenedor animate plato-full">
+    <span onclick="closeModal()" class="close" title="Close Modal">
+&times;
+    </span>
+    <article class="infoBasica-plato">
       <div id="messageBox"></div>
       <div class="info-plato">
-      <section class="title-plato">
-        <h3 id="titulo"></h3>
-        <hr class="separador">
+        <section class="title-plato">
+          <h3 class="title" id="titulo"></h3>
+          <hr class="separador" />
+        </section>
+        <section class="descrip">
+          <img id="imagen-modal" src="/public/res/2.jpg" alt="" />
+          <h3 class="descrip-t title">Descripcion</h3>
+          <hr class="separador" />
+          <p class="parrafo" id="descripcion"></p>
+        </section>
+      </div>
+      <div >
+      <section class="contiene">
+        <h3 class="title">Contiene</h3>
+        <hr class="separador" />
+        <ul class="datos">
+          <li>
+            <img id="Lacteos" src="/public/svg/leche(1).svg" alt="Lacteos" />
+          </li>
+          <li>
+            <img id="Gluten" src="/public/svg/gluten(1).svg" alt="Gluten" />
+          </li>
+          <li>
+            <img id="Picante" src="/public/svg/chile(1).svg" alt="Picante" />
+          </li>
+          <li>
+            <img id="Vegano" src="/public/svg/tomate(1).svg" alt="Vegano" />
+          </li>
+          <li>
+            <img id="Azucar" src="/public/svg/sugar(1).svg" alt="Azucar" />
+          </li>
+          <li><img id="Sal" src="/public/svg/dietetico(1).svg" alt="Sal" /></li>
+        </ul>
       </section>
-      <section class="descrip">
-        <img id="imagen-modal" src="/public/res/2.jpg" alt="">
-        <h3 class="descrip-t">Descripcion</h3>
-        <p id="descripcion"></p>
+      <section class="infonut">
+        <h3 class="title">Informacion Nutricional</h3>
+        <hr class="separador" />
+        <dl class=" detalles">
+          <dt>Peso</dt>
+          <dd id="Peso"></dd>
+          <dt>Energia</dt>
+          <dd id="Energia"></dd>
+          <dt>Carbohidratos</dt>
+          <dd id="Carbo"></dd>
+          <dt>Proteina</dt>
+          <dd id="Proteina"></dd>
+          <dt>Grasas Totales</dt>
+          <dd id="Grasas"></dd>
+          <dt>Sodio</dt>
+          <dd id="Sodio" class="ultimo"></dd>
+        </dl>
       </section>
     </div>
-      <section class="secciion"></section>
-        <section class="infonut">
-          <h3>Informacion Nutricional</h3>
-          <hr class="separador">
-          <dl class="caracteristicas">
-            <dt>Peso</dt>
-            <dd id="Peso"></dd>
-            <dt>Energia</dt>
-            <dd id="Energia"></dd>
-            <dt>Carbohidratos</dt>
-            <dd id="Carbo"></dd>
-            <dt>Proteina</dt>
-            <dd id="Proteina"></dd>
-            <dt>Grasas Totales</dt>
-            <dd id="Grasas"></dd>
-            <dt>Sodio</dt>
-            <dd id="Sodio" class="ultimo"></dd>
-          </dl>
-        </section>
-
-        <section class="contiene">
-          <h3>Contiene</h3>
-          <hr class="separador">
-          <ul class="datos">
-            <li><img id="Lacteos" src="/public/svg/leche(1).svg" alt="Lacteos"></li>
-            <li><img id="Gluten" src="/public/svg/gluten(1).svg" alt="Gluten"></li>
-            <li><img id="Picante" src="/public/svg/chile(1).svg" alt="Picante"></li>
-            <li><img id="Vegano" src="/public/svg/tomate(1).svg" alt="Vegano"></li>
-            <li><img id="Azucar" src="/public/svg/sugar(1).svg" alt="Azucar"></li>
-            <li><img id="Sal" src="/public/svg/dietetico(1).svg" alt="Sal"></li>
-          </ul>
-        </section>
     </article>
   </div>
 </div>

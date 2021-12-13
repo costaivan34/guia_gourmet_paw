@@ -1,10 +1,7 @@
 {% extends "base.html" %}
 {% block head %}
 {{ parent() }}
-<link rel="stylesheet" href="/public/css/restauranteSingle.css">
-<link rel="stylesheet" href="/public/css/platoSingle.css">
-<link rel="stylesheet" href="/public/css/comentarios.css">
-<link rel="stylesheet" href="/public/css/formulario_newuser.css">
+
 <script src="/public/script/formNewPlato.js"></script>
 <script src="/public/script/tabs.js"></script>
 <script src="/public/script/modal.js"></script>
@@ -17,14 +14,14 @@
 {% endblock %} 
 
 {% block main %}
-<form id="regForm" method="post">
-  <h3 id="idSitio">{{ datos.idSitio }} </h3>
-  <h3>{{ datos.NameSitio }}</h3>
+<form id="regForm" method="post" class=" contenedor formulario">
+  <h3 class="title" id="idSitio">{{ datos.idSitio }} </h3>
+  <h3 class="title">{{ datos.NameSitio }}</h3>
   <h3>NUEVO PLATO:</h3>
   <div id="messageBox"></div>
 
   <fieldset>
-    <legend>Información del Plato</legend>
+    <legend class="title">Información del Plato</legend>
     <label for="namePlato">Nombre del Plato:</label>
     <input class="caja-texto" id="namePlato" type="text" name="namePlato" value="" placeholder="Nombre de Sitio" required />
     <label for="subject">Descripcion:*</label>
@@ -33,7 +30,7 @@
     <input class="caja-texto" id="namePrecio" type="text" name="namePrecio" value="" placeholder="Precio" required />
   </fieldset>
   <fieldset>
-    <legend>Información Nutricional</legend>
+    <legend class="title">Información Nutricional</legend>
     <label for="InformaciónPeso">Peso:</label>
     <input class="caja-texto" id="InformaciónPeso" type="number" name="InformaciónPeso" value="" placeholder="Peso" required />
     <label for="InformaciónEnergia">Energia:</label>
@@ -49,7 +46,7 @@
   </fieldset>
 
   <fieldset>
-    <legend>Ingredientes</legend>
+    <legend class="title">Ingredientes</legend>
     <label class="heading">Seleccione las caracteristicas del Plato:</label>
     <div class="checkbox">
       <label><input type="checkbox" name="caracteristicas[]" value="5">Contiene Sal</label>
@@ -72,7 +69,7 @@
   </fieldset>
 
   <fieldset>
-    <legend>Imagenes</legend>
+    <legend class="title">Imagenes</legend>
     <label for="archivosubido[]">Imagenes del Sitio:</label>
         <input id="archivosubido[]" type="file" name="archivosubido"  accept="image/jpeg">
   </fieldset>

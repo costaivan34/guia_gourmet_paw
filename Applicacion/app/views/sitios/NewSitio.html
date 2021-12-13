@@ -1,80 +1,158 @@
-{% extends "base.html" %}
-{% block head %}
-{{ parent() }}
-<link rel="stylesheet" href="/public/css/restauranteSingle.css">
-<link rel="stylesheet" href="/public/css/platoSingle.css">
-<link rel="stylesheet" href="/public/css/comentarios.css">
-<link rel="stylesheet" href="/public/css/formulario_newuser.css">
-<script src="/public/script/tabs.js"></script>
-<script src="/public/script/modal.js"></script>
+{% extends "base.html" %} {% block head %} {{ parent() }}
+
 <script src="/public/script/formNewSitio.js"></script>
-{% endblock %}
-{% block title %}NUEVO SITIO{% endblock %}
-{% block header %}
-
-{% endblock %} 
-
-{% block main %}
-<form id="regForm" name="regForm"  enctype="multipart/form-data" method="post">
-  <h3>NUEVO SITIO:</h3>
+{% endblock %} {% block title %}NUEVO SITIO{% endblock %} {% block main %}
+<form
+  class="contenedor formulario"
+  id="regForm"
+  name="regForm"
+  enctype="multipart/form-data"
+  method="post"
+>
+  <h3 class="title">NUEVO SITIO:</h3>
   <div id="messageBox"></div>
 
   <fieldset>
-    <legend>Información del Sitio</legend>
+    <legend class="title">Información del Sitio</legend>
     <label for="nameSitio">Nombre de Sitio:</label>
-    <input class="caja-texto" id="nameSitio" type="text" name="nameSitio" value="" placeholder="Nombre de Sitio" required />
+    <input
+      class="caja-texto"
+      id="nameSitio"
+      type="text"
+      name="nameSitio"
+      value=""
+      placeholder="Nombre de Sitio"
+      required
+    />
     <label for="subject">Descripcion:*</label>
-    <textarea id="subject" name="subject" placeholder="Escriba algo" style="height:170px" required></textarea>
+    <textarea
+      id="subject"
+      name="subject"
+      placeholder="Escriba algo"
+     
+      required
+    ></textarea>
   </fieldset>
 
   <fieldset>
-    <legend>Información de Contacto</legend>
+    <legend class="title">Información de Contacto</legend>
     <label for="DireccionSitio">Direccion:</label>
-    <input class="caja-texto" id="DireccionSitio" type="text" name="DireccionSitio" value="" placeholder="Direccion" required />
+    <input
+      class="caja-texto"
+      id="DireccionSitio"
+      type="text"
+      name="DireccionSitio"
+      value=""
+      placeholder="Direccion"
+      required
+    />
     <label for="ProvinciaSitio">Provincia:</label>
-    <input class="caja-texto" id="ProvinciaSitio" type="text" name="ProvinciaSitio" value="" placeholder="Provincia" required />
+    <input
+      class="caja-texto"
+      id="ProvinciaSitio"
+      type="text"
+      name="ProvinciaSitio"
+      value=""
+      placeholder="Provincia"
+      required
+    />
     <label for="LocalidadSitio">Localidad:</label>
-    <input class="caja-texto" id="LocalidadSitio" type="text" name="LocalidadSitio" value="" placeholder="Localidad" required />
-    <label for="MailSitio">Mail:</label>
-    <input class="caja-texto" id="MailSitio" type="email" name="MailSitio" value="" placeholder="Mail" required />
+    <input
+      class="caja-texto"
+      id="LocalidadSitio"
+      type="text"
+      name="LocalidadSitio"
+      value=""
+      placeholder="Localidad"
+      required
+    />
+    <label for="MailSitio"> eMaail:</label>
+    <input
+      class="caja-texto"
+      id="MailSitio"
+      type="email"
+      name="MailSitio"
+      value=""
+      placeholder="Mail"
+      required
+    />
     <label for="TelefonoSitio">Telefono:</label>
-    <input class="caja-texto" id="TelefonoSitio" type="tel" name="TelefonoSitio" value="" placeholder="Telefono" required />
+    <input
+      class="caja-texto"
+      id="TelefonoSitio"
+      type="tel"
+      name="TelefonoSitio"
+      value=""
+      placeholder="Telefono"
+      required
+    />
   </fieldset>
   <fieldset>
-    <legend>Localización</legend>
+    <legend class="title">Localización</legend>
     <p class="heading">Ingrese las coordenadas geograficas del lugar:</p>
 
-    <label for="Longitud">X:</label>
-    <input id="Longitud" type="number" name="Longitud" value="" placeholder="Longitud" required />
-    <label for="Latitud">Y:</label>
-    <input id="Latitud" type="number" name="Latitud" value="" placeholder="Latitud" required />
-
+    <label for="Longitud">X(Longitud):</label>
+    <input
+      id="Longitud"
+      type="number"
+      name="Longitud"
+      value=""
+      placeholder="Longitud"
+      required
+    />
+    <label for="Latitud">Y(Latitud):</label>
+    <input
+      id="Latitud"
+      type="number"
+      name="Latitud"
+      value=""
+      placeholder="Latitud"
+      required
+    />
   </fieldset>
 
   <fieldset>
-    <legend>Servicios</legend>
+    <legend class="title">Servicios</legend>
     <label class="heading">Seleccione los servicios disponibles:</label>
     <div class="checkbox">
-      <label><input type="checkbox" name="servicios[]" value="1">WIFI</label>
+      <label>
+        <input type="checkbox" name="servicios[]" value="1" />
+        WIFI
+      </label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="servicios[]" value="2">Acceso Personas con Discapacidad</label>
+      <label>
+        <input type="checkbox" name="servicios[]" value="2" />
+        Acceso Personas con Discapacidad
+      </label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="servicios[]" value="3">Aire Acondicionado </label>
+      <label>
+        <input type="checkbox" name="servicios[]" value="3" />
+        Aire Acondicionado
+      </label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="servicios[]" value="4">Estacionamiento</label>
+      <label>
+        <input type="checkbox" name="servicios[]" value="4" />
+        Estacionamiento
+      </label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="servicios[]" value="5">TV</label>
+      <label>
+        <input type="checkbox" name="servicios[]" value="5" />
+        TV
+      </label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="servicios[]" value="6">Juegos para niños</label>
+      <label>
+        <input type="checkbox" name="servicios[]" value="6" />
+        Juegos para niños
+      </label>
     </div>
   </fieldset>
   <fieldset>
-    <legend>Horarios</legend>
+    <legend class="title">Horarios</legend>
     <div class="horario">
       <label for="Dia-Inicio">De :</label>
       <select id="Dia-Inicio" name="Dia-Inicio">
@@ -87,8 +165,8 @@
         <option value="6">Sabado</option>
         <option value="7">Domingo</option>
       </select>
-      <label for="Dia-Fin">A:</label>
-      <select  id="Dia-Fin" name="Dia-Fin">
+      <label for="Dia-Fin">A :</label>
+      <select id="Dia-Fin" name="Dia-Fin">
         <option value="0">Selecionar día:</option>
         <option value="1">Lunes</option>
         <option value="2">Martes</option>
@@ -98,7 +176,8 @@
         <option value="6">Sabado</option>
         <option value="7">Domingo</option>
       </select>
-      <label for="De-Inicio">De:</label>
+      <br>
+      <label for="De-Inicio">De :</label>
       <select class="heading" id="De-Inicio" name="De-Inicio">
         <option value="-1">Selecionar hora:</option>
         <option value="00">00:00</option>
@@ -126,8 +205,8 @@
         <option value="22">22:00</option>
         <option value="23">23:00</option>
       </select>
-      
-      <label for="Hasta-Fin">A:</label>
+  
+      <label for="Hasta-Fin">A :</label>
       <select class="heading" id="Hasta-Fin" name="Hasta-Fin">
         <option value="-1">Selecionar hora:</option>
         <option value="00">00:00</option>
@@ -155,14 +234,26 @@
         <option value="22">22:00</option>
         <option value="23">23:00</option>
       </select>
-    </div> 
+    </div>
   </fieldset>
   <fieldset>
-    <legend>Imagenes</legend>
+    <legend class="title">Imagenes</legend>
     <label for="archivosubido[]">Imagenes del Sitio:</label>
-        <input id="archivosubido[]" type="file" name="archivosubido[]"  multiple="" accept="image/jpeg">
+    <input
+      id="archivosubido[]"
+      type="file"
+      name="archivosubido[]"
+      multiple=""
+      accept="image/jpeg"
+    />
   </fieldset>
-  
-  <input class="input-enviar" onclick="validarRegistro();" type="button" value="Enviar" name="Enviar" />
+
+  <input
+    class="input-enviar"
+    onclick="validarRegistro();"
+    type="button"
+    value="Enviar"
+    name="Enviar"
+  />
 </form>
-  {% endblock %}
+{% endblock %}

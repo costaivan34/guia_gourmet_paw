@@ -1,23 +1,12 @@
-body{
-  overflow: hidden;
-}
 
 
 #mapa {
   height:100%;
   width:100%;
-  min-height: 550px;
+  min-height: 70vh;
  
 }
 
-#resultado-mapa{
-  position: fixed;
-  border: 2px solid #E7CF7F;
-  width: 94%;
-  margin-left: 2.5%;
-  margin-right: 2.5%;
- 
-}
 .actualPosition{
   background-image: url('/public/res/location.svg');
   background-size: cover;
@@ -48,7 +37,7 @@ body{
 
 #mapa .mapboxgl-popup-content {
   text-align: center;
-  font-family: 'Open Sans', sans-serif;
+  /*font-family: 'Open Sans', sans-serif;*/
   border-radius: 10%;
   background-color: #E7CF7F;
 }

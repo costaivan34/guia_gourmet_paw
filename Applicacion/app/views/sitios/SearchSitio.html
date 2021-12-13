@@ -3,46 +3,45 @@
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2018,Templates,PHP">
-    <link rel="stylesheet" href="/public/css/search-bar.css">
-    
-    <link rel="stylesheet" href="/public/css/resultados.css">
-    <link rel="stylesheet" href="/public/css/paginacion.css">
 {% endblock %}
 
 {% block title %}Buscador{% endblock %}
 
-{% block header %}
-    
-{% endblock %}
+
 {% block nav %}
   {{ include('partials/nav.html') }}
   {% endblock %}
 {% block main %}
 <article>
-<section id="search">
+<section id="search" class="contenedor">
        <script>
-        
             var clave = "{{datos.clave}}";
             var  categoria = "{{datos.categoria}}";
             var provincia = "{{datos.provincia}}"; 
           </script>
   <script src="/public/script/busqueda.js"></script>
-<form class="barra-busqueda"  method="GET">  
-  <h3>Encuentra al mejor restaurante para ti</h3>
-      <input class="selectClave" id="palabraClave" type="text" placeholder="Palabra Clave" name="clave" >
-        <select name="categorias" id="categorias" class="selectClave" required >
-          <option value="">Selecionar Categoria:</option>
-        </select>
-        <select name="provincias" id="provincias" class="selectClave" required>
-          <option value="">Selecionar Ubicación:</option>
-        </select>
-      <button  onclick="getDatos();" type="submit">BUSCAR</button>
-  </form>
+  <h3 class="title">Encuentra al mejor restaurante para ti</h3>
+<form class="barra-busqueda formulario" action="buscador" method="GET">
+  <input
+    class="selectClave"
+    id="palabraClave"
+    type="text"
+    placeholder="Palabra Clave"
+    name="clave"
+  />
+  <select name="categorias" id="categorias" class="selectClave" required>
+    <option value="">Selecionar Categoria:</option>
+  </select>
+  <select name="provincias" id="provincias" class="selectClave" required>
+    <option value="">Selecionar Ubicación:</option>
+  </select>
+  <input id="enviar" value="Buscar" class="input-enviar" type="submit">
+</form>
 </section>
 
 <section id="resultados">
-  <div class="slideshow-places">
-    <h3> Resultados de la busqueda</h3>
+  <div class="slideshow-places contenedor">
+    <h3 class="title"> Resultados de la busqueda</h3>
     <div class="fila">
     <div id="columna">
 

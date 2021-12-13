@@ -1,24 +1,24 @@
-<section class="encabezado">
+<section class=" sidebar-dash contenedor">
   <div class="user-Profile">
-    <img class="User-Img" src="{{datos.data[0].fotoPerfil}}" alt="imagen de perfil del usuario" />
     <div class="User-Alias">
-      <h3>{{datos.data[0].nombreUsuario}}</h3>
+      <h3 class="title">{{datos.data[0].nombreUsuario}}</h3>
     </div>
-    <div class="User-LastName">
+    <img class="User-Img" src="{{datos.data[0].fotoPerfil}}" alt="imagen de perfil del usuario" />
+    
+    <div class="User-LastName"> 
       <h4>{{datos.data[0].nombre}} {{datos.data[0].apellido}}</h4>
     </div>
     <div class="User-Email">
       <h5 id="User-mail">{{datos.data[0].mail}}</h5>
     </div>
   </div>
-</section>
-<section class="opciones">
+
   <a class="settings-menu-link active" title="Configuración">
     <div class="icon-font-component settings-icon">
-      <span class="settings-link-name">Configuración</span>
+      <h3 class="title settings-link-name">Configuración</h3>
     </div>
   </a>
-  <a href="/dashboard/account" class="settings-menu-link" title="Configuración">
+  <a href="/dashboard/account" class="settings-menu-link " title="Configuración">
     <div class="icon-font-component settings-icon">
       <span class="fa fa-2x fa-user"></span>
       <span class="settings-link-name">Cuenta</span>

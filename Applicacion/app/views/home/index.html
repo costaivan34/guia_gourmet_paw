@@ -5,20 +5,14 @@
 {% block head %}
 {{ parent() }}
 <meta name="keywords" content="PAW,2018,Templates,PHP">
-<link rel="stylesheet" href="/public/css/index.css">
-<link rel="stylesheet" href="/public/css/carrusel.css">
-<link rel="stylesheet" href="/public/css/search-bar.css">
-<link rel="stylesheet" href="/public/css/resultados.css">
-<link rel="stylesheet" href="/public/css/platoSingle.css">
 <script src="/public/script/carusel.js"></script>
 
 {% endblock %}
 
 {% block main %}
 
-
 <!-- Slideshow container -->
-<div class="slideshow-container index">
+<div class="slideshow-container index contenedor">
   <!-- Full-width images with number and caption text -->
   <div class="mySlides fade">
     <img src="public/res/home-banner-1.jpg" alt="">
@@ -39,30 +33,31 @@
   <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
   <a class="next" onclick="plusSlides(1)">&#10095;</a>
   <!-- The dots/circles -->
+  <div class="circles" style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+    <span class="dot" onclick="currentSlide(5)"></span>
+  </div>
 </div>
-<div class="circles" style="text-align:center">
-  <span class="dot" onclick="currentSlide(1)"></span>
-  <span class="dot" onclick="currentSlide(2)"></span>
-  <span class="dot" onclick="currentSlide(3)"></span>
-  <span class="dot" onclick="currentSlide(4)"></span>
-  <span class="dot" onclick="currentSlide(5)"></span>
-</div>
+
 
 <!-- search  module-->
 <div>
-  <section id="search">
+  <section id="search" class="contenedor">
     {{ include('partials/search-bar.html') }}
   </section>
 
-  <div class="slideshow-places">
-    <h3> Restaurantes Destacados</h3>
+  <div class="slideshow-places contenedor" >
+    <h3 class="title"> Restaurantes Destacados</h3>
     <div class="fila">
       <div id="columna">
         {% for a in datos.Destacados %}
         <div class="tarjeta">
           <img src="{{ a.path }}" alt="Denim Jeans">
           <a href="/resto?Sitio={{ a.idSitio }}">
-            <h3>{{ a.nombre }}</h3>
+            <h3 class="title">{{ a.nombre }}</h3>
           </a>
           <p><i class=" fa fa-map-marker  "></i> {{ a.ciudad }},{{ a.provincia }}</p>
         </div>

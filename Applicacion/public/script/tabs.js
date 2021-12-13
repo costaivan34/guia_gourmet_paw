@@ -18,6 +18,7 @@ function getPaginacionID(pagina,sitio,objeto){
      }
      //console.log("pagina: "+respuesta)
       if (respuesta > 0){
+      if (pagina >1){
       var ElementoPagina = document.createElement("li");
       ElementoPagina.innerHTML = "<input type='button' id='inicio' onclick='load"+objeto+"("+1+","+sitio+")' value='<<'>";
       document.getElementById("paginacion"+ objeto).appendChild(ElementoPagina);
@@ -49,6 +50,7 @@ function getPaginacionID(pagina,sitio,objeto){
       document.getElementById("paginacion"+ objeto).appendChild(ElementoPagina);
       }
 		}
+  }
 	}
 	xmlHttpRequest.open("GET","paginacion"+objeto+"?Sitio="+sitio+"&page="+pagina,true);
 	xmlHttpRequest.send();
@@ -74,7 +76,7 @@ function agregarPlato(imagen,nombre,id){
   DivPlato.className="plato";
   var BotonPlato = document.createElement("div");
   BotonPlato.id="boton-modal";
-  BotonPlato.className="carta-plato";
+  BotonPlato.className="tarjeta";
   var SeccionFoto = document.createElement("section");
   var Foto = document.createElement("img");
   Foto.src=imagen;
@@ -83,14 +85,15 @@ function agregarPlato(imagen,nombre,id){
   var Titulo = document.createElement("h3");
   var textNode = document.createTextNode(nombre);
   Titulo.appendChild(textNode);
+  Titulo.className="title";
   SeccionTitulo.appendChild(Titulo);
   SeccionFoto.appendChild(Foto);
   BotonPlato.appendChild(SeccionFoto);
   BotonPlato.appendChild(SeccionTitulo);
   SeccionTitulo.innerHTML =  SeccionTitulo.innerHTML +" <i class='fa fa-search-plus fa-2x'  id='inicio' onclick=' openModal("+id+","+sitio+")' ></i>";
   DivPlato.appendChild(BotonPlato);
-  document.getElementById("fila").appendChild(DivPlato);
-
+  document.getElementById("columna").appendChild(DivPlato);
+ 
 }
 
 function getPlatos(pagina,sitio){
@@ -98,7 +101,7 @@ function getPlatos(pagina,sitio){
   xmlHttpRequest.onreadystatechange=function() {         
     if (xmlHttpRequest.readyState==4 && xmlHttpRequest.status==200) {
       var respuesta =JSON.parse( xmlHttpRequest.responseText );
-      var elemento  = document.getElementById("fila");
+      var elemento  = document.getElementById("columna");
       while (elemento.firstChild) {
         elemento.removeChild(elemento.firstChild);
       }
@@ -128,8 +131,8 @@ function agregarComentario(imagen,nombre,fecha,comentario,vp,va,vs){
   var liComentario = document.createElement("li");
   liComentario.className="comentario";
   var imgComentario = document.createElement("img");
-  imgComentario.className="coment-img";
-  imgComentario.src=imagen;
+ // imgComentario.className="coment-img";
+  //imgComentario.src=imagen;
   var nombreComentario = document.createElement("h4");
   nombreComentario.className="coment-nombre";
   var textNode = document.createTextNode(nombre);
@@ -146,7 +149,6 @@ function agregarComentario(imagen,nombre,fecha,comentario,vp,va,vs){
   for(v1=1;v1<=vp;v1++){
         if(vp>=v1){
           liPrecio.innerHTML =  liPrecio.innerHTML+ "<span class='fa fa-star checked'></span>"; 
-          
         }else{
           liPrecio.innerHTML =  liPrecio.innerHTML+ "<span class='fa fa-star'></span>";
         }
@@ -178,13 +180,17 @@ function agregarComentario(imagen,nombre,fecha,comentario,vp,va,vs){
   ulValor.appendChild(liPrecio);
   ulValor.appendChild(liSabor);
   ulValor.appendChild(liAmbiente);
-  var h2Fecha = document.createElement("h3");
-  var textNode = document.createTextNode(fecha);
-  h2Fecha.appendChild(textNode);
-  ulValor.appendChild(h2Fecha);
-  liComentario.appendChild(imgComentario);
+  
+//  liComentario.appendChild(imgComentario);
+var h2Fecha = document.createElement("h3");
+var textNode = document.createTextNode(fecha);
+h2Fecha.className="title";
+h2Fecha.appendChild(textNode);
+liComentario.appendChild(h2Fecha);
   liComentario.appendChild(nombreComentario);
+ 
   liComentario.appendChild(ulValor);
+
   var pComentario = document.createElement("p");
   pComentario.textContent=comentario;
   pComentario.className="coment-text";

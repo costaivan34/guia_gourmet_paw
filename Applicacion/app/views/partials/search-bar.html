@@ -1,13 +1,18 @@
 <script src="/public/script/busqueda.js"></script>
-<form class="barra-busqueda" action="buscador" method="GET">  
-  <h3>Encuentra al mejor restaurante para ti</h3>
-  <input class="selectClave" id="palabraClave" type="text" placeholder="Palabra Clave" name="clave" >
-  <select name="categorias" id="categorias" class="selectClave" required >
+<h3 class="title">Encuentra al mejor restaurante para ti</h3>
+<form class="barra-busqueda formulario" action="buscador" method="GET">
+  <input
+    class="selectClave"
+    id="palabraClave"
+    type="text"
+    placeholder="Palabra Clave"
+    name="clave"
+  />
+  <select name="categorias" id="categorias" class="selectClave" required>
     <option value="">Selecionar Categoria:</option>
   </select>
   <select name="provincias" id="provincias" class="selectClave" required>
     <option value="">Selecionar Ubicación:</option>
   </select>
-      <button type="submit">BUSCAR</button>
-  </form>
-
+  <input id="enviar" value="Buscar" class="input-enviar" type="submit">
+</form>

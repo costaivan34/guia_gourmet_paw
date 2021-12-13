@@ -1,31 +1,74 @@
-{% extends "base.html" %} {% block head %} {{ parent() }}
-<link rel="stylesheet" href="/public/css/formulario_newuser.css" />
-<script src="/public/script/validarRegistro.js"></script>
-{% endblock %} {% block title %}Registro de Nuevo Usuario{% endblock %} {% block
-header %} {% endblock %} {% block main %}
+{% extends "base.html" %}
 
-<div id="info">
-  <form id="formCuenta" enctype="multipart/form-data" method="post" name="formCuenta">
-    <h3>REGISTRATE EN LA GUIA GOURMET Y DISFRUTA DEL CONTENIDO</h3>
+{% block title %}Registro de Nuevo Usuario{% endblock %}
+
+{% block head %}
+{{ parent() }}
+
+<script src="/public/script/validarRegistro.js"></script>
+{% endblock %}
+
+{% block main %}
+
+
+<div  id="contact-form" class="contenedor formulario" id="info">
+  <form
+    id="formCuenta"
+    enctype="multipart/form-data"
+    method="post"
+    name="formCuenta"
+  >
+    <h3 class="title">
+      REGISTRATE EN LA GUIA GOURMET Y DISFRUTA DEL CONTENIDO
+    </h3>
     <div id="messageBox"></div>
     <fieldset>
-      <legend>Información del Usuario</legend>
+      <legend class="title">Información del Usuario</legend>
       <label for="nameUser">Nombre de Usuario:</label>
-      <input class="caja-texto" id="nameUser" type="text" name="nameUser" value="" placeholder="Nombre de Usuario"
-        required />
+      <input
+        class="caja-texto"
+        id="nameUser"
+        type="text"
+        name="nameUser"
+        value=""
+        placeholder="Nombre de Usuario"
+        required
+      />
 
       <label for="nombreUser">Nombre:</label>
-      <input class="caja-texto" id="nombreUser" type="text" name="nombreUser" value="" placeholder="Nombre" required />
+      <input
+        class="caja-texto"
+        id="nombreUser"
+        type="text"
+        name="nombreUser"
+        value=""
+        placeholder="Nombre"
+        required
+      />
 
       <label for="apellidoUser">Apellido:</label>
-      <input class="caja-texto" id="apellidoUser" type="text" name="apellidoUser" value="" placeholder="Apellido"
-        required />
+      <input
+        class="caja-texto"
+        id="apellidoUser"
+        type="text"
+        name="apellidoUser"
+        value=""
+        placeholder="Apellido"
+        required
+      />
     </fieldset>
     <fieldset>
-      <legend>Información de Contacto</legend>
+      <legend class="title">Información de Contacto</legend>
       <label for="mailUser">Correo Electronico:</label>
-      <input class="caja-texto" id="mailUser" type="email" name="mailUser" value="" placeholder="Correo Electronico"
-        required />
+      <input
+        class="caja-texto"
+        id="mailUser"
+        type="email"
+        name="mailUser"
+        value=""
+        placeholder="Correo Electronico"
+        required
+      />
 
       <label for="paisUser">Ubicacion:</label>
       <select class="caja-texto" id="paisUser" name="paisUser">
@@ -43,26 +86,59 @@ header %} {% endblock %} {% block main %}
         <option value="VE">Venezuela</option>
       </select>
       <label for="telefonoUser">Telefono:</label>
-      <input class="caja-texto" id="telefonoUser" type="tel" name="telefonoUser" value="" placeholder="Telefono"
-        required />
+      <input
+        class="caja-texto"
+        id="telefonoUser"
+        type="tel"
+        name="telefonoUser"
+        value=""
+        placeholder="Telefono"
+        required
+      />
     </fieldset>
     <fieldset>
       <label for="archivosubido">Imagen de perfil:</label>
-      <input class="caja-texto" id="archivosubido" type="file" name="archivosubido" accept="image/jpeg" />
+      <input
+        class="caja-texto"
+        id="archivosubido"
+        type="file"
+        name="archivosubido"
+        accept="image/jpeg"
+      />
 
       <label for="passwordNueva">Contraseña:</label>
-      <input class="caja-texto" id="passwordNueva" type="password" name="passwordNueva" value="" placeholder=""
-        required />
+      <input
+        class="caja-texto"
+        id="passwordNueva"
+        type="password"
+        name="passwordNueva"
+        value=""
+        placeholder=""
+        required
+      />
 
       <label for="passwordRepeat">Confirmar Contraseña:</label>
-      <input class="caja-texto" id="passwordRepeat" type="password" name="passwordRepeat" value="" placeholder=""
-        required />
+      <input
+        class="caja-texto"
+        id="passwordRepeat"
+        type="password"
+        name="passwordRepeat"
+        value=""
+        placeholder=""
+        required
+      />
       <p>
         Nota: La contraseña debe contener entre 6 y 20 caracteres, una
         Mayuscula, una minuscula y al menos un digito.
       </p>
     </fieldset>
-    <input class="input-enviar" onclick="validarRegistro();" type="button" value="Enviar" name="Enviar" />
+    <input
+      class="input-enviar"
+      onclick="validarRegistro();"
+      type="button"
+      value="Enviar"
+      name="Enviar"
+    />
   </form>
 </div>
 

@@ -1,5 +1,6 @@
 
 window.addEventListener("DOMContentLoaded", function () {
+  event.preventDefault();
   getProvincias();
   getCategorias();
   /*console.log(clave);
@@ -183,7 +184,8 @@ function agregarSitio(respuesta){
 
   var aNombre =document.createElement("a");
   aNombre.href="/resto?Sitio="+respuesta.idSitio;
-  var h3nombre = document.createElement("h3");
+  var h3nombre = document.createElement("h3"); 
+  h3nombre.className="title";
   var textNode = document.createTextNode(respuesta.nombre);
   h3nombre.appendChild(textNode);
   aNombre.appendChild(h3nombre);
