@@ -10,17 +10,17 @@
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.1.0/mapbox-gl.css" />
 {% endblock %} {% block title %}{{ datos.OneSitio[0].nombre }}{% endblock %} {%
 block main %}
-
+<article itemscope itemtype="https://schema.org/Restaurant">
 <div class="encabezado">
   <div class="slideshow-sitio slideshow-container contenedor">
     <!-- Full-width images with number and caption text -->
     {% for N in datos.Imagenes %} {% if loop.index-1 == 0 %}
     <div class="mySlides fade" style="display: block;">
-      <img src="{{ datos.Imagenes[ loop.index-1 ].path }}" alt="" />
+      <img itemprop="image" src="{{ datos.Imagenes[ loop.index-1 ].path }}" alt="" />
     </div>
     {% else %}
     <div class="mySlides fade" style="display: none;">
-      <img src="{{ datos.Imagenes[ loop.index-1 ].path }}" alt="" />
+      <img itemprop="image" src="{{ datos.Imagenes[ loop.index-1 ].path }}" alt="" />
     </div>
     {% endif %}
     {% endfor %}
@@ -38,56 +38,57 @@ block main %}
   </div>
 
   <div class="contenedor">
-    <h3 class="title">{{ datos.OneSitio[0].nombre }}</h3>
+    <h3 itemprop="name" class="title">{{ datos.OneSitio[0].nombre }}</h3>
     <section class=" caracteristicas">
       <h4 title>
-        <i class="fa fa-briefcase"></i>
+        <i  class="fa fa-briefcase"></i>
         Servicios
       </h4>
       <ul class="fa-ul caract">
         {% if "wifi" in datos.Caract %}
-        <li>
-          <i class="fa fa-wifi enable"></i>
-          WI-FI
+          <li  itemprop="amenityFeature" itemscope itemtype="https://schema.org/LocationFeatureSpecification">
+          <i itemprop="name" class="fa fa-wifi enable"></i>
+          WI-FI<meta itemprop="value" content="True">
         </li>
         {% endif %} {% if "wheelchair" in datos.Caract %}
-        <li>
-          <i class="fa fa-wheelchair enable"></i>
-          Acceso Personas con Discapacidad
+        <li  itemprop="amenityFeature" itemscope itemtype="https://schema.org/LocationFeatureSpecification">
+          <i itemprop="name" class="fa fa-wheelchair enable"></i>
+          Acceso Personas con Discapacidad<meta itemprop="value" content="True">
         </li>
         {% endif %} {% if "aireacondicionado" in datos.Caract %}
-        <li>
-          <i class="fa fa-snowflake-o enable"></i>
-          Aire Acondicionado
+        <li  itemprop="amenityFeature" itemscope itemtype="https://schema.org/LocationFeatureSpecification">
+          <i itemprop="name" class="fa fa-snowflake-o enable"></i>
+          Aire Acondicionado<meta itemprop="value" content="True">
         </li>
         {% endif %} {% if "estacionamiento" in datos.Caract %}
-        <li>
-          <i class="fa fa-car enable"></i>
-          Estacionamiento
+        <li  itemprop="amenityFeature" itemscope itemtype="https://schema.org/LocationFeatureSpecification">
+          <i itemprop="name" lass="fa fa-car enable"></i>
+          Estacionamiento<meta itemprop="value" content="True">
         </li>
         {% endif %} {% if "tv" in datos.Caract %}
-        <li>
-          <i class="fa fa-television enable"></i>
-          TV
+        <li  itemprop="amenityFeature" itemscope itemtype="https://schema.org/LocationFeatureSpecification">
+          <i itemprop="name" class="fa fa-television enable"></i>
+          TV<meta itemprop="value" content="True">
         </li>
         {% endif %} {% if "juegos" in datos.Caract %}
-        <li>
-          <i class="fa fa-child enable"></i>
-          Juegos para niños
+        <li  itemprop="amenityFeature" itemscope itemtype="https://schema.org/LocationFeatureSpecification">
+          <i itemprop="name" class="fa fa-child enable"></i>
+          Juegos para niños<meta itemprop="value" content="True">
         </li>
         {% endif %}
       </ul>
     </section>
-    <section class=" horarios">
+    <section itemprop="openingHoursSpecification" itemscope itemtype="https://schema.org/OpeningHoursSpecification" class=" horarios">
       <h4 title>
         <i class="fa fa-clock-o"></i>
         Horario
       </h4>
       <dl class="detalles">
         {% for N in datos.Horario %}
-        <dt>{{ datos.Horario[loop.index-1].nombre }}</dt>
+        <dt itemprop="dayOfWeek" href="https://schema.org/{{ datos.Horario[loop.index-1].nombre }}"> {{ datos.Horario[loop.index-1].nombre }}</dt>
         <dd>
-          {{ datos.Horario[loop.index-1].HDesde }}hs  - {{ datos.Horario[loop.index-1].HHasta  }}hs
+          <time itemprop="opens" content="{{ datos.Horario[loop.index-1].HDesde }}:00:00">{{ datos.Horario[loop.index-1].HDesde }}hs</time>  -
+          <time itemprop="closes" content="{{ datos.Horario[loop.index-1].HHasta  }}:00:00">{{ datos.Horario[loop.index-1].HHasta  }}hs</time>  
         </dd>
         {% endfor %}
       </dl>
@@ -118,30 +119,33 @@ block main %}
         <section>
           <h3 class="title">Descripcion</h3>
           <hr class="separador" />
-          <p class="parrafo">{{ datos.OneSitio[0].descripcion}}</p>
+          <p itemprop="description" class="parrafo">{{ datos.OneSitio[0].descripcion}}</p>
         </section>
         <section id="contact-form" >
           <h3 class="title">Contacto</h3>
           <hr class="separador" />
           <dl class="detalles">
-            <dt>Direccion</dt>
-            <dd>{{ datos.Ubicacion[0].direccion }}</dd>
+            <dt  itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" >Direccion</dt>
+            <dd itemprop="streetAddress" >{{ datos.Ubicacion[0].direccion }}</dd>
             <dt>Ubicacion</dt>
-            <dd>
+            <dd itemprop="addressLocality" >
               {{ datos.Ubicacion[0].ciudad }} {{ datos.Ubicacion[0].provincia }}
             </dd>
             <dt>Mail</dt>
-            <dd>{{ datos.OneSitio[0].sitioWeb }}</dd>
+            <dd itemprop="url">{{ datos.OneSitio[0].sitioWeb }}</dd>
             <dt>Telefono</dt>
-            <dd class="ultimo">{{ datos.OneSitio[0].telefono }}</dd>
+            <dd itemprop="telephone" class="ultimo">{{ datos.OneSitio[0].telefono }}</dd>
           </dl>
         </section>
       </article>
     </div>
 
     <!-- Tab content Ubicacion-->
-    <div id="Ubicacion" class="tabcontent noactive">
-      <div id="mapa"></div>
+    <div itemprop="hasMap" id="Ubicacion" class="tabcontent noactive">
+      <div  itemprop="geo" itemscope itemtype="https://schema.org/GeoCoordinates" id="mapa">
+        <meta itemprop="latitude" content="{{ datos.Ubicacion[0].y}}" />
+        <meta itemprop="longitude" content="{{ datos.Ubicacion[0].x}}" />
+      </div>
       <script>
         var longitud = '{{ datos.Ubicacion[0].y}}'
         var latitud = '{{ datos.Ubicacion[0].x}}'
@@ -158,7 +162,7 @@ block main %}
     </div>
 
     <!-- Tab content Valoracion-->
-    <div id="Valoracion" class="tabcontent noactive">
+    <div  id="Valoracion" class="tabcontent noactive">
       <h3 class="title">Valoracion</h3>
       <hr class="separador" />
       <ul class="valoracion2">
@@ -277,7 +281,7 @@ block main %}
    
   </aside>
 </div>
-
+</article>
 <!-- The Modal for plato -->
 <div id="plato" class=" modal-plato">
   <!-- Modal Content for plato-->
@@ -285,18 +289,18 @@ block main %}
     <span onclick="closeModal()" class="close" title="Close Modal">
 &times;
     </span>
-    <article class="infoBasica-plato">
+    <article itemscope itemtype="https://schema.org/Recipe" class="infoBasica-plato">
       <div id="messageBox"></div>
       <div class="info-plato">
         <section class="title-plato">
-          <h3 class="title" id="titulo"></h3>
+          <h3 itemprop="name" class="title" id="titulo"></h3>
           <hr class="separador" />
         </section>
         <section class="descrip">
-          <img id="imagen-modal" src="/public/res/2.jpg" alt="" />
+          <img itemprop="image" id="imagen-modal" src="/public/res/2.jpg" alt="" />
           <h3 class="descrip-t title">Descripcion</h3>
           <hr class="separador" />
-          <p class="parrafo" id="descripcion"></p>
+          <p itemprop="description" class="parrafo" id="descripcion"></p>
         </section>
       </div>
       <div >
@@ -305,38 +309,39 @@ block main %}
         <hr class="separador" />
         <ul class="datos">
           <li>
-            <img id="Lacteos" src="/public/svg/leche(1).svg" alt="Lacteos" />
+            <img itemprop="recipeIngredient" id="Lacteos" src="/public/svg/leche(1).svg" alt="Lacteos" />
           </li>
           <li>
-            <img id="Gluten" src="/public/svg/gluten(1).svg" alt="Gluten" />
+            <img itemprop="recipeIngredient" id="Gluten" src="/public/svg/gluten(1).svg" alt="Gluten" />
           </li>
           <li>
-            <img id="Picante" src="/public/svg/chile(1).svg" alt="Picante" />
+            <img itemprop="recipeIngredient" id="Picante" src="/public/svg/chile(1).svg" alt="Picante" />
           </li>
           <li>
-            <img id="Vegano" src="/public/svg/tomate(1).svg" alt="Vegano" />
+            <img itemprop="recipeIngredient" id="Vegano" src="/public/svg/tomate(1).svg" alt="Vegano" />
           </li>
           <li>
-            <img id="Azucar" src="/public/svg/sugar(1).svg" alt="Azucar" />
+            <img itemprop="recipeIngredient" id="Azucar" src="/public/svg/sugar(1).svg" alt="Azucar" />
           </li>
-          <li><img id="Sal" src="/public/svg/dietetico(1).svg" alt="Sal" /></li>
+          <li><img itemprop="recipeIngredient" id="Sal" src="/public/svg/dietetico(1).svg" alt="Sal" /></li>
         </ul>
       </section>
-      <section class="infonut">
+      <section itemprop="nutrition"
+      itemscope itemtype="https://schema.org/NutritionInformation" class="infonut">
         <h3 class="title">Informacion Nutricional</h3>
         <hr class="separador" />
         <dl class=" detalles">
-          <dt>Peso</dt>
+          <dt itemprop="servingSize">Peso</dt>
           <dd id="Peso"></dd>
-          <dt>Energia</dt>
+          <dt itemprop="calories" >Energia</dt>
           <dd id="Energia"></dd>
-          <dt>Carbohidratos</dt>
+          <dt itemprop="carbohydrateContent">Carbohidratos</dt>
           <dd id="Carbo"></dd>
-          <dt>Proteina</dt>
+          <dt itemprop="proteinContent">Proteina</dt>
           <dd id="Proteina"></dd>
-          <dt>Grasas Totales</dt>
+          <dt itemprop="fatContent">Grasas Totales</dt>
           <dd id="Grasas"></dd>
-          <dt>Sodio</dt>
+          <dt itemprop="sodiumContent">Sodio</dt>
           <dd id="Sodio" class="ultimo"></dd>
         </dl>
       </section>
