@@ -380,13 +380,10 @@ public function selectDestacados(){
 }
 
 public function selectCerca(){ 
-    $statement = $this->pdo->prepare("SELECT s.idSitio,s.nombre,u.ciudad, u.provincia, u.X, u.Y, i.path, ca.nombre as cat FROM sitios s 
+    $statement = $this->pdo->prepare("SELECT s.idSitio,s.nombre, u.X, u.Y, i.path FROM sitios s 
     INNER JOIN ubicacion u  ON  s.idSitio = u.idSitio
     INNER JOIN imagenessitios i ON  s.idSitio = i.idSitio
-    INNER JOIN categorias ca ON s.idCategoria= ca.idCategoria
      ");
-
-
     /*$statement = $this->pdo->prepare("SELECT s.idSitio, s.nombre, s.idCategoria, u.X, u.Y 
     FROM sitios s INNER JOIN ubicacion u ON u.idSitio = s.idSitio 
     WHERE u.ciudad like CONCAT('%','$Ciudad','%') AND u.provincia like CONCAT('%','$Provincia','%') ");*/

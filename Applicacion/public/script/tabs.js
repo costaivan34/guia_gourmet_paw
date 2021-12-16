@@ -1,10 +1,10 @@
-
+/*
 function loadmapa(longitud,latitud) {
   mapboxgl.accessToken = 'pk.eyJ1IjoiY29zdGFpdmFuMzQiLCJhIjoiY2treDFvM25yMTd1ZjJ4anVldTA3ZHFpYiJ9.EsQJxJQTd6YbOHyUWcftnw';
   map = new mapboxgl.Map({container: 'mapa',style: 'mapbox://styles/mapbox/streets-v11',center: [longitud,latitud],zoom: 15 });
   map.addControl(new mapboxgl.NavigationControl());
   var marker = new mapboxgl.Marker().setLngLat([longitud, latitud]).addTo(map);
-}
+}*/
 
 
 function getPaginacionID(pagina,sitio,objeto){
@@ -17,8 +17,8 @@ function getPaginacionID(pagina,sitio,objeto){
        elemento.removeChild(elemento.firstChild);
      }
      //console.log("pagina: "+respuesta)
-      if (respuesta > 0){
-      if (pagina >1){
+      if (respuesta > 1){
+
       var ElementoPagina = document.createElement("li");
       ElementoPagina.innerHTML = "<input type='button' id='inicio' onclick='load"+objeto+"("+1+","+sitio+")' value='<<'>";
       document.getElementById("paginacion"+ objeto).appendChild(ElementoPagina);
@@ -49,7 +49,7 @@ function getPaginacionID(pagina,sitio,objeto){
       ElementoPagina.innerHTML = "<input type='button' id='inicio' onclick='load"+objeto+"("+respuesta+","+sitio+")' value='>>'>";
       document.getElementById("paginacion"+ objeto).appendChild(ElementoPagina);
       }
-		}
+
   }
 	}
 	xmlHttpRequest.open("GET","paginacion"+objeto+"?Sitio="+sitio+"&page="+pagina,true);
@@ -90,7 +90,7 @@ function agregarPlato(imagen,nombre,id){
   SeccionFoto.appendChild(Foto);
   BotonPlato.appendChild(SeccionFoto);
   BotonPlato.appendChild(SeccionTitulo);
-  SeccionTitulo.innerHTML =  SeccionTitulo.innerHTML +" <i class='fa fa-search-plus fa-2x'  id='inicio' onclick=' openModal("+id+","+sitio+")' ></i>";
+  SeccionTitulo.innerHTML =  SeccionTitulo.innerHTML +" <i class='fa fa-search-plus fa-2x'  id='inicio' onclick=' openModal("+id+","+idSitio+")' ></i>";
   DivPlato.appendChild(BotonPlato);
   document.getElementById("columna").appendChild(DivPlato);
  
@@ -395,13 +395,13 @@ function openTab(evt, Name) {
   document.getElementById(Name).style.display = "block";
   evt.currentTarget.className += " active";
   if(Name=="Ubicacion"){
-    loadmapa(longitud,latitud);
+    agregarMarcadorCentrar(longitud,latitud,idSitio,nombre,path);
   }
   if(Name=="Platos"){
-    loadPlatos(1,sitio);
+    loadPlatos(1,idSitio);
   }
   if(Name=="Valoracion"){
-    loadComentarios(1,sitio);
+    loadComentarios(1,idSitio);
   }
   
 }

@@ -1,5 +1,4 @@
 
-
 #mapa {
   height:100%;
   width:100%;
@@ -32,12 +31,11 @@
 }
 
 .imagen_pop{
-  max-width: 200px;
+  width: 14vw;
+  margin-left: 1vw;
 }
 
 #mapa .mapboxgl-popup-content {
-  text-align: center;
-  /*font-family: 'Open Sans', sans-serif;*/
   border-radius: 10%;
   background-color: #E7CF7F;
 }
@@ -71,4 +69,18 @@
 	color: #721c24;
 	background-color: #f8d7da;
 	border-color: #f5c6cb;
+}
+
+
+@media screen and (max-width: 600px) {
+  .imagen_pop{
+    width: 50vw;
+    height: 20vh;
+    margin-left: 4vw;
+  }
+
+  #mapa .mapboxgl-popup-content h3{
+font-size: 4vw;
+  }
+
 }

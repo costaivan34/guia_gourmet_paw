@@ -1,10 +1,10 @@
 {% extends "base.html" %} {% block head %} {{ parent() }}
 <script src="/public/script/carusel.js"></script>
 <script src="/public/script/tabs.js"></script>
+<script src="/public/script/mapa.js"></script>
 
 <link rel="stylesheet" href="/public/css/one-sitios.css" />
 <link rel="stylesheet" href="/public/css/near-sitios.css" />
-<link rel="stylesheet" href="/public/css/comentarios.css" />
 
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.0/mapbox-gl.js"></script>
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.1.0/mapbox-gl.css" />
@@ -149,7 +149,9 @@ block main %}
       <script>
         var longitud = '{{ datos.Ubicacion[0].y}}'
         var latitud = '{{ datos.Ubicacion[0].x}}'
-        var sitio = '{{datos.OneSitio[0].idSitio}}'
+        var idSitio = '{{datos.OneSitio[0].idSitio}}'
+        var nombre ='{{ datos.OneSitio[0].nombre }}'
+        var path='{{ datos.Imagenes[0].path }}'
       </script>
     </div>
     <!-- Tab content Platos-->
@@ -309,21 +311,21 @@ block main %}
         <hr class="separador" />
         <ul class="datos">
           <li>
-            <img itemprop="recipeIngredient" id="Lacteos" src="/public/svg/leche(1).svg" alt="Lacteos" />
+            <img itemprop="recipeIngredient" id="Lacteos" src="/public/svg/leche (1).svg" alt="Lacteos" />
           </li>
           <li>
-            <img itemprop="recipeIngredient" id="Gluten" src="/public/svg/gluten(1).svg" alt="Gluten" />
+            <img itemprop="recipeIngredient" id="Gluten" src="/public/svg/gluten (1).svg" alt="Gluten" />
           </li>
           <li>
-            <img itemprop="recipeIngredient" id="Picante" src="/public/svg/chile(1).svg" alt="Picante" />
+            <img itemprop="recipeIngredient" id="Picante" src="/public/svg/chile (1).svg" alt="Picante" />
           </li>
           <li>
-            <img itemprop="recipeIngredient" id="Vegano" src="/public/svg/tomate(1).svg" alt="Vegano" />
+            <img itemprop="recipeIngredient" id="Vegano" src="/public/svg/tomate (1).svg" alt="Vegano" />
           </li>
           <li>
-            <img itemprop="recipeIngredient" id="Azucar" src="/public/svg/sugar(1).svg" alt="Azucar" />
+            <img itemprop="recipeIngredient" id="Azucar" src="/public/svg/sugar (1).svg" alt="Azucar" />
           </li>
-          <li><img itemprop="recipeIngredient" id="Sal" src="/public/svg/dietetico(1).svg" alt="Sal" /></li>
+          <li><img itemprop="recipeIngredient" id="Sal" src="/public/svg/dietetico (1).svg" alt="Sal" /></li>
         </ul>
       </section>
       <section itemprop="nutrition"

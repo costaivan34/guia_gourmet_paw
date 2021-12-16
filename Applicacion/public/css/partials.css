@@ -533,12 +533,14 @@ h3 {
   bottom: 3em;
   right: 2em;
   cursor: pointer;
+  z-index: 400;
 }
 
 #ToTheTop:hover {
   border-left: 2em solid transparent;
   border-right: 2em solid transparent;
   border-bottom: 4em solid var(--assent-color);
+  z-index: 400;
 }
 
 @media screen and (max-width: 600px) {
@@ -668,12 +670,14 @@ h3 {
     bottom: 5vw;
     right: 3vw;
     cursor: pointer;
+    z-index: 400;
   }
 
   #ToTheTop:hover {
     border-left: 8.5vw solid transparent;
     border-right: 8.5vw solid transparent;
     border-bottom: 15.5vw solid var(--assent-color);
+    z-index: 400;
   }
 
   .nav-logo img {
