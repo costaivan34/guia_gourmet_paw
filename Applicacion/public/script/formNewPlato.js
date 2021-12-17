@@ -23,9 +23,10 @@ function validarDatos(namePlato,descripcion,Peso,Energia,Carbohidratos,Proteina,
 function validarRegistro(){
 	var xmlHttpRequest=new XMLHttpRequest();
 	xmlHttpRequest.onreadystatechange=function() {
+    console.log("RESPEUSTA DEL SERVER:"+response)
 		if (xmlHttpRequest.readyState==4 && xmlHttpRequest.status==200) {
 			var response = xmlHttpRequest.responseText;
-     console.log("RESPEUSTA DEL SERVER:"+response)
+     console.log("RESPEWUSTA DEL SERVER:"+response)
 			if(xmlHttpRequest.responseText == 1) {
         document.getElementById( 'regForm' ).scrollIntoView();
 				const m = document.getElementById("messageBox");
@@ -59,9 +60,9 @@ function validarRegistro(){
     oData = new FormData(document.forms.namedItem("regForm"));
     oData.append('username', Usuario);
     oData.append('idSitio', idSitio);
-   for(let [name, value] of oData) {
+ /*  for(let [name, value] of oData) {
       console.log(`${name} = ${value}`); // key1 = value1, luego key2 = value2
-    }
+    }*/
     xmlHttpRequest.open("POST","/plato/CreatePlato",true);
     xmlHttpRequest.send(oData);
     event.preventDefault();

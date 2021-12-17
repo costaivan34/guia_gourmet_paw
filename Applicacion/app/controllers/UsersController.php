@@ -61,13 +61,17 @@ class UsersController extends Controller{
     }
 
     public function actualizarPerfil(){ 
-        $user= $_POST["mailUser"];
-        $nombre= $_POST["nombreUser"];
-        $apellido= $_POST["apellidoUser"];
-        $ubicacion= $_POST["paisUser"];
-        $telefono= $_POST["telefonoUser"];
-        $this->model->updateUsuario( $user, $nombre,$apellido,$ubicacion, $telefono );
-      return  $this-> dash();
+        $user = $_POST["mailUser"];
+        $nombre = $_POST["nombreUser"];
+        $apellido = $_POST["apellidoUser"];
+        $ubicacion = $_POST["paisUser"];
+        $telefono = $_POST["telefonoUser"];
+        $statement = $this->model->updateUsuario( $user, $nombre,$apellido,$ubicacion, $telefono );
+        if(($statement)==1){
+            return  1;
+        }else{
+            return 0;
+        }   
     }
 
     public function actualizarPassword(){

@@ -41,16 +41,16 @@
 <div id="id02" class="modal delete formulario">
 
   <!-- Modal Content for delete-->
-  <form class="contenedor animate" method="POST" id="formDelete">
+  <form class="contenedor animate" enctype="multipart/form-data" method="post" id="formDelete">
     <div class="imgcontainer">
       <h3 class="title" id="MensajeAtencion">ATENCIÓN</h3>
       <span onclick="closeModal()" class="close" title="Close Modal">&times;</span>
 
       <div id="messageBox"></div>
       <p class="title"> ¿Esta seguro de eliminar el sitio?</p>
-      <button  class="input-enviar" onclick="eliminarSitio();" type="submit">Aceptar</button>
+      <button  class="input-enviar" onclick="eliminarSitio();" >Aceptar</button>
 
-      <button   onclick="closeModal();">Cancelar</button>
+      <button onclick="closeModal();">Cancelar</button>
   </form>
 </div>
 

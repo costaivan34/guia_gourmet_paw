@@ -54,7 +54,7 @@ if (validarDatos(nombre,apellido,mail,texto)){
   xmlHttpRequest.send("nombre="+nombre+"&apellido="+apellido+"&mail="+mail+"&texto="+texto);
   event.preventDefault();
 }else{
-  console.log("error form")
+  //console.log("error form")
   const m = document.getElementById("mensaje");
   m.innerHTML = `<div class="alert alert-danger" role="alert">`+mensaje+`</div>`; 
   document.getElementById( 'topof' ).scrollIntoView();

@@ -1,60 +1,52 @@
 {% extends "base.html" %}
 
 {% block head %}
-    {{ parent() }}
-    <meta name="keywords" content="PAW,2018,Templates,PHP">
+{{ parent() }}
+<meta name="keywords" content="PAW,2018,Templates,PHP">
 {% endblock %}
 
 {% block title %}Buscador{% endblock %}
 
-
 {% block nav %}
-  {{ include('partials/nav.html') }}
-  {% endblock %}
+{{ include('partials/nav.html') }}
+{% endblock %}
 {% block main %}
 <article>
-<section id="search" class="contenedor">
-       <script>
-            var clave = "{{datos.clave}}";
-            var  categoria = "{{datos.categoria}}";
-            var provincia = "{{datos.provincia}}"; 
-          </script>
-  <script src="/public/script/busqueda.js"></script>
-  <h3 class="title">Encuentra al mejor restaurante para ti</h3>
-<form class="barra-busqueda formulario" action="buscador" method="GET">
-  <input
-    class="selectClave"
-    id="palabraClave"
-    type="text"
-    placeholder="Palabra Clave"
-    name="clave"
-  />
-  <select name="categorias" id="categorias" class="selectClave" required>
-    <option value="">Selecionar Categoria:</option>
-  </select>
-  <select name="provincias" id="provincias" class="selectClave" required>
-    <option value="">Selecionar Ubicación:</option>
-  </select>
-  <input id="enviar" value="Buscar" class="input-enviar" type="submit">
-</form>
-</section>
+  <section id="search" class="contenedor">
+    <script>
+      var clave = "{{datos.clave}}";
+      var categoria = "{{datos.categoria}}";
+      var provincia = "{{datos.provincia}}"; 
+    </script>
+    <script src="/public/script/busqueda.js"></script>
+    <h3 class="title">Encuentra al mejor restaurante para ti</h3>
+    <form class="barra-busqueda formulario" action="buscador" method="GET">
+      <input class="selectClave" id="palabraClave" type="text" placeholder="Palabra Clave" name="clave" />
+      <select name="categorias" id="categorias" class="selectClave" required>
+        <option value="">Selecionar Categoria:</option>
+      </select>
+      <select name="provincias" id="provincias" class="selectClave" required>
+        <option value="">Selecionar Ubicación:</option>
+      </select>
+      <input id="enviarBuscar" value="Buscar" class="input-enviar" onclick="ejecutar();" type="submit">
+    </form>
+  </section>
 
-<section id="resultados">
-  <div class="slideshow-places contenedor">
-    <h3 class="title"> Resultados de la busqueda</h3>
-    <div class="fila">
-    <div id="columna">
+  <section id="resultados">
+    <div class="slideshow-places contenedor">
+      <h3 class="title"> Resultados de la busqueda</h3>
+      <div class="fila">
+        <div id="columna">
 
+        </div>
+      </div>
+      <ul class="paginacion" id="paginacionPlatos">
+
+      </ul>
     </div>
-    </div>
-    <ul class="paginacion" id="paginacionPlatos">
-    
-    </ul>
-  </div>
-      
-  
-</section>
+
+
+  </section>
 </article>
 
 {% endblock %}
-

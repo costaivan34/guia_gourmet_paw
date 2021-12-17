@@ -158,7 +158,6 @@ CREATE TABLE `horario` (
 CREATE TABLE `imagenesplatos` (
   `idImagen` bigint(20) UNSIGNED NOT NULL,
   `idPlato` int(11) NOT NULL,
-  `nombre` int(11) NOT NULL,
   `path` text COLLATE latin1_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
@@ -281,9 +280,9 @@ CREATE TABLE `sitios` (
   `descripcion` text COLLATE latin1_spanish_ci NOT NULL,
   `telefono` text COLLATE latin1_spanish_ci NOT NULL,
   `sitioWeb` text COLLATE latin1_spanish_ci NOT NULL,
-  `valoracionPrecio` int(11) NOT NULL,
-  `valoracionAmbiente` int(11) NOT NULL,
-  `valoracionSabor` int(11) NOT NULL,
+  `valoracionPrecio` int(11) ,
+  `valoracionAmbiente` int(11) ,
+  `valoracionSabor` int(11) ,
   `idUsuario` int(11) NOT NULL,
   `idCategoria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
@@ -317,9 +316,9 @@ CREATE TABLE `usuarios` (
   `nombreUsuario` text COLLATE latin1_spanish_ci NOT NULL,
   `nombre` text COLLATE latin1_spanish_ci NOT NULL,
   `apellido` text COLLATE latin1_spanish_ci NOT NULL,
-  `direccion` text COLLATE latin1_spanish_ci NOT NULL,
+  `direccion` text COLLATE latin1_spanish_ci ,
   `pais` text COLLATE latin1_spanish_ci NOT NULL,
-  `telefono` int(11) NOT NULL,
+  `telefono` text COLLATE latin1_spanish_ci NOT NULL,
   `password` text COLLATE latin1_spanish_ci NOT NULL,
   `fotoPerfil` text COLLATE latin1_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
@@ -409,7 +408,7 @@ ALTER TABLE `infonutricional`
 -- Indices de la tabla `listacaractplato`
 --
 ALTER TABLE `listacaractplato`
-  ADD PRIMARY KEY (`idListaCaract`,`idPlato`),
+  ADD PRIMARY KEY (`idCaract`,`idPlato`),
   ADD UNIQUE KEY `idListaCaract` (`idListaCaract`),
   ADD KEY `idPlato` (`idPlato`),
   ADD KEY `listacaractplato_ibfk_222` (`idCaract`);

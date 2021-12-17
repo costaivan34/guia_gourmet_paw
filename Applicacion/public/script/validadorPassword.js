@@ -15,7 +15,7 @@ function update(){
         document.getElementById("passwordNueva").value ="";
         document.getElementById("passwordRepeat").value ="";
 			} else {
-        alert('El nombre de usuario y la contraseña que ingresaste no coinciden con nuestros registros. Por favor, revisa e inténtalo de nuevo.');
+        alert('La contraseña que ingresaste no coinciden con nuestros registros. Por favor, revisa e inténtalo de nuevo.');
 				
 			}
 		}
@@ -23,8 +23,8 @@ function update(){
 var mail = document.getElementById("User-mail").textContent;
 var pswOLD = document.getElementById("passwordAntigua").value;
 var psw = document.getElementById("passwordNueva").value;
-console.log(mail);
-console.log(psw);
+//console.log(mail);
+//console.log(psw);
 xmlHttpRequest.open("POST","/cambioPassword",true);
 xmlHttpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xmlHttpRequest.send("userName="+mail+"&passwordAntigua="+pswOLD+"&passwordNueva="+psw);
@@ -33,6 +33,7 @@ event.preventDefault();
 
 
 function validarFormulario(evento) {
+  passwordRegex =  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
   evento.preventDefault();
   var passwordAntigua = document.getElementById('passwordAntigua').value;
   if(passwordAntigua.length == 0) {
@@ -42,9 +43,9 @@ function validarFormulario(evento) {
   var passwordNueva = document.getElementById('passwordNueva').value;
   var passwordRepeat = document.getElementById('passwordRepeat').value;
   if (passwordNueva==passwordRepeat) {
-    if (passwordNueva.length< 8) {
-      alert('Las contraseñas deben contener al menos 8 caracteres');
-      return;
+    if (!passwordRegex.test(passwordRepeat)) {
+      alert("La contraseña ingresada no cumple con los requisitos. Por favor, revisa los datos e inténtalo de nuevo.");
+      return ;
     }else{
       update();
     }

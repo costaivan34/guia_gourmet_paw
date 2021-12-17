@@ -23,8 +23,9 @@ function eliminarSitio(){
 				mensaje.innerHTML = `<div class="alert alert-success" role="alert">
 				Sitio Eliminado</div>`; 
 				setTimeout(function(){ mensaje.innerHTML = "" }, 2500);
-        window.location.replace("/dashboard/sitios");
+       // window.location.replace("/dashboard/sitios");
 			} else {
+				event.preventDefault();
 				const mensaje = document.getElementById("messageBox");
       	mensaje.innerHTML = `<div class="alert alert-danger" role="alert">
         El Sitio seleccionado tiene Platos registrados, Eliminelos antes de borrar el sitio.
@@ -33,7 +34,8 @@ function eliminarSitio(){
 			}
 		}
 	}
-xmlHttpRequest.open("POST","/resto/DeleteResto",true);
+xmlHttpRequest.open("POST","/resto/DeleteResto",true); 
+console.log(idSitio+" asdas"+ Sitio)
 xmlHttpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xmlHttpRequest.send("idSitio="+idSitio);
 event.preventDefault();

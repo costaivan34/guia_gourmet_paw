@@ -1,7 +1,6 @@
 
 function validarDatos(nameUser,nombreUser,apellidoUser,mailUser,paisUser,telefonoUser,passwordNueva,passwordRepeat, archivosubido){
   emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-  telefonoRegex = /^[2-9]\d{2}[2-9]\d{2}\d{4}$/;
   passwordRegex =  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
 
   if (nameUser.length<0 || nombreUser.length<0 || apellidoUser.length<0){
@@ -31,18 +30,18 @@ function validarRegistro(){
 		if (xmlHttpRequest.readyState==4 && xmlHttpRequest.status==200) {
 			var response = xmlHttpRequest.responseText;
 			if(xmlHttpRequest.responseText == 1) {
-        document.getElementById( 'info' ).scrollIntoView();
+        document.getElementById( 'contact-form' ).scrollIntoView();
 				const m = document.getElementById("messageBox");
 				m.innerHTML = `<div class="alert alert-success" role="alert">
 				Cuenta creada con exito. Bienvenido!</div>`; 
 				setTimeout(function(){ mensaje.innerHTML = "" }, 2500);
         setTimeout(function(){ window.location.replace("/"); }, 2500);
 			} else {
-        document.getElementById( 'info' ).scrollIntoView();
+        document.getElementById( 'contact-form' ).scrollIntoView();
         const m = document.getElementById("messageBox");
         m.innerHTML = `<div class="alert alert-danger" role="alert"> Ocurrio un error en el servidor.
          Por favor, inténtalo de nuevo más tarde.</div>`; 
-        document.getElementById( 'info' ).scrollIntoView();
+        document.getElementById( 'contact-form' ).scrollIntoView();
         setTimeout(function(){ m.innerHTML = "" }, 2500);
 			}
 		}
@@ -67,12 +66,12 @@ function validarRegistro(){
     xmlHttpRequest.send(oData);
     event.preventDefault();
   }else{
-    console.log("error form")
+
     const m = document.getElementById("messageBox");
     m.innerHTML = `<div class="alert alert-danger" role="alert">`+mensaje+`</div>`; 
-    document.getElementById( 'info' ).scrollIntoView();
+    document.getElementById( 'contact-form' ).scrollIntoView();
     setTimeout(function(){ mensaje.innerHTML = "" }, 2500);
-    //setTimeout(function(){ mensaje.innerHTML = "" }, 2500);
+
   }
 
   

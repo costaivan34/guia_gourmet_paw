@@ -1,21 +1,11 @@
-{% extends "base.html" %}
-{% block head %}
-{{ parent() }}
+{% extends "base.html" %} {% block head %} {{ parent() }}
 
 <script src="/public/script/formNewPlato.js"></script>
-<script src="/public/script/tabs.js"></script>
-<script src="/public/script/modal.js"></script>
 
-
-{% endblock %}
-{% block title %}NUEVO PLATO{% endblock %}
-{% block header %}
-
-{% endblock %} 
-
-{% block main %}
-<form id="regForm" method="post" class=" contenedor formulario">
-  <h3 class="title" id="idSitio">{{ datos.idSitio }} </h3>
+{% endblock %} {% block title %}NUEVO PLATO{% endblock %} {% block header %} {%
+endblock %} {% block main %}
+<form id="regForm" enctype="multipart/form-data" method="post" class="contenedor formulario">
+  <h3 class="title" id="idSitio">{{ datos.idSitio }}</h3>
   <h3 class="title">{{ datos.NameSitio }}</h3>
   <h3>NUEVO PLATO:</h3>
   <div id="messageBox"></div>
@@ -23,56 +13,162 @@
   <fieldset>
     <legend class="title">Información del Plato</legend>
     <label for="namePlato">Nombre del Plato:</label>
-    <input class="caja-texto" id="namePlato" type="text" name="namePlato" value="" placeholder="Nombre de Sitio" required />
+    <input
+      class="caja-texto"
+      id="namePlato"
+      type="text"
+      name="namePlato"
+      value=""
+      placeholder="Nombre de Sitio"
+      required
+    />
     <label for="subject">Descripcion:*</label>
-    <textarea id="subject" name="subject" placeholder="Escriba algo" style="height:170px" required></textarea>
+    <textarea
+      id="subject"
+      name="subject"
+      placeholder="Escriba algo"
+      style="height: 170px;"
+      required
+    ></textarea>
     <label for="namePrecio">Precio:</label>
-    <input class="caja-texto" id="namePrecio" type="text" name="namePrecio" value="" placeholder="Precio" required />
+    <input
+      class="caja-texto"
+      id="namePrecio"
+      type="number"
+      name="namePrecio"
+      value=""
+      min=1
+      placeholder="Precio"
+      required
+    /> 
   </fieldset>
   <fieldset>
     <legend class="title">Información Nutricional</legend>
     <label for="InformaciónPeso">Peso:</label>
-    <input class="caja-texto" id="InformaciónPeso" type="number" name="InformaciónPeso" value="" placeholder="Peso" required />
+    <input
+      class="caja-texto"
+      id="InformaciónPeso"
+      type="number"
+      name="InformaciónPeso"
+      value=""
+      placeholder="Peso"
+      min=0
+      required
+    />
     <label for="InformaciónEnergia">Energia:</label>
-    <input class="caja-texto" id="InformaciónEnergia" type="number" name="InformaciónEnergia" value="" placeholder="Energia" required />
+    <input
+      class="caja-texto"
+      id="InformaciónEnergia"
+      type="number"
+      name="InformaciónEnergia"
+      min=0
+      value=""
+      placeholder="Energia"
+      required
+    />
     <label for="InformaciónCarbohidratos">Carbohidratos:</label>
-    <input class="caja-texto" id="InformaciónCarbohidratos" type="number" name="InformaciónCarbohidratos" value="" placeholder="Carbohidratos" required />
+    <input
+      class="caja-texto"
+      id="InformaciónCarbohidratos"
+      min=0
+      type="number"
+      name="InformaciónCarbohidratos"
+      value=""
+      placeholder="Carbohidratos"
+      required
+    />
     <label for="InformaciónProteina">Proteina:</label>
-    <input class="caja-texto" id="InformaciónProteina" type="number" name="InformaciónProteina" value="" placeholder="Proteina" required />
+    <input
+      class="caja-texto"
+      id="InformaciónProteina"
+      min=0
+      type="number"
+      name="InformaciónProteina"
+      value=""
+      placeholder="Proteina"
+      required
+    />
     <label for="InformaciónGrasas">Grasas Totales:</label>
-    <input class="caja-texto" id="InformaciónGrasas" type="number" name="InformaciónGrasas" value="" placeholder="Grasas Totales" required />
+    <input
+      class="caja-texto"
+      min=0
+      id="InformaciónGrasas"
+      type="number"
+      name="InformaciónGrasas"
+      value=""
+      placeholder="Grasas Totales"
+      required
+    />
     <label for="InformaciónSodio">Sodio:</label>
-    <input class="caja-texto" id="InformaciónSodio" type="number" name="InformaciónSodio" value="" placeholder="Sodio" required />
+    <input
+      class="caja-texto"
+      id="InformaciónSodio"
+      min=0
+      type="number"
+      name="InformaciónSodio"
+      value=""
+      placeholder="Sodio"
+      required
+    />
   </fieldset>
 
   <fieldset>
     <legend class="title">Ingredientes</legend>
     <label class="heading">Seleccione las caracteristicas del Plato:</label>
     <div class="checkbox">
-      <label><input type="checkbox" name="caracteristicas[]" value="5">Contiene Sal</label>
+      <label>
+        <input type="checkbox" name="caracteristicas[]" value="5" />
+        Contiene Sal
+      </label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="caracteristicas[]" value="1">Con Tacc</label>
+      <label>
+        <input type="checkbox" name="caracteristicas[]" value="1" />
+        Con Tacc
+      </label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="caracteristicas[]" value="4">Alto Contenido de Azucares </label>
+      <label>
+        <input type="checkbox" name="caracteristicas[]" value="4" />
+        Alto Contenido de Azucares
+      </label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="caracteristicas[]" value="3">Plato Vegetariano</label>
+      <label>
+        <input type="checkbox" name="caracteristicas[]" value="3" />
+        Plato Vegetariano
+      </label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="caracteristicas[]" value="2">Contiene Picante</label>
+      <label>
+        <input type="checkbox" name="caracteristicas[]" value="2" />
+        Contiene Picante
+      </label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="caracteristicas[]" value="6">Contiene Lacteos</label>
+      <label>
+        <input type="checkbox" name="caracteristicas[]" value="7" />
+        Contiene Lacteos
+      </label>
     </div>
   </fieldset>
 
   <fieldset>
     <legend class="title">Imagenes</legend>
     <label for="archivosubido[]">Imagenes del Sitio:</label>
-        <input id="archivosubido[]" type="file" name="archivosubido"  accept="image/jpeg">
+    <input
+      id="archivosubido[]"
+      type="file"
+      name="archivosubido"
+      accept="image/jpeg"
+    />
   </fieldset>
-  <input class="input-enviar" onclick="validarRegistro();" type="button" value="Enviar" name="Enviar" />
+  <input
+    class="input-enviar"
+    onclick="validarRegistro();"
+    type="button"
+    value="Enviar"
+    name="Enviar"
+  />
 </form>
-  {% endblock %}
+{% endblock %}

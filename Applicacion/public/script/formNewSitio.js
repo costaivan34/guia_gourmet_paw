@@ -46,8 +46,8 @@ function validarRegistro(){
 	xmlHttpRequest.onreadystatechange=function() {
 		if (xmlHttpRequest.readyState==4 && xmlHttpRequest.status==200) {
 			var response = xmlHttpRequest.responseText;
-   //   console.log("RESPEUSTA DEL SERVER:"+response)
-			if(xmlHttpRequest.responseText == 1) {
+     console.log("RESPEUSTA DEL SERVER:"+response)
+			if(response == 1) {
         document.getElementById( 'regForm' ).scrollIntoView();
 				const m = document.getElementById("messageBox");
 				m.innerHTML = `<div class="alert alert-success" role="alert">
@@ -85,9 +85,9 @@ function validarRegistro(){
   if (validarDatos(nameSitio,descripcion,direccion,localidad,provincia,mail,telefono,X,Y, Dia_Inicio,Dia_Fin , De_Inicio, Hasta_Fin )){
     oData = new FormData(document.forms.namedItem("regForm"));
     oData.append('username', Usuario);
-   for(let [name, value] of oData) {
+  /* for(let [name, value] of oData) {
       console.log(`${name} = ${value}`); // key1 = value1, luego key2 = value2
-    }
+    }*/
     xmlHttpRequest.open("POST","/resto/CreateResto",true);
     xmlHttpRequest.send(oData);
     event.preventDefault();

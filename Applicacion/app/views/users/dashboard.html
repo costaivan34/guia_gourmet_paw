@@ -1,7 +1,9 @@
 {% extends "base.html" %} 
-{% block head %} {{ parent() }}
-
-{% endblock %} {% block title %} Cuenta{% endblock %} 
+{% block head %}
+{{ parent() }}
+<script src="/public/script/validadorCuenta.js"></script>
+{% endblock %}
+{% block title %} Cuenta{% endblock %} 
  {% block main %}
 
 
@@ -27,8 +29,8 @@
       <label for="mailUser">Correo Electronico</label>
       <input id="mailUser" type="email" name="mailUser" value="{{datos.data[0].mail}}" placeholder="example@mail.com" />
       <br />
-      <label for="paisUser">Ubicacion</label>
-      <input  type="text" name="paisUser" value="{{datos.data[0].pais}}" placeholder="Pais" required />
+      <label for="ubicacionUser">Ubicacion</label>
+      <input  id="ubicacionUser" type="text" name="ubicacionUser" value="{{datos.data[0].pais}}" placeholder="Pais" required />
       <br />
       <label for="telefonoUser">Telefono</label>
       <input id="telefonoUser" type="tel" name="telefonoUser" value="{{datos.data[0].telefono}}" placeholder="telefono"

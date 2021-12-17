@@ -1,4 +1,4 @@
-<script src="/public/script/busqueda.js"></script>
+<script src="/public/script/buscar.js"></script>
 <h3 class="title">Encuentra al mejor restaurante para ti</h3>
 <form class="barra-busqueda formulario" action="buscador" method="GET">
   <input
@@ -14,5 +14,5 @@
   <select name="provincias" id="provincias" class="selectClave" required>
     <option value="">Selecionar Ubicación:</option>
   </select>
-  <input id="enviar" value="Buscar" class="input-enviar" type="submit">
+  <input id="enviarBuscar" value="Buscar" class="input-enviar" onclick="getDatos();" type="submit" />
 </form>

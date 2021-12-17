@@ -76,19 +76,19 @@ class SitioController extends Controller{
         $this->model->agregarServicios($_POST['servicios'],$idSitio);
         $this->model->agregarHorarios($_POST['Dia-Inicio'],$_POST['Dia-Fin'],$_POST['De-Inicio'],$_POST['Hasta-Fin'],$idSitio);
         $this->model->agregarUbicacion($idSitio, $_POST['DireccionSitio'],$_POST['LocalidadSitio'],$_POST['ProvinciaSitio'],$_POST['Longitud'],$_POST['Latitud']);
-        return 1;   
+            return 1;   
         }else{
             return 0;   
         }
     }
 
     public function delete(){
-        if(tienePlatos($idSitio)>0){
+        if($this->model->tienePlatos($_POST['idSitio'])>0){
             return 0;
         }else{
             $idSitio= $this->model->deleteSitio($_POST['idSitio']);
-            if ($idSitio>0){
-            return 1;   
+            if ($idSitio==1){
+                return 1;   
             }else{
                 return 0;   
             }
