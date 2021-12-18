@@ -425,20 +425,20 @@ INSERT INTO `valornutricional` (`idValor`, `idPlato`, `idInfo`, `valor`) VALUES
 --
 -- Volcado de datos para la tabla `listacaractplato`
 --
-INSERT INTO `listacaractplato`(`idPlato`, `idCaract`) VALUES 
-(1,1),
-(2,2),
-(3,1),
-(4,4),
-(5,1),
-(6,1),
-(7,5),
-(8,1),
-(9,2),
-(10,1),
-(11,3),
-(12,2),
-(13,1);
+INSERT INTO `listacaractplato`(`idListaCaract`,`idPlato`, `idCaract`) VALUES 
+(1,1,1),
+(2,2,2),
+(3,3,1),
+(4,4,4),
+(5,5,1),
+(6,6,1),
+(7,7,5),
+(8,8,1),
+(9,9,2),
+(10,10,1),
+(11,11,3),
+(12,12,2),
+(13,13,1);
 
 
 COMMIT;

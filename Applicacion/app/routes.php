@@ -1,6 +1,6 @@
  <?php
 
-    $router->get('', 'SitioController@index');
+    $router->get('inicio', 'SitioController@index');
     $router->get('contacto', 'PagesController@contacto');
     $router->post('sendConsulta', 'SitioController@sendConsulta');
 

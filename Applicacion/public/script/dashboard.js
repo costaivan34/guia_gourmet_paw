@@ -1,9 +1,9 @@
 let idSitio=0;
 
 function openModal(Sitio) {
-  idSitio=Sitio;
-  document.getElementById('id02').style.display='block';
-}
+  	idSitio=Sitio;
+	document.getElementById('id02').style.display='block';
+	}
 
 function closeModal() {
   event.preventDefault();
@@ -23,7 +23,7 @@ function eliminarSitio(){
 				mensaje.innerHTML = `<div class="alert alert-success" role="alert">
 				Sitio Eliminado</div>`; 
 				setTimeout(function(){ mensaje.innerHTML = "" }, 2500);
-       // window.location.replace("/dashboard/sitios");
+       			window.location.replace("/dashboard/sitios");
 			} else {
 				event.preventDefault();
 				const mensaje = document.getElementById("messageBox");
@@ -35,7 +35,7 @@ function eliminarSitio(){
 		}
 	}
 xmlHttpRequest.open("POST","/resto/DeleteResto",true); 
-console.log(idSitio+" asdas"+ Sitio)
+console.log(idSitio+" asdas")
 xmlHttpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xmlHttpRequest.send("idSitio="+idSitio);
 event.preventDefault();

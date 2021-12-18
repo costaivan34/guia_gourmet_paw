@@ -479,7 +479,6 @@ class QueryBuilder
             "DELETE FROM listacaractplato WHERE idPlato =$idPlato"
         );
         $statement->execute();
-
     }
     public function eliminarValorPlatos($idPlato)
     {
@@ -487,7 +486,6 @@ class QueryBuilder
             "DELETE FROM valornutricional WHERE idPlato =$idPlato"
         );
         $statement->execute();
-
     }
 
     public function eliminarImagenesPlatos($idPlato)
@@ -496,7 +494,6 @@ class QueryBuilder
             "DELETE FROM imagenesplatos WHERE idPlato =$idPlato"
         );
         $statement->execute();
-
     }
 
     public function eliminarPlatos($idPlato)
@@ -505,7 +502,6 @@ class QueryBuilder
             "DELETE FROM platos WHERE idPlato =$idPlato"
         );
         $statement->execute();
-
     }
 
     public function eliminarCaractSitio($idSitio)
@@ -514,7 +510,6 @@ class QueryBuilder
             "DELETE FROM listacaractsitio WHERE idSitio =$idSitio"
         );
         $statement->execute();
-
     }
 
     public function eliminarComentarioSitios($idSitio)
@@ -522,7 +517,6 @@ class QueryBuilder
         $statement = $this->pdo->prepare(
             "DELETE FROM comentariositios WHERE idSitio =$idSitio"
         );
-
     }
 
     public function eliminarHorario($idSitio)
@@ -531,7 +525,6 @@ class QueryBuilder
             "DELETE FROM horario WHERE idSitio =$idSitio"
         );
         $statement->execute();
-
     }
 
     public function eliminarImagenesSitios($idSitio)
@@ -540,7 +533,6 @@ class QueryBuilder
             "DELETE FROM imagenessitios WHERE idSitio =$idSitio"
         );
         $statement->execute();
-
     }
 
     public function eliminarUbicacion($idSitio)
@@ -554,7 +546,7 @@ class QueryBuilder
     public function eliminarSitio($idSitio)
     {
         $statement = $this->pdo->prepare(
-            "DELETE FROM sitio WHERE idSitio =$idSitio"
+            "DELETE FROM sitios WHERE idSitio =$idSitio"
         );
         $statement->execute();
         if ($statement->rowCount() > 0) {

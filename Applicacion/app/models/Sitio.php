@@ -135,8 +135,8 @@ class Sitio extends Model
         $this->db->eliminarComentarioSitios($idSitio);
         $this->db->eliminarImagenesSitios($idSitio);
         $this->db->eliminarUbicacion($idSitio);
-        $this->db->eliminarSitio($idSitio);
         $this->db->eliminarHorario($idSitio);
+        $this->db->eliminarSitio($idSitio);
         return 1;
     }
 
