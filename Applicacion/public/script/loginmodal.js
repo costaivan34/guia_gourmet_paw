@@ -49,7 +49,7 @@ function closeSession(){
 	xmlHttpRequest.onreadystatechange=function() {
 		if (xmlHttpRequest.readyState==4 && xmlHttpRequest.status==200) {
 		
-				window.location.replace("/");
+				window.location.replace("/inicio");
 		
 		}
 	}

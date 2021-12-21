@@ -30,9 +30,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `caracteristicaplato` (
   `idCaracteristica` int(11) NOT NULL,
-  `nombre` varchar(30) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
-  `descripcion` varchar(60) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+  `nombre` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` varchar(60) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `caracteristicaplato`
@@ -54,9 +54,9 @@ INSERT INTO `caracteristicaplato` (`idCaracteristica`, `nombre`, `descripcion`) 
 
 CREATE TABLE `caracteristicasitio` (
   `idCaracteristica` int(10) NOT NULL,
-  `nombre` varchar(30) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
-  `descripcion` varchar(60) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+  `nombre` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` varchar(60) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `caracteristicasitio`
@@ -78,8 +78,8 @@ INSERT INTO `caracteristicasitio` (`idCaracteristica`, `nombre`, `descripcion`) 
 
 CREATE TABLE `categorias` (
   `idCategoria` int(11) NOT NULL,
-  `nombre` text CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+  `nombre` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `categorias`
@@ -98,14 +98,14 @@ INSERT INTO `categorias` (`idCategoria`, `nombre`) VALUES
 CREATE TABLE `comentariositios` (
   `idComentario` int(11) NOT NULL,
   `idSitio` int(11) NOT NULL,
-  `nombre` text CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
-  `mail` text CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
-  `descripcion` text CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `nombre` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `mail` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `fecha` date NOT NULL,
   `valoracionSabor` int(11) NOT NULL,
   `valoracionPrecio` int(11) NOT NULL,
   `valoracionAmbiente` int(11) NOT NULL
-)  ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+)  ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 
 --
@@ -124,11 +124,11 @@ DELIMITER ;
 
 CREATE TABLE `consultas` (
   `idConsulta` int(11) NOT NULL,
-  `mail` text COLLATE latin1_spanish_ci NOT NULL,
-  `nombre` text COLLATE latin1_spanish_ci NOT NULL,
-  `apellido` text COLLATE latin1_spanish_ci NOT NULL,
-  `mensaje` text COLLATE latin1_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+  `mail` text COLLATE utf8_spanish_ci NOT NULL,
+  `nombre` text COLLATE utf8_spanish_ci NOT NULL,
+  `apellido` text COLLATE utf8_spanish_ci NOT NULL,
+  `mensaje` text COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -145,7 +145,7 @@ CREATE TABLE `horario` (
   `idDia` int(11) NOT NULL,
   `HDesde` int(11) NOT NULL,
   `HHasta` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 
 
@@ -158,8 +158,8 @@ CREATE TABLE `horario` (
 CREATE TABLE `imagenesplatos` (
   `idImagen` bigint(20) UNSIGNED NOT NULL,
   `idPlato` int(11) NOT NULL,
-  `path` text COLLATE latin1_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+  `path` text COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `imagenesplatos`
@@ -174,8 +174,8 @@ CREATE TABLE `imagenesplatos` (
 CREATE TABLE `imagenessitios` (
   `idImagen` bigint(20) UNSIGNED NOT NULL,
   `idSitio` int(11) NOT NULL,
-  `path` text COLLATE latin1_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+  `path` text COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 --
 -- Volcado de datos para la tabla `imagenessitios`
 --
@@ -190,8 +190,8 @@ CREATE TABLE `imagenessitios` (
 
 CREATE TABLE `infonutricional` (
   `idInfo` int(11) NOT NULL,
-  `nombre` text CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+  `nombre` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 -- --------------------------------------------------------
 --
 -- Volcado de datos para la tabla `infonutricional`
@@ -215,7 +215,7 @@ CREATE TABLE `listacaractplato` (
   `idListaCaract` bigint(20) UNSIGNED NOT NULL,
   `idPlato` int(11) NOT NULL,
   `idCaract` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -227,7 +227,7 @@ CREATE TABLE `listacaractsitio` (
   `idListaCaract` bigint(20) UNSIGNED NOT NULL,
   `idSitio` int(11) NOT NULL,
   `idCaract` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 
 -- --------------------------------------------------------
@@ -238,11 +238,11 @@ CREATE TABLE `listacaractsitio` (
 
 CREATE TABLE `platos` (
   `idPlato` int(11) NOT NULL,
-  `nombre` text COLLATE latin1_spanish_ci NOT NULL,
-  `descripcion` text COLLATE latin1_spanish_ci NOT NULL,
-  `precio` text COLLATE latin1_spanish_ci NOT NULL,
+  `nombre` text COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` text COLLATE utf8_spanish_ci NOT NULL,
+  `precio` text COLLATE utf8_spanish_ci NOT NULL,
   `idSitio` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -252,8 +252,8 @@ CREATE TABLE `platos` (
 
 CREATE TABLE `semanasdias` (
   `idDia` int(11) NOT NULL,
-  `nombre` text COLLATE latin1_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+  `nombre` text COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `semanasdias`
@@ -276,16 +276,16 @@ INSERT INTO `semanasdias` (`idDia`, `nombre`) VALUES
 
 CREATE TABLE `sitios` (
   `idSitio` int(11) NOT NULL,
-  `nombre` text COLLATE latin1_spanish_ci NOT NULL,
-  `descripcion` text COLLATE latin1_spanish_ci NOT NULL,
-  `telefono` text COLLATE latin1_spanish_ci NOT NULL,
-  `sitioWeb` text COLLATE latin1_spanish_ci NOT NULL,
+  `nombre` text COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` text COLLATE utf8_spanish_ci NOT NULL,
+  `telefono` text COLLATE utf8_spanish_ci NOT NULL,
+  `sitioWeb` text COLLATE utf8_spanish_ci NOT NULL,
   `valoracionPrecio` int(11) ,
   `valoracionAmbiente` int(11) ,
   `valoracionSabor` int(11) ,
   `idUsuario` int(11) NOT NULL,
   `idCategoria` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -296,12 +296,12 @@ CREATE TABLE `sitios` (
 CREATE TABLE `ubicacion` (
   `idUbicacion` int(11) NOT NULL,
   `idSitio` int(11) NOT NULL,
-  `direccion` text COLLATE latin1_spanish_ci NOT NULL,
-  `ciudad` text COLLATE latin1_spanish_ci NOT NULL,
-  `provincia` text COLLATE latin1_spanish_ci NOT NULL,
-  `X` text COLLATE latin1_spanish_ci NOT NULL,
-  `Y` text COLLATE latin1_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+  `direccion` text COLLATE utf8_spanish_ci NOT NULL,
+  `ciudad` text COLLATE utf8_spanish_ci NOT NULL,
+  `provincia` text COLLATE utf8_spanish_ci NOT NULL,
+  `X` text COLLATE utf8_spanish_ci NOT NULL,
+  `Y` text COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 
 -- --------------------------------------------------------
@@ -312,16 +312,16 @@ CREATE TABLE `ubicacion` (
 
 CREATE TABLE `usuarios` (
   `idUsuario` int(11) NOT NULL,
-  `mail` varchar(60) COLLATE latin1_spanish_ci NOT NULL UNIQUE,
-  `nombreUsuario` text COLLATE latin1_spanish_ci NOT NULL,
-  `nombre` text COLLATE latin1_spanish_ci NOT NULL,
-  `apellido` text COLLATE latin1_spanish_ci NOT NULL,
-  `direccion` text COLLATE latin1_spanish_ci ,
-  `pais` text COLLATE latin1_spanish_ci NOT NULL,
-  `telefono` text COLLATE latin1_spanish_ci NOT NULL,
-  `password` text COLLATE latin1_spanish_ci NOT NULL,
-  `fotoPerfil` text COLLATE latin1_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+  `mail` varchar(60) COLLATE utf8_spanish_ci NOT NULL UNIQUE,
+  `nombreUsuario` text COLLATE utf8_spanish_ci NOT NULL,
+  `nombre` text COLLATE utf8_spanish_ci NOT NULL,
+  `apellido` text COLLATE utf8_spanish_ci NOT NULL,
+  `direccion` text COLLATE utf8_spanish_ci ,
+  `pais` text COLLATE utf8_spanish_ci NOT NULL,
+  `telefono` text COLLATE utf8_spanish_ci NOT NULL,
+  `password` text COLLATE utf8_spanish_ci NOT NULL,
+  `fotoPerfil` text COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -334,7 +334,7 @@ CREATE TABLE `valornutricional` (
   `idPlato` int(11) NOT NULL,
   `idInfo` int(11) NOT NULL,
   `valor` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 
 --
@@ -490,7 +490,7 @@ ALTER TABLE `comentariositios`
 -- AUTO_INCREMENT de la tabla `consultas`
 --
 ALTER TABLE `consultas`
-  MODIFY `idConsulta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idConsulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `horario`
