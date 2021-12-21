@@ -19,6 +19,6 @@ cd Applicacion/
 php -S localhost:8888
 ```
 
-Luego ingresar a http://localhost:8888
+Luego ingresar a http://localhost:8888/inicio
 
 
