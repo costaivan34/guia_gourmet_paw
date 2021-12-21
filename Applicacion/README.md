@@ -21,4 +21,6 @@ php -S localhost:8888
 
 Luego ingresar a http://localhost:8888/inicio
 
+### Online
 
+Ingresar a http://laguiagourmet.freecluster.eu/index.php/inicio
