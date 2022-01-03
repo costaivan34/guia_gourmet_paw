@@ -74,6 +74,6 @@ Información que debe persistir el sitio:
 
 ![Home](/Diseño/Plato-Modal.png)
 
-#### Búsqueda Sitio Gastronómicoss
+#### Búsqueda Sitio Gastronómicos
 
 ![Home](/Diseño/Buscador.png)
