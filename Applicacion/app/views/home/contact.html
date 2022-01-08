@@ -4,19 +4,14 @@
 <script src="/public/script/enviarconsulta.js"></script>
 {% endblock %} {% block main %}
 
-<div id="topof" class="contenedor formulario">
-  <div class="title">
-    <img class="imagen-contacto" src="/public/res/contacto.png" alt="imagen de contacto" />
-    <h1>¿Tenes Alguna Consulta?</h1>
-    <p>Comunicate con nosotros</p>
-  </div>
+<section id="topof" class="contenedor formulario">
+  <section class="title">
+    <img  class="imagen-contacto" src="/public/res/contacto.png" alt="imagen de contacto" />
+    <h3 class="title">¿Tenes Alguna Consulta?</h3>
+    <p class="title">Comunicate con nosotros</p>
+  </section>
   <div id="mensaje"></div>
-  <div class="row">
-    <div class="column">
-   
-    </div>
-    <div class="column">
-      
+    <section class="column">
       <form id="contact-form">
         <label for="fname">Nombre*</label>
         <input
@@ -48,7 +43,6 @@
           id="subject"
           name="subject"
           placeholder="Escriba algo"
-          
           required
         ></textarea>
         <input
@@ -58,7 +52,6 @@
           onclick="guardarConsulta();"
         />
       </form>
-    </div>
-  </div>
-</div>
+    </section>
+</section>
 {% endblock %}

@@ -117,10 +117,26 @@ function cargarMarcadores(currentX, currentY) {
       console.log(
         haversine_distance(currentX, currentY, -59.2805014, -35.0047812),
       )*/
-      for (cat of respuesta) {
-        if ( //si esta cerca mostrar
+      for (cat of respuesta) {map.getBounds();
+      //  const ll = new mapboxgl.LngLat(currentX, currentY);
+      
+      const bounds = map.getBounds();
+      console.log(bounds._ne.lng);
+      console.log(bounds._sw);
+        const ll = new mapboxgl.LngLat(cat.Y, cat.X);
+        const lx= new mapboxgl.LngLat(currentX,currentY);
+        const ll1 = new mapboxgl.LngLat(bounds._ne.lng, bounds._ne.lat);
+        const ll2 = new mapboxgl.LngLat(bounds._sw.lng, bounds._sw.lat);
+        console.log("distancia del centro al borde:"+lx.distanceTo(ll1))
+        console.log("distancia del centro a sitio:"+lx.distanceTo(ll))
+      /*  if ( //si esta cerca mostrar
           haversine_distance(currentX, currentY, cat.Y, cat.X) <
           0.5748535276915911
+        ) {
+          agregarMarcador(cat.idSitio, cat.nombre, cat.path, cat.Y, cat.X)
+        }*/
+        if ( //si esta cerca mostrar
+          ( lx.distanceTo(ll1) > lx.distanceTo(ll)) 
         ) {
           agregarMarcador(cat.idSitio, cat.nombre, cat.path, cat.Y, cat.X)
         }
@@ -140,13 +156,23 @@ function loadmapa(longitud, latitud) {
     center: [longitud, latitud],
     zoom:14.5 ,
   })
+  map.addControl(
+    new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken,
+    mapboxgl: mapboxgl
+    })
+    );
   map.addControl(new mapboxgl.NavigationControl())
   map.addControl(new mapboxgl.FullscreenControl())
+  map.addControl(new mapboxgl.GeolocateControl())
+ 
 
+  
   map.on('dragend', () => {
+
     const { lng, lat } = map.getCenter()
     borrarMarcadores();
-    marcarPosition(lng, lat)
+    marcarPosition(currentX, currentY)
     cargarMarcadores(lng, lat)
   })
 }

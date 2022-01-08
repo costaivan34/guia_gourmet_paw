@@ -2,17 +2,17 @@
 <link rel="stylesheet" href="/public/css/near-sitios.css" />
 <script src="/public/script/mapa.js"></script>
 
-<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
-<link
-  href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css"
-  rel="stylesheet"
-/>
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css"> 
+
 {% endblock %} {% block title %}Lugares cerca de mi{% endblock %} {% block main
 %}
 
   <div id="messageBox"></div>
   <section class="contenedor" id="resultado-mapa">
-    <div id="mapa">
+    <section id="mapa">
       <script>
         var d = '{{M}}'
         var latitud = '{{datos.latitud}}'
@@ -20,7 +20,7 @@
         var ciudad = '{{datos.ciudad}}'
         var region = '{{datos.region}}'
       </script>
-    </div>
+    </section>
   </section>
 
 

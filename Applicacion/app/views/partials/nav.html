@@ -10,32 +10,27 @@
   <li><a id="nombreUsuario" onclick="openLoginModal();">Ingresar</a></li>
   {% else %}
   <li><a id="nombreUsuario" href="/dashboard/account">{{datos.user}}</a>
-    <i class="fa fa-sign-out logout-button" aria-hidden="true" onclick="closeSession();"></i>
+    <i class="fa-2x fa fa-sign-out logout-button icons" aria-hidden="true" onclick="closeSession();"></i>
   </li>
   {% endif %}
-
 </ul>
 
 
 <!-- The Modal for login -->
-<div id="id01" class="modal">
-
+<aside id="id01" class="modal">
   <!-- Modal Content for login-->
   <form class=" animate contenedor formulario" method="POST" id="formLogin">
-    <div class="imgcontainer">
+    <section class="imgcontainer">
       <span onclick="closeLoginModal()" class="close" title="Close Modal">&times;</span>
       <img src="/public/res/avatar-2.png" alt="Avatar" class="avatar">
       <h3 class="title" id="Mensaje">ACCEDE A TU CUENTA</h3>
       <div id="LoginMessageBox"></div>
       <input class="caja-login" type="text" placeholder="&#xf0e; Correo Electronico" name="userName" id="userName" required>
-      <input class="caja-login" type="password" placeholder="&#xf084; Contraseña" name="password" id="password"
-        required>
-
+      <input class="caja-login" type="password" placeholder="&#xf084; Contraseña" name="password" id="password"  required>
       <input id="enviar" value="Ingresar"  onclick="callLogin();" class="input-enviar" type="submit">
-
       <span class="psw"><a href="#">¿Has olvidado tu contraseña?</a></span>
       <a class=" " href="/user/new">Registrate</a>
-    </div>
+    </section>
   </form>
-</div>
+</aside>
 {% endblock %}

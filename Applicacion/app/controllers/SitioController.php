@@ -69,6 +69,16 @@ class SitioController extends Controller{
    }
 
     public function store(){
+       // $this->model->insertarSitio($_POST, $_FILES);
+       $sitio = [ 
+        'idSitio' => $_POST['sitio'],
+        'nombre' => $_POST['nombre'],
+        'descripcion' => $_POST['texto'],
+        'telefono' => $_POST['precio'],
+        'sitioWeb' => $_POST['mail'],
+        'idUsuario' => $_POST['precio'],
+        'idCategoria' => $_POST['sabor'],
+    ];
         $idSitio= $this->model->agregarSitio($_POST['nameSitio'],$_POST['subject'], $_POST['TelefonoSitio'],
         $_POST['MailSitio'],$_POST["username"],1);
         if ($idSitio>0){

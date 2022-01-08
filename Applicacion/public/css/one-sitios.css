@@ -1,14 +1,17 @@
 /* Estilo de la pestaña */
 .tab {
   margin-left: 1vw;
-  margin-bottom: 1vh;
-  background-color: var(--main-color);
+  background-color: var(--back-color);
   padding: 1vw 0 0 1vw;
-  padding-bottom: 0vw;
   overflow: hidden;
   border-top-left-radius: 2vw;
   border-top-right-radius: 2vw;
 }
+
+.tab-title{
+  color:  var(--assent-color);
+}
+
 /* Estilo de la solapa de la pestaña */
 .tablinks {
   background-color: inherit;
@@ -23,27 +26,40 @@
   border: none;
 }
 
+.tablinks:hover .tab-title{
+  color: var(--main-color);
+}
+
 .tablinks:hover {
-  background-color: #f59287;
+  background-color: var(--assent-color);
 }
 
 .tablinks.active {
-  background-color: var(--back-color);
+  background-color: var(--main-color);
 }
 
 .tablinks.active:hover {
-  background-color: var(--back-color);
-  color: #000;
+  color: var(--assent-color);
+  background-color: var(--main-color);
+  cursor: default;
+  
+}
+
+.tablinks.active:hover .tab-title{
+  color: var(--assent-color);
   cursor: default;
 }
 
+
 .tabcontent {
   display: none;
-  background-color: rgba(245, 242, 233, 0.8);
+  background-color: var(--main-color);
   border-top: none;
   padding: 1vw;
   margin-bottom: 1vh;
   padding-top: 2vh;
+  border-top-left-radius: 1vw;
+  border-top-right-radius: 1vw;
 }
 
 .tabcontent .active {
@@ -52,6 +68,27 @@
 
 .tabcontent .noactive {
   display: none;
+}
+
+.tabcontent .tarjeta{
+  background-color: var(--back-color);
+  box-shadow: 0 4px 8px 0 var(--back-color);
+}
+.fondo{
+  background-color: var(--main-color);
+  padding: 2vw;
+  padding-bottom: 4vw;
+}
+
+.tabcontent .tarjeta:hover {
+  background-color: var(--assent-color);
+  box-shadow: 0 4px 8px 0 var(--assent-color);
+}
+
+
+.fa-search-plus{
+cursor: pointer;
+color: var(--main-color);
 }
 
 .parrafo {
@@ -67,13 +104,13 @@ dl.detalles {
   padding-right: 2.5%;
 }
 dl.detalles dt {
-  width: 2px;
+  width: 15px;
   padding-top: 20px;
   padding-bottom: 20px;
-  flex: 0 0 25%;
+  flex: 0 0 40%;
   text-overflow: ellipsis;
   overflow: hidden;
-  border-bottom: 1px solid #e7cf7f;
+  border-bottom: 1px solid var(--main-color);
   /* font-family: 'Abril Fatface', cursive;*/
 }
 
@@ -83,8 +120,8 @@ dl.detalles dd {
   text-align: left;
   text-overflow: ellipsis;
   overflow: hidden;
-  flex: 0 0 75%;
-  border-bottom: 1px solid #e7cf7f;
+  flex: 0 0 60%;
+  border-bottom: 1px solid var(--main-color);
 }
 
 .horarios dl.detalles {
@@ -103,7 +140,7 @@ dl.detalles dd {
   flex: 0 0 10vw;
   text-overflow: ellipsis;
   overflow: hidden;
-  border-bottom: 1px solid #e7cf7f;
+  border-bottom: 1px solid var(--back-color);
 }
 
 .horarios dl.detalles dd {
@@ -113,7 +150,7 @@ dl.detalles dd {
   text-overflow: ellipsis;
   overflow: hidden;
   flex: 0 0 20vw;
-  border-bottom: 1px solid #e7cf7f;
+  border-bottom: 1px solid var(--back-color);
   display: flex;
 }
 
@@ -152,6 +189,20 @@ dl.detalles dd {
   padding-bottom: 80vh;
 }
 
+.infoBasica-plato,.plato-full{
+background-color: var(--main-color);
+}
+
+
+
+.plato-full .close{
+  color: var(--back-color);
+  }
+
+  .plato-full .close:hover{
+    color: var(--assent-color);
+    }
+
 .contiene {
   background-color: var(--back-color);
   width: 20vw;
@@ -174,7 +225,7 @@ dl.detalles dd {
 
 .comentario {
   overflow: auto;
-  border: 1px solid #e7cf7f;
+  border: 1px solid var(--main-color);
   width: 100%;
   background: #f5f2e9;
   margin: 2% 0 25px;
@@ -203,6 +254,7 @@ dl.detalles dd {
 
 .comentario .title {
   float: right;
+  color: var(--back-color);
 }
 
 .valoracion {
@@ -232,7 +284,6 @@ dl.detalles dd {
 .deja-comentario textarea {
   width: 92%;
   padding: 8px;
-  border: 1px solid #ccc;
   margin-top: 6px;
   margin-bottom: 16px;
   resize: vertical;
@@ -240,20 +291,20 @@ dl.detalles dd {
 
 .deja-comentario input[type='submit'] {
   /* font-family: 'Hanalei Fill', cursive;*/
-  width: 40%;
-  height: 10%;
-  border: none;
-  color: black;
-  padding-top: 20%;
-  padding: 16px 32px;
-  text-decoration: none;
-  margin: 4px 2px;
-  cursor: pointer;
-  background-color: #e7cf7f;
+  background-color: var(--back-color);
+  width: 71vw;
+  padding: 1vw;
+  margin: 0.5vh 0 1vh 1vw;
+  resize: vertical;
 }
 
+
+.deja-comentario input[type='submit']:hover {
+  /* font-family: 'Hanalei Fill', cursive;*/
+  background-color: var(--assent-color);
+}
 .deja-comentario {
-  border: 1px solid #e7cf7f;
+  border: 1px solid var(--back-color);
   padding: 3%;
 }
 

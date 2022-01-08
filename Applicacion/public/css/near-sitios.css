@@ -2,7 +2,7 @@
 #mapa {
   height:100%;
   width:100%;
-  min-height: 70vh;
+  min-height: 80vh;
  
 }
 
@@ -37,11 +37,11 @@
 
 #mapa .mapboxgl-popup-content {
   border-radius: 10%;
-  background-color: #E7CF7F;
+  background-color: var(--main-color);
 }
 
 #mapa .mapboxgl-popup-tip{
-  border-top-color: #E7CF7F;
+  border-top-color: var(--main-color);
 }
 
 #mapa .mapboxgl-popup-close-button{

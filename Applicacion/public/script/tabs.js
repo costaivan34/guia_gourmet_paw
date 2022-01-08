@@ -1,10 +1,4 @@
-/*
-function loadmapa(longitud,latitud) {
-  mapboxgl.accessToken = 'pk.eyJ1IjoiY29zdGFpdmFuMzQiLCJhIjoiY2treDFvM25yMTd1ZjJ4anVldTA3ZHFpYiJ9.EsQJxJQTd6YbOHyUWcftnw';
-  map = new mapboxgl.Map({container: 'mapa',style: 'mapbox://styles/mapbox/streets-v11',center: [longitud,latitud],zoom: 15 });
-  map.addControl(new mapboxgl.NavigationControl());
-  var marker = new mapboxgl.Marker().setLngLat([longitud, latitud]).addTo(map);
-}*/
+
 
 function validarDatos(nombre, mail, texto) {
   emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i
@@ -147,9 +141,11 @@ function loadPlatos(pagina, sitio) {
 }
 
 function agregarPlato(imagen, nombre, id) {
-  var DivPlato = document.createElement('div')
+  var li = document.createElement('li')
+  li.className = 'fila'
+  var DivPlato = document.createElement('section')
   DivPlato.className = 'plato'
-  var BotonPlato = document.createElement('div')
+  var BotonPlato = document.createElement('section')
   BotonPlato.id = 'boton-modal'
   BotonPlato.className = 'tarjeta'
   var SeccionFoto = document.createElement('section')
@@ -173,7 +169,8 @@ function agregarPlato(imagen, nombre, id) {
     idSitio +
     ")' ></i>"
   DivPlato.appendChild(BotonPlato)
-  document.getElementById('columna').appendChild(DivPlato)
+  li.appendChild(DivPlato)
+  document.getElementById('columna').appendChild(li)
 }
 
 function getPlatos(pagina, sitio) {
@@ -317,30 +314,7 @@ function getComentarios(pagina, sitio) {
   event.preventDefault()
 }
 
-function getInfoPlato(plato, sitio) {
-  var xmlHttpRequest = new XMLHttpRequest()
-  xmlHttpRequest.onreadystatechange = function () {
-    if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
-      var respuesta = JSON.parse(xmlHttpRequest.responseText)
-      console.log(respuesta)
-      document.getElementById('plato').style.display = 'block'
-      /* var elemento  = document.getElementById("lista-coment");
-      while (elemento.firstChild) {
-        elemento.removeChild(elemento.firstChild);
-      }
-      console.log(respuesta);
-      for (cat of respuesta) {
-        var titulo = document.getElementById("titulo");
-        var textNode = document.createTextNode(cat.nombre);
-        titulo.appendChild(textNode);
-   
-      }*/
-    }
-  }
-  xmlHttpRequest.open('GET', 'plato?Sitio=' + sitio + '&Plato=' + plato, true)
-  xmlHttpRequest.send()
-  event.preventDefault()
-}
+
 
 function setPlatoModal(respuesta, info, img, lista, caract) {
   document.getElementById('plato').style.display = 'block'
@@ -362,11 +336,13 @@ function setPlatoModal(respuesta, info, img, lista, caract) {
   Proteina.innerHTML = lista[4].valor
   Grasas.innerHTML = lista[2].valor
   Sodio.innerHTML = lista[5].valor
-  for (c in caract) {
+  console.log(caract)
+ for (c in caract) {
     console.log(caract[c].nombre)
     if (caract[c].nombre == 'Picante') {
       var Picante = document.getElementById('Picante')
       Picante.src = '/public/svg/chile (1).svg'
+      title="Agregar nuevo Sitio"
     } else {
       var Picante = document.getElementById('Picante')
       Picante.src = '/public/svg/chile.svg'
@@ -394,7 +370,6 @@ function setPlatoModal(respuesta, info, img, lista, caract) {
     }
     if (caract[c].nombre == 'Azucar') {
       var Azucar = document.getElementById('Azucar')
-
       Azucar.src = '/public/svg/sugar (1).svg'
     } else {
       var Azucar = document.getElementById('Azucar')
@@ -402,7 +377,6 @@ function setPlatoModal(respuesta, info, img, lista, caract) {
     }
     if (caract[c].nombre == 'Sal') {
       var Sal = document.getElementById('Sal')
-
       Sal.src = '/public/svg/dietetico (1).svg'
     } else {
       var Sal = document.getElementById('Sal')

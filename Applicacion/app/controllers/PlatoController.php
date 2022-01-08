@@ -34,8 +34,9 @@ class PlatoController extends Controller{
         if (isset($_SESSION["user"])){
             $datos["user"] =  $_SESSION["user"];
         }
-        $datos["idSitio"] = htmlspecialchars($_GET['Sitio']);
-        $datos["NameSitio"] = htmlspecialchars($_GET['Name']);
+        $data = $this->model->getNombreSitios(htmlspecialchars($_GET['Sitio']));
+        $datos['idSitio'] = $data[0]->idSitio;
+        $datos['NameSitio'] = $data[0]->nombre;
         return view('/sitios/NewPlatos', compact('datos'));
     }
 

@@ -10,47 +10,50 @@
 
 {% block main %}
 
-
-<div class="side-bar">
+<section class="side-bar">
   {{ include('partials/sidebar-dashboard.html') }}
 
-</div>
-<div id="contact-form" class="contenedor  dash">
+</section>
+<section id="contact-form" class="contenedor  dash">
   <h3 class="title"> Mis Restaurantes</h3>
-  <div class="fila">
-    <div id="columna">
-      {% for a in datos.sitios %}
-      <div class="tarjeta">
+  <ul id="columna">
+    {% for a in datos.sitios %}
+    <li class="fila">
+      <article class="tarjeta">
         <img src="{{ a.path }}" alt="{{ a.nombre }}">
         <a href="/resto?Sitio={{ a.idSitio|url_encode(true) }}">
           <h3 class="title">{{ a.nombre }}</h3>
         </a>
-        <i class="fa-2x fa fa-trash icons" onclick="openModal('{{ a.idSitio }}');"></i>
-        <a href="/dashboard/plato?Sitio={{ a.idSitio|url_encode(true) }}&Name={{ a.nombre |url_encode(true)}}"><i
-            class="fa-2x fa fa-plus icons" ></i> </a>
-      </div>
+        <i class="fa-2x fa fa-trash icons" title="Eliminar Sitio" onclick="openModal('{{ a.idSitio }}');"></i>
+        <a href="/dashboard/plato?Sitio={{ a.idSitio|url_encode(true) }}"><i
+            title="Agregar nuevo Plato" class="fa-2x fa fa-plus icons"></i> </a>
+      </article>
+    </li>
       {% endfor %}
-      <div class="tarjeta">
-        <div class="plus-text">
-          <a href="/resto/new"><i class=" fa-5x fa fa-plus-circle icons"></i> </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div id="id02" class="modal delete formulario">
+      <li class="fila">
+      <section class="tarjeta">
+        <section class="plus-text">
+          <a href="/resto/new"><i title="Agregar nuevo Sitio" class=" fa-5x fa fa-plus-circle icons"></i> </a>
+        </section>
+      </section>
+    </li>
+  </ul>
 
+</section>
+
+
+<aside id="id02" class="modal delete formulario">
   <!-- Modal Content for delete-->
-  <form class="contenedor animate" enctype="multipart/form-data" method="post" id="formDelete">
-    <div class="imgcontainer">
+  <section class="imgcontainer">
+    <form class="contenedor animate" enctype="multipart/form-data" method="post" id="formDelete">
       <h3 class="title" id="MensajeAtencion">ATENCIÓN</h3>
       <span onclick="closeModal()" class="close" title="Close Modal">&times;</span>
       <div id="messageBox"></div>
       <p class="title"> ¿Esta seguro de eliminar el sitio?</p>
-      <button id="eliminar_sitio" class="input-enviar" onclick="eliminarSitio();" >Aceptar</button>
-
+      <button id="eliminar_sitio" class="input-enviar" onclick="eliminarSitio();">Aceptar</button>
       <button onclick="closeModal();">Cancelar</button>
-  </form>
-</div>
+    </form>
+  </section>
+</aside>
 
 {% endblock %}

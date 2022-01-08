@@ -18,8 +18,7 @@
   </div>
 </div>
 <div id="contact-form" class="contenedor dash">
-  <h3 class="title"id="idSitio">{{ datos.idSitio }} </h3>
-  <h3 class="title" id="nameSitio">{{ datos.NameSitio }}</h3>
+  <h3 class="title"id="idSitio">{{ datos.idSitio }}-{{ datos.NameSitio }}</h3>
   <h3 class="title"> PLATOS:</h3>
   <div class="fila">
     <div id="columna">
@@ -27,40 +26,31 @@
       <div class="tarjeta">
         <img src="{{ a.path }}" alt="{{ a.nombre }}">
         <h3 class="title">{{ a.nombre }}</h3>
-        <i class=" fa-2x fa fa-trash icons" onclick="openModal('{{ a.idPlato }}');"></i>
+        <i class=" fa-2x fa fa-trash icons" title="Eliminar Plato" onclick="openModal('{{ a.idPlato }}');"></i>
       </div>
       {% endfor %}
       <div class="tarjeta">
         <div class="plus-text">
-          <a href="/plato/new?Sitio={{ datos.idSitio|url_encode(true) }}&Name={{ datos.NameSitio|url_encode(true) }}"><i
-              class=" fa-3x fa fa-plus-circle icons"></i> </a>
+          <a href="/plato/new?Sitio={{ datos.idSitio|url_encode(true) }}"><i
+              class=" fa-3x fa fa-plus-circle icons" title="Agregar nuevo Plato"></i> </a>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-
-
-
-<div id="id02" class="modal delete">
-
-  <!-- Modal Content for login-->
-  <form class="contenedor animate" method="POST" id="formDelete">
-    <div class="imgcontainer">
-      <h3  class="title" id="MensajeAtencion">ATENCIÓN</h3>
+<aside id="id02" class="modal delete formulario">
+  <!-- Modal Content for delete-->
+  <section class="imgcontainer">
+    <form class="contenedor animate" enctype="multipart/form-data" method="post" id="formDelete">
+      <h3 class="title" id="MensajeAtencion">ATENCIÓN</h3>
       <span onclick="closeModal()" class="close" title="Close Modal">&times;</span>
-    </div>
-    <div class="container">
       <div id="messageBox"></div>
-      <p  class="title"> ¿Esta seguro de eliminar el plato?</p>
-      <button class="input-enviar" onclick="eliminarPlatos();" type="submit">Aceptar</button>
-    </div>
-    <button onclick="closeModal();">Cancelar</button>
-  </form>
-</div>
-
-
-
+      <p class="title"> ¿Esta seguro de eliminar el plato?</p>
+      <button id="eliminar_sitio" class="input-enviar" onclick="eliminarPlatos();">Aceptar</button>
+      <button onclick="closeModal();">Cancelar</button>
+    </form>
+  </section>
+</aside>
 
 {% endblock %}

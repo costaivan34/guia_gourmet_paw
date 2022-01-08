@@ -1,39 +1,37 @@
 <section class=" sidebar-dash contenedor">
-  <div class="user-Profile">
-    <div class="User-Alias">
-      <h3 class="title">{{datos.data[0].nombreUsuario}}</h3>
-    </div>
+  <section class="user-Profile">
+    <h3 class="title User-Alias">{{datos.data[0].nombreUsuario}}</h3>
     <img class="User-Img" src="{{datos.data[0].fotoPerfil}}" alt="imagen de perfil del usuario" />
-    
-    <div class="User-LastName"> 
-      <h4>{{datos.data[0].nombre}} {{datos.data[0].apellido}}</h4>
-    </div>
-    <div class="User-Email">
-      <h5 id="User-mail">{{datos.data[0].mail}}</h5>
-    </div>
-  </div>
-
-  <a class="settings-menu-link active" title="Configuración">
-    <div class="icon-font-component settings-icon">
-      <h3 class="title settings-link-name">Configuración</h3>
-    </div>
-  </a>
-  <a href="/dashboard/account" class="settings-menu-link " title="Configuración">
-    <div class="icon-font-component settings-icon">
-      <span class="fa fa-2x fa-user"></span>
-      <span class="settings-link-name">Cuenta</span>
-    </div>
-  </a>
-  <a href="/dashboard/password" class="settings-menu-link" title="Configuración">
-    <div class="icon-font-component settings-icon">
-      <span class="fa fa-2x fa-shield"></span>
-      <span class="settings-link-name">Seguridad</span>
-    </div>
-  </a>
-  <a href="/dashboard/sitios" class="settings-menu-link" title="Configuración">
-    <div class="icon-font-component settings-icon">
-      <span class="fa fa-2x fa-cutlery"></span>
-      <span class="settings-link-name">Sitios</span>
-    </div>
-  </a>
+    <h4 class="User-LastName title">{{datos.data[0].nombre}} {{datos.data[0].apellido}}</h4>
+    <h5 class="User-Email title" id="User-mail">{{datos.data[0].mail}}</h5>
+  </section>
+  <section>
+    <h3 class="title">Configuración</h3>
+    <ul>
+      <li>
+        <a href="/dashboard/account" class="settings-menu-link " title="Configuración">
+          <div class="icon-font-component settings-icon">
+            <span class="fa fa-2x fa-user"></span>
+            <span class="settings-link-name">Cuenta</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/dashboard/password" class="settings-menu-link" title="Configuración">
+          <div class="icon-font-component settings-icon">
+            <span class="fa fa-2x fa-shield"></span>
+            <span class="settings-link-name">Seguridad</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/dashboard/sitios" class="settings-menu-link" title="Configuración">
+          <div class="icon-font-component settings-icon">
+            <span class="fa fa-2x fa-cutlery"></span>
+            <span class="settings-link-name">Sitios</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </section>
 </section>

@@ -1,6 +1,15 @@
 {% extends "base.html" %} {% block head %} {{ parent() }}
 
 <script src="/public/script/formNewSitio.js"></script>
+
+<link rel="stylesheet" href="/public/css/near-sitios.css" />
+<script src="/public/script/mapa.js"></script>
+
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css"> 
+
 {% endblock %} {% block title %}NUEVO SITIO{% endblock %} {% block main %}
 <form
   class="contenedor formulario"
@@ -23,13 +32,14 @@
       value=""
       placeholder="Nombre de Sitio"
       required
+      onfocusout="validarDatos('nameSitio');"
     />
     <label for="subject">Descripcion:*</label>
     <textarea
       id="subject"
       name="subject"
       placeholder="Escriba algo"
-     
+      onfocusout="validarDatos('subject');"
       required
     ></textarea>
   </fieldset>
@@ -44,6 +54,18 @@
       name="DireccionSitio"
       value=""
       placeholder="Direccion"
+      onfocusout="validarDatos('DireccionSitio');"
+      required
+    />
+    <label for="LocalidadSitio">Localidad:</label>
+    <input
+      class="caja-texto"
+      id="LocalidadSitio"
+      type="text"
+      name="LocalidadSitio"
+      value=""
+      placeholder="Localidad"
+      onfocusout="validarDatos('LocalidadSitio');"
       required
     />
     <label for="ProvinciaSitio">Provincia:</label>
@@ -56,17 +78,7 @@
       placeholder="Provincia"
       required
     />
-    <label for="LocalidadSitio">Localidad:</label>
-    <input
-      class="caja-texto"
-      id="LocalidadSitio"
-      type="text"
-      name="LocalidadSitio"
-      value=""
-      placeholder="Localidad"
-      required
-    />
-    <label for="MailSitio"> eMaail:</label>
+    <label for="MailSitio"> Correo Electrónico:</label>
     <input
       class="caja-texto"
       id="MailSitio"
@@ -75,8 +87,9 @@
       value=""
       placeholder="Mail"
       required
+      onfocusout="validarDatos('MailSitio');"
     />
-    <label for="TelefonoSitio">Telefono:</label>
+    <label for="TelefonoSitio">Teléfono:</label>
     <input
       class="caja-texto"
       id="TelefonoSitio"
@@ -85,30 +98,51 @@
       value=""
       placeholder="Telefono"
       required
+      onfocusout="validarDatos('TelefonoSitio');"
     />
   </fieldset>
   <fieldset>
     <legend class="title">Localización</legend>
-    <p class="heading">Ingrese las coordenadas geograficas del lugar:</p>
+    <section class="contenedor" id="resultado-mapa">
+      <section id="mapa">
+        <script>
+          var d = '{{M}}'
+          var latitud = '{{datos.latitud}}'
+          var longitud = '{{datos.longitud}}'
+          var ciudad = '{{datos.ciudad}}'
+          var region = '{{datos.region}}'
+        </script>
+      </section>
+    </section>
+    <p class="title">Las coordenadas geograficas del lugar:</p>
 
     <label for="Longitud">X(Longitud):</label>
     <input
       id="Longitud"
       type="number"
       name="Longitud"
-      value=""
+      value="0"
       placeholder="Longitud"
-      required
+      disabled
     />
     <label for="Latitud">Y(Latitud):</label>
     <input
       id="Latitud"
       type="number"
       name="Latitud"
-      value=""
+      value="0"
       placeholder="Latitud"
-      required
+      disabled
     />
+    <input
+    class=""
+    type="button"
+    value="Buscar Coordenadas"
+    onclick="buscarcoord();"
+    name="Enviar"
+  />
+
+
   </fieldset>
 
   <fieldset>
@@ -193,7 +227,7 @@
         <option value="10">10:00</option>
         <option value="11">11:00</option>
         <option value="12">12:00</option>
-        <option value="12">12:00</option>
+        <option value="13">13:00</option>
         <option value="14">14:00</option>
         <option value="15">15:00</option>
         <option value="16">16:00</option>
@@ -222,7 +256,7 @@
         <option value="10">10:00</option>
         <option value="11">11:00</option>
         <option value="12">12:00</option>
-        <option value="12">12:00</option>
+        <option value="13">13:00</option>
         <option value="14">14:00</option>
         <option value="15">15:00</option>
         <option value="16">16:00</option>
@@ -234,6 +268,20 @@
         <option value="22">22:00</option>
         <option value="23">23:00</option>
       </select>
+      <input
+      class="input-enviar"
+      onclick=""
+      type="button"
+      value="Agregar uno"
+      name="Enviar"
+    />
+    <input
+    class="input-enviar"
+    onclick=""
+    type="button"
+    value="Quitar último"
+    name="Enviar"
+  />
     </div>
   </fieldset>
   <fieldset>

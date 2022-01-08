@@ -1,24 +1,97 @@
-function validarDatos(namePlato,descripcion,Peso,Energia,Carbohidratos,Proteina,Grasas,Sodio){
- 
-  if (namePlato.length<0 ){
-    mensaje="El nombre ingresado no es valido. Por favor, revisa los datos e inténtalo de nuevo."
-    return false;
-  }
-  if (descripcion.length<0 ){
-    mensaje="La descripción ingresada no es valida. Por favor, revisa los datos e inténtalo de nuevo."
-    return false;
-  }
-  if (Peso.length<0 || Energia.length<0 || Carbohidratos.length<0 || Proteina.length<0 ||Grasas.length<0 ||Sodio.length<0  ){
-    mensaje="La información Nutricional ingresada no es valida. Por favor, revisa los datos e inténtalo de nuevo."
-    return false;
-  } 
-  if (Peso<0 || Energia<0 || Carbohidratos<0 || Proteina<0 ||Grasas<0 ||Sodio<=0  ){
-    mensaje="La información Nutricional ingresada no es valida. Por favor, revisa los datos e inténtalo de nuevo."
-    return false;
-  } 
-  return true;
-}
 
+function validarDatos(e) {
+  if (e="namePlato"){
+    X = document.getElementById("namePlato").value
+    if ( X.length<1){
+      mensaje="Debes escribir algo en el nombre."
+      document.getElementById("namePlato").classList.add("input-error")
+      return false;
+    }else{
+      document.getElementById("namePlato").classList.remove("input-error")
+    }
+  }
+  if (e="subject"){
+    X = document.getElementById("subject").value
+    if ( X.length<1){
+      document.getElementById("subject").classList.add("input-error")
+      mensaje="Debes escribir algo en la descripcion."
+      return false;
+    }else{
+      document.getElementById("subject").classList.remove("input-error")
+    }
+  }
+
+  if (e="InformaciónPeso"){
+    X = document.getElementById("InformaciónPeso").value
+    if ( X<1){
+      mensaje="El Peso debe ser mayor a cero."
+      document.getElementById("InformaciónPeso").classList.add("input-error")
+      return false;
+    }else{
+      document.getElementById("InformaciónPeso").classList.remove("input-error")
+    }
+  }
+  if (e="InformaciónEnergia"){
+    X = document.getElementById("InformaciónEnergia").value
+    if ( X<1){
+      mensaje="La Cantidad de Energia debe ser mayor a cero."
+      document.getElementById("InformaciónEnergia").classList.add("input-error")
+      return false;
+    }else{
+      document.getElementById("InformaciónEnergia").classList.remove("input-error")
+    }
+  }
+  if (e="InformaciónCarbohidratos"){
+    X = document.getElementById("InformaciónCarbohidratos").value
+    if ( X<1){
+      mensaje="La Cantidad de Carbohidratos debe ser mayor a cero."
+      document.getElementById("InformaciónCarbohidratos").classList.add("input-error")
+      return false;
+    }else{
+      document.getElementById("InformaciónCarbohidratos").classList.remove("input-error")
+    }
+  }
+  if (e="InformaciónProteina"){
+    X = document.getElementById("InformaciónProteina").value
+    if ( X<1){
+      mensaje="La Cantidad de Proteina debe ser mayor a cero."
+      document.getElementById("InformaciónProteina").classList.add("input-error")
+      return false;
+    }else{
+      document.getElementById("InformaciónProteina").classList.remove("input-error")
+    }
+  }
+  if (e="InformaciónGrasas"){
+    X = document.getElementById("InformaciónGrasas").value
+    if ( X<1){
+      mensaje="La Cantidad de Grasas Totales debe ser mayor a cero."
+      document.getElementById("InformaciónGrasas").classList.add("input-error")
+      return false;
+    }else{
+      document.getElementById("InformaciónGrasas").classList.remove("input-error")
+    }
+  }
+  if (e="InformaciónSodio"){
+    X = document.getElementById("InformaciónSodio").value
+    if ( X<1){
+      mensaje="La cantidad de Sodio debe ser mayor a cero."
+      document.getElementById("InformaciónSodio").classList.add("input-error")
+      return false;
+    }else{
+      document.getElementById("InformaciónSodio").classList.remove("input-error")
+    }
+  }
+  if (e="archivosubido"){
+    X = document.getElementById("archivosubido")
+    if (X.files.length < 1) {
+      mensaje="Debes subir al menos una imagen."
+      document.getElementById("archivosubido").classList.add("input-error")
+      return false;
+    }else{
+      document.getElementById("archivosubido").classList.remove("input-error")
+    }
+  }
+}
 
 function validarRegistro(){
 	var xmlHttpRequest=new XMLHttpRequest();
@@ -45,24 +118,12 @@ function validarRegistro(){
 		}
 	}
 
-  namePlato = document.getElementById('namePlato').value;
-  descripcion = document.getElementById('subject').value;
-  Peso = document.getElementById('InformaciónPeso').value;
-  Energia = document.getElementById('InformaciónEnergia').value;
-  Carbohidratos = document.getElementById('InformaciónCarbohidratos').value;
-  Proteina = document.getElementById('InformaciónProteina').value;
-  Grasas = document.getElementById('InformaciónGrasas').value;
-  Sodio = document.getElementById('InformaciónSodio').value;
-  Sitio = document.getElementById('InformaciónSodio').value;
-  Usuario =  document.getElementById('nombreUsuario').textContent;
-  idSitio =  document.getElementById('idSitio').textContent;
-  if (validarDatos(namePlato,descripcion,Peso,Energia,Carbohidratos,Proteina,Grasas,Sodio)){
+  if( validarDatos('namePlato') && validarDatos('subject') && validarDatos('InformaciónPeso') 
+  &&  validarDatos('InformaciónEnergia') && validarDatos('InformaciónCarbohidratos') && validarDatos('InformaciónProteina')
+   &&  validarDatos('InformaciónGrasas') &&  validarDatos('InformaciónSodio')){
     oData = new FormData(document.forms.namedItem("regForm"));
     oData.append('username', Usuario);
     oData.append('idSitio', idSitio);
- /*  for(let [name, value] of oData) {
-      console.log(`${name} = ${value}`); // key1 = value1, luego key2 = value2
-    }*/
     xmlHttpRequest.open("POST","/plato/CreatePlato",true);
     xmlHttpRequest.send(oData);
     event.preventDefault();

@@ -32,6 +32,7 @@
         name="nameUser"
         value=""
         placeholder="Nombre de Usuario"
+        onfocusout="validarDatos('nameUser');"
         required
       />
 
@@ -43,6 +44,7 @@
         name="nombreUser"
         value=""
         placeholder="Nombre"
+        onfocusout="validarDatos('nombreUser');"
         required
       />
 
@@ -54,12 +56,13 @@
         name="apellidoUser"
         value=""
         placeholder="Apellido"
+        onfocusout="validarDatos('apellidoUser');"
         required
       />
     </fieldset>
     <fieldset>
       <legend class="title">Información de Contacto</legend>
-      <label for="mailUser">Correo Electronico:</label>
+      <label for="mailUser">Correo Electrónico:</label>
       <input
         class="caja-texto"
         id="mailUser"
@@ -67,24 +70,20 @@
         name="mailUser"
         value=""
         placeholder="Correo Electronico"
+        onfocusout="validarDatos('mailUser');"
         required
       />
-
-      <label for="paisUser">Ubicacion:</label>
-      <select class="caja-texto" id="paisUser" name="paisUser">
-        <option value="A">Selecionar Ubicación:</option>
-        <option value="AR">Argentina</option>
-        <option value="BO">Bolivia</option>
-        <option value="BR">Brasil</option>
-        <option value="CL">Chile</option>
-        <option value="CO">Colombia</option>
-        <option value="EC">Ecuador</option>
-        <option value="MX">México</option>
-        <option value="PY">Paraguay</option>
-        <option value="PE">Perú</option>
-        <option value="UY">Uruguay</option>
-        <option value="VE">Venezuela</option>
-      </select>
+      <label for="paisUser">País:</label>
+      <input
+        class="caja-texto"
+        id="paisUser"
+        type="text"
+        name="paisUser"
+        value=""
+        placeholder="País"
+        onfocusout="validarDatos('paisUser');"
+        required
+      />
       <label for="telefonoUser">Telefono:</label>
       <input
         class="caja-texto"
@@ -93,6 +92,7 @@
         name="telefonoUser"
         value=""
         placeholder="Telefono"
+        onfocusout="validarDatos('telefonoUser');"
         required
       />
     </fieldset>
@@ -115,6 +115,7 @@
         value=""
         placeholder=""
         required
+        onfocusout="validarDatos('passwordNueva');"
       />
 
       <label for="passwordRepeat">Confirmar Contraseña:</label>
@@ -126,6 +127,7 @@
         value=""
         placeholder=""
         required
+        onfocusout="validarDatos('passwordRepeat');"
       />
       <p>
         Nota: La contraseña debe contener entre 6 y 20 caracteres, una

@@ -1,7 +1,5 @@
-function validarDatos(nameSitio,descripcion,direccion,localidad,provincia,mail,telefono,X,Y, Dia_Inicio,Dia_Fin , De_Inicio, Hasta_Fin ){
-  emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-  telefonoRegex = /^[2-9]\d{2}[2-9]\d{2}\d{4}$/;
-  passwordRegex =  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+function validarDato(nameSitio,descripcion,direccion,localidad,provincia,mail,telefono,X,Y, Dia_Inicio,Dia_Fin , De_Inicio, Hasta_Fin ){
+
   if (direccion.length<0 ){
     mensaje="La direccion ingresada no es valida. Por favor, revisa los datos e inténtalo de nuevo."
     return false;
@@ -39,6 +37,106 @@ function validarDatos(nameSitio,descripcion,direccion,localidad,provincia,mail,t
   
   return true;
 }
+
+
+  id="nameSitio"
+  id="subject"
+  id="DireccionSitio"
+  id="LocalidadSitio"
+  id="MailSitio"
+  id="TelefonoSitio"
+  id="Longitud"
+  id="Latitud"
+
+  function buscarcoord(){
+    
+     var xmlHttpRequest=new XMLHttpRequest();
+     xmlHttpRequest.onreadystatechange=function() {
+       if (xmlHttpRequest.readyState==4 && xmlHttpRequest.status==200) {
+         var respuesta = JSON.parse(  xmlHttpRequest.responseText );
+     console.log(respuesta)
+     document.getElementById("Longitud").value = 111
+     document.getElementById("Latitud").value = 111
+     } else{
+       console.log("33")
+     }
+    
+   }
+   accessToken =
+   'pk.eyJ1IjoiY29zdGFpdmFuMzQiLCJhIjoiY2treDI1MDk3MDI2cjJ2bXFydTdnMnBmYSJ9.tYdWtyp9KZzPcZL1VowmZg'
+   direccion = document.getElementById("DireccionSitio").value
+   localidad = document.getElementById("LocalidadSitio").value
+   provincia = document.getElementById("ProvinciaSitio").value
+   console.log("33")
+   xmlHttpRequest.open("GET","https://api.mapbox.com/geocoding/v5/mapbox.places/"+ encodeURIComponent(direccion)+"%20"+ encodeURIComponent(localidad) +"%20"+encodeURIComponent(provincia)+".json?limit=1&access_token="+accessToken+"",true);
+   xmlHttpRequest.send();
+   event.preventDefault(); 
+
+   }
+
+function validarDatos(e){
+  emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+  telefonoRegex = /^[2-9]\d{2}[2-9]\d{2}\d{4}$/;
+  passwordRegex =  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+
+    console.log("El elemento selecionado ha sido " +  e);
+    if (e="Longitud"){
+      X = document.getElementById("Latitud").value
+      if ( X <(-180) || X >(180)){
+        mensaje="Las coordenadas ingresadas no son validas."
+      }
+    }
+    if (e="Latitud"){
+      X = document.getElementById("Latitud").value
+      if ( X <(-90) || X >(90)){
+        mensaje="Las coordenadas ingresadas no son validas."
+      }
+    }
+    if (e="nameSitio"){
+      X = document.getElementById("MailSitio").value
+      if (X<(-90) || X>(90)){
+        mensaje="Las coordenadas ingresadas no son validas."
+       alert(mensaje)
+      }
+    }
+    if (e="subject"){
+      X = document.getElementById("MailSitio").value
+      if (X<(-90) || X>(90)){
+        mensaje="Las coordenadas ingresadas no son validas."
+       alert(mensaje)
+      }
+    } if (e="DireccionSitio"){
+      X = document.getElementById("MailSitio").value
+      if (X<(-90) || X>(90)){
+        mensaje="Las coordenadas ingresadas no son validas."
+       alert(mensaje)
+      }
+    } if (e="LocalidadSitio"){
+      X = document.getElementById("MailSitio").value
+      if (X<(-90) || X>(90)){
+        mensaje="Las coordenadas ingresadas no son validas."
+       alert(mensaje)
+      }
+    }
+
+  if (e="TelefonoSitio"){
+    Telefono = document.getElementById("MailSitio").value
+    if (!telefonoRegex.test(Telefono)){
+      mensaje="Las coordenadas ingresadas no son validas."
+     alert(mensaje)
+    }
+  }
+   if (e="MailSitio"){
+    Mail = document.getElementById("MailSitio").value 
+    if (!emailRegex.test(Mail)){
+      mensaje="Las coordenadas ingresadas no son validas."
+     alert(mensaje)
+    }
+  }
+    alert(mensaje)
+}
+
+
 
 
 function validarRegistro(){

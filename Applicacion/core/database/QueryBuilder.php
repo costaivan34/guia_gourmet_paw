@@ -454,7 +454,7 @@ class QueryBuilder
             ->prepare("SELECT  s.idSitio,s.nombre,u.ciudad, u.provincia, i.path FROM sitios s 
     INNER JOIN ubicacion u  ON  s.idSitio = u.idSitio
     RIGHT JOIN imagenessitios i ON  s.idSitio = i.idSitio
-    GROUP BY idSitio  LIMIT 0, 4");
+    GROUP BY idSitio  LIMIT 0, 6");
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }

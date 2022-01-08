@@ -90,4 +90,10 @@ class Plato extends Model
         $basicPlato['lista'] = json_encode($listaValor);
         return json_encode($basicPlato);
     }
+
+    public function getNombreSitios($idSitio){
+        $datos = $this->db->selectSitio($idSitio);
+        //return json_decode(json_encode($datos),true);
+        return $datos;
+    }
 }

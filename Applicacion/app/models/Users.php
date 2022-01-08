@@ -60,6 +60,12 @@ class Users extends Model
         //return json_decode(json_encode($datos),true);
         return$datos;
     }
+
+    public function getNombreSitios($idSitio){
+        $datos = $this->db->selectSitio($idSitio);
+        //return json_decode(json_encode($datos),true);
+        return $datos;
+    }
 }
 
 

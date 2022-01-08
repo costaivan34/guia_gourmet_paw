@@ -101,20 +101,14 @@ CREATE TABLE `comentariositios` (
   `nombre` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `mail` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `descripcion` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `fecha` date NOT NULL,
+  `fecha` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `valoracionSabor` int(11) NOT NULL,
   `valoracionPrecio` int(11) NOT NULL,
   `valoracionAmbiente` int(11) NOT NULL
 )  ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 
---
--- Disparadores `comentariositios`
---
-DELIMITER $$
-CREATE TRIGGER `upd_comentarios_bi` BEFORE INSERT ON `comentariositios` FOR EACH ROW set NEW.fecha = NOW()
-$$
-DELIMITER ;
+
 
 -- --------------------------------------------------------
 
