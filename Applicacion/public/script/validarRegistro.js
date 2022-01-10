@@ -1,135 +1,124 @@
-function validarDato(
-  nameUser,
-  nombreUser,
-  apellidoUser,
-  mailUser,
-  paisUser,
-  telefonoUser,
-  passwordNueva,
-  passwordRepeat,
-  archivosubido,
-) {
-  emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i
-  passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/
-
-  if (nameUser.length < 0 || nombreUser.length < 0 || apellidoUser.length < 0) {
-    mensaje =
-      'El nombre de usuario o nombre y apellido ingresados no es valido. Por favor, revisa los datos e inténtalo de nuevo.'
-    return false
-  }
-  if (!emailRegex.test(mailUser)) {
-    mensaje =
-      'El correo electronico ingresado no es valido. Por favor, revisa los datos e inténtalo de nuevo.'
-    return false
-  }
-
-  if (!passwordRepeat === passwordNueva) {
-    mensaje =
-      'Las contraseñas ingresadas no coinciden. Por favor, revisa los datos e inténtalo de nuevo.'
-    return false
-  }
-  if (!passwordRegex.test(passwordRepeat)) {
-    mensaje =
-      'La contraseña ingresada no cumple con los requisitos. Por favor, revisa los datos e inténtalo de nuevo.'
-    return false
-  }
-  return true
+function mostrar_mensaje(mensaje, contenedor) {
+  document.getElementById(contenedor).textContent = mensaje
 }
 
-function validarDatos(e) {
-  emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i
-  telefonoRegex = /^[2-9]\d{2}[2-9]\d{2}\d{4}$/
-  passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/
-  X = document.getElementById('subject').value
-
-  if ((e = 'nameUser')) {
-    nameUser = document.getElementById('nameUser').value
-    if (nameUser.length < 4) {
-      mensaje = 'El usuario ingresado no es valido.'
-      document.getElementById('nameUser').classList.add('input-error')
-      return false
+function validarDatos(e, id) {
+  switch (e) {
+    case "nameUser":
+    X = document.getElementById("nameUser").value;
+    if (X.length < 4) {
+      document.getElementById("nameUser").classList.add("input-error");
+      mostrar_mensaje("El usuario ingresado no es valido.","help-nameUser");
+      return false;
     } else {
-      document.getElementById('nameUser').classList.remove('input-error')
+      document.getElementById("nameUser").classList.remove("input-error");
+      document.getElementById("help-nameUser").textContent = ""
+      mostrar_mensaje("","help-nameUser");
     }
-  }
-  if ((e = 'nombreUser')) {
-    if (apellidoUser.length < 4) {
-      mensaje = 'El nombre ingresado no es valido.'
-    document.getElementById('nombreUser').classList.add('input-error')
-    return false
+break;
+case "nombreUser":
+  X = document.getElementById("nombreUser").value;
+  if (X.length < 4) {
+    document.getElementById("nombreUser").classList.add("input-error");
+    mostrar_mensaje("El nombre ingresado no es valido.","help-nombreUser");
+    return false;
   } else {
-    document.getElementById('nombreUser').classList.remove('input-error')
+    document.getElementById("nombreUser").classList.remove("input-error");
+    document.getElementById("help-nombreUser").textContent = ""
+    mostrar_mensaje("","help-nombreUser");
   }
-  
-  }
-  if ((e = 'apellidoUser')) {
-    apellidoUser = document.getElementById('apellidoUser').value
-    if (apellidoUser.length < 4) {
-        mensaje = 'El apellido ingresado no es valido.'
-      document.getElementById('apellidoUser').classList.add('input-error')
-      return false
+break;
+case "apellidoUser":
+    X = document.getElementById("apellidoUser").value;
+    if (X.length < 4) {
+      document.getElementById("apellidoUser").classList.add("input-error");
+      mostrar_mensaje("El apellido ingresado no es valido.","help-apellidoUser");
+      return false;
     } else {
-      document.getElementById('apellidoUser').classList.remove('input-error')
+      document.getElementById("apellidoUser").classList.remove("input-error");
+      document.getElementById("help-apellidoUser").textContent = ""
+      mostrar_mensaje("","help-apellidoUser");
     }
-  }
-  if ((e = 'mailUser')) {
-    Mail = document.getElementById('mailUser').value
+break;
+  case "paisUser":
+    X = document.getElementById("paisUser").value;
+    if (X < 5) {
+      document.getElementById("paisUser").classList.add("input-error");
+      mostrar_mensaje("Debes ingresar el País.","help-paisUser");
+      return false;
+    } else {
+      document.getElementById("paisUser").classList.remove("input-error");
+      mostrar_mensaje("","help-paisUser");
+    }
+  break;
+  case "mailUser":
+    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    Mail = document.getElementById('mailUser').value;
     if (!emailRegex.test(Mail)) {
-      mensaje = 'El correo electrónico ingresado no es valido.'
-      document.getElementById('mailUser').classList.add('input-error')
+      document.getElementById('mailUser').classList.add('input-error');
+      mostrar_mensaje("El correo electrónico ingresado no es valido.","help-mailUser");
       return false
     } else {
-      document.getElementById('mailUser').classList.remove('input-error')
+      document.getElementById('mailUser').classList.remove('input-error');
+      mostrar_mensaje("","help-mailUser");
     }
-  }
+  break;
+  case "telefonoUser":
+    telefonoRegex = /^(\(\+?\d{2,3}\)[\*|\s|\-|\.]?(([\d][\*|\s|\-|\.]?){6})(([\d][\s|\-|\.]?){2})?|(\+?[\d][\s|\-|\.]?){8}(([\d][\s|\-|\.]?){2}(([\d][\s|\-|\.]?){2})?)?)$/;
+    X = document.getElementById("telefonoUser").value
+    if (!telefonoRegex.test(X)) {
+      document.getElementById("telefonoUser").classList.add("input-error");
+      mostrar_mensaje("El telefono ingresado no es correcto.","help-telefonoUser");
+      return false;
+    } else {
+      document.getElementById("telefonoUser").classList.remove("input-error");
+      mostrar_mensaje("","help-telefonoUser");
+    }
+break;
 
-  if ((e = 'telefonoUser')) {
-    telefono = document.getElementById('telefonoUser').value
-    if (!telefonoRegex.test(telefono)) {
-      mensaje = 'El telefono ingresado no es valido.'
-      document.getElementById('telefonoUser').classList.add('input-error')
-      return false
-    } else {
-      document.getElementById('telefonoUser').classList.remove('input-error')
-    }
+case "passwordNueva":
+  passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/
+  X = document.getElementById("passwordNueva").value
+  if (!passwordRegex.test(X)) {
+    document.getElementById("passwordNueva").classList.add("input-error");
+    mostrar_mensaje("La contraseña ingresada no es valida.","help-passwordNueva");
+    return false;
+  } else {
+    document.getElementById("passwordNueva").classList.remove("input-error");
+    mostrar_mensaje("","help-passwordNueva");
   }
+  case "passwordRepeat":
+      passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/
+      passwordNueva = document.getElementById('passwordNueva').value
+      passwordRepeat = document.getElementById('passwordRepeat').value
+      if ( !passwordRegex.test(passwordRepeat) ||!passwordRepeat === passwordNueva ) {
+        mostrar_mensaje("Las Contraseñas ingresadas no coinciden.","help-passwordRepeat");
+        document.getElementById('passwordNueva').classList.add('input-error')
+        document.getElementById('passwordRepeat').classList.add('input-error')
+        return false;
+      } else {
+        document.getElementById('passwordNueva').classList.remove('input-error')
+        document.getElementById('passwordRepeat').classList.remove('input-error')
+        mostrar_mensaje("","help-passwordRepeat");
+      }
+  break;
 
-  if ((e = 'passwordNueva')) {
-    passwordNueva = document.getElementById('passwordNueva').value
-    if (!passwordRegex.test(passwordNueva)) {
-      mensaje = 'La contraseña ingresada no es valida.'
-      document.getElementById('passwordNueva').classList.add('input-error')
-      return false
-    } else {
-      document.getElementById('passwordNueva').classList.remove('input-error')
-    }
-  }
-  if ((e = 'passwordRepeat')) {
-    passwordNueva = document.getElementById('passwordNueva').value
-    passwordRepeat = document.getElementById('passwordRepeat').value
-    if ( !passwordRegex.test(passwordRepeat) ||!passwordRepeat === passwordNueva ) {
-      mensaje = 'Las Contraseñas ingresadas no coinciden.'
-      document.getElementById('passwordNueva').classList.add('input-error')
-      document.getElementById('passwordRepeat').classList.add('input-error')
-      return false
-    } else {
-      document.getElementById('passwordRepeat').classList.remove('input-error')
-      document.getElementById('passwordNueva').classList.remove('input-error')
-    }
-  }
-  if ((e = 'paisUser')) {
-    paisUser = document.getElementById('paisUser').value
-    console.log(paisUser)
-    if (paisUser.length < 4) {
-      mensaje = 'El usuario ingresado no es valido.'
-      document.getElementById('nameUser').classList.add('input-error')
-      return false
-    } else {
-      document.getElementById('nameUser').classList.remove('input-error')
-    }
 
+  case "archivosubido":
+    X = document.getElementById("archivosubido");
+  
+    if (X.files.length == 0) {
+      document.getElementById("archivosubido").classList.add("input-error");
+      mostrar_mensaje("Debes subir al menos una imagen.","help-archivosubido");
+      return false;
+    } else {
+      document.getElementById("archivosubido").classList.remove("input-error");
+      mostrar_mensaje("","help-archivosubido");
+    }
+  break;
 }
 }
+
 function validarRegistro() {
   var xmlHttpRequest = new XMLHttpRequest()
   xmlHttpRequest.onreadystatechange = function () {
@@ -161,7 +150,7 @@ function validarRegistro() {
 
   if( validarDatos('nameUser') && validarDatos('nombreUser') && validarDatos('apellidoUser') 
   &&  validarDatos('mailUser') && validarDatos('paisUser') && validarDatos('telefonoUser')
-   &&  validarDatos('passwordNueva') &&  validarDatos('passwordRepeat')){
+   &&  validarDatos('passwordNueva') &&  validarDatos('passwordRepeat') &&  validarDatos('archivosubido')){
     oData = new FormData(document.forms.namedItem('formCuenta'))
   /*  for (let [name, value] of oData) {
       console.log(`${name} = ${value}`) // key1 = value1, luego key2 = value2
@@ -170,13 +159,12 @@ function validarRegistro() {
     xmlHttpRequest.send(oData)
     event.preventDefault()
   }else{
-    const m = document.getElementById('messageBox')
-    m.innerHTML =
-      `<div class="alert alert-danger" role="alert">` + mensaje + `</div>`
-    document.getElementById('contact-form').scrollIntoView()
-    setTimeout(function () {
-      mensaje.innerHTML = ''
-    }, 2500)
+    console.log("error form")
+    const m = document.getElementById("messageBox");
+    m.innerHTML = `<div class="alert alert-danger" role="alert">` + 
+    "El formulario presenta errores. Por favor, inténtalo de nuevo." + `</div>`;
+    document.getElementById('regForm').scrollIntoView();
+    setTimeout(function () { m.innerHTML = "" }, 2500);
   }
 
 }

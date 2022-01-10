@@ -11,6 +11,7 @@ endblock %} {% block main %}
   <fieldset>
     <legend class="title">Información del Plato</legend>
     <label for="namePlato">Nombre del Plato:</label>
+    <span  id="help-namePlato" class="error-text" ></span>
     <input
       class="caja-texto"
       id="namePlato"
@@ -18,22 +19,24 @@ endblock %} {% block main %}
       name="namePlato"
       value=""
       placeholder="Nombre de Sitio"
-      onfocusout="validarDatos('namePlato');"
+      onBlur="validarDatos('namePlato');"
       required
     />
     <label for="subject">Descripción:*</label>
+    <span  id="help-subject" class="error-text" ></span>
     <textarea
       id="subject"
       name="subject" 
       placeholder="Escriba algo"
       style="height: 170px;"
-      onfocusout="validarDatos('subject');"
+      onBlur="validarDatos('subject');"
       required
     ></textarea>
   </fieldset>
   <fieldset>
     <legend class="title">Información Nutricional</legend>
     <label for="InformaciónPeso">Peso:</label>
+    <span  id="help-InformaciónPeso" class="error-text" ></span>
     <input
       class="caja-texto"
       id="InformaciónPeso"
@@ -41,12 +44,13 @@ endblock %} {% block main %}
       name="InformaciónPeso"
       value="0"
       placeholder="Peso"
-      onfocusout="validarDatos('InformaciónPeso');"
+      onBlur="validarDatos('InformaciónPeso');"
       min=0
       step="0.10"
       required
     />
     <label for="InformaciónEnergia">Energia:</label>
+    <span  id="help-InformaciónEnergia" class="error-text" ></span>
     <input
       class="caja-texto"
       id="InformaciónEnergia"
@@ -56,10 +60,11 @@ endblock %} {% block main %}
       step="0.10"
       value="0"
       placeholder="Energia"
-      onfocusout="validarDatos('InformaciónEnergia');"
+      onBlur="validarDatos('InformaciónEnergia');"
       required
     />
     <label for="InformaciónCarbohidratos">Carbohidratos:</label>
+    <span  id="help-InformaciónCarbohidratos" class="error-text" ></span>
     <input
       class="caja-texto"
       id="InformaciónCarbohidratos"
@@ -69,10 +74,11 @@ endblock %} {% block main %}
       name="InformaciónCarbohidratos"
       value="0"
       placeholder="Carbohidratos"
-      onfocusout="validarDatos('InformaciónCarbohidratos');"
+      onBlur="validarDatos('InformaciónCarbohidratos');"
       required
     />
     <label for="InformaciónProteina">Proteína:</label>
+    <span  id="help-InformaciónProteina" class="error-text" ></span>
     <input
       class="caja-texto"
       id="InformaciónProteina"
@@ -82,10 +88,11 @@ endblock %} {% block main %}
       name="InformaciónProteina"
       value="0"
       placeholder="Proteina"
-      onfocusout="validarDatos('InformaciónProteina');"
+      onBlur="validarDatos('InformaciónProteina');"
       required
     />
     <label for="InformaciónGrasas">Grasas Totales:</label>
+    <span  id="help-InformaciónGrasas" class="error-text" ></span>
     <input
       class="caja-texto"
       min=0
@@ -95,10 +102,11 @@ endblock %} {% block main %}
       name="InformaciónGrasas"
       value="0"
       placeholder="Grasas Totales"
-      onfocusout="validarDatos('InformaciónGrasas');"
+      onBlur="validarDatos('InformaciónGrasas');"
       required
     />
     <label for="InformaciónSodio">Sodio:</label>
+    <span  id="help-InformaciónSodio" class="error-text" ></span>
     <input
       class="caja-texto"
       id="InformaciónSodio"
@@ -108,7 +116,7 @@ endblock %} {% block main %}
       name="InformaciónSodio"
       value="0"
       placeholder="Sodio"
-      onfocusout="validarDatos('InformaciónSodio');"
+      onBlur="validarDatos('InformaciónSodio');"
       required
     />
   </fieldset>
@@ -157,12 +165,13 @@ endblock %} {% block main %}
   <fieldset>
     <legend class="title">Imagenes</legend>
     <label for="archivosubido">Imagenes del Sitio:</label>
+    <span  id="help-archivosubido" class="error-text" ></span>
     <input
       id="archivosubido"
       type="file"
       name="archivosubido"
       accept="image/jpeg"
-      onchange="validarDatos('archivosubido');"
+      onfocus="validarDatos('archivosubido');"
     />
   </fieldset>
   <input

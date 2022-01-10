@@ -25,6 +25,7 @@
     <fieldset>
       <legend class="title">Información del Usuario</legend>
       <label for="nameUser">Nombre de Usuario:</label>
+      <span  id="help-nameUser" class="error-text" ></span>
       <input
         class="caja-texto"
         id="nameUser"
@@ -32,11 +33,12 @@
         name="nameUser"
         value=""
         placeholder="Nombre de Usuario"
-        onfocusout="validarDatos('nameUser');"
+        onBlur="validarDatos('nameUser');"
         required
       />
 
       <label for="nombreUser">Nombre:</label>
+      <span  id="help-nombreUser" class="error-text" ></span>
       <input
         class="caja-texto"
         id="nombreUser"
@@ -44,11 +46,12 @@
         name="nombreUser"
         value=""
         placeholder="Nombre"
-        onfocusout="validarDatos('nombreUser');"
+        onBlur="validarDatos('nombreUser');"
         required
       />
 
       <label for="apellidoUser">Apellido:</label>
+      <span  id="help-apellidoUser" class="error-text" ></span>
       <input
         class="caja-texto"
         id="apellidoUser"
@@ -56,13 +59,15 @@
         name="apellidoUser"
         value=""
         placeholder="Apellido"
-        onfocusout="validarDatos('apellidoUser');"
+        onBlur="validarDatos('apellidoUser');"
         required
       />
     </fieldset>
     <fieldset>
       <legend class="title">Información de Contacto</legend>
+
       <label for="mailUser">Correo Electrónico:</label>
+      <span  id="help-mailUser" class="error-text" ></span>
       <input
         class="caja-texto"
         id="mailUser"
@@ -70,10 +75,11 @@
         name="mailUser"
         value=""
         placeholder="Correo Electronico"
-        onfocusout="validarDatos('mailUser');"
+        onBlur="validarDatos('mailUser');"
         required
       />
       <label for="paisUser">País:</label>
+      <span  id="help-paisUser" class="error-text" ></span>
       <input
         class="caja-texto"
         id="paisUser"
@@ -81,10 +87,11 @@
         name="paisUser"
         value=""
         placeholder="País"
-        onfocusout="validarDatos('paisUser');"
+        onBlur="validarDatos('paisUser');"
         required
       />
       <label for="telefonoUser">Telefono:</label>
+      <span  id="help-telefonoUser" class="error-text" ></span>
       <input
         class="caja-texto"
         id="telefonoUser"
@@ -92,21 +99,24 @@
         name="telefonoUser"
         value=""
         placeholder="Telefono"
-        onfocusout="validarDatos('telefonoUser');"
+        onBlur="validarDatos('telefonoUser');"
         required
       />
     </fieldset>
     <fieldset>
       <label for="archivosubido">Imagen de perfil:</label>
+      <span  id="help-archivosubido" class="error-text" ></span>
       <input
         class="caja-texto"
         id="archivosubido"
         type="file"
         name="archivosubido"
         accept="image/jpeg"
+        onfocus="validarDatos('archivosubido');"
       />
 
       <label for="passwordNueva">Contraseña:</label>
+      <span  id="help-passwordNueva" class="error-text" ></span>
       <input
         class="caja-texto"
         id="passwordNueva"
@@ -115,10 +125,11 @@
         value=""
         placeholder=""
         required
-        onfocusout="validarDatos('passwordNueva');"
+        onBlur="validarDatos('passwordNueva');"
       />
 
       <label for="passwordRepeat">Confirmar Contraseña:</label>
+      <span  id="help-passwordRepeat" class="error-text" ></span>
       <input
         class="caja-texto"
         id="passwordRepeat"
@@ -127,7 +138,7 @@
         value=""
         placeholder=""
         required
-        onfocusout="validarDatos('passwordRepeat');"
+        onBlur="validarDatos('passwordRepeat');"
       />
       <p>
         Nota: La contraseña debe contener entre 6 y 20 caracteres, una

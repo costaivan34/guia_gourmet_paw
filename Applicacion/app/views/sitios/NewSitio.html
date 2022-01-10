@@ -3,12 +3,12 @@
 <script src="/public/script/formNewSitio.js"></script>
 
 <link rel="stylesheet" href="/public/css/near-sitios.css" />
-<script src="/public/script/mapa.js"></script>
 
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css"> 
+    
 
 {% endblock %} {% block title %}NUEVO SITIO{% endblock %} {% block main %}
 <form
@@ -24,6 +24,7 @@
   <fieldset>
     <legend class="title">Información del Sitio</legend>
     <label for="nameSitio">Nombre de Sitio:</label>
+    <span  id="help-nameSitio" class="error-text" ></span>
     <input
       class="caja-texto"
       id="nameSitio"
@@ -32,14 +33,17 @@
       value=""
       placeholder="Nombre de Sitio"
       required
-      onfocusout="validarDatos('nameSitio');"
+      onBlur="validarDatos('nameSitio');"
     />
+  
+
     <label for="subject">Descripcion:*</label>
+    <span  id="help-subject" class="error-text" ></span>
     <textarea
       id="subject"
       name="subject"
       placeholder="Escriba algo"
-      onfocusout="validarDatos('subject');"
+      onBlur="validarDatos('subject');"
       required
     ></textarea>
   </fieldset>
@@ -47,6 +51,7 @@
   <fieldset>
     <legend class="title">Información de Contacto</legend>
     <label for="DireccionSitio">Direccion:</label>
+    <span  id="help-DireccionSitio" class="error-text" ></span>
     <input
       class="caja-texto"
       id="DireccionSitio"
@@ -54,10 +59,11 @@
       name="DireccionSitio"
       value=""
       placeholder="Direccion"
-      onfocusout="validarDatos('DireccionSitio');"
+      onBlur="validarDatos('DireccionSitio');"
       required
     />
     <label for="LocalidadSitio">Localidad:</label>
+    <span  id="help-LocalidadSitio" class="error-text" ></span>
     <input
       class="caja-texto"
       id="LocalidadSitio"
@@ -65,10 +71,11 @@
       name="LocalidadSitio"
       value=""
       placeholder="Localidad"
-      onfocusout="validarDatos('LocalidadSitio');"
+      onBlur="validarDatos('LocalidadSitio');"
       required
     />
     <label for="ProvinciaSitio">Provincia:</label>
+    <span  id="help-ProvinciaSitio" class="error-text" ></span>
     <input
       class="caja-texto"
       id="ProvinciaSitio"
@@ -76,9 +83,11 @@
       name="ProvinciaSitio"
       value=""
       placeholder="Provincia"
+      onBlur="validarDatos('ProvinciaSitio');"
       required
     />
     <label for="MailSitio"> Correo Electrónico:</label>
+    <span  id="help-MailSitio" class="error-text" ></span>
     <input
       class="caja-texto"
       id="MailSitio"
@@ -87,9 +96,10 @@
       value=""
       placeholder="Mail"
       required
-      onfocusout="validarDatos('MailSitio');"
+      onBlur="validarDatos('MailSitio');"
     />
     <label for="TelefonoSitio">Teléfono:</label>
+    <span  id="help-TelefonoSitio" class="error-text" ></span>
     <input
       class="caja-texto"
       id="TelefonoSitio"
@@ -98,51 +108,18 @@
       value=""
       placeholder="Telefono"
       required
-      onfocusout="validarDatos('TelefonoSitio');"
+      onBlur="validarDatos('TelefonoSitio');"
     />
   </fieldset>
   <fieldset>
     <legend class="title">Localización</legend>
-    <section class="contenedor" id="resultado-mapa">
+    <span  id="help-Mapa" class="error-text" ></span>
+    <p class="title">Arraste el punto rojo a la ubicación geográfica del lugar</p>
+   
       <section id="mapa">
-        <script>
-          var d = '{{M}}'
-          var latitud = '{{datos.latitud}}'
-          var longitud = '{{datos.longitud}}'
-          var ciudad = '{{datos.ciudad}}'
-          var region = '{{datos.region}}'
-        </script>
+    
+
       </section>
-    </section>
-    <p class="title">Las coordenadas geograficas del lugar:</p>
-
-    <label for="Longitud">X(Longitud):</label>
-    <input
-      id="Longitud"
-      type="number"
-      name="Longitud"
-      value="0"
-      placeholder="Longitud"
-      disabled
-    />
-    <label for="Latitud">Y(Latitud):</label>
-    <input
-      id="Latitud"
-      type="number"
-      name="Latitud"
-      value="0"
-      placeholder="Latitud"
-      disabled
-    />
-    <input
-    class=""
-    type="button"
-    value="Buscar Coordenadas"
-    onclick="buscarcoord();"
-    name="Enviar"
-  />
-
-
   </fieldset>
 
   <fieldset>
@@ -185,12 +162,14 @@
       </label>
     </div>
   </fieldset>
-  <fieldset>
+  <fieldset >
     <legend class="title">Horarios</legend>
-    <div class="horario">
-      <label for="Dia-Inicio">De :</label>
-      <select id="Dia-Inicio" name="Dia-Inicio">
-        <option value="0">Selecionar día:</option>
+    <div id=horarios>
+    <div id="horario-0">
+     
+      <label for="Dia">Día :</label>
+      <select  id="Dia-0" name="Dia" onBlur="validarDatos('Horario','0');">
+        <option value="-1" >Selecionar día:</option>
         <option value="1">Lunes</option>
         <option value="2">Martes</option>
         <option value="3">Miercoles</option>
@@ -199,100 +178,95 @@
         <option value="6">Sabado</option>
         <option value="7">Domingo</option>
       </select>
-      <label for="Dia-Fin">A :</label>
-      <select id="Dia-Fin" name="Dia-Fin">
-        <option value="0">Selecionar día:</option>
-        <option value="1">Lunes</option>
-        <option value="2">Martes</option>
-        <option value="3">Miercoles</option>
-        <option value="4">Jueves</option>
-        <option value="5">Viernes</option>
-        <option value="6">Sabado</option>
-        <option value="7">Domingo</option>
-      </select>
+      <span  id="help-horario-0" class="error-text" ></span>
       <br>
-      <label for="De-Inicio">De :</label>
-      <select class="heading" id="De-Inicio" name="De-Inicio">
-        <option value="-1">Selecionar hora:</option>
-        <option value="00">00:00</option>
-        <option value="01">01:00</option>
-        <option value="02">02:00</option>
-        <option value="03">03:00</option>
-        <option value="04">04:00</option>
-        <option value="05">05:00</option>
-        <option value="06">06:00</option>
-        <option value="07">07:00</option>
-        <option value="08">08:00</option>
-        <option value="09">09:00</option>
-        <option value="10">10:00</option>
-        <option value="11">11:00</option>
-        <option value="12">12:00</option>
-        <option value="13">13:00</option>
-        <option value="14">14:00</option>
-        <option value="15">15:00</option>
-        <option value="16">16:00</option>
-        <option value="17">17:00</option>
-        <option value="18">18:00</option>
-        <option value="19">19:00</option>
-        <option value="20">20:00</option>
-        <option value="21">21:00</option>
-        <option value="22">22:00</option>
-        <option value="23">23:00</option>
+      <label for="De">De :</label> 
+      <select id="De-0" name="De" onBlur="validarDatos('Horario','0');">
+        <option value=-1>Selecionar hora:</option>
+        <option value=0>00:00</option>
+        <option value=1>01:00</option>
+        <option value=2>02:00</option>
+        <option value=3>03:00</option>
+        <option value=4>04:00</option>
+        <option value=5>05:00</option>
+        <option value=6>06:00</option>
+        <option value=7>07:00</option>
+        <option value=8>08:00</option>
+        <option value=9>09:00</option>
+        <option value=10>10:00</option>
+        <option value=11>11:00</option>
+        <option value=12>12:00</option>
+        <option value=13>13:00</option>
+        <option value=14>14:00</option>
+        <option value=15>15:00</option>
+        <option value=16>16:00</option>
+        <option value=17>17:00</option>
+        <option value=18>18:00</option>
+        <option value=19>19:00</option>
+        <option value=20>20:00</option>
+        <option value=21>21:00</option>
+        <option value=22>22:00</option>
+        <option value=23>23:00</option>
       </select>
   
-      <label for="Hasta-Fin">A :</label>
-      <select class="heading" id="Hasta-Fin" name="Hasta-Fin">
-        <option value="-1">Selecionar hora:</option>
-        <option value="00">00:00</option>
-        <option value="01">01:00</option>
-        <option value="02">02:00</option>
-        <option value="03">03:00</option>
-        <option value="04">04:00</option>
-        <option value="05">05:00</option>
-        <option value="06">06:00</option>
-        <option value="07">07:00</option>
-        <option value="08">08:00</option>
-        <option value="09">09:00</option>
-        <option value="10">10:00</option>
-        <option value="11">11:00</option>
-        <option value="12">12:00</option>
-        <option value="13">13:00</option>
-        <option value="14">14:00</option>
-        <option value="15">15:00</option>
-        <option value="16">16:00</option>
-        <option value="17">17:00</option>
-        <option value="18">18:00</option>
-        <option value="19">19:00</option>
-        <option value="20">20:00</option>
-        <option value="21">21:00</option>
-        <option value="22">22:00</option>
-        <option value="23">23:00</option>
+      <label for="Hasta">A :</label>
+      <select id="Hasta-0" name="Hasta" onBlur="validarDatos('Horario','0');">
+        <option value=-1>Selecionar hora:</option>
+        <option value=0>00:00</option>
+        <option value=1>01:00</option>
+        <option value=2>02:00</option>
+        <option value=3>03:00</option>
+        <option value=4>04:00</option>
+        <option value=5>05:00</option>
+        <option value=6>06:00</option>
+        <option value=7>07:00</option>
+        <option value=8>08:00</option>
+        <option value=9>09:00</option>
+        <option value=10">10:00</option>
+        <option value=11>11:00</option>
+        <option value=12>12:00</option>
+        <option value=13>13:00</option>
+        <option value=14>14:00</option>
+        <option value=15>15:00</option>
+        <option value=16>16:00</option>
+        <option value=17>17:00</option>
+        <option value=18>18:00</option>
+        <option value=19>19:00</option>
+        <option value=20>20:00</option>
+        <option value=21>21:00</option>
+        <option value=22>22:00</option>
+        <option value=23>23:00</option>
       </select>
+    </div>
+  </div>
+      <div  id="input">
       <input
       class="input-enviar"
-      onclick=""
       type="button"
       value="Agregar uno"
+      onclick=agregar_horario()
       name="Enviar"
     />
     <input
     class="input-enviar"
-    onclick=""
+    onclick="quitar_horario();"
     type="button"
     value="Quitar último"
     name="Enviar"
   />
     </div>
   </fieldset>
-  <fieldset>
+  <fieldset id="archivo">
     <legend class="title">Imagenes</legend>
     <label for="archivosubido[]">Imagenes del Sitio:</label>
+    <span  id="help-archivosubido" class="error-text" ></span>
     <input
-      id="archivosubido[]"
+      id="archivosubido"
       type="file"
       name="archivosubido[]"
       multiple=""
       accept="image/jpeg"
+      onfocus="validarDatos('archivosubido');"
     />
   </fieldset>
 

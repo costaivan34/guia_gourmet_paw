@@ -1,22 +1,62 @@
-function validarDatos(nombre, apellido, mail, texto) {
-  emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i
-  if (nombre.length <= 0 || apellido.length <= 0) {
-    mensaje =
-      'El nombre y apellido ingresados no es valido. Por favor, revisa los datos e inténtalo de nuevo.'
-    return false
-  }
-  if (texto.length <= 0) {
-    mensaje =
-      'El mensaje ingresado no es valido. Por favor, revisa los datos e inténtalo de nuevo.'
-    return false
-  }
-  if (!emailRegex.test(mail)) {
-    mensaje =
-      'El correo electronico ingresado no es valido. Por favor, revisa los datos e inténtalo de nuevo.'
-    return false
-  }
-  return true
+function mostrar_mensaje(mensaje, contenedor) {
+  document.getElementById(contenedor).textContent = mensaje
 }
+
+function validarDatos(e, id) {
+  switch (e) {
+
+case "fname":
+  X = document.getElementById("fname").value;
+  if (X.length < 4) {
+    document.getElementById("fname").classList.add("input-error");
+    mostrar_mensaje("El nombre ingresado no es valido.","help-fname");
+    return false;
+  } else {
+    document.getElementById("fname").classList.remove("input-error");
+    document.getElementById("help-fname").textContent = ""
+    mostrar_mensaje("","help-fname");
+  }
+break;
+case "aname":
+    X = document.getElementById("aname").value;
+    if (X.length < 4) {
+      document.getElementById("aname").classList.add("input-error");
+      mostrar_mensaje("El apellido ingresado no es valido.","help-aname");
+      return false;
+    } else {
+      document.getElementById("aname").classList.remove("input-error");
+      document.getElementById("help-aname").textContent = ""
+      mostrar_mensaje("","help-aname");
+    }
+break;
+  case "mail":
+    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    Mail = document.getElementById('mail').value;
+    if (!emailRegex.test(Mail)) {
+      document.getElementById('mail').classList.add('input-error');
+      mostrar_mensaje("El correo electrónico ingresado no es valido.","help-mail");
+      return false
+    } else {
+      document.getElementById('mail').classList.remove('input-error');
+      mostrar_mensaje("","help-mail");
+    }
+  break;
+  case "subject":
+    X = document.getElementById("subject").value;
+    if (X.length < 40) {
+      document.getElementById("subject").classList.add("input-error");
+      mostrar_mensaje("Debes escribir algo en la descripcion.","help-subject");
+      return false;
+    } else {
+      document.getElementById("subject").classList.remove("input-error");
+      mostrar_mensaje("","help-subject");
+    }
+break;
+default:
+  return true;
+}
+}
+
 
 function guardarConsulta() {
   var xmlHttpRequest = new XMLHttpRequest()
@@ -25,7 +65,7 @@ function guardarConsulta() {
       var response = xmlHttpRequest.responseText
       if (xmlHttpRequest.responseText == 1) {
         //console.log(pagina);
-        const m = document.getElementById('mensaje')
+        const m = document.getElementById('messageBox')
         m.innerHTML = `<div class="alert alert-success" role="alert">
           Mensaje enviado con exito, pronto nos contactaremos con usted.Muchas gracias.</div>`
         //alert("Mensaje enviado con exito, pronto nos contactaremos con usted.Muchas gracias por tus comentarios!");
@@ -33,15 +73,15 @@ function guardarConsulta() {
         document.getElementById('aname').value = ''
         document.getElementById('mail').value = ''
         document.getElementById('subject').value = ''
-        document.getElementById('topof').scrollIntoView()
+        document.getElementById('messageBox').scrollIntoView()
         setTimeout(function () {
           m.innerHTML = ''
         }, 2500)
       } else {
-        const m = document.getElementById('mensaje')
+        const m = document.getElementById('messageBox')
         m.innerHTML = `<div class="alert alert-danger" role="alert">
           El mensaje no pudo ser procesado, por favor intentelo nuevamente </div>`
-        document.getElementById('topof').scrollIntoView()
+        document.getElementById('messageBox').scrollIntoView()
         setTimeout(function () {
           m.innerHTML = ''
         }, 2500)
@@ -49,17 +89,11 @@ function guardarConsulta() {
       }
     }
   }
+  if(validarDatos('fname') && validarDatos('aname') &&  validarDatos('mail') && validarDatos('paisUser') ){
   var nombre = document.getElementById('fname').value
   var apellido = document.getElementById('aname').value
   var mail = document.getElementById('mail').value
   var texto = document.getElementById('subject').value
-
-  if (validarDatos(nombre, apellido, mail, texto)) {
-    xmlHttpRequest.open('POST', 'sendConsulta', true)
-    xmlHttpRequest.setRequestHeader(
-      'Content-type',
-      'application/x-www-form-urlencoded',
-    )
     xmlHttpRequest.send(
       'nombre=' +
         nombre +
@@ -72,13 +106,11 @@ function guardarConsulta() {
     )
     event.preventDefault()
   } else {
-    //console.log("error form")
-    const m = document.getElementById('mensaje')
-    m.innerHTML =
-      `<div class="alert alert-danger" role="alert">` + mensaje + `</div>`
-    document.getElementById('topof').scrollIntoView()
-    setTimeout(function () {
-      m.innerHTML = ''
-    }, 2500)
+    console.log("error form")
+    const m = document.getElementById("messageBox");
+    m.innerHTML = `<div class="alert alert-danger" role="alert">` + 
+    "El formulario presenta errores. Por favor, inténtalo de nuevo." + `</div>`;
+    document.getElementById('messageBox').scrollIntoView();
+    setTimeout(function () { m.innerHTML = "" }, 2500);
   }
 }

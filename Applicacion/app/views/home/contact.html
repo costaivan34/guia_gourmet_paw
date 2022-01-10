@@ -10,39 +10,47 @@
     <h3 class="title">¿Tenes Alguna Consulta?</h3>
     <p class="title">Comunicate con nosotros</p>
   </section>
-  <div id="mensaje"></div>
+  <div id="messageBox"></div>
     <section class="column">
       <form id="contact-form">
         <label for="fname">Nombre*</label>
+        <span  id="help-fname" class="error-text" ></span>
         <input
           type="text"
           id="fname"
           name="firstname"
           placeholder="Nombre"
+          onBlur="validarDatos('fname');"
           required
         />
         <label for="aname">Apellido*</label>
+        <span  id="help-aname" class="error-text" ></span>
         <input
           type="text"
           id="aname"
           name="lastname"
           placeholder="Apellido"
+          onBlur="validarDatos('aname');"
           required
         />
         <label for="mail">Email*</label>
+        <span  id="help-mail" class="error-text" ></span>
         <input
           type="email"
           id="mail"
           name="firstname"
           placeholder="Mail"
+          onBlur="validarDatos('mail');"
           required
         />
 
         <label for="subject">Mensaje*</label>
+        <span  id="help-subject" class="error-text" ></span>
         <textarea
           id="subject"
           name="subject"
           placeholder="Escriba algo"
+          onBlur="validarDatos('subject');"
           required
         ></textarea>
         <input

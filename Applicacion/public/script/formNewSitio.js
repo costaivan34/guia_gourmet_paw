@@ -1,204 +1,399 @@
-function validarDato(nameSitio,descripcion,direccion,localidad,provincia,mail,telefono,X,Y, Dia_Inicio,Dia_Fin , De_Inicio, Hasta_Fin ){
 
-  if (direccion.length<0 ){
-    mensaje="La direccion ingresada no es valida. Por favor, revisa los datos e inténtalo de nuevo."
-    return false;
-  }
-  
-  if (X<(-90) || X>(90) || Y<(-180) || Y>(180)){
-    mensaje="Las coordenadas ingresadas no son validas. Por favor, revisa los datos e inténtalo de nuevo."
-    return false;
-  }
+var longitud = 0;
+var latitud = 0;
+a = 0;
+var self = this;
+function mostrar_mensaje(mensaje, contenedor) {
+  document.getElementById(contenedor).textContent = mensaje
+}
 
-  if (nameSitio.length<0 ){
-    mensaje="El nombre ingresado no es valido. Por favor, revisa los datos e inténtalo de nuevo."
-    return false;
-  }
-  if (descripcion.length<0 ){
-    mensaje="La descripción ingresada no es valida. Por favor, revisa los datos e inténtalo de nuevo."
-    return false;
-  }
-  if (localidad.length<0){
-    mensaje="La localidad ingresada no es valida. Por favor, revisa los datos e inténtalo de nuevo."
-    return false;
-  } 
-  if (provincia.length<0){
-    mensaje="La provincia ingresada no es valida. Por favor, revisa los datos e inténtalo de nuevo."
-    return false;
-  } 
-  if (Dia_Inicio=="0" || Dia_Fin=="0" || De_Inicio=="-1" || Hasta_Fin=="-1" || Dia_Inicio>Dia_Fin || De_Inicio>Hasta_Fin){
-    mensaje="El horario ingresado no es valido. Por favor, revisa los datos e inténtalo de nuevo."
-    return false;
-  }
-  if (!emailRegex.test(mail)) {
-    mensaje="El correo electronico ingresado no es valido. Por favor, revisa los datos e inténtalo de nuevo."
-    return false;
-  }
+function validarDatos(e, id) {
+  switch (e) {
+    case "nameSitio":
+    X = document.getElementById("nameSitio").value;
+    if (X.length < 4) {
+      document.getElementById("nameSitio").classList.add("input-error");
+      mostrar_mensaje("Debes escribir algo en el nombre.","help-nameSitio");
+      return false;
+    } else {
+      document.getElementById("nameSitio").classList.remove("input-error");
+      document.getElementById("help-nameSitio").textContent = ""
+      mostrar_mensaje("","help-nameSitio");
+    }
+break;
+  case "subject":
+    X = document.getElementById("subject").value;
+    if (X.length < 40) {
+      document.getElementById("subject").classList.add("input-error");
+      mostrar_mensaje("Debes escribir algo en la descripcion.","help-subject");
+      return false;
+    } else {
+      document.getElementById("subject").classList.remove("input-error");
+      mostrar_mensaje("","help-subject");
+    }
+break;
+  case "DireccionSitio":
+
+    X = document.getElementById("DireccionSitio").value;
+    if (X.length < 10) {
+      document.getElementById("DireccionSitio").classList.add("input-error");
+      mostrar_mensaje("Debes ingresar la direccion.Calle y Número","help-DireccionSitio");
+      return false;
+    } else {
+      document.getElementById("DireccionSitio").classList.remove("input-error");
+      mostrar_mensaje("","help-DireccionSitio");
+    }
+  break;
+  case "LocalidadSitio":
+    X = document.getElementById("LocalidadSitio").value;
+    if (X < 10) {
+      document.getElementById("LocalidadSitio").classList.add("input-error");
+      mostrar_mensaje("Debes ingresar la localidad.","help-LocalidadSitio");
+      return false;
+    } else {
+      document.getElementById("LocalidadSitio").classList.remove("input-error");
+      mostrar_mensaje("","help-LocalidadSitio");
+    }
+break;
+  case "ProvinciaSitio":
+    X = document.getElementById("ProvinciaSitio").value;
+    if (X < 5) {
+      document.getElementById("ProvinciaSitio").classList.add("input-error");
+      mostrar_mensaje("Debes ingresar la Provincia.","help-ProvinciaSitio");
+      return false;
+    } else {
+      document.getElementById("ProvinciaSitio").classList.remove("input-error");
+      mostrar_mensaje("","help-ProvinciaSitio");
+    }
+  break;
+  case "MailSitio":
+    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    Mail = document.getElementById('MailSitio').value;
+    if (!emailRegex.test(Mail)) {
+      document.getElementById('MailSitio').classList.add('input-error');
+      mostrar_mensaje('El correo electrónico ingresado no es valido.',"help-MailSitio");
+      return false
+    } else {
+      document.getElementById('MailSitio').classList.remove('input-error');
+      mostrar_mensaje("","help-MailSitio");
+    }
+  break;
+  case "TelefonoSitio":
+    telefonoRegex = /^(\(\+?\d{2,3}\)[\*|\s|\-|\.]?(([\d][\*|\s|\-|\.]?){6})(([\d][\s|\-|\.]?){2})?|(\+?[\d][\s|\-|\.]?){8}(([\d][\s|\-|\.]?){2}(([\d][\s|\-|\.]?){2})?)?)$/;
+    X = document.getElementById("TelefonoSitio").value
+    if (!telefonoRegex.test(X)) {
+      document.getElementById("TelefonoSitio").classList.add("input-error");
+      mostrar_mensaje("El telefono ingresado no es correcto.","help-TelefonoSitio");
+      return false;
+    } else {
+      document.getElementById("TelefonoSitio").classList.remove("input-error");
+      mostrar_mensaje("","help-TelefonoSitio");
+    }
+break;
+  case "Mapa":
+    console.log("Lont="+longitud+"lat="+latitud)
+    if ((this.longitud == 0) && (this.latitud == 0)) {
+        mostrar_mensaje("Debes ingresar la ubicacion del Sitio.","help-Mapa");
+      return false;
+    }else {
+      mostrar_mensaje("","help-Mapa");
+    }
+ break;
+  case "Horario":
+
+    seleccion = document.getElementById('Dia-' + id);
+    Dia = seleccion.options[seleccion.selectedIndex].value;
+
+    seleccion1 = document.getElementById('De-' + id);
+    De = seleccion1.options[seleccion1.selectedIndex].value;
+
+    seleccion2 = document.getElementById('Hasta-' + id);
+    Hasta = seleccion2.options[seleccion2.selectedIndex].value;
+
+    if ((Dia == -1) || (De == -1) || (Hasta == -1) || (De > Hasta) || (Hasta < De)) {
+      document.getElementById('Dia-' + id).classList.add("input-error");
+      document.getElementById('De-' + id).classList.add("input-error");
+      document.getElementById('Hasta-' + id).classList.add("input-error");
+      mostrar_mensaje("El Horario ingresado no es valido.","help-horario-"+ id);
+      return false;
+    } else {
+      document.getElementById('Dia-' + id).classList.remove("input-error");
+      document.getElementById('De-' + id).classList.remove("input-error");
+      document.getElementById('Hasta-' + id).classList.remove("input-error");
+      mostrar_mensaje("","help-horario-"+ id);
+    }
+break;
+  case "archivosubido":
+    X = document.getElementById("archivosubido");
+    console.log("dia"+X.files.length);
   
-  return true;
+    if (X.files.length == 0) {
+      document.getElementById("archivosubido").classList.add("input-error");
+      mostrar_mensaje("Debes subir al menos una imagen.","help-archivosubido");
+      return false;
+    } else {
+      document.getElementById("archivosubido").classList.remove("input-error");
+      mostrar_mensaje("","help-archivosubido");
+    }
+  break;
+}
 }
 
 
-  id="nameSitio"
-  id="subject"
-  id="DireccionSitio"
-  id="LocalidadSitio"
-  id="MailSitio"
-  id="TelefonoSitio"
-  id="Longitud"
-  id="Latitud"
-
-  function buscarcoord(){
-    
-     var xmlHttpRequest=new XMLHttpRequest();
-     xmlHttpRequest.onreadystatechange=function() {
-       if (xmlHttpRequest.readyState==4 && xmlHttpRequest.status==200) {
-         var respuesta = JSON.parse(  xmlHttpRequest.responseText );
-     console.log(respuesta)
-     document.getElementById("Longitud").value = 111
-     document.getElementById("Latitud").value = 111
-     } else{
-       console.log("33")
-     }
-    
-   }
-   accessToken =
-   'pk.eyJ1IjoiY29zdGFpdmFuMzQiLCJhIjoiY2treDI1MDk3MDI2cjJ2bXFydTdnMnBmYSJ9.tYdWtyp9KZzPcZL1VowmZg'
-   direccion = document.getElementById("DireccionSitio").value
-   localidad = document.getElementById("LocalidadSitio").value
-   provincia = document.getElementById("ProvinciaSitio").value
-   console.log("33")
-   xmlHttpRequest.open("GET","https://api.mapbox.com/geocoding/v5/mapbox.places/"+ encodeURIComponent(direccion)+"%20"+ encodeURIComponent(localidad) +"%20"+encodeURIComponent(provincia)+".json?limit=1&access_token="+accessToken+"",true);
-   xmlHttpRequest.send();
-   event.preventDefault(); 
-
-   }
-
-function validarDatos(e){
-  emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-  telefonoRegex = /^[2-9]\d{2}[2-9]\d{2}\d{4}$/;
-  passwordRegex =  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-
-    console.log("El elemento selecionado ha sido " +  e);
-    if (e="Longitud"){
-      X = document.getElementById("Latitud").value
-      if ( X <(-180) || X >(180)){
-        mensaje="Las coordenadas ingresadas no son validas."
-      }
-    }
-    if (e="Latitud"){
-      X = document.getElementById("Latitud").value
-      if ( X <(-90) || X >(90)){
-        mensaje="Las coordenadas ingresadas no son validas."
-      }
-    }
-    if (e="nameSitio"){
-      X = document.getElementById("MailSitio").value
-      if (X<(-90) || X>(90)){
-        mensaje="Las coordenadas ingresadas no son validas."
-       alert(mensaje)
-      }
-    }
-    if (e="subject"){
-      X = document.getElementById("MailSitio").value
-      if (X<(-90) || X>(90)){
-        mensaje="Las coordenadas ingresadas no son validas."
-       alert(mensaje)
-      }
-    } if (e="DireccionSitio"){
-      X = document.getElementById("MailSitio").value
-      if (X<(-90) || X>(90)){
-        mensaje="Las coordenadas ingresadas no son validas."
-       alert(mensaje)
-      }
-    } if (e="LocalidadSitio"){
-      X = document.getElementById("MailSitio").value
-      if (X<(-90) || X>(90)){
-        mensaje="Las coordenadas ingresadas no son validas."
-       alert(mensaje)
-      }
-    }
-
-  if (e="TelefonoSitio"){
-    Telefono = document.getElementById("MailSitio").value
-    if (!telefonoRegex.test(Telefono)){
-      mensaje="Las coordenadas ingresadas no son validas."
-     alert(mensaje)
-    }
-  }
-   if (e="MailSitio"){
-    Mail = document.getElementById("MailSitio").value 
-    if (!emailRegex.test(Mail)){
-      mensaje="Las coordenadas ingresadas no son validas."
-     alert(mensaje)
-    }
-  }
-    alert(mensaje)
-}
-
-
-
-
-function validarRegistro(){
-	var xmlHttpRequest=new XMLHttpRequest();
-	xmlHttpRequest.onreadystatechange=function() {
-		if (xmlHttpRequest.readyState==4 && xmlHttpRequest.status==200) {
-			var response = xmlHttpRequest.responseText;
-     console.log("RESPEUSTA DEL SERVER:"+response)
-			if(response == 1) {
-        document.getElementById( 'regForm' ).scrollIntoView();
-				const m = document.getElementById("messageBox");
-				m.innerHTML = `<div class="alert alert-success" role="alert">
-				Sitio registrado con exito.</div>`; 
-				setTimeout(function(){ mensaje.innerHTML = "" }, 2500);
-        setTimeout(function(){ window.location.replace("/dashboard/sitios"); }, 2500);
-			} else {
-        document.getElementById( 'regForm' ).scrollIntoView();
+function validarRegistro() {
+  var xmlHttpRequest = new XMLHttpRequest();
+  xmlHttpRequest.onreadystatechange = function () {
+    if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
+      var response = xmlHttpRequest.responseText;
+      console.log("RESPEUSTA DEL SERVER:" + response)
+      if (response == 1) {
+        document.getElementById('regForm').scrollIntoView();
+        const m = document.getElementById("messageBox");
+        m.innerHTML = `<div class="alert alert-success" role="alert">
+				Sitio registrado con exito.</div>`;
+        setTimeout(function () { mensaje.innerHTML = "" }, 2500);
+        setTimeout(function () { window.location.replace("/dashboard/sitios"); }, 2500);
+      } else {
+        document.getElementById('regForm').scrollIntoView();
         const m = document.getElementById("messageBox");
         m.innerHTML = `<div class="alert alert-danger" role="alert"> Ocurrio un error en el servidor.
-         Por favor, inténtalo de nuevo más tarde.</div>`; 
-        document.getElementById( 'regForm' ).scrollIntoView();
-        setTimeout(function(){ m.innerHTML = "" }, 2500);
-			}
-		}
-	}
-
-  nameSitio = document.getElementById('nameSitio').value;
-  descripcion = document.getElementById('subject').value;
-
-  direccion= document.getElementById('DireccionSitio').value;
-  localidad= document.getElementById('LocalidadSitio').value;
-  provincia= document.getElementById('ProvinciaSitio').value;
-  mail= document.getElementById('MailSitio').value;
-  telefono= document.getElementById('TelefonoSitio').value;
-
-  X = document.getElementById('Longitud').value;
-  Y = document.getElementById('Latitud').value;
-
-  Dia_Inicio = document.getElementById('Dia-Inicio').value;
-  Dia_Fin = document.getElementById('Dia-Fin').value;
-  De_Inicio = document.getElementById('De-Inicio').value;
-  Hasta_Fin = document.getElementById('Hasta-Fin').value;
-  Usuario =  document.getElementById('nombreUsuario').textContent;
-  if (validarDatos(nameSitio,descripcion,direccion,localidad,provincia,mail,telefono,X,Y, Dia_Inicio,Dia_Fin , De_Inicio, Hasta_Fin )){
+         Por favor, inténtalo de nuevo más tarde.</div>`;
+        document.getElementById('regForm').scrollIntoView();
+        setTimeout(function () { m.innerHTML = "" }, 2500);
+      }
+    }
+  }
+  if (validarDatos('nameSitio') && validarDatos('subject') && validarDatos('DireccionSitio')
+    && validarDatos('LocalidadSitio') && validarDatos('ProvinciaSitio') && validarDatos('MailSitio')
+    && validarDatos('TelefonoSitio') && validarDatos('archivosubido')) {
+    Usuario = document.getElementById('nombreUsuario').textContent;
     oData = new FormData(document.forms.namedItem("regForm"));
+    oData.append('longitud', longitud);
+    oData.append('latitud', latitud);
     oData.append('username', Usuario);
-  /* for(let [name, value] of oData) {
+    for (let [name, value] of oData) {
       console.log(`${name} = ${value}`); // key1 = value1, luego key2 = value2
-    }*/
-    xmlHttpRequest.open("POST","/resto/CreateResto",true);
+    }
+    xmlHttpRequest.open("POST", "/resto/CreateResto", true);
     xmlHttpRequest.send(oData);
     event.preventDefault();
-  }else{
+  } else {
     console.log("error form")
     const m = document.getElementById("messageBox");
-    m.innerHTML = `<div class="alert alert-danger" role="alert">`+mensaje+`</div>`; 
-    document.getElementById( 'regForm' ).scrollIntoView();
-    setTimeout(function(){ mensaje.innerHTML = "" }, 2500);
-    //setTimeout(function(){ mensaje.innerHTML = "" }, 2500);
+    m.innerHTML = `<div class="alert alert-danger" role="alert">` + 
+    "El formulario presenta errores. Por favor, inténtalo de nuevo." + `</div>`;
+    document.getElementById('regForm').scrollIntoView();
+    setTimeout(function () { m.innerHTML = "" }, 2500);
   }
 
-  
+
 }
 
+window.addEventListener('DOMContentLoaded', function () {
 
+  mapboxgl.accessToken = 'pk.eyJ1IjoiY29zdGFpdmFuMzQiLCJhIjoiY2treDFvM25yMTd1ZjJ4anVldTA3ZHFpYiJ9.EsQJxJQTd6YbOHyUWcftnw';
+  const coordinates = document.getElementById('coordinates');
+  const map = new mapboxgl.Map({
+    container: 'mapa',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [0, 0],
+    zoom: 2
+  });
+  map.addControl(
+    new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl: mapboxgl
+    })
+  );
+  map.addControl(new mapboxgl.NavigationControl())
+  map.addControl(new mapboxgl.FullscreenControl())
+  map.addControl(new mapboxgl.GeolocateControl())
+
+  const canvas = map.getCanvasContainer();
+
+  const geojson = {
+    'type': 'FeatureCollection',
+    'features': [
+      {
+        'type': 'Feature',
+        'geometry': {
+          'type': 'Point',
+          'coordinates': [0, 0]
+        }
+      }
+    ]
+  };
+
+  function onMove(e) {
+    const coords = e.lngLat;
+
+    // Set a UI indicator for dragging.
+    canvas.style.cursor = 'grabbing';
+
+    // Update the Point feature in `geojson` coordinates
+    // and call setData to the source layer `point` on it.
+    geojson.features[0].geometry.coordinates = [coords.lng, coords.lat];
+    map.getSource('point').setData(geojson);
+  }
+
+  function onUp(e) {
+    const coords = e.lngLat;
+
+    // Print the coordinates of where the point had
+    // finished being dragged to on the map.
+    //  coordinates.style.display = 'block';
+    //   coordinates.innerHTML = `Longitude: ${coords.lng}<br />Latitude: ${coords.lat}`;
+    canvas.style.cursor = '';
+   
+    console.log("longitud=" + longitud + "latitud=" + latitud);
+    // Unbind mouse/touch events
+    map.off('mousemove', onMove);
+    map.off('touchmove', onMove);
+    self.longitud = coords.lng;
+    self.latitud = coords.lat;
+    validarDatos("Mapa");
+  }
+
+  map.on('load', () => {
+    // Add a single point to the map.
+    map.addSource('point', {
+      'type': 'geojson',
+      'data': geojson
+    });
+
+    map.addLayer({
+      'id': 'point',
+      'type': 'circle',
+      'source': 'point',
+      'paint': {
+        'circle-radius': 10,
+        'circle-color': '#F84C4C' // red color
+      }
+    });
+
+    // When the cursor enters a feature in
+    // the point layer, prepare for dragging.
+    map.on('mouseenter', 'point', () => {
+      map.setPaintProperty('point', 'circle-color', '#F84C4C');
+      canvas.style.cursor = 'move';
+    });
+
+    map.on('mouseleave', 'point', () => {
+      map.setPaintProperty('point', 'circle-color', '#F84C4C');
+      canvas.style.cursor = '';
+    });
+
+    map.on('mousedown', 'point', (e) => {
+      // Prevent the default map drag behavior.
+      e.preventDefault();
+
+      canvas.style.cursor = 'grab';
+
+      map.on('mousemove', onMove);
+      map.once('mouseup', onUp);
+    });
+
+    map.on('touchstart', 'point', (e) => {
+      if (e.points.length !== 1) return;
+
+      // Prevent the default map drag behavior.
+      e.preventDefault();
+
+      map.on('touchmove', onMove);
+      map.once('touchend', onUp);
+    });
+  });
+
+
+
+})
+
+function quitar_horario() {
+
+  input = document.getElementById('horario-' + a)
+  padre = input.parentNode;
+  padre.removeChild(input);
+  a--;
+}
+
+function agregar_horario() {
+  a++;
+
+  var div = document.createElement('div');
+  div.setAttribute('id', 'horario-' + a);
+  div.innerHTML = `     
+  <label for="Dia">Día :</label>
+      <select  id="Dia-` + a + `" name="Dia" onBlur="validarDatos('Horario','` + a + `' );">
+        <option value="-1" >Selecionar día:</option>
+        <option value="1">Lunes</option>
+        <option value="2">Martes</option>
+        <option value="3">Miercoles</option>
+        <option value="4">Jueves</option>
+        <option value="5">Viernes</option>
+        <option value="6">Sabado</option>
+        <option value="7">Domingo</option>
+      </select>
+      <span  id="help-horario-` + a + `" class="error-text" ></span>
+      <br>
+      <label for="De">De :</label>
+      <select  id="De-` + a + `" name="De" onBlur="validarDatos('Horario','` + a + `');">
+        <option value="-1">Selecionar hora:</option>
+        <option value="0">00:00</option>
+        <option value="1">01:00</option>
+        <option value="2">02:00</option>
+        <option value="3">03:00</option>
+        <option value="4">04:00</option>
+        <option value="5">05:00</option>
+        <option value="6">06:00</option>
+        <option value="7">07:00</option>
+        <option value="8">08:00</option>
+        <option value="9">09:00</option>
+        <option value="10">10:00</option>
+        <option value="11">11:00</option>
+        <option value="12">12:00</option>
+        <option value="13">13:00</option>
+        <option value="14">14:00</option>
+        <option value="15">15:00</option>
+        <option value="16">16:00</option>
+        <option value="17">17:00</option>
+        <option value="18">18:00</option>
+        <option value="19">19:00</option>
+        <option value="20">20:00</option>
+        <option value="21">21:00</option>
+        <option value="22">22:00</option>
+        <option value="23">23:00</option>
+      </select>
+  
+      <label for="Hasta">A :</label>
+      <select  id="Hasta-` + a + `" name="Hasta" onBlur="validarDatos('Horario','` + a + `');">
+        <option value="-1">Selecionar hora:</option>
+        <option value="0">00:00</option>
+        <option value="1">01:00</option>
+        <option value="2">02:00</option>
+        <option value="3">03:00</option>
+        <option value="4">04:00</option>
+        <option value="5">05:00</option>
+        <option value="6">06:00</option>
+        <option value="7">07:00</option>
+        <option value="8">08:00</option>
+        <option value="9">09:00</option>
+        <option value="10">10:00</option>
+        <option value="11">11:00</option>
+        <option value="12">12:00</option>
+        <option value="13">13:00</option>
+        <option value="14">14:00</option>
+        <option value="15">15:00</option>
+        <option value="16">16:00</option>
+        <option value="17">17:00</option>
+        <option value="18">18:00</option>
+        <option value="19">19:00</option>
+        <option value="20">20:00</option>
+        <option value="21">21:00</option>
+        <option value="22">22:00</option>
+        <option value="23">23:00</option>
+      </select>
+`;
+  document.getElementById('horarios').appendChild(div);
+  document.getElementById('horarios').appendChild(div);
+
+}
