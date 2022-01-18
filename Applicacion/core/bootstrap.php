@@ -26,8 +26,8 @@ App::bind('logger', Logger::getLogger(App::get('config')['logger']['level']));
 /**
  * Load template engine
  */
-$loader = new Twig_Loader_Filesystem(App::get('config')['twig']['templates_dir']);
-$twig = new Twig_Environment($loader, array(
+$loader = new \Twig\Loader\FilesystemLoader(App::get('config')['twig']['templates_dir']);
+$twig = new \Twig\Environment($loader, array(
     'cache' => App::get('config')['twig']['templates_cache_dir'],
     'debug' => true,
 ));
