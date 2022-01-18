@@ -1,10 +1,11 @@
 ## Instalación
 
  - Clonar el repositorio
- - Crear un schema de base de datos con algun cliente MySQL(el schema debe tener codificacion de tipo "latin")
- - Ejecutar los migrations del directorio `sql/` en orden
- - Crear un archivo `config.php` (Hay un ejemplo para copiar en `config.php.example`)
+ - Crear un schema de base de datos con algun cliente MySQL.
+ - Importar el archivo `db_import.sql` del directorio `sql/` al schema creado anteriormente.
+ - Si desea utilizar datos de ejemplo para probar el sistema, importe el archivo `datos_ejemplos.sql`
   - Configurar la base de datos creada y los usuarios correspondientes
+  - Crear un archivo `config.php` (Hay un ejemplo para copiar en `config.php.example`)
  - Ejecutar `composer install`
 
 ## Deploy / ejecución
