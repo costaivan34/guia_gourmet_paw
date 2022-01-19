@@ -26,18 +26,21 @@
 }
 
 .mapboxgl-popup {
-  max-width: 200px;
-
+  min-width: 20vw;
+  min-height: 20vh;
 }
 
 .imagen_pop{
-  width: 14vw;
-  margin-left: 1vw;
+  width: 20vw;
+  height: 10vw;
+  background-size: cover;
 }
 
 #mapa .mapboxgl-popup-content {
   border-radius: 10%;
   background-color: var(--main-color);
+  min-width: 20vw;
+  min-height: 20vh;
 }
 
 #mapa .mapboxgl-popup-tip{
