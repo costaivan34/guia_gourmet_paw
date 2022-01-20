@@ -51,16 +51,11 @@ class UsersController extends Controller{
             $_POST['passwordNueva'],
             $dest_path
         );
-        
-        if ($statement == 1) {
-            return 1;
-        } else {
-            return 0;
-        }
+        header('Location: /inicio');
+        exit();
     }
 
-    public function validarLogin()
-    {
+    public function validarLogin() {
         $user = $_POST['userName'];
         $password = $_POST['password'];
         $statement = $this->model->validarLogin($user, $password);
@@ -75,12 +70,11 @@ class UsersController extends Controller{
         }
     }
 
-    public function actualizarPerfil()
-    {
+    public function actualizarPerfil()  {
         $user = $_POST['mailUser'];
         $nombre = $_POST['nombreUser'];
         $apellido = $_POST['apellidoUser'];
-        $ubicacion = $_POST['paisUser'];
+        $ubicacion = $_POST['ubicacionUser'];
         $telefono = $_POST['telefonoUser'];
         $statement = $this->model->updateUsuario(
             $user,
@@ -90,9 +84,15 @@ class UsersController extends Controller{
             $telefono
         );
         if ($statement == 1) {
-            return 1;
+            session_start();
+            $datos['user'] = ' ';
+            if (isset($_SESSION['user'])) {
+                $datos['user'] = $_SESSION['user'];
+                $datos['data'] = $this->model->getUsuario($_SESSION['user']);
+                return view('/users/dashboard', compact('datos'));
+            }
         } else {
-            return 0;
+            return view('/errors/internal-error', compact('datos'));
         }
     }
 
@@ -123,17 +123,15 @@ class UsersController extends Controller{
         return view('/sitios/NearSitios', compact('data'));
     }
 
-    public function dash()
-    {
+    public function dash(){
         session_start();
         $datos['user'] = ' ';
         if (isset($_SESSION['user'])) {
             $datos['user'] = $_SESSION['user'];
             $datos['data'] = $this->model->getUsuario($_SESSION['user']);
-
             return view('/users/dashboard', compact('datos'));
         } else {
-            header('Location: /');
+            header('Location: /inicio');
             exit();
         }
     }
@@ -193,6 +191,6 @@ class UsersController extends Controller{
     public function new_user()
     {
         $datos = '';
-        return view('/users/create_user', compact('datos'));
+        return view('/users/create_user copy', compact('datos'));
     }
 }

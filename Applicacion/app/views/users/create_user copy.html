@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}Registro de Nuevo Usuario{% endblock %}
+
+{% block head %}
+{{ parent() }}
+
+<script src="/public/script/validar_form.js"></script>
+{% endblock %}
+
+{% block main %}
+
+
+<div  id="contact-form" class="contenedor formulario" >
+  <form
+    id="formCuenta"
+    enctype="multipart/form-data"
+    method="post"
+    name="formCuenta"
+    action="/user/CreateUser"
+  >
+    <h3 class="title">
+      REGISTRATE EN LA GUIA GOURMET Y DISFRUTA DEL CONTENIDO
+    </h3>
+    <div id="messageBox"></div>
+    <fieldset>
+      <legend class="title">Información del Usuario</legend>
+      <label for="nameUser">Nombre de Usuario:</label>
+      <input
+        class="caja-texto"
+        id="nameUser"
+        type="text"
+        name="nameUser"
+        value=""
+        placeholder="Nombre de Usuario"
+        required
+        minlength="4" 
+        maxlength="20"
+        autocorrect="on"
+      />
+
+      <label for="nombreUser">Nombre:</label>
+      <input
+        class="caja-texto"
+        id="nombreUser"
+        type="text"
+        name="nombreUser"
+        value=""
+        placeholder="Nombre"
+        required
+        minlength="4" 
+        maxlength="40"
+        autocorrect="on"
+      />
+
+      <label for="apellidoUser">Apellido:</label>
+     
+      <input
+        class="caja-texto"
+        id="apellidoUser"
+        type="text"
+        name="apellidoUser"
+        value=""
+        placeholder="Apellido"
+        required
+        minlength="4" 
+        maxlength="40"
+        autocorrect="on"
+      />
+    </fieldset>
+    <fieldset>
+      <legend class="title">Información de Contacto</legend>
+
+      <label for="mailUser">Correo Electrónico:</label>
+      <input
+        class="caja-texto"
+        id="mailUser"
+        type="email"
+        name="mailUser"
+        value=""
+        placeholder="Correo Electronico"
+        required
+      />
+      <label for="paisUser">País:</label>
+      <input
+        class="caja-texto"
+        id="paisUser"
+        type="text"
+        name="paisUser"
+        value=""
+        placeholder="País"
+        required
+      />
+      <label for="telefonoUser">Telefono:</label>
+      <input
+        class="caja-texto"
+        id="telefonoUser"
+        type="tel"
+        name="telefonoUser"
+        value=""
+        placeholder="Telefono"
+        pattern="^(\(\+?\d{2,3}\)[\*|\s|\-|\.]?(([\d][\*|\s|\-|\.]?){6})(([\d][\s|\-|\.]?){2})?|(\+?[\d][\s|\-|\.]?){8}(([\d][\s|\-|\.]?){2}(([\d][\s|\-|\.]?){2})?)?)$"
+        required
+      />
+    </fieldset>
+    <fieldset>
+      <label for="archivosubido">Imagen de perfil:</label>
+      <span  id="help-archivosubido" class="error-text" ></span>
+      <input
+        class="caja-texto"
+        id="archivosubido"
+        type="file"
+        name="archivosubido"
+        accept="image/jpeg"
+      />
+
+      <label for="passwordNueva">Contraseña:</label>
+      <span  id="help-passwordNueva" class="error-text" ></span>
+      <input
+        class="caja-texto"
+        id="passwordNueva"
+        type="password"
+        name="passwordNueva"
+        value=""
+        placeholder=""
+        required
+        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$"
+      />
+
+      <label for="passwordRepeat">Confirmar Contraseña:</label>
+      <span  id="help-passwordRepeat" class="error-text" ></span>
+      <input
+        class="caja-texto"
+        id="passwordRepeat"
+        type="password"
+        name="passwordRepeat"
+        value=""
+        placeholder=""
+        required   
+        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$"
+      />
+      <p>
+        Nota: La contraseña debe contener entre 6 y 20 caracteres, una
+        Mayuscula, una minuscula y al menos un digito.
+      </p>
+    </fieldset>
+    <input
+      class="input-enviar"
+      
+      type="submit"
+      value="Enviar"
+      name="Enviar"
+    />
+  </form>
+</div>
+
+{% endblock %}

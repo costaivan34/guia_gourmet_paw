@@ -1,7 +1,7 @@
 {% extends "base.html" %} 
 {% block head %}
 {{ parent() }}
-<script src="/public/script/validadorCuenta.js"></script>
+<script src="/public/script/validar_form.js"></script>
 {% endblock %}
 {% block title %} Cuenta{% endblock %} 
  {% block main %}
@@ -20,11 +20,15 @@
       <br />
       <label for="nombreUser">Nombre</label>
       <input id="nombreUser" type="text" name="nombreUser" value="{{datos.data[0].nombre}}" placeholder="Nombre"
-        required />
+        required      minlength="4" 
+        maxlength="20"
+        autocorrect="on"/>
       <br />
       <label for="apellidoUser">Apellido</label>
       <input id="apellidoUser" type="text" name="apellidoUser" value="{{datos.data[0].apellido}}" placeholder="Apellido"
-        required />
+        required      minlength="4" 
+        maxlength="20"
+        autocorrect="on"/>
       <br />
       <label for="mailUser">Correo Electronico</label>
       <input id="mailUser" type="email" name="mailUser" value="{{datos.data[0].mail}}" placeholder="example@mail.com" />
@@ -34,6 +38,7 @@
       <br />
       <label for="telefonoUser">Telefono</label>
       <input id="telefonoUser" type="tel" name="telefonoUser" value="{{datos.data[0].telefono}}" placeholder="telefono"
+        pattern="^(\(\+?\d{2,3}\)[\*|\s|\-|\.]?(([\d][\*|\s|\-|\.]?){6})(([\d][\s|\-|\.]?){2})?|(\+?[\d][\s|\-|\.]?){8}(([\d][\s|\-|\.]?){2}(([\d][\s|\-|\.]?){2})?)?)$"
         required />
       <input class="input-enviar" type="submit" value="Guardar" name="Enviar" />
     </form>
