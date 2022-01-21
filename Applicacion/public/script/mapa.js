@@ -1,6 +1,7 @@
 var currentMarkers=[];
 
 window.addEventListener('DOMContentLoaded', function () {
+
   if ('geolocation' in navigator) {
     navigator.geolocation.getCurrentPosition(
       function (position) {
@@ -21,31 +22,127 @@ window.addEventListener('DOMContentLoaded', function () {
   }
 })
 
-function haversine_distance(currentX, currentY, X, Y) {
-  function toRad(x) {
-    return (x * Math.PI) / 180
+
+function clickbuscar(latitud, longitud){
+ loadmapa(longitud, latitud); 
+ map.setZoom(18);
+}
+
+
+function forwardGeocoder(query) {
+  const matchingFeatures = [];
+  var xmlHttpRequest = new XMLHttpRequest()
+  xmlHttpRequest.onreadystatechange = function () {
+    if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
+      var respuesta = JSON.parse(xmlHttpRequest.responseText)
+      var geojson =  {
+        'features': [],
+        'type': 'FeatureCollection'
+        };
+   
+      for (sitio in respuesta.AllSitios){
+      
+        geojson.features.push(
+          {
+          'type': 'Feature',
+          'properties': {
+          'title': respuesta.AllSitios[sitio].nombre
+          },
+          'geometry': {
+          'coordinates': [respuesta.AllSitios[sitio].Y, respuesta.AllSitios[sitio].X],
+          'type': 'place'
+          }
+          
+        },);
+      
+      }
+
+      for (const feature of geojson.features) {
+      // Handle queries with different capitalization
+      // than the source data by calling toLowerCase().
+        if (feature.properties.title.toLowerCase() .includes(query.toLowerCase())) {
+          // Add a tree emoji as a prefix for custom
+          // data results using carmen geojson format:
+          // https://github.com/mapbox/carmen/blob/master/carmen-geojson.md
+          feature['place_name'] = `✔️ ${feature.properties.title}`;
+          feature['center'] = feature.geometry.coordinates;
+          feature['place_type'] = ['place'];
+          matchingFeatures.push(feature);
+        }
+      }
+      console.log(matchingFeatures)
+      }
+      return matchingFeatures;
   }
 
-  var lon1 = currentX
-  var lat1 = currentY
-  var lon2 = X
-  var lat2 = Y
-
-  var R = 6371 // km
-  var x1 = lat1 - lat2
-  var dLat = toRad(x1)
-  var x2 = lon1 - lon2
-  var dLon = toRad(x2)
-  var a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(toRad(lat1)) *
-      Math.cos(toRad(lat2)) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2)
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-  var d = R * c
-  return d
+ 
+  xmlHttpRequest.open(
+    'GET',
+    'buscar?Clave=' +
+      query +
+      '&Provincia=' +
+      "TODAS" +
+      '&Categoria=' +
+      0 +
+      '&Pagina=' +
+      1,
+    true,
+  );
+  xmlHttpRequest.send()
+  return matchingFeatures;
 }
+
+
+
+/*
+function forwardGeocoder() {
+  var element  = document.getElementsByClassName("suggestions")[0];
+  while (element.firstChild) {
+    element.removeChild(element.firstChild);
+  }
+  var xmlHttpRequest = new XMLHttpRequest()
+  xmlHttpRequest.onreadystatechange = function () {
+    if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
+     
+      var respuesta = JSON.parse(xmlHttpRequest.responseText)
+     
+      while (element.firstChild) {
+        element.removeChild(element.firstChild);
+      }
+     for (sitio in respuesta.AllSitios){
+      console.log(respuesta.AllSitios[sitio])
+   
+      var div = document.createElement('li');
+      div.innerHTML = `     
+          <a onclick="clickbuscar(` + respuesta.AllSitios[sitio].X + `, ` + respuesta.AllSitios[sitio].Y + `)">
+          <div class="mapboxgl-ctrl-geocoder--suggestion"  >
+            <div class="mapboxgl-ctrl-geocoder--suggestion-title">★` + respuesta.AllSitios[sitio].nombre + `</div>
+            <div class="mapboxgl-ctrl-geocoder--suggestion-address"> Place from Site</div>
+          </div>
+        </a x>
+    `;
+    element.appendChild(div);
+  }
+    }
+  }
+
+  clave = document.getElementsByClassName("mapboxgl-ctrl-geocoder--input")[0].value
+  xmlHttpRequest.open(
+    'GET',
+    'buscar?Clave=' +
+      clave +
+      '&Provincia=' +
+      "TODAS" +
+      '&Categoria=' +
+      0 +
+      '&Pagina=' +
+      1,
+    true,
+  );
+  xmlHttpRequest.send()
+}
+*/
+
 
 function agregarMarcadorCentrar(longitud, latitud, idSitio, nombre, path) {
   loadmapa(longitud, latitud)
@@ -105,49 +202,41 @@ function borrarMarcadores(){
 }
 
 
-
-
-
 function cargarMarcadores(currentX, currentY) {
   var xmlHttpRequest = new XMLHttpRequest()
   xmlHttpRequest.onreadystatechange = function () {
     if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
-      var respuesta = JSON.parse(xmlHttpRequest.responseText)
-    /*  console.log(respuesta)
-      console.log(
+        
+     /* console.log(
         haversine_distance(currentX, currentY, -59.2805014, -35.0047812),
       )*/
-      for (cat of respuesta) {map.getBounds();
-      //  const ll = new mapboxgl.LngLat(currentX, currentY);
-      
-      const bounds = map.getBounds();
-      console.log(bounds._ne.lng);
-      console.log(bounds._sw);
-        const ll = new mapboxgl.LngLat(cat.Y, cat.X);
-        const lx= new mapboxgl.LngLat(currentX,currentY);
-        const ll1 = new mapboxgl.LngLat(bounds._ne.lng, bounds._ne.lat);
-        const ll2 = new mapboxgl.LngLat(bounds._sw.lng, bounds._sw.lat);
-        console.log("distancia del centro al borde:"+lx.distanceTo(ll1))
-        console.log("distancia del centro a sitio:"+lx.distanceTo(ll))
-      /*  if ( //si esta cerca mostrar
-          haversine_distance(currentX, currentY, cat.Y, cat.X) <
-          0.5748535276915911
-        ) {
-          agregarMarcador(cat.idSitio, cat.nombre, cat.path, cat.Y, cat.X)
-        }*/
-        if ( //si esta cerca mostrar
-          ( lx.distanceTo(ll1) > lx.distanceTo(ll)) 
-        ) {
+      if (xmlHttpRequest.responseText ===  " []"){
+        document.getElementById( 'info' ).style.display = 'block';
+        setTimeout(function(){ document.getElementById( 'info' ).style.display = 'none'; }, 2500);
+      }else{ 
+        var respuesta = JSON.parse(xmlHttpRequest.responseText)
+        for (cat of respuesta) {
           agregarMarcador(cat.idSitio, cat.nombre, cat.path, cat.Y, cat.X)
         }
-      }
+      
     }
   }
-  xmlHttpRequest.open('GET', 'marcadores', true)
+}
+  const bounds = map.getBounds();
+  const lx= new mapboxgl.LngLat(currentX,currentY);
+  const ll1 = new mapboxgl.LngLat(bounds._ne.lng, bounds._ne.lat);
+  const ll2 = new mapboxgl.LngLat(bounds._sw.lng, bounds._sw.lat);
+ 
+  xmlHttpRequest.open('GET', 'marcadores?clong='+
+  currentX+"&clat="+currentY+
+  "&Ulong="+bounds._ne.lng +"&Ulat="+bounds._ne.lat
+  +
+  "&Dlong="+bounds._sw.lng +"&Dlat="+bounds._sw.lat, true)
   xmlHttpRequest.send()
 }
 
 function loadmapa(longitud, latitud) {
+  document.getElementById( 'info' ).style.display = 'none';
   mapboxgl.accessToken =
     'pk.eyJ1IjoiY29zdGFpdmFuMzQiLCJhIjoiY2treDI1MDk3MDI2cjJ2bXFydTdnMnBmYSJ9.tYdWtyp9KZzPcZL1VowmZg'
   map = new mapboxgl.Map({
@@ -156,20 +245,34 @@ function loadmapa(longitud, latitud) {
     center: [longitud, latitud],
     zoom:14.5 ,
   })
+
   map.addControl(
     new MapboxGeocoder({
     accessToken: mapboxgl.accessToken,
+    localGeocoder: forwardGeocoder,
+    marker: false,
     mapboxgl: mapboxgl
     })
     );
+
   map.addControl(new mapboxgl.NavigationControl())
   map.addControl(new mapboxgl.FullscreenControl())
   map.addControl(new mapboxgl.GeolocateControl())
- 
 
   
-  map.on('dragend', () => {
 
+
+  map.on('zoom', () => {
+    const { lng, lat } = map.getCenter()
+    borrarMarcadores();
+    marcarPosition(currentX, currentY)
+    cargarMarcadores(lng, lat)
+  })
+
+
+
+  
+  map.on('drag', () => {
     const { lng, lat } = map.getCenter()
     borrarMarcadores();
     marcarPosition(currentX, currentY)

@@ -91,7 +91,7 @@ break;
     }
 break;
   case "Mapa":
-    console.log("Lont="+longitud+"lat="+latitud)
+   // console.log("Lont="+longitud+"lat="+latitud)
     if ((this.longitud == 0) && (this.latitud == 0)) {
         mostrar_mensaje("Debes ingresar la ubicacion del Sitio.","help-Mapa");
       return false;
@@ -224,86 +224,21 @@ window.addEventListener('DOMContentLoaded', function () {
     ]
   };
 
-  function onMove(e) {
-    const coords = e.lngLat;
+  var el = document.createElement('div')
+  el.className = 'marker'
+  marker = new mapboxgl.Marker(el,{draggable: true ,  color: '#00000F' })
+  .setLngLat([0, 0])
+  .addTo(map);
 
-    // Set a UI indicator for dragging.
-    canvas.style.cursor = 'grabbing';
-
-    // Update the Point feature in `geojson` coordinates
-    // and call setData to the source layer `point` on it.
-    geojson.features[0].geometry.coordinates = [coords.lng, coords.lat];
-    map.getSource('point').setData(geojson);
-  }
-
-  function onUp(e) {
-    const coords = e.lngLat;
-
-    // Print the coordinates of where the point had
-    // finished being dragged to on the map.
-    //  coordinates.style.display = 'block';
-    //   coordinates.innerHTML = `Longitude: ${coords.lng}<br />Latitude: ${coords.lat}`;
-    canvas.style.cursor = '';
-   
-    console.log("longitud=" + longitud + "latitud=" + latitud);
-    // Unbind mouse/touch events
-    map.off('mousemove', onMove);
-    map.off('touchmove', onMove);
+     
+    function onDragEnd() {
+    const coords = marker.getLngLat();
     self.longitud = coords.lng;
     self.latitud = coords.lat;
     validarDatos("Mapa");
-  }
-
-  map.on('load', () => {
-    // Add a single point to the map.
-    map.addSource('point', {
-      'type': 'geojson',
-      'data': geojson
-    });
-
-    map.addLayer({
-      'id': 'point',
-      'type': 'circle',
-      'source': 'point',
-      'paint': {
-        'circle-radius': 10,
-        'circle-color': '#F84C4C' // red color
-      }
-    });
-
-    // When the cursor enters a feature in
-    // the point layer, prepare for dragging.
-    map.on('mouseenter', 'point', () => {
-      map.setPaintProperty('point', 'circle-color', '#F84C4C');
-      canvas.style.cursor = 'move';
-    });
-
-    map.on('mouseleave', 'point', () => {
-      map.setPaintProperty('point', 'circle-color', '#F84C4C');
-      canvas.style.cursor = '';
-    });
-
-    map.on('mousedown', 'point', (e) => {
-      // Prevent the default map drag behavior.
-      e.preventDefault();
-
-      canvas.style.cursor = 'grab';
-
-      map.on('mousemove', onMove);
-      map.once('mouseup', onUp);
-    });
-
-    map.on('touchstart', 'point', (e) => {
-      if (e.points.length !== 1) return;
-
-      // Prevent the default map drag behavior.
-      e.preventDefault();
-
-      map.on('touchmove', onMove);
-      map.once('touchend', onUp);
-    });
-  });
-
+    }
+     
+    marker.on('dragend', onDragEnd);
 
 
 })

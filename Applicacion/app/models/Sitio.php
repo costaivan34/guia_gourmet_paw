@@ -123,9 +123,35 @@ class Sitio extends Model{
         return $total_pages;
     }
 
-    public function getMarcadores(){
+    function distance($lat1, $lon1, $lat2, $lon2) {
+ 
+        $theta = $lon1 - $lon2;
+        $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+        $dist = acos($dist);
+        $dist = rad2deg($dist);
+        $miles = $dist * 60 * 1.1515;
+        return ($miles  * 1.609344);
+      }
+      
+
+    public function getMarcadores( $currentX, $currentY , $Ulong ,$Ulat,$Dlong,$Dlat ){
         $Marcadores = $this->db->selectCerca();
-        $basicMarcadores = json_encode($Marcadores);
+       $mark= [];
+        foreach ($Marcadores as $value){
+            //calcular distancia al lugar || $dist_to_place > $distSbounds
+            //si dub y ddb son manores eliminar del array   
+            $dist_to_place = $this->distance( $currentX, $currentY,$value->Y,$value->X);       
+            $distNbounds = $this->distance($currentY,$currentX, $Ulat, $Ulong);
+            $distSbounds = $this->distance( $currentY,$currentX, $Dlat,$Dlong);
+       //     var_dump($dist_to_place >= $distNbounds  ); 
+      //      var_dump("------------"  );        var_dump(  $dist_to_place   );     var_dump(  $distNbounds );   var_dump(  $distSbounds );
+            if ($dist_to_place <= $distNbounds ){
+          //      var_dump("entro"); 
+                array_push($mark, $value); 
+            }
+        }
+       
+        $basicMarcadores = json_encode( $mark);
         return $basicMarcadores;
     }
 

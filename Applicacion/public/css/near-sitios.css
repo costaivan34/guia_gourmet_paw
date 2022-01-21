@@ -5,6 +5,23 @@
   min-height: 80vh;
  
 }
+#info {
+
+  margin: 0px auto;
+  word-wrap: anywhere;
+  white-space: pre-wrap;
+  padding: 0vh  8vw 0vh 8vw ;
+  margin:12vh 12vw 12vh 10vw ;
+  border: solid 1px var(--main-color);
+  border-radius: 3px;
+  font-size: 12px;
+  text-align: center;
+  color: #222;
+  background: #fff;
+  z-index: 20;
+  position: absolute;
+  top: 0;
+  }
 
 .actualPosition{
   background-image: url('/public/res/location.svg');
@@ -12,7 +29,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  
+
 }
 
 .marker {

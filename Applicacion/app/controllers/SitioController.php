@@ -185,11 +185,15 @@ class SitioController extends Controller{
       //var_dump($datos);
         return view('/sitios/NearSitios', compact('datos'));
     }
-
-
+    
     public function getMarcadores(){
-
-        $Datos=$this->model->getMarcadores();
+       $currentX = ($_GET['clong']);
+        $currentY = ($_GET['clat']);
+        $Ulong = ($_GET['Ulong']);
+        $Ulat = ($_GET['Ulat']);
+        $Dlong = ($_GET['Dlong']);
+        $Dlat = ($_GET['Dlat']);
+        $Datos=$this->model->getMarcadores( $currentX, $currentY , $Ulong ,$Ulat,$Dlong,$Dlat );
       //  $data = json_encode( $Datos, JSON_FORCE_OBJECT);
        return  $Datos;
     }

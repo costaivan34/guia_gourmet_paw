@@ -464,7 +464,7 @@ class QueryBuilder
         $statement = $this->pdo
             ->prepare("SELECT s.idSitio,s.nombre, u.X, u.Y, i.path FROM sitios s 
     INNER JOIN ubicacion u  ON  s.idSitio = u.idSitio
-    INNER JOIN imagenessitios i ON  s.idSitio = i.idSitio
+    INNER JOIN imagenessitios i ON  s.idSitio = i.idSitio 
      ");
         /*$statement = $this->pdo->prepare("SELECT s.idSitio, s.nombre, s.idCategoria, u.X, u.Y 
     FROM sitios s INNER JOIN ubicacion u ON u.idSitio = s.idSitio 
@@ -564,7 +564,7 @@ class QueryBuilder
         $per_page
     ) {
         $statement = $this->pdo
-            ->prepare("SELECT s.idSitio,s.nombre,u.ciudad, u.provincia, i.path FROM sitios s 
+            ->prepare("SELECT s.idSitio,s.nombre,u.ciudad, u.provincia,i.path FROM sitios s 
     INNER JOIN ubicacion u  ON  s.idSitio = u.idSitio
     INNER JOIN imagenessitios i ON  s.idSitio = i.idSitio
     WHERE s.nombre like CONCAT('%','$Clave','%') AND u.provincia like CONCAT('%','$Provincia','%') AND idCategoria=$Categoria
@@ -612,7 +612,7 @@ class QueryBuilder
     public function selectSitioBuscarAllSitios($Clave, $offset, $per_page)
     {
         $statement = $this->pdo
-            ->prepare("SELECT s.idSitio,s.nombre,u.ciudad, u.provincia, i.path FROM sitios s 
+            ->prepare("SELECT s.idSitio,s.nombre,u.ciudad, u.provincia, u.X,u.Y, i.path FROM sitios s 
     INNER JOIN ubicacion u  ON  s.idSitio = u.idSitio
     RIGHT JOIN imagenessitios i ON  s.idSitio = i.idSitio
     WHERE s.nombre like CONCAT('%','$Clave','%')
