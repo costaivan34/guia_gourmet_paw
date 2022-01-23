@@ -188,9 +188,8 @@ class UsersController extends Controller{
         }
     }
 
-    public function new_user()
-    {
+    public function new_user(){
         $datos = '';
-        return view('/users/create_user copy', compact('datos'));
+        return view('/users/create_user', compact('datos'));
     }
 }

@@ -736,4 +736,13 @@ class QueryBuilder
             return 0;
         }
     }
+    public function isFree($mail) {
+        $statement = $this->pdo->prepare(
+            "SELECT * FROM `usuarios` WHERE mail='$mail' "
+        );
+        $statement->execute();
+        return $statement->rowCount();
+       
+    }
+    
 }

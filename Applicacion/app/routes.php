@@ -36,6 +36,7 @@
 
     $router->get('paginacionPlatos', 'SitioController@getPlatoPage');
     $router->get('categorias', 'SitioController@getCategorias');
+    $router->get('mail', 'SitioController@getMail');
     $router->get('cerca', 'SitioController@cerca');
     $router->get('marcadores', 'SitioController@getMarcadores');
     $router->get('buscador', 'SitioController@buscador');

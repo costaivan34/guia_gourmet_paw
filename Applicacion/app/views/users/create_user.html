@@ -5,7 +5,7 @@
 {% block head %}
 {{ parent() }}
 
-<script src="/public/script/validarRegistro.js"></script>
+<script src="/public/script/validar_form.js"></script>
 {% endblock %}
 
 {% block main %}
@@ -17,6 +17,7 @@
     enctype="multipart/form-data"
     method="post"
     name="formCuenta"
+    action="/user/CreateUser"
   >
     <h3 class="title">
       REGISTRATE EN LA GUIA GOURMET Y DISFRUTA DEL CONTENIDO
@@ -24,8 +25,8 @@
     <div id="messageBox"></div>
     <fieldset>
       <legend class="title">Información del Usuario</legend>
-      <label for="nameUser">Nombre de Usuario:</label>
-      <span  id="help-nameUser" class="error-text" ></span>
+      <div class="input-group">
+        <label for="nameUser">Nombre de Usuario:</label>
       <input
         class="caja-texto"
         id="nameUser"
@@ -33,12 +34,16 @@
         name="nameUser"
         value=""
         placeholder="Nombre de Usuario"
-        onBlur="validarDatos('nameUser');"
         required
+        minlength="4" 
+        maxlength="20"
+        autocorrect="on"
       />
-
-      <label for="nombreUser">Nombre:</label>
-      <span  id="help-nombreUser" class="error-text" ></span>
+      <span  id="help-nameUser" class="error-text" ></span>
+    </div>
+    
+    <div class="input-group">
+        <label for="nombreUser">Nombre:</label>
       <input
         class="caja-texto"
         id="nombreUser"
@@ -46,12 +51,17 @@
         name="nombreUser"
         value=""
         placeholder="Nombre"
-        onBlur="validarDatos('nombreUser');"
         required
+        minlength="4" 
+        maxlength="40"
+        autocorrect="on"
       />
-
-      <label for="apellidoUser">Apellido:</label>
-      <span  id="help-apellidoUser" class="error-text" ></span>
+      <span  id="help-nombreUser" class="error-text" ></span>
+    </div>
+    
+      
+    <div class="input-group">
+        <label for="apellidoUser">Apellido:</label>
       <input
         class="caja-texto"
         id="apellidoUser"
@@ -59,15 +69,20 @@
         name="apellidoUser"
         value=""
         placeholder="Apellido"
-        onBlur="validarDatos('apellidoUser');"
         required
+        minlength="4" 
+        maxlength="40"
+        autocorrect="on"
       />
+      <span  id="help-apellidoUser" class="error-text" ></span>
+    </div>
     </fieldset>
     <fieldset>
       <legend class="title">Información de Contacto</legend>
 
-      <label for="mailUser">Correo Electrónico:</label>
-      <span  id="help-mailUser" class="error-text" ></span>
+     
+      <div class="input-group">
+        <label for="mailUser">Correo Electrónico:</label>
       <input
         class="caja-texto"
         id="mailUser"
@@ -75,11 +90,12 @@
         name="mailUser"
         value=""
         placeholder="Correo Electronico"
-        onBlur="validarDatos('mailUser');"
         required
       />
-      <label for="paisUser">País:</label>
-      <span  id="help-paisUser" class="error-text" ></span>
+      <span  id="help-mailUser" class="error-text" ></span>
+    </div>
+      <div class="input-group">
+        <label for="paisUser">País:</label>
       <input
         class="caja-texto"
         id="paisUser"
@@ -87,11 +103,12 @@
         name="paisUser"
         value=""
         placeholder="País"
-        onBlur="validarDatos('paisUser');"
         required
       />
-      <label for="telefonoUser">Telefono:</label>
-      <span  id="help-telefonoUser" class="error-text" ></span>
+      <span  id="help-paisUser" class="error-text" ></span>
+    </div>
+    <div class="input-group">
+        <label for="telefonoUser">Telefono:</label>
       <input
         class="caja-texto"
         id="telefonoUser"
@@ -99,24 +116,27 @@
         name="telefonoUser"
         value=""
         placeholder="Telefono"
-        onBlur="validarDatos('telefonoUser');"
+        pattern="^(\(\+?\d{2,3}\)[\*|\s|\-|\.]?(([\d][\*|\s|\-|\.]?){6})(([\d][\s|\-|\.]?){2})?|(\+?[\d][\s|\-|\.]?){8}(([\d][\s|\-|\.]?){2}(([\d][\s|\-|\.]?){2})?)?)$"
         required
       />
+      <span  id="help-telefonoUser" class="error-text" ></span>
+    </div>
     </fieldset>
     <fieldset>
-      <label for="archivosubido">Imagen de perfil:</label>
-      <span  id="help-archivosubido" class="error-text" ></span>
+      <div class="input-group">
+        <label for="archivosubido">Imagen de perfil:</label>
       <input
         class="caja-texto"
         id="archivosubido"
         type="file"
         name="archivosubido"
         accept="image/jpeg"
-        onfocus="validarDatos('archivosubido');"
       />
-
-      <label for="passwordNueva">Contraseña:</label>
-      <span  id="help-passwordNueva" class="error-text" ></span>
+      <span  id="help-archivosubido" class="error-text" ></span>
+    </div>
+    
+    <div class="input-group">
+        <label for="passwordNueva">Contraseña:</label>
       <input
         class="caja-texto"
         id="passwordNueva"
@@ -125,11 +145,13 @@
         value=""
         placeholder=""
         required
-        onBlur="validarDatos('passwordNueva');"
+        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$"
       />
-
-      <label for="passwordRepeat">Confirmar Contraseña:</label>
-      <span  id="help-passwordRepeat" class="error-text" ></span>
+      <span  id="help-passwordNueva" class="error-text" ></span>
+    </div>
+     
+    <div class="input-group">
+        <label for="passwordRepeat">Confirmar Contraseña:</label>
       <input
         class="caja-texto"
         id="passwordRepeat"
@@ -137,9 +159,10 @@
         name="passwordRepeat"
         value=""
         placeholder=""
-        required
-        onBlur="validarDatos('passwordRepeat');"
+        required   
       />
+      <span  id="help-passwordRepeat" class="error-text" ></span>
+    </div>
       <p>
         Nota: La contraseña debe contener entre 6 y 20 caracteres, una
         Mayuscula, una minuscula y al menos un digito.
@@ -147,8 +170,7 @@
     </fieldset>
     <input
       class="input-enviar"
-      onclick="validarRegistro();"
-      type="button"
+      type="submit"
       value="Enviar"
       name="Enviar"
     />

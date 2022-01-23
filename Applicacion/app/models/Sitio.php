@@ -234,7 +234,10 @@ class Sitio extends Model{
         $total_pages = ceil($total_rows / $this->n_per_page);
         return $total_pages;
     }
-
+    
+    public function isFree($mail){
+        return $this->db->isFree($mail);
+    }
 
     public function agregarComentario(array $comentario){
         $this->db->insert('comentariositios', $comentario);

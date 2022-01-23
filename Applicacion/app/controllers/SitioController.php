@@ -173,6 +173,15 @@ class SitioController extends Controller{
         return  $this->model->getCategorias();
     }
  
+    public function getMail(){
+        $idSitio= $this->model->isFree($_GET['mailUser']);
+        if ($idSitio==1){
+            return 1;   
+        }else{
+            return 0;   
+        }
+    }
+
 
     public function cerca(){
         session_start();

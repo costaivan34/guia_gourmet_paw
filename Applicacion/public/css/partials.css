@@ -550,7 +550,7 @@ fieldset {
 .formulario textarea {
   width: 67vw;
   padding: 1vw;
-  margin: 1vh 4vh 4vh 2vw;
+  margin: 1vh 4vh 0vh 4vw;
   resize: vertical;
 }
 
@@ -570,6 +570,18 @@ fieldset {
   width: 6vw;
   height: 6vh;
 }
+
+
+.error-text{
+
+  margin: 2vh 4vh 0vh 4vw;
+}
+
+.input-group{
+  margin-bottom: 4vh;
+  width: 67vw;
+}
+
 
 #formDelete .input-enviar {
   width: 70vw;
