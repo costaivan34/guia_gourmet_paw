@@ -15,7 +15,7 @@
 {% endblock %} {% block title %}{{ datos.OneSitio[0].nombre }}{% endblock %} {%
 block main %}
 <article itemscope itemtype="https://schema.org/Restaurant">
-  <section class="encabezado">
+ 
     <section class="slideshow-sitio slideshow-container contenedor">
       <ul>
         <!-- Full-width images with number and caption text -->
@@ -111,7 +111,7 @@ block main %}
         </section>
       </section>
     </section>
-  </section>
+
   <section class="contenedor">
     <!-- Tab links -->
     <section class="tab">
@@ -161,6 +161,7 @@ block main %}
       <div itemprop="geo" itemscope itemtype="https://schema.org/GeoCoordinates" id="mapa">
         <meta itemprop="latitude" content="{{ datos.Ubicacion[0].y}}" />
         <meta itemprop="longitude" content="{{ datos.Ubicacion[0].x}}" />
+        <pre id="info">No fue posible encontrar un sitio cerca de tu ubicación. Por favor mueve el mapa para cambiar las coordenadas</pre>
       </div>
       <script>
         var longitud = '{{ datos.Ubicacion[0].y}}'
@@ -169,13 +170,14 @@ block main %}
         var nombre = '{{ datos.OneSitio[0].nombre }}'
         var path = '{{ datos.Imagenes[0].path }}'
       </script>
+      
     </section>
     <!-- Tab content Platos-->
     <section id="Platos" class="tabcontent noactive">
       <ul id="columna">
-        <div id="fila">
+        <li id="fila">
 
-        </div>
+        </li>
       </ul>
       <ul class="paginacion" id="paginacionPlatos"></ul>
     </section>

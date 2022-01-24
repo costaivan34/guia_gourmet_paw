@@ -102,9 +102,10 @@ class UsersController extends Controller{
         $password = $_POST['passwordNueva'];
         $statement = $this->model->validarLogin($user, $passwordOLD);
         if ($statement == 1) {
-            return $this->model->updatePassword($user, $password);
+            $this->model->updatePassword($user, $password);
+            return view('/users/dashboard-password', compact('datos'));
         } else {
-            return 0;
+            return view('/users/dashboard-password', compact('datos'));
         }
     }
 

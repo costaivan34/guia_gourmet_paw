@@ -125,15 +125,17 @@
     <fieldset>
       <div class="input-group">
         <label for="archivosubido">Imagen de perfil:</label>
-      <input
-        class="caja-texto"
-        id="archivosubido"
-        type="file"
-        name="archivosubido"
-        accept="image/jpeg"
-      />
-      <span  id="help-archivosubido" class="error-text" ></span>
-    </div>
+        <div id="preview"></div>
+        <input
+          id="archivosubido"
+          type="file"
+          name="archivosubido"
+          accept="image/jpeg"
+          required
+        />
+       
+        <span id="help-archivosubido" class="error-text"></span>
+      </div>
     
     <div class="input-group">
         <label for="passwordNueva">Contraseña:</label>

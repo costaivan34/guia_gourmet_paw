@@ -17,7 +17,7 @@
     $router->get('user/new', 'UsersController@new_user' );
     $router->post('user/CreateUser', 'UsersController@store' );
 
-    $router->get('plato/new', 'PlatoController@new_plato' );
+
 
     $router->post('actualizarPerfil', 'UsersController@actualizarPerfil');
     $router->post('cambioPassword', 'UsersController@actualizarPassword');

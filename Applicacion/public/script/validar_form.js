@@ -30,6 +30,23 @@ inputs.forEach(function(input) {
 document.getElementById('passwordRepeat').addEventListener('blur', event => {validarpassword()});
 document.getElementById('paisUser').addEventListener('blur', event => {validarpais()});
 document.getElementById('mailUser').addEventListener('blur', event => {validarmail()});
+
+document.getElementById("archivosubido").onchange = function(e) {
+  // Creamos el objeto de la clase FileReader
+  let reader = new FileReader();
+ 
+  // Leemos el archivo subido y se lo pasamos a nuestro fileReader
+  reader.readAsDataURL( document.getElementById("archivosubido").files[0]);
+
+  // Le decimos que cuando este listo ejecute el código interno
+  reader.onload = function(){
+    let preview = document.getElementById('preview'),
+            image = document.createElement('img');
+    image.src = reader.result;
+    preview.innerHTML = '';
+    preview.append(image);
+  };
+}
 })
 
 
@@ -95,4 +112,6 @@ function validarmail() {
   }
   
 }
+
+
 

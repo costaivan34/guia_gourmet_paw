@@ -531,7 +531,7 @@ fieldset {
   width: 60vw;
   resize: vertical;
   padding: 1vw;
-  margin: 1vh 0 4vh 2vw;
+  margin: 1vh 4vh 0vh 4vw;
 }
 
 .dash select {
@@ -560,6 +560,7 @@ fieldset {
   width: 20vw;
   margin: 1vh 0 4vh 1vw;
 }
+
 .formulario label {
   margin-right: 4vw;
 }
@@ -580,6 +581,21 @@ fieldset {
 .input-group{
   margin-bottom: 4vh;
   width: 67vw;
+}
+
+#preview{
+  border: 2px solid var(--main-color);
+  background-color: var(--assent-color);
+  margin: 4vh 4vw 0 4vw;
+  width: 67vw;
+  padding: 1vw;
+}
+
+#preview img{
+  max-width: 20vw;
+  max-height: 20vh;
+  padding:  1vh 35vw 0 30vw;
+ 
 }
 
 
