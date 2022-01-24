@@ -128,21 +128,70 @@ class QueryBuilder
         }
     }
 
-    public function agregarCaracteristicas($value, $idPlato)
-    {
+   
+
+    public function agregarPlato( $namePlato, $subject, $namePrecio, $idSitio,
+    $IP,$IE,$IC,$IPP,$IG,$IS,$archivos,$Carac){
+        try {
+            $this->pdo->beginTransaction();
+            
+            $statement = $this->pdo
+                ->prepare("INSERT INTO platos(nombre, descripcion, precio,idSitio) 
+            VALUES ('$namePlato','$subject', $namePrecio,$idSitio)");
+            $statement->execute();
+            
+            $idPlato = $this->pdo->lastInsertId();
+            
+            $this->agregarInfor(1, $IP, $idPlato);
+            $this->agregarInfor(2, $IE, $idPlato);
+            $this->agregarInfor(3, $IC, $idPlato);
+            $this->agregarInfor(4, $IPP, $idPlato);
+            $this->agregarInfor(5, $IG, $idPlato);
+            $this->agregarInfor(6, $IS, $idPlato);
+
+            $this->agregarCaracteristicas($Carac, $idPlato);
+
+            $this->agregarImagenes1($archivos, $idPlato);
+
+            $this->pdo->commit();
+            
+    } catch (\PDOException $e) {
+        // rollback the transaction
+        $this->pdo->rollBack();
+    
+        // show the error message
+        die($e->getMessage());
+    }
+    }
+   
+    public function agregarImagenes1($Archivos, $idPlato){
+        if (  isset($Archivos['archivosubido']) &&  is_uploaded_file($Archivos['archivosubido']['tmp_name'])) {
+            $fileTmpPath = $_FILES['archivosubido']['tmp_name'];
+            $uploadFileDir = './private/plates/' . $idPlato . '/';
+            mkdir($uploadFileDir, 0777, true);
+            $dest_path = $uploadFileDir . '/1.jpg';
+            move_uploaded_file($fileTmpPath, $dest_path);
+        }
+        $dest_path = substr($dest_path, 1);
+        $statement = $this->pdo->prepare(
+            "INSERT INTO imagenesplatos(idPlato, path) VALUES ($idPlato,'$dest_path')"
+        );
+        $statement->execute();
+    }
+
+    public function agregarCaracteristicas($caract, $idPlato) {
+        foreach ($caract as $value) {
+            $datos = $this->db->agregarCaracteristicas($value, $idPlato);
+       
         $statement = $this->pdo->prepare(
             "INSERT INTO listacaractplato (idPlato,idCaract) VALUES ($idPlato,$value)"
         );
         $statement->execute();
-        if ($statement->rowCount() > 0) {
-            return $this->pdo->lastInsertId();
-        } else {
-            return 0;
-        }
+    }
     }
 
-    public function agregarInfor($Info, $Valor, $idPlato)
-    {
+    public function agregarInfor($Info, $Valor, $idPlato) {
+        
         $statement = $this->pdo->prepare(
             "INSERT INTO valornutricional (idPlato,idInfo, valor) VALUES ($idPlato,$Info,$Valor)"
         );
@@ -153,19 +202,7 @@ class QueryBuilder
             return 0;
         }
     }
-
-    public function agregarPlato($namePlato, $subject, $namePrecio, $idSitio)
-    {
-        $statement = $this->pdo
-            ->prepare("INSERT INTO platos(nombre, descripcion, precio,idSitio) 
-        VALUES ('$namePlato','$subject', $namePrecio,$idSitio)");
-        $statement->execute();
-        if ($statement->rowCount() > 0) {
-            return $this->pdo->lastInsertId();
-        } else {
-            return 0;
-        }
-    }
+   
 
     public function agregarSitio(
         $nameSitio,
@@ -256,31 +293,12 @@ class QueryBuilder
         }
     }
 
-    public function agregarImagenes1($idPlato, $path)
-    {
-        $statement = $this->pdo->prepare(
-            "INSERT INTO imagenesplatos(idPlato, path) VALUES ($idPlato,'$path')"
-        );
-        $statement->execute();
-        if ($statement->rowCount() > 0) {
-            return $this->pdo->lastInsertId();
-        } else {
-            return 0;
-        }
-    }
 
-    public function selectSitio($idSitio)
-    {
-        /*
-    $statement = $this->pdo->prepare("SELECT idsitio, nombre, descripcion, telefono, sitioweb, valoracionPrecio,
-     valoracionAmbiente, valoracionServicio FROM sitio WHERE idSitio= $idSitio");
-
-    */
+    public function selectSitio($idSitio) {
         $statement = $this->pdo->prepare(
             "SELECT * FROM sitios WHERE idSitio= $idSitio"
         );
         $statement->execute();
-
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
 

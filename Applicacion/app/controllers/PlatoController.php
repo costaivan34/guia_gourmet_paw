@@ -41,15 +41,38 @@ class PlatoController extends Controller{
     }
 
     public function store(){
-        $idPlato = $this->model->agregarPlato($_POST['namePlato'],$_POST['subject'], $_POST['namePrecio'],$_POST["idSitio"]);
-        if ($idPlato>0){
-            $this->model->agregarImagenes($_FILES,$idPlato);
-             $this->model->agregarCaracteristicas($_POST['caracteristicas'],$idPlato);
-            $this->model->agregarInfor($_POST['InformaciónPeso'],$_POST['InformaciónEnergia'],$_POST['InformaciónCarbohidratos'],$_POST['InformaciónProteina'],$_POST['InformaciónGrasas'],$_POST['InformaciónSodio'],$idPlato);
-           return 1;   
-        }else{
-           return 0;   
+        var_dump($_POST); 
+        var_dump($_FILES);  
+      session_start();
+        $datos['user'] = ' ';
+        if (isset($_SESSION['user'])) {
+                $datos['user'] = $_SESSION['user'];
+                //si formulario valido
+                /*  if (isset($_SESSION['user'])) {
+                     //=>>> store*/
+                    $idPlato = $this->model->agregarPlato($_POST['namePlato'],$_POST['subject'],
+                     $_POST['namePrecio'],$_POST["idSitio"],$_POST['InformaciónPeso']
+                     ,$_POST['InformaciónEnergia'],$_POST['InformaciónCarbohidratos'],
+                     $_POST['InformaciónProteina'],$_POST['InformaciónGrasas'],$_POST['InformaciónSodio'],
+                    $_FILES,$_POST['caracteristicas']);
+                    if ($idPlato>0){ //si valido
+                        $datos['data'] = $this->model->getUsuario($_SESSION['user']);
+                        $datos['sitios'] = $this->model->getSitiosUsuario( $_SESSION['user']);
+                        return view('/users/dashboard-sitios', compact('datos')); 
+                    }else{ //si errores
+                      return view('/errors/internal-error', compact('datos'));  
+                    }
+             /*   } else {
+                    //si formulario invalido
+                    //=>> reeenviar con errores
+                }*/
+        } else {
+            //sino esta logeado
+            //=>> exit
+            header('Location: /');
+            exit();
         }
+ 
     }
 
     public function delete(){

@@ -137,17 +137,13 @@ class UsersController extends Controller{
         }
     }
 
-    public function dash_sitios()
-    {
+    public function dash_sitios() {
         session_start();
         $datos['user'] = ' ';
         if (isset($_SESSION['user'])) {
             $datos['user'] = $_SESSION['user'];
-
             $datos['data'] = $this->model->getUsuario($_SESSION['user']);
-            $datos['sitios'] = $this->model->getSitiosUsuario(
-                $_SESSION['user']
-            );
+            $datos['sitios'] = $this->model->getSitiosUsuario( $_SESSION['user']);
             return view('/users/dashboard-sitios', compact('datos'));
         } else {
             header('Location: /');

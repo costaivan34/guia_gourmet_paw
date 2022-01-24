@@ -69,6 +69,14 @@ class SitioController extends Controller{
    }
 
     public function store(){
+        //si formulario valido
+        //=>>> store
+        //si formulario invalido
+        //=>> reeenviar con errores
+
+
+        var_dump($_POST); 
+        var_dump($_FILES);  
        // $this->model->insertarSitio($_POST, $_FILES);
        $sitio = [ 
         'idSitio' => $_POST['sitio'],

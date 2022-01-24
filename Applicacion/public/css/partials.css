@@ -557,8 +557,8 @@ fieldset {
 .formulario select {
   padding: 1vw;
   height: auto;
-  width: 20vw;
-  margin: 1vh 0 4vh 1vw;
+  width: 67vw;
+  margin: 1vh 4vh 0vh 4vw;
 }
 
 .formulario label {
@@ -594,7 +594,7 @@ fieldset {
 #preview img{
   max-width: 20vw;
   max-height: 20vh;
-  padding:  1vh 35vw 0 30vw;
+  padding:  1vh 4vw 0 0vw;
  
 }
 
@@ -648,20 +648,27 @@ fieldset {
     margin: 1em;
   }
 
+  .error-text{
+    font-size: 4vw;
+    margin-left: 6vw;
+  }
+
   .formulario input,
   .formulario textarea {
     width: 70vw;
     padding: 2vw;
     margin: 1vh 0 1vh 4vw;
     resize: vertical;
-  }
+  }  
+ 
+
 
   .formulario select {
     height: auto;
 
-    width: 20vw;
-    margin: 1vh 0 4vh 1vw;
-    padding: 1vw;
+    width: 70vw;
+    padding: 2vw;
+    margin: 1vh 0 1vh 4vw;
   }
 
   .barra-busqueda input,

@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block head %} {{ parent() }}
 
-<script src="/public/script/formNewSitio.js"></script>
+<script src="/public/script/validar_form_sitio.js"></script>
 
 <link rel="stylesheet" href="/public/css/near-sitios.css" />
 
@@ -17,112 +17,128 @@
   name="regForm"
   enctype="multipart/form-data"
   method="post"
+  action="/resto/CreateResto"
 >
   <h3 class="title">NUEVO SITIO:</h3>
   <div id="messageBox"></div>
-
   <fieldset>
     <legend class="title">Información del Sitio</legend>
-    <label for="nameSitio">Nombre de Sitio:</label>
-   
-    <input
-      class="caja-texto"
-      id="nameSitio"
-      type="text"
-      name="nameSitio"
-      value=""
-      placeholder="Nombre de Sitio"
-      required
-      onBlur="validarDatos('nameSitio');"
-    />
-    <span  id="help-nameSitio" class="error-text" ></span>
 
-    <label for="subject">Descripcion:*</label>
-  
-    <textarea
-      id="subject"
-      name="subject"
-      placeholder="Escriba algo"
-      onBlur="validarDatos('subject');"
-      required
-    ></textarea>
-    <span  id="help-subject" class="error-text" ></span>
+    <div class="input-group">
+      <label for="nameSitio">Nombre de Sitio:</label>
+      <input
+        class="caja-texto"
+        id="nameSitio"
+        type="text"
+        name="nameSitio"
+        value="{{datos.data[0].nombreUsuario}}"
+        class="{{datos.data[0].nombreUsuario}}"
+        placeholder="Nombre de Sitio"
+        minlength="4"
+        maxlength="20"
+        required
+      />
+      <span  id="help-nameSitio" class="error-text" ></span>
+    </div>
+    <div class="input-group">
+      <label for="subject">Descripcion:*</label>
+      <textarea
+        id="subject"
+        name="subject"
+        placeholder="Escriba algo"
+        rows="4"
+        cols="50"
+        required
+        minlength="4"
+        maxlength="2000"
+       
+        class="{{datos.data[0].nombreUsuario}}"
+      >"{{datos.data[0].nombreUsuario}}"</textarea>
+      <span  id="help-subject" class="error-text" ></span>
+    </div>
+
   </fieldset>
 
 
   <fieldset>
     <legend class="title">Información de Contacto</legend>
-   
-    <span  id="help-DireccionSitio" class="error-text" ></span>
-    <input
-      class="caja-texto"
-      id="DireccionSitio"
-      type="text"
-      name="DireccionSitio"
-      value=""
-      placeholder="Direccion"
-      onBlur="validarDatos('DireccionSitio');"
-      required
-    />
-    <label for="DireccionSitio">Direccion:</label>
-
-    <label for="LocalidadSitio">Localidad:</label>
-   
-    <input
-      class="caja-texto"
-      id="LocalidadSitio"
-      type="text"
-      name="LocalidadSitio"
-      value=""
-      placeholder="Localidad"
-      onBlur="validarDatos('LocalidadSitio');"
-      required
-    />
-    <span  id="help-LocalidadSitio" class="error-text" ></span>
-
-    <label for="ProvinciaSitio">Provincia:</label>
-    
-    <input
-      class="caja-texto"
-      id="ProvinciaSitio"
-      type="text"
-      name="ProvinciaSitio"
-      value=""
-      placeholder="Provincia"
-      onBlur="validarDatos('ProvinciaSitio');"
-      required
-    />
-    <span  id="help-ProvinciaSitio" class="error-text" ></span>
-
-    <label for="MailSitio"> Correo Electrónico:</label>
-  
-    <input
-      class="caja-texto"
-      id="MailSitio"
-      type="email"
-      name="MailSitio"
-      value=""
-      placeholder="Mail"
-      required
-      onBlur="validarDatos('MailSitio');"
-    />
-    <span  id="help-MailSitio" class="error-text" ></span>
-
-
-    <label for="TelefonoSitio">Teléfono:</label>
-   
-    <input
-      class="caja-texto"
-      id="TelefonoSitio"
-      type="tel"
-      name="TelefonoSitio"
-      value=""
-      placeholder="Telefono"
-      required
-      onBlur="validarDatos('TelefonoSitio');"
-    />
-    <span  id="help-TelefonoSitio" class="error-text" ></span>
-
+      <div class="input-group">
+        <label for="DireccionSitio">Direccion:</label>
+        <input
+          class="caja-texto"
+          id="DireccionSitio"
+          type="text"
+          name="DireccionSitio"
+          value="{{datos.data[0].nombreUsuario}}"
+          class="{{datos.data[0].nombreUsuario}}"
+          placeholder="Direccion"
+          minlength="4" 
+          maxlength="40"
+          
+          required
+        />
+        <span  id="help-DireccionSitio" class="error-text" ></span>
+      </div>
+    <div class="input-group">
+      <label for="LocalidadSitio">Localidad:</label>
+      <input
+        class="caja-texto"
+        id="LocalidadSitio"
+        type="text"
+        name="LocalidadSitio"
+        value="{{datos.data[0].nombreUsuario}}"
+        class="{{datos.data[0].nombreUsuario}}"
+        placeholder="Localidad"
+        minlength="4" 
+        maxlength="40"
+        required
+      />
+      <span  id="help-LocalidadSitio" class="error-text" ></span>
+    </div>
+    <div class="input-group">
+      <label for="ProvinciaSitio">Provincia:</label>
+      <input
+        class="caja-texto"
+        id="ProvinciaSitio"
+        type="text"
+        name="ProvinciaSitio"
+        value="{{datos.data[0].nombreUsuario}}"
+        class="{{datos.data[0].nombreUsuario}}"
+        placeholder="Provincia"
+        minlength="4" 
+        maxlength="40"
+        required
+      />
+      <span  id="help-ProvinciaSitio" class="error-text" ></span>
+  </div>
+      <div class="input-group">
+      <label for="MailSitio">Correo Electrónico:</label>
+      <input
+        class="caja-texto"
+        id="MailSitio"
+        type="email"
+        name="MailSitio"
+        value="{{datos.data[0].nombreUsuario}}"
+        class="{{datos.data[0].nombreUsuario}}"
+        placeholder="Correo Electronico"
+        required
+      />
+      <span  id="help-MailSitio" class="error-text" ></span>
+    </div>
+    <div class="input-group">
+      <label for="TelefonoSitio">Telefono:</label>
+      <input
+        class="caja-texto"
+        id="TelefonoSitio"
+        type="tel"
+        name="TelefonoSitio"
+        value=""
+        placeholder="Telefono"
+        pattern="^(\(\+?\d{2,3}\)[\*|\s|\-|\.]?(([\d][\*|\s|\-|\.]?){6})(([\d][\s|\-|\.]?){2})?|(\+?[\d][\s|\-|\.]?){8}(([\d][\s|\-|\.]?){2}(([\d][\s|\-|\.]?){2})?)?)$"
+        required
+      />
+      <span  id="help-TelefonoSitio" class="error-text" ></span>
+    </div>
   </fieldset>
   <fieldset>
     <legend class="title">Localización</legend>
@@ -178,9 +194,10 @@
     <legend class="title">Horarios</legend>
     <div id=horarios>
     <div id="horario-0">
-      <label for="Dia">Día :</label>
-      <select  id="Dia-0" name="Dia-0" onBlur="validarDatos('Horario','0');">
-        <option value="-1" >Selecionar día:</option>
+      <div class="input-group">
+      <label for="Dia-0">Día :</label>
+      <select  id="Dia-0" name="Dia-0"  required >
+        <option value="" >Selecionar día:</option>
         <option value="1">Lunes</option>
         <option value="2">Martes</option>
         <option value="3">Miercoles</option>
@@ -189,65 +206,71 @@
         <option value="6">Sabado</option>
         <option value="7">Domingo</option>
       </select>
-      <span  id="help-horario-0" class="error-text" ></span>
+      <span  id="help-Dia-0" class="error-text" ></span>
+    </div>
       <br>
-      <label for="De">De :</label> 
-      <select id="De-0" name="De-0" onBlur="validarDatos('Horario','0');">
-        <option value=-1>Selecionar hora:</option>
-        <option value=0>00:00</option>
-        <option value=1>01:00</option>
-        <option value=2>02:00</option>
-        <option value=3>03:00</option>
-        <option value=4>04:00</option>
-        <option value=5>05:00</option>
-        <option value=6>06:00</option>
-        <option value=7>07:00</option>
-        <option value=8>08:00</option>
-        <option value=9>09:00</option>
-        <option value=10>10:00</option>
-        <option value=11>11:00</option>
-        <option value=12>12:00</option>
-        <option value=13>13:00</option>
-        <option value=14>14:00</option>
-        <option value=15>15:00</option>
-        <option value=16>16:00</option>
-        <option value=17>17:00</option>
-        <option value=18>18:00</option>
-        <option value=19>19:00</option>
-        <option value=20>20:00</option>
-        <option value=21>21:00</option>
-        <option value=22>22:00</option>
-        <option value=23>23:00</option>
+      <div class="input-group">
+      <label for="De-0">De :</label> 
+      <select id="De-0" name="De-0" onBlur="validarhorario('0');" required >
+        <option value="">Selecionar hora:</option>
+        <option value="0">00:00</option>
+        <option value="1">01:00</option>
+        <option value="2">02:00</option>
+        <option value="3">03:00</option>
+        <option value="4">04:00</option>
+        <option value="5">05:00</option>
+        <option value="6">06:00</option>
+        <option value="7">07:00</option>
+        <option value="8">08:00</option>
+        <option value="9">09:00</option>
+        <option value="10">10:00</option>
+        <option value="11">11:00</option>
+        <option value="12">12:00</option>
+        <option value="13">13:00</option>
+        <option value="14">14:00</option>
+        <option value="15">15:00</option>
+        <option value="16">16:00</option>
+        <option value="17">17:00</option>
+        <option value="18">18:00</option>
+        <option value="19">19:00</option>
+        <option value="20">20:00</option>
+        <option value="21">21:00</option>
+        <option value="22">22:00</option>
+        <option value="23">23:00</option>
       </select>
-  
-      <label for="Hasta">A :</label>
-      <select id="Hasta-0" name="Hasta-0" onBlur="validarDatos('Horario','0');">
-        <option value=-1>Selecionar hora:</option>
-        <option value=0>00:00</option>
-        <option value=1>01:00</option>
-        <option value=2>02:00</option>
-        <option value=3>03:00</option>
-        <option value=4>04:00</option>
-        <option value=5>05:00</option>
-        <option value=6>06:00</option>
-        <option value=7>07:00</option>
-        <option value=8>08:00</option>
-        <option value=9>09:00</option>
-        <option value=10">10:00</option>
-        <option value=11>11:00</option>
-        <option value=12>12:00</option>
-        <option value=13>13:00</option>
-        <option value=14>14:00</option>
-        <option value=15>15:00</option>
-        <option value=16>16:00</option>
-        <option value=17>17:00</option>
-        <option value=18>18:00</option>
-        <option value=19>19:00</option>
-        <option value=20>20:00</option>
-        <option value=21>21:00</option>
-        <option value=22>22:00</option>
-        <option value=23>23:00</option>
+      <span id="help-De-0" class="error-text" ></span>
+    </div>
+      <div class="input-group">
+      <label for="Hasta-0">A :</label>
+      <select id="Hasta-0" name="Hasta-0" onBlur="validarhorario('0');" required >
+        <option value="">Selecionar hora:</option>
+        <option value="0">00:00</option>
+        <option value="1">01:00</option>
+        <option value="2">02:00</option>
+        <option value="3">03:00</option>
+        <option value="4">04:00</option>
+        <option value="5">05:00</option>
+        <option value="6">06:00</option>
+        <option value="7">07:00</option>
+        <option value="8">08:00</option>
+        <option value="9">09:00</option>
+        <option value="10">10:00</option>
+        <option value="11">11:00</option>
+        <option value="12">12:00</option>
+        <option value="13">13:00</option>
+        <option value="14">14:00</option>
+        <option value="15">15:00</option>
+        <option value="16">16:00</option>
+        <option value="17">17:00</option>
+        <option value="18">18:00</option>
+        <option value="19">19:00</option>
+        <option value="20">20:00</option>
+        <option value="21">21:00</option>
+        <option value="22">22:00</option>
+        <option value="23">23:00</option>
       </select>
+      <span  id="help-Hasta-0" class="error-text" ></span>
+    </div>
     </div>
   </div>
       <div  id="input">
@@ -255,7 +278,7 @@
       class="input-enviar"
       type="button"
       value="Agregar uno"
-      onclick=agregar_horario()
+      onclick=agregar_horario();
       name="Enviar"
     />
     <input
@@ -268,23 +291,22 @@
     </div>
   </fieldset>
   <fieldset id="archivo">
-    <legend class="title">Imagenes</legend>
-    <label for="archivosubido[]">Imagenes del Sitio:</label>
-    <span  id="help-archivosubido" class="error-text" ></span>
-    <input
+    <div class="input-group">
+      <label for="archivosubido">Imagenes del Sitio:</label>
+      <div id="preview"></div>
+      <input
       id="archivosubido"
       type="file"
       name="archivosubido[]"
       multiple=""
       accept="image/jpeg"
-      onfocus="validarDatos('archivosubido');"
-    />
-  </fieldset>
-
+        required
+      />
+      <span id="help-archivosubido" class="error-text"></span>
+    </div>
   <input
     class="input-enviar"
-    onclick="validarRegistro();"
-    type="button"
+    type="submit"
     value="Enviar"
     name="Enviar"
   />

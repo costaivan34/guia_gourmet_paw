@@ -1,4 +1,3 @@
-
 var longitud = 0;
 var latitud = 0;
 a = 0;
@@ -179,6 +178,14 @@ function validarRegistro() {
     event.preventDefault();
   } else {
     console.log("error form")
+    Usuario = document.getElementById('nombreUsuario').textContent;
+    oData = new FormData(document.forms.namedItem("regForm"));
+    oData.append('longitud', longitud);
+    oData.append('latitud', latitud);
+    oData.append('username', Usuario);
+    for (let [name, value] of oData) {
+      console.log(`${name} = ${value}`); // key1 = value1, luego key2 = value2
+    }
     const m = document.getElementById("messageBox");
     m.innerHTML = `<div class="alert alert-danger" role="alert">` + 
     "El formulario presenta errores. Por favor, inténtalo de nuevo." + `</div>`;
@@ -258,7 +265,7 @@ function agregar_horario() {
   div.setAttribute('id', 'horario-' + a);
   div.innerHTML = `     
   <label for="Dia">Día :</label>
-      <select  id="Dia-` + a + `" name="Dia" onBlur="validarDatos('Horario','` + a + `' );">
+      <select  id="Dia-` + a + `" name="Dia-` + a + `" onBlur="validarDatos('Horario','` + a + `' );">
         <option value="-1" >Selecionar día:</option>
         <option value="1">Lunes</option>
         <option value="2">Martes</option>
@@ -271,7 +278,7 @@ function agregar_horario() {
       <span  id="help-horario-` + a + `" class="error-text" ></span>
       <br>
       <label for="De">De :</label>
-      <select  id="De-` + a + `" name="De" onBlur="validarDatos('Horario','` + a + `');">
+      <select  id="De-` + a + `" name="De-` + a + `" onBlur="validarDatos('Horario','` + a + `');">
         <option value="-1">Selecionar hora:</option>
         <option value="0">00:00</option>
         <option value="1">01:00</option>
@@ -300,7 +307,7 @@ function agregar_horario() {
       </select>
   
       <label for="Hasta">A :</label>
-      <select  id="Hasta-` + a + `" name="Hasta" onBlur="validarDatos('Horario','` + a + `');">
+      <select  id="Hasta-` + a + `" name="Hasta-` + a + `" onBlur="validarDatos('Horario','` + a + `');">
         <option value="-1">Selecionar hora:</option>
         <option value="0">00:00</option>
         <option value="1">01:00</option>

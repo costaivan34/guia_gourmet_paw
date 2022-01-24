@@ -16,8 +16,7 @@ window.addEventListener('DOMContentLoaded', function () {
       
             }
       });
-  });
-  
+    });
     // Por cada input, chequeo su validez y hago acciones en consecuencia
     inputs.forEach(function(input) {
         input.addEventListener('blur', event => {

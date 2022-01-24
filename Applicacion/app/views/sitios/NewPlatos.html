@@ -15,7 +15,15 @@ parent() }}{% endblock %} {% block main %}
   <h3 class="title" id="idSitio">{{ datos.idSitio }}-{{ datos.NameSitio }}</h3>
   <h3 class="title">NUEVO PLATO:</h3>
   <div id="messageBox"></div>
-
+  <input
+        class="caja-texto"
+        id="idSitio"
+        type="text"
+        name="idSitio"
+        value="{{ datos.idSitio }}"
+        hidden
+        readonly
+      />
   <fieldset>
     <legend class="title">Información del Plato</legend>
     <div class="input-group">
@@ -26,7 +34,7 @@ parent() }}{% endblock %} {% block main %}
         type="text"
         name="namePlato"
         value=""
-        placeholder="Nombre de Sitio"
+        placeholder="Nombre de Plato"
         minlength="4"
         maxlength="20"
         required
