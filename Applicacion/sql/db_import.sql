@@ -234,7 +234,6 @@ CREATE TABLE `platos` (
   `idPlato` int(11) NOT NULL,
   `nombre` text COLLATE utf8_spanish_ci NOT NULL,
   `descripcion` text COLLATE utf8_spanish_ci NOT NULL,
-  `precio` text COLLATE utf8_spanish_ci NOT NULL,
   `idSitio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 

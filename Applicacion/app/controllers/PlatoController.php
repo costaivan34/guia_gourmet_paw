@@ -9,6 +9,7 @@ use App\Models\Plato;
 class PlatoController extends Controller{
     protected $idSitio;
     protected $idPlato;
+    
     public function __construct(){
         $this->model = new Plato();
 
@@ -25,7 +26,7 @@ class PlatoController extends Controller{
         $idSitio = htmlspecialchars($_GET['Sitio']);
         $idPlato = htmlspecialchars($_GET['Plato']);
         $plato = $this->model->getOne($idSitio,$idPlato);
-        return  $plato;
+        return $plato;
     }
 
     public function newOne(){
@@ -41,19 +42,18 @@ class PlatoController extends Controller{
     }
 
     public function store(){
-        var_dump($_POST); 
-        var_dump($_FILES);  
+  //      var_dump($_POST); 
+    //    var_dump($_FILES);  
       session_start();
         $datos['user'] = ' ';
         if (isset($_SESSION['user'])) {
                 $datos['user'] = $_SESSION['user'];
-                //si formulario valido
-                /*  if (isset($_SESSION['user'])) {
+                /*  if (  //si formulario valido) {
                      //=>>> store*/
                     $idPlato = $this->model->agregarPlato($_POST['namePlato'],$_POST['subject'],
-                     $_POST['namePrecio'],$_POST["idSitio"],$_POST['InformaciónPeso']
-                     ,$_POST['InformaciónEnergia'],$_POST['InformaciónCarbohidratos'],
-                     $_POST['InformaciónProteina'],$_POST['InformaciónGrasas'],$_POST['InformaciónSodio'],
+                    $_POST["idSitio"],$_POST['InformaciónPeso'],$_POST['InformaciónEnergia'],
+                     $_POST['InformaciónCarbohidratos'], $_POST['InformaciónProteina'],
+                     $_POST['InformaciónGrasas'],$_POST['InformaciónSodio'],
                     $_FILES,$_POST['caracteristicas']);
                     if ($idPlato>0){ //si valido
                         $datos['data'] = $this->model->getUsuario($_SESSION['user']);
@@ -69,7 +69,7 @@ class PlatoController extends Controller{
         } else {
             //sino esta logeado
             //=>> exit
-            header('Location: /');
+            header('Location: /inicio');
             exit();
         }
  
@@ -82,6 +82,13 @@ class PlatoController extends Controller{
         }else{
         return 0;   
         }
+    }
+
+    public function getPlatos(){
+        $idSitio = htmlspecialchars($_GET['Sitio']);
+        $pageN = htmlspecialchars($_GET['page']);
+        $PlatosPag =  $this->model->getAllPlatos($idSitio,$pageN);
+        return $PlatosPag;
     }
 
     public function getAll(){

@@ -14,7 +14,8 @@ class Users extends Model
     }
 
     public function agregarUsuario($nombreUsuario ,$nombre ,$apellido ,$mail ,$pais ,$telefono,$password,$path_img){
-        $password= md5($password,false);
+        $opciones = [  'cost' => 12, ];
+        $password = password_hash($password, PASSWORD_BCRYPT, $opciones);
         $datos = $this->db->agregarUsuario($mail ,$nombreUsuario ,$nombre ,$apellido ,$pais ,$telefono,$password,$path_img);
         return $datos;
     }
@@ -31,10 +32,23 @@ class Users extends Model
     }
 
     public function validarLogin($user, $password){
-        $password= md5($password,false);
-        $datos = $this->db->validarLogin($user, $password);
-        return $datos;
+        $hash_BD = $this->db->validarLogin($user);
+      // var_dump(  password_verify( $password, $hash_BD[0]->password));
+        //var_dump($password);
+        //var_dump($hash_BD[0]->password); 
+        if (password_verify( $password, $hash_BD[0]->password)) {
+            return 1;
+        } else {
+            return 0; 
+        }
     }
+
+
+    public function isFree($mail){
+        return $this->db->isFree($mail);
+    }
+
+
 
     public function getUsuario($user){
         $datos = $this->db->getUsuario($user);

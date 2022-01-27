@@ -391,7 +391,6 @@ function openModal(plato, sitio) {
     if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
       console.log(xmlHttpRequest.responseText)
       var respuesta = JSON.parse(xmlHttpRequest.responseText)
-   
       var info = JSON.parse(respuesta.info)
       var img = JSON.parse(respuesta.img)
       var lista = JSON.parse(respuesta.lista)

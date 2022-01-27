@@ -28,53 +28,53 @@
       <div class="input-group">
         <label for="nameUser">Nombre de Usuario:</label>
       <input
-        class="caja-texto"
+        class="caja-texto {{datos['form'][0].estado}} "
         id="nameUser"
         type="text"
         name="nameUser"
-        value=""
+        value="{{datos['form'][0].input}}"
         placeholder="Nombre de Usuario"
         required
         minlength="4" 
         maxlength="20"
         autocorrect="on"
       />
-      <span  id="help-nameUser" class="error-text" ></span>
+      <span  id="help-nameUser" class="error-text" >{{datos['form'][0].mensaje}}</span>
     </div>
     
     <div class="input-group">
         <label for="nombreUser">Nombre:</label>
       <input
-        class="caja-texto"
+        class="caja-texto {{datos['form'][1].estado}}"
         id="nombreUser"
         type="text"
         name="nombreUser"
-        value=""
+        value="{{datos['form'][1].input}}"
         placeholder="Nombre"
         required
         minlength="4" 
         maxlength="40"
         autocorrect="on"
       />
-      <span  id="help-nombreUser" class="error-text" ></span>
+      <span  id="help-nombreUser" class="error-text" >{{datos['form'][1].mensaje}}</span>
     </div>
     
       
     <div class="input-group">
         <label for="apellidoUser">Apellido:</label>
       <input
-        class="caja-texto"
+        class="caja-texto {{datos['form'][2].estado}}"
         id="apellidoUser"
         type="text"
         name="apellidoUser"
-        value=""
+        value="{{datos['form'][2].input}}"
         placeholder="Apellido"
         required
         minlength="4" 
         maxlength="40"
         autocorrect="on"
       />
-      <span  id="help-apellidoUser" class="error-text" ></span>
+      <span  id="help-apellidoUser" class="error-text" >{{datos['form'][2].mensaje}}</span>
     </div>
     </fieldset>
     <fieldset>
@@ -84,42 +84,42 @@
       <div class="input-group">
         <label for="mailUser">Correo Electrónico:</label>
       <input
-        class="caja-texto"
+        class="caja-texto {{datos['form'][3].estado}}"
         id="mailUser"
         type="email"
         name="mailUser"
-        value=""
+        value="{{datos['form'][3].input}}"
         placeholder="Correo Electronico"
         required
       />
-      <span  id="help-mailUser" class="error-text" ></span>
+      <span  id="help-mailUser" class="error-text" >{{datos['form'][3].mensaje}}</span>
     </div>
       <div class="input-group">
         <label for="paisUser">País:</label>
       <input
-        class="caja-texto"
+        class="caja-texto {{datos['form'][4].estado}}"
         id="paisUser"
         type="text"
         name="paisUser"
-        value=""
+        value="{{datos['form'][4].input}}"
         placeholder="País"
         required
       />
-      <span  id="help-paisUser" class="error-text" ></span>
+      <span  id="help-paisUser" class="error-text" >{{datos['form'][4].mensaje}}</span>
     </div>
     <div class="input-group">
         <label for="telefonoUser">Telefono:</label>
       <input
-        class="caja-texto"
+        class="caja-texto {{datos['form'][5].estado}}"
         id="telefonoUser"
         type="tel"
         name="telefonoUser"
-        value=""
+        value="{{datos['form'][5].input}}"
         placeholder="Telefono"
         pattern="^(\(\+?\d{2,3}\)[\*|\s|\-|\.]?(([\d][\*|\s|\-|\.]?){6})(([\d][\s|\-|\.]?){2})?|(\+?[\d][\s|\-|\.]?){8}(([\d][\s|\-|\.]?){2}(([\d][\s|\-|\.]?){2})?)?)$"
         required
       />
-      <span  id="help-telefonoUser" class="error-text" ></span>
+      <span  id="help-telefonoUser" class="error-text" >{{datos['form'][5].mensaje}}</span>
     </div>
     </fieldset>
     <fieldset>

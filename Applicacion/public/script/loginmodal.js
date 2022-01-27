@@ -35,8 +35,7 @@ function callLogin(){
 	}
 var mail = document.getElementById("userName").value;
 var psw = document.getElementById("password").value;
-console.log(mail);
-console.log(psw);
+
 xmlHttpRequest.open("POST","/login",true);
 xmlHttpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xmlHttpRequest.send("userName="+mail+"&password="+psw);

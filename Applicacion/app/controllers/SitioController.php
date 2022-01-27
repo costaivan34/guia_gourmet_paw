@@ -5,12 +5,17 @@ namespace App\Controllers;
 use App\Core\Controller;
 
 use App\Models\Sitio;
+use App\Models\Comentario;
+use App\Models\Plato;
 
 class SitioController extends Controller{
     protected $idSitio;
+    protected $Comentarios;
+    protected $Platos;
 
     public function __construct(){
-      
+        $this->Comentarios = new Comentario();
+        $this->Platos = new Plato();
         $this->model = new Sitio();
     }
     
@@ -36,9 +41,9 @@ class SitioController extends Controller{
         'valoracionPrecio' => $_POST['sabor'],
         'valoracionAmbiente' => $_POST['ambiente']
     ];
-     $this->model->agregarComentario($comentario);
+     $this->Comentarios->store($comentario);
     
-    return $this->model->getPaginacionComentarios($_POST['sitio']);
+    return $this->Comentarios->getPaginacionComentarios($_POST['sitio']);
    }
 
 
@@ -48,33 +53,16 @@ class SitioController extends Controller{
         if (isset($_SESSION["user"])){
             $datos["user"] =  $_SESSION["user"];
         }
-        //funcion busqueda 
         return view('/sitios/NewSitio',compact('datos'));
 }
 
-   public function sendConsulta(){	
-        $comentario = [ 
-            'nombre' => $_POST['nombre'],
-            'apellido' => $_POST['apellido'],
-            'mail' => $_POST['mail'],
-            'texto' => $_POST['texto'],
-        ];
-        $statement= $this->model->agregarConsulta($_POST['nombre'],$_POST['apellido'],$_POST['mail'],
-        $_POST['texto']);
-        if(($statement)==1){
-            return 1;
-        }else{
-            return 0;
-        }
-   }
+  
 
     public function store(){
         //si formulario valido
         //=>>> store
         //si formulario invalido
         //=>> reeenviar con errores
-
-
         var_dump($_POST); 
         var_dump($_FILES);  
        // $this->model->insertarSitio($_POST, $_FILES);
@@ -117,31 +105,26 @@ class SitioController extends Controller{
 
     public function getOne(){
         session_start();
+        $idSitio = htmlspecialchars($_GET['Sitio']);
+        $datos = $this->model->getOne($idSitio);
         $datos["user"] = " ";
         if (isset($_SESSION["user"])){
             $datos["user"] =  $_SESSION["user"];
         }
-        $idSitio = htmlspecialchars($_GET['Sitio']);
-        $datos['OneSitio'] = $this->model->getOne($idSitio);
-        $datos['Ubicacion'] = $this->model->getUbicacion($idSitio);
-        $datos['Horario'] = $this->model->getHorario($idSitio);
-        $datos['Imagenes'] = $this->model->getImagenesSitio($idSitio);
-        $datos['Valoracion'] =  $this->model->getValoracionSitio($idSitio);
-        $datos['Caract'] =  $this->model->getCaractSitio($idSitio);
-        return view('/sitios/OneSitio',compact('datos'));
+        if($datos == 0){
+            return view('/errors/not-found', compact('datos'));
+        }else{
+            return view('/sitios/OneSitio',compact('datos'));
+        }
     }
 
-    public function getPlatos(){
-        $idSitio = htmlspecialchars($_GET['Sitio']);
-        $pageN = htmlspecialchars($_GET['page']);
-        $PlatosPag =  $this->model->getAllPlatos($idSitio,$pageN);
-        return $PlatosPag;
-    }
+
+   
 
     public function getComentarios(){
         $idSitio = htmlspecialchars($_GET['Sitio']);
         $pageN = htmlspecialchars($_GET['page']);
-        $Comentarios=  $this->model->getAllComentarios($idSitio,$pageN);
+        $Comentarios=  $this->Comentarios->getAllComentarios($idSitio,$pageN);
       // var_dump($Comentarios);
         return $Comentarios;
     }
@@ -157,7 +140,7 @@ class SitioController extends Controller{
     public function getComentarioPage(){
         $idSitio = htmlspecialchars($_GET['Sitio']);
         $pageN = htmlspecialchars($_GET['page']);
-        $PaginacionComentarios =  $this->model->getPaginacionComentarios($idSitio);
+        $PaginacionComentarios =  $this->Comentarios->getPaginacionComentarios($idSitio);
         return $PaginacionComentarios;
     }
 
@@ -181,14 +164,7 @@ class SitioController extends Controller{
         return  $this->model->getCategorias();
     }
  
-    public function getMail(){
-        $idSitio= $this->model->isFree($_GET['mailUser']);
-        if ($idSitio==1){
-            return 1;   
-        }else{
-            return 0;   
-        }
-    }
+
 
 
     public function cerca(){
@@ -204,7 +180,7 @@ class SitioController extends Controller{
     }
     
     public function getMarcadores(){
-       $currentX = ($_GET['clong']);
+        $currentX = ($_GET['clong']);
         $currentY = ($_GET['clat']);
         $Ulong = ($_GET['Ulong']);
         $Ulat = ($_GET['Ulat']);

@@ -22,33 +22,41 @@ class Sitio extends Model{
         return $basic;
     }
 
+
+
     public function getOne($idSitio){
-        $basic = $this->db->selectSitio($idSitio);
-        $basicSitio = json_encode($basic, true);
-        return $basic;
+        $datos['OneSitio'] = $this->db->selectSitio($idSitio);
+       ///var_dump(count($datos['OneSitio']));
+        if(count($datos['OneSitio']) == 0){
+            return 0;
+        }else{
+            $datos['Ubicacion'] = $this->getUbicacion($idSitio);
+            $datos['Horario'] = $this->getHorario($idSitio);
+            $datos['Imagenes'] = $this->getImagenesSitio($idSitio);
+            $datos['Valoracion'] = $this->getValoracionSitio($idSitio);
+            $datos['Caract'] = $this->getCaractSitio($idSitio);
+            //$basicSitio = json_encode($basic, true);
+            return $datos;
+        }
     }
 
     public function getUbicacion($idSitio){
         $ubicacion = $this->db->selectUbicacion($idSitio);
-        //$basicUbicacion = json_decode(json_encode($basic), True);
         return $ubicacion;
     }
 
     public function getHorario($idSitio){
         $horario = $this->db->selectHorarios($idSitio);
-        //$basicUbicacion = json_decode(json_encode($basic), True);
         return $horario;
     }
 
     public function getImagenesSitio($idSitio){
         $Imagenes = $this->db->selectImagenesSitio($idSitio);
-        //$basicUbicacion = json_decode(json_encode($basic), True);
         return $Imagenes;
     }
 
     public function getValoracionSitio($idSitio){
         $Valoracion = $this->db->selectValoracionSitio($idSitio);
-        //$basicUbicacion = json_decode(json_encode($basic), True);
         return $Valoracion;
     }
 
@@ -65,12 +73,7 @@ class Sitio extends Model{
     }
 
 
-    public function getPaginacionComentarios($idSitio){
-        //  $offset = ($pagenro-1) * $n_per_coment;
-        $total_rows = $this->db->getPages($idSitio, 'comentariositios');
-        $total_pages = ceil($total_rows / $this->n_per_coment);
-        return $total_pages;
-    }
+
 
     public function getAllPlatos($idSitio, $page){
         $offset = ($page - 1) * $this->n_per_plato;
@@ -83,16 +86,7 @@ class Sitio extends Model{
         return $basicPlatos;
     }
 
-    public function getAllComentarios($idSitio, $page){
-        $offset = ($page - 1) * $this->n_per_coment;
-        $Comentarios = $this->db->selectAllComentarios(
-            $idSitio,
-            $offset,
-            $this->n_per_coment
-        );
-        $basicComentarios = json_encode($Comentarios);
-        return $basicComentarios;
-    }
+
 
     public function getCategorias(){
         $Categorias = $this->db->getCategorias();
@@ -235,13 +229,9 @@ class Sitio extends Model{
         return $total_pages;
     }
     
-    public function isFree($mail){
-        return $this->db->isFree($mail);
-    }
 
-    public function agregarComentario(array $comentario){
-        $this->db->insert('comentariositios', $comentario);
-    }
+
+    
 
     public function agregarConsulta($nombre, $apellido, $mail, $texto){
         $datos = $this->db->agregarConsulta($nombre, $apellido, $mail, $texto);
