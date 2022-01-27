@@ -103,23 +103,30 @@ class QueryBuilder
         $password,
         $path_img
     ) {
-        $statement = $this->pdo->prepare(
-            "INSERT INTO  usuarios (mail,nombreUsuario,nombre,apellido,pais,telefono,password,fotoPerfil) 
-            VALUES (:mail,:nombreUsuario ,:nombre ,:apellido,:pais ,:telefono,:passwsord, :path_img)"
-        );
-        $statement->bindParam(':mail', $mail, PDO::PARAM_STR);
-        $statement->bindParam(':nombreUsuario', $nombreUsuario, PDO::PARAM_STR);
-        $statement->bindParam(':nombre', $nombre, PDO::PARAM_STR);
-        $statement->bindParam(':apellido', $apellido, PDO::PARAM_STR);
-        $statement->bindParam(':pais', $pais, PDO::PARAM_STR);
-        $statement->bindParam(':telefono', $telefono, PDO::PARAM_STR);
-        $statement->bindParam(':passwsord', $password, PDO::PARAM_STR);
-        $statement->bindParam(':path_img', $path_img, PDO::PARAM_STR);
-        $statement->execute();
-        if ($statement->rowCount() > 0) {
-            return 1;
-        } else {
-            return 0;
+        try {
+            $this->pdo->beginTransaction();
+            $statement = $this->pdo->prepare(
+                "INSERT INTO  usuarios (mail,nombreUsuario,nombre,apellido,pais,telefono,password,fotoPerfil) 
+                VALUES (:mail,:nombreUsuario ,:nombre ,:apellido,:pais ,:telefono,:passwsord, :path_img)"
+            );
+            $statement->bindParam(':mail', $mail, PDO::PARAM_STR);
+            $statement->bindParam(':nombreUsuario', $nombreUsuario, PDO::PARAM_STR);
+            $statement->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+            $statement->bindParam(':apellido', $apellido, PDO::PARAM_STR);
+            $statement->bindParam(':pais', $pais, PDO::PARAM_STR);
+            $statement->bindParam(':telefono', $telefono, PDO::PARAM_STR);
+            $statement->bindParam(':passwsord', $password, PDO::PARAM_STR);
+            $statement->bindParam(':path_img', $path_img, PDO::PARAM_STR);
+            $statement->execute();
+           
+          $this->pdo->commit();
+            
+        } catch (\PDOException $e) {
+            // rollback the transaction
+            $this->pdo->rollBack();
+        
+            // show the error message
+            die($e->getMessage());
         }
     }
 
@@ -790,13 +797,15 @@ class QueryBuilder
         return $statement->fetchColumn();
     }
 
-    public function getDatosUsuario($user)  {
+    public function getDatosUsuario($user){
         $statement = $this->pdo->prepare(
             " SELECT `idUsuario`, `mail`, `nombreUsuario`, `nombre`, `apellido`, 
-            `direccion`, `pais`, `telefono`, `fotoPerfil` 
-            FROM `usuarios` WHERE mail=:user "
+             `pais`, `telefono`, `fotoPerfil` 
+            FROM `usuarios` WHERE `mail` = :user "
         );
+        
         $statement->bindParam(':user', $user, PDO::PARAM_STR);
+        //$statement->bindParam(':params', $params, PDO::PARAM_STR);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
@@ -804,8 +813,8 @@ class QueryBuilder
     public function getUsuario($user) {
         $statement = $this->pdo->prepare(
             " SELECT `idUsuario`, `mail`, `nombreUsuario`, `nombre`, 
-            `apellido`, `direccion`, `pais`, `telefono`, `fotoPerfil` 
-            FROM `usuarios` WHERE nombreUsuario=:user "
+            `apellido`, `pais`, `telefono`, `fotoPerfil` 
+            FROM `usuarios` WHERE `nombreUsuario` = :user "
         );
         $statement->bindParam(':user', $user, PDO::PARAM_STR);
         $statement->execute();

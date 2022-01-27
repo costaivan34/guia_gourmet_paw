@@ -1,6 +1,4 @@
-
 window.addEventListener('DOMContentLoaded', function () {
-
   // Obtengo los inputs que quiero lanzar su validación al perder el foco
   var inputs = document.querySelectorAll('input');
   // Por cada input, chequeo su validez y hago acciones en consecuencia
@@ -27,28 +25,41 @@ window.addEventListener('DOMContentLoaded', function () {
             }
       });
   });
+  document.getElementById('passwordAntigua').addEventListener('blur', event => {validarpassActual()});
   document.getElementById('passwordRepeat').addEventListener('blur', event => {validarpassword()});
-  document.getElementById('paisUser').addEventListener('blur', event => {validarpais()});
-  document.getElementById('mailUser').addEventListener('blur', event => {validarmail()});
-  
-  document.getElementById("archivosubido").onchange = function(e) {
-    // Creamos el objeto de la clase FileReader
-    let reader = new FileReader();
-   
-    // Leemos el archivo subido y se lo pasamos a nuestro fileReader
-    reader.readAsDataURL( document.getElementById("archivosubido").files[0]);
-  
-    // Le decimos que cuando este listo ejecute el código interno
-    reader.onload = function(){
-      let preview = document.getElementById('preview'),
-              image = document.createElement('img');
-      image.src = reader.result;
-      preview.innerHTML = '';
-      preview.append(image);
-    };
-  }
+ 
   })
   
+
+function validarpassActual() {
+  passwordAntigua = document.getElementById('passwordAntigua')
+  if (passwordAntigua.checkValidity()) {
+  var xmlHttpRequest = new XMLHttpRequest()
+  xmlHttpRequest.onreadystatechange = function () {
+    if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
+      if(xmlHttpRequest.responseText == 1) {
+      document.getElementById("passwordAntigua").classList.remove("input-error");
+      document.getElementById(`help-passwordAntigua`).textContent = ""
+    }else{
+      console.log(`La contraseña ingresada no es válida`)
+      document.getElementById("passwordAntigua").classList.add("input-error");
+      document.getElementById(`help-passwordAntigua`).textContent = `La contraseña ingresada no es válida`
+    }
+  }
+  } 
+  var mail = document.getElementById("User-mail").value;
+  var psw = document.getElementById("passwordAntigua").value;
+  xmlHttpRequest.open("POST","/login",true);
+  xmlHttpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xmlHttpRequest.send("userName="+mail+"&password="+psw);
+  event.preventDefault();
+  } else {
+    document.getElementById('passwordAntigua').classList.add("input-error");
+    document.getElementById(`help-passwordAntigua`).textContent = "La contraseña ingresada no es válida"
+  }
+  
+}
+
   
   function validarpassword() {
           passwordNueva = document.getElementById('passwordNueva').value

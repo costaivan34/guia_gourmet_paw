@@ -33,16 +33,12 @@ class Users extends Model
 
     public function validarLogin($user, $password){
         $hash_BD = $this->db->validarLogin($user);
-      // var_dump(  password_verify( $password, $hash_BD[0]->password));
-        //var_dump($password);
-        //var_dump($hash_BD[0]->password); 
         if (password_verify( $password, $hash_BD[0]->password)) {
             return 1;
         } else {
             return 0; 
         }
     }
-
 
     public function isFree($mail){
         return $this->db->isFree($mail);
@@ -69,17 +65,7 @@ class Users extends Model
         return$datos;
     }
 
-    public function getPlatosFromSitios($idSitio){
-        $datos = $this->db->selectPlatos($idSitio);
-        //return json_decode(json_encode($datos),true);
-        return$datos;
-    }
-
-    public function getNombreSitios($idSitio){
-        $datos = $this->db->selectSitio($idSitio);
-        //return json_decode(json_encode($datos),true);
-        return $datos;
-    }
+  
 }
 
 

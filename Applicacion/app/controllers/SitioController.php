@@ -7,6 +7,7 @@ use App\Core\Controller;
 use App\Models\Sitio;
 use App\Models\Comentario;
 use App\Models\Plato;
+use App\Models\Users;
 
 class SitioController extends Controller{
     protected $idSitio;
@@ -17,6 +18,7 @@ class SitioController extends Controller{
         $this->Comentarios = new Comentario();
         $this->Platos = new Plato();
         $this->model = new Sitio();
+        $this->Users = new Users();
     }
     
    public function getAll(){
@@ -119,8 +121,6 @@ class SitioController extends Controller{
     }
 
 
-   
-
     public function getComentarios(){
         $idSitio = htmlspecialchars($_GET['Sitio']);
         $pageN = htmlspecialchars($_GET['page']);
@@ -131,7 +131,7 @@ class SitioController extends Controller{
 
     public function getPlatoPage(){
         $idSitio = htmlspecialchars($_GET['Sitio']);
-        $PaginacionPlatos =  $this->model->getPaginacionPlatos($idSitio);
+        $PaginacionPlatos =  $this->Platos->getPaginacionPlatos($idSitio);
         //var_dump($datos);
         return $PaginacionPlatos;
     }

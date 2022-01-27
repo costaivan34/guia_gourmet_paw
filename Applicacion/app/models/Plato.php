@@ -4,8 +4,7 @@ namespace App\Models;
 
 use App\Core\Model;
 
-class Plato extends Model
-{
+class Plato extends Model{
     protected $table = 'plato';
     protected $n_per_plato = 6;
 
@@ -28,6 +27,8 @@ class Plato extends Model
         $basicPlatos = json_encode($Platos);
         return $basicPlatos;
     }
+
+
 
     public function getOne($idSitio, $idPlato)  {
         $Plato = $this->db->selectPlato($idSitio, $idPlato);
@@ -55,31 +56,21 @@ class Plato extends Model
             }
     }
 
-    public function getUsuario($user){
-        $datos = $this->db->getUsuario($user);
-        //$datos = (json_encode($datos,true)); 
-        $tdatos= json_decode(json_encode($datos), True);
-       return $datos;
-    }
-    public function getSitiosUsuario($user){
-        $datos = $this->db->getSitiosUsuario($user);
-        //return json_decode(json_encode($datos),true);
-        return$datos;
-    }
 
- 
-
-    public function getNombreSitios($idSitio){
-        $datos = $this->db->selectSitio($idSitio);
-        //return json_decode(json_encode($datos),true);
-        return $datos;
-    }
-    public function deletePlato($idPlato)
-    {
+    public function deletePlato($idPlato)  {
         $this->db->eliminarCaracPlatos($idPlato);
         $this->db->eliminarValorPlatos($idPlato);
         $this->db->eliminarImagenesPlatos($idPlato);
         $op4 = $this->db->eliminarPlatos($idPlato);
         return 1;
     }
+
+    public function getPaginacionPlatos($idSitio){
+        $total_rows = $this->db->getPages($idSitio, 'platos');
+        $total_pages = ceil($total_rows / $this->n_per_plato);
+        return $total_pages;
+    }
+
+
+
 }

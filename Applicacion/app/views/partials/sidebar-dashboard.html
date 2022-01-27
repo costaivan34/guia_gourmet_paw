@@ -1,9 +1,9 @@
 <section class=" sidebar-dash contenedor">
   <section class="user-Profile">
-    <h3 class="title User-Alias">{{datos.data[0].nombreUsuario}}</h3>
-    <img class="User-Img" src="{{datos.data[0].fotoPerfil}}" alt="imagen de perfil del usuario" />
-    <h4 class="User-LastName title">{{datos.data[0].nombre}} {{datos.data[0].apellido}}</h4>
-    <h5 class="User-Email title" id="User-mail">{{datos.data[0].mail}}</h5>
+    <h3 class="title User-Alias">{{datos['data'][0].input}}</h3>
+    <img class="User-Img" src="{{datos['data'][7].input}}" alt="imagen de perfil del usuario" />
+    <h4 class="User-LastName title">{{datos['data'][1].input}} {{datos['data'][2].input}}</h4>
+    <h5 class="User-Email title" id="User-mail">{{datos['data'][3].input}}</h5>
   </section>
   <section>
     <h3 class="title">Configuración</h3>

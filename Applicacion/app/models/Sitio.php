@@ -22,6 +22,17 @@ class Sitio extends Model{
         return $basic;
     }
 
+    public function getPlatosFromSitios($idSitio){
+        $datos = $this->db->selectPlatos($idSitio);
+        //return json_decode(json_encode($datos),true);
+        return$datos;
+    }
+
+    public function getNombreSitios($idSitio){
+        $datos = $this->db->selectSitio($idSitio);
+        //return json_decode(json_encode($datos),true);
+        return $datos;
+    }
 
 
     public function getOne($idSitio){
@@ -65,27 +76,6 @@ class Sitio extends Model{
         $basicCaract = json_encode($Caract);
         return $basicCaract;
     }
-
-    public function getPaginacionPlatos($idSitio){
-        $total_rows = $this->db->getPages($idSitio, 'platos');
-        $total_pages = ceil($total_rows / $this->n_per_plato);
-        return $total_pages;
-    }
-
-
-
-
-    public function getAllPlatos($idSitio, $page){
-        $offset = ($page - 1) * $this->n_per_plato;
-        $Platos = $this->db->selectAllPlatos(
-            $idSitio,
-            $offset,
-            $this->n_per_plato
-        );
-        $basicPlatos = json_encode($Platos);
-        return $basicPlatos;
-    }
-
 
 
     public function getCategorias(){

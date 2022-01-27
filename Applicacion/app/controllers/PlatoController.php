@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 
 use App\Models\Plato;
+use App\Models\Sitio;
 
 class PlatoController extends Controller{
     protected $idSitio;
@@ -12,6 +13,7 @@ class PlatoController extends Controller{
     
     public function __construct(){
         $this->model = new Plato();
+        $this->Sitios = new Sitio();
 
     }
     
@@ -35,7 +37,7 @@ class PlatoController extends Controller{
         if (isset($_SESSION["user"])){
             $datos["user"] =  $_SESSION["user"];
         }
-        $data = $this->model->getNombreSitios(htmlspecialchars($_GET['Sitio']));
+        $data = $this->Sitios->getNombreSitios(htmlspecialchars($_GET['Sitio']));
         $datos['idSitio'] = $data[0]->idSitio;
         $datos['NameSitio'] = $data[0]->nombre;
         return view('/sitios/NewPlatos', compact('datos'));

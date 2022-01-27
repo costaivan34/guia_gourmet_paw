@@ -29,8 +29,8 @@ SET NAMES utf8;
 --
 -- Volcado de datos para la tabla `usuarios`
 --
-INSERT INTO `usuarios` (`idUsuario`, `mail`, `nombreUsuario`, `nombre`, `apellido`, `direccion`, `pais`, `telefono`, `password`, `fotoPerfil`) VALUES
-(1, 'costaivan34@gmail.com', 'costaivan34', 'Iván', 'Costa', 'Calle 123, enmicasa', 'Argentina', 0, '25f9e794323b453885f5181f1b624d0b', '/private/users/costaivan34@gmail.com/perfil.jpg');
+INSERT INTO `usuarios` (`idUsuario`, `mail`, `nombreUsuario`, `nombre`, `apellido`, `pais`, `telefono`, `password`, `fotoPerfil`) VALUES
+(1, 'costaivan34@gmail.com', 'costaivan34', 'Iván', 'Costa', 'Argentina', 0, '25f9e794323b453885f5181f1b624d0b', '/private/users/costaivan34@gmail.com/perfil.jpg');
 
 
 INSERT INTO `sitios` (`idSitio`, `nombre`, `descripcion`, `telefono`, `sitioWeb`, `valoracionPrecio`, `valoracionAmbiente`, `valoracionSabor`, `idUsuario`, `idCategoria`) VALUES
