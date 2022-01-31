@@ -26,7 +26,7 @@
         </a>
         <i class="fa-2x fa fa-trash icons" title="Eliminar Sitio" onclick="openModal('{{ a.idSitio }}');"></i>
         <a href="/dashboard/plato?Sitio={{ a.idSitio|url_encode(true) }}"><i
-            title="Agregar nuevo Plato" class="fa-2x fa fa-plus icons"></i> </a>
+            title="Ver platos" class="fa-2x fa fa-cutlery icons"></i> </a>
       </article>
     </li>
       {% endfor %}
@@ -51,7 +51,7 @@
       <div id="messageBox"></div>
       <p class="title"> ¿Esta seguro de eliminar el sitio?</p>
       <button id="eliminar_sitio" class="input-enviar" onclick="eliminarSitio();">Aceptar</button>
-      <button onclick="closeModal();">Cancelar</button>
+      <button class="input-enviar" onclick="closeModal();">Cancelar</button>
     </form>
   </section>
 </aside>

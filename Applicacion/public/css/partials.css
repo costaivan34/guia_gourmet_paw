@@ -296,7 +296,7 @@ nav li {
 .close {
   position: absolute;
   right: 12vw;
-  top: 1;
+  top: 3vw;
   color: var(--main-color);
   font-size: 35px;
   font-weight: bold;
@@ -706,7 +706,7 @@ fieldset {
   }
 
   #formDelete .close {
-    top: 4vh;
+    top: 2vh;
   }
 
   .modal-content {

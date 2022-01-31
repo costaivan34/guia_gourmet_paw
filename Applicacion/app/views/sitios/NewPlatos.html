@@ -2,7 +2,7 @@
 
 <script src="/public/script/validar_form_plato.js"></script>
 
-{% endblock %} {% block title %}NUEVO PLATO{% endblock %} {% block header %}{{
+{% endblock %} {% block title %}Nuevo Plato-{{ datos.NameSitio }}{% endblock %} {% block header %}{{
 parent() }}{% endblock %} {% block main %}
 <form
   id="regForm"
@@ -29,17 +29,17 @@ parent() }}{% endblock %} {% block main %}
     <div class="input-group">
       <label for="namePlato">Nombre del Plato:</label>
       <input
-        class="caja-texto"
+        class="caja-texto {{datos['form'][0].estado}} "
         id="namePlato"
         type="text"
         name="namePlato"
-        value=""
+        value="{{datos['form'][0].input}}"
         placeholder="Nombre de Plato"
         minlength="4"
         maxlength="20"
         required
       />
-      <span id="help-namePlato" class="error-text"></span>
+      <span id="help-namePlato" class="error-text">{{datos['form'][0].mensaje}}</span>
     </div>
     <div class="input-group">
       <label for="subject">Descripción:*</label>
@@ -47,13 +47,14 @@ parent() }}{% endblock %} {% block main %}
         id="subject"
         name="subject"
         placeholder="Escriba algo"
-        rows="4"
+        rows="94"
         cols="50"
         required
         minlength="4"
         maxlength="2000"
-      ></textarea>
-      <span id="help-subject" class="error-text"></span>
+        class="caja-texto {{datos['form'][1].estado}} "
+      >{{datos['form'][1].input}}</textarea>
+      <span id="help-subject" class="error-text">{{datos['form'][1].mensaje}}</span>
     </div>
   </fieldset>
   <fieldset>
@@ -61,97 +62,97 @@ parent() }}{% endblock %} {% block main %}
     <div class="input-group">
       <label for="InformaciónPeso">Peso:</label>
       <input
-        class="caja-texto"
+      class="caja-texto {{datos['form'][2].estado}} "
         id="InformaciónPeso"
         type="number"
         name="InformaciónPeso"
-        value="0"
+        value="{{datos['form'][2].input}}"
         placeholder="Peso"
-        min="0"
+        min="0.10"
         step="0.10"
         required
       />
-      <span id="help-InformaciónPeso" class="error-text"></span>
+      <span id="help-InformaciónPeso" class="error-text">{{datos['form'][2].mensaje}}</span>
     </div>
     <div class="input-group">
       <label for="InformaciónEnergia">Energia:</label>
 
       <input
-        class="caja-texto"
+      class="caja-texto {{datos['form'][3].estado}} "
         id="InformaciónEnergia"
         type="number"
         name="InformaciónEnergia"
-        min="0"
+        min="0.10"
         step="0.10"
-        value="0"
+        value="{{datos['form'][3].input}}"
         placeholder="Energia"
         required
       />
-      <span id="help-InformaciónEnergia" class="error-text"></span>
+      <span id="help-InformaciónEnergia" class="error-text">{{datos['form'][3].mensaje}}</span>
     </div>
     <div class="input-group">
       <label for="InformaciónCarbohidratos">Carbohidratos:</label>
 
       <input
-        class="caja-texto"
+      class="caja-texto {{datos['form'][4].estado}} "
         id="InformaciónCarbohidratos"
-        min="0"
+        min="0.10"
         step="0.10"
         type="number"
         name="InformaciónCarbohidratos"
-        value="0"
+        value="{{datos['form'][4].input}}"
         placeholder="Carbohidratos"
         required
       />
-      <span id="help-InformaciónCarbohidratos" class="error-text"></span>
+      <span id="help-InformaciónCarbohidratos" class="error-text">{{datos['form'][4].mensaje}}</span>
     </div>
     <div class="input-group">
       <label for="InformaciónProteina">Proteína:</label>
 
       <input
-        class="caja-texto"
+      class="caja-texto {{datos['form'][5].estado}} "
         id="InformaciónProteina"
-        min="0"
+        min="0.10"
         step="0.10"
         type="number"
         name="InformaciónProteina"
-        value="0"
+        value="{{datos['form'][5].input}}"
         placeholder="Proteina"
         required
       />
-      <span id="help-InformaciónProteina" class="error-text"></span>
+      <span id="help-InformaciónProteina" class="error-text">{{datos['form'][5].mensaje}}</span>
     </div>
     <div class="input-group">
       <label for="InformaciónGrasas">Grasas Totales:</label>
 
       <input
-        class="caja-texto"
-        min="0"
+      class="caja-texto {{datos['form'][6].estado}} "
+      min="0.10"
         step="0.10"
         id="InformaciónGrasas"
         type="number"
         name="InformaciónGrasas"
-        value="0"
+        value="{{datos['form'][6].input}}"
         placeholder="Grasas Totales"
         required
       />
-      <span id="help-InformaciónGrasas" class="error-text"></span>
+      <span id="help-InformaciónGrasas" class="error-text">{{datos['form'][6].mensaje}}</span>
     </div>
     <div class="input-group">
       <label for="InformaciónSodio">Sodio:</label>
 
       <input
-        class="caja-texto"
+      class="caja-texto {{datos['form'][7].estado}} "
         id="InformaciónSodio"
-        min="0"
+        min="0.10"
         step="0.10"
         type="number"
         name="InformaciónSodio"
-        value="0"
+        value="{{datos['form'][7].input}}"
         placeholder="Sodio"
         required
       />
-      <span id="help-InformaciónSodio" class="error-text"></span>
+      <span id="help-InformaciónSodio" class="error-text">{{datos['form'][7].mensaje}}</span>
     </div>
   </fieldset>
 

@@ -27,18 +27,17 @@
     <div class="input-group">
       <label for="nameSitio">Nombre de Sitio:</label>
       <input
-        class="caja-texto"
         id="nameSitio"
         type="text"
         name="nameSitio"
-        value="{{datos.data[0].nombreUsuario}}"
-        class="{{datos.data[0].nombreUsuario}}"
+        value="{{datos.data[0].input}}"
+        class="caja-texto {{datos['form'][0].estado}} "
         placeholder="Nombre de Sitio"
         minlength="4"
         maxlength="20"
         required
       />
-      <span  id="help-nameSitio" class="error-text" ></span>
+      <span  id="help-nameSitio" class="error-text" >{{datos['form'][0].mensaje}}</span>
     </div>
     <div class="input-group">
       <label for="subject">Descripcion:*</label>
@@ -51,10 +50,9 @@
         required
         minlength="4"
         maxlength="2000"
-       
-        class="{{datos.data[0].nombreUsuario}}"
-      >"{{datos.data[0].nombreUsuario}}"</textarea>
-      <span  id="help-subject" class="error-text" ></span>
+        class="caja-texto {{datos['form'][1].estado}} "
+      >{{datos.data[1].input}}</textarea>
+      <span  id="help-subject" class="error-text" >{{datos['form'][1].mensaje}}</span>
     </div>
 
   </fieldset>
@@ -65,92 +63,110 @@
       <div class="input-group">
         <label for="DireccionSitio">Direccion:</label>
         <input
-          class="caja-texto"
           id="DireccionSitio"
           type="text"
           name="DireccionSitio"
-          value="{{datos.data[0].nombreUsuario}}"
-          class="{{datos.data[0].nombreUsuario}}"
+          value="{{datos.data[2].input}}"
+          class="caja-texto {{datos['form'][2].estado}} "
           placeholder="Direccion"
           minlength="4" 
           maxlength="40"
           
           required
         />
-        <span  id="help-DireccionSitio" class="error-text" ></span>
+        <span  id="help-DireccionSitio" class="error-text" >{{datos['form'][2].mensaje}}</span>
       </div>
     <div class="input-group">
       <label for="LocalidadSitio">Localidad:</label>
       <input
-        class="caja-texto"
         id="LocalidadSitio"
         type="text"
         name="LocalidadSitio"
-        value="{{datos.data[0].nombreUsuario}}"
-        class="{{datos.data[0].nombreUsuario}}"
+        value="{{datos.data[3].input}}"
+        class="caja-texto {{datos['form'][3].estado}} "
         placeholder="Localidad"
         minlength="4" 
         maxlength="40"
         required
       />
-      <span  id="help-LocalidadSitio" class="error-text" ></span>
+      <span  id="help-LocalidadSitio" class="error-text" >{{datos['form'][3].mensaje}}</span>
     </div>
     <div class="input-group">
       <label for="ProvinciaSitio">Provincia:</label>
       <input
-        class="caja-texto"
         id="ProvinciaSitio"
         type="text"
         name="ProvinciaSitio"
-        value="{{datos.data[0].nombreUsuario}}"
-        class="{{datos.data[0].nombreUsuario}}"
+        value="{{datos.data[4].input}}"
+        class="caja-texto {{datos['form'][4].estado}} "
         placeholder="Provincia"
         minlength="4" 
         maxlength="40"
         required
       />
-      <span  id="help-ProvinciaSitio" class="error-text" ></span>
+      <span  id="help-ProvinciaSitio" class="error-text" >{{datos['form'][4].mensaje}}</span>
   </div>
       <div class="input-group">
       <label for="MailSitio">Correo Electrónico:</label>
       <input
-        class="caja-texto"
+        class="caja-texto {{datos['form'][5].estado}} "
         id="MailSitio"
         type="email"
         name="MailSitio"
-        value="{{datos.data[0].nombreUsuario}}"
-        class="{{datos.data[0].nombreUsuario}}"
+        value="{{datos.data[5].input}}"
         placeholder="Correo Electronico"
         required
       />
-      <span  id="help-MailSitio" class="error-text" ></span>
+      <span  id="help-MailSitio" class="error-text" >{{datos['form'][5].mensaje}}</span>
     </div>
     <div class="input-group">
       <label for="TelefonoSitio">Telefono:</label>
       <input
-        class="caja-texto"
+        class="caja-texto {{datos['form'][6].estado}} "
         id="TelefonoSitio"
         type="tel"
         name="TelefonoSitio"
-        value=""
+        value="{{datos.data[6].input}}"
         placeholder="Telefono"
         pattern="^(\(\+?\d{2,3}\)[\*|\s|\-|\.]?(([\d][\*|\s|\-|\.]?){6})(([\d][\s|\-|\.]?){2})?|(\+?[\d][\s|\-|\.]?){8}(([\d][\s|\-|\.]?){2}(([\d][\s|\-|\.]?){2})?)?)$"
         required
       />
-      <span  id="help-TelefonoSitio" class="error-text" ></span>
+      <span  id="help-TelefonoSitio" class="error-text" >{{datos['form'][6].mensaje}}</span>
     </div>
   </fieldset>
-  <fieldset>
+  <fieldset class=" {{datos['form'][9].estado}} ">
     <legend class="title">Localización</legend>
-   
+      <input
+      class="caja-texto"
+      id="longitud"
+      type="number"
+      name="longitud"
+      value=""
+      min="-180"
+      max="180"
+      hidden
+      readonly
+      />
+    
+      <input
+          class="caja-texto"
+          id="latitud"
+          type="number"
+          name="latitud"
+          value=""
+          min="-90"
+          max="90"
+          hidden
+          readonly
+      />
     <p class="title">Arraste el marcador a la ubicación geográfica del lugar</p>
-      <section id="mapa">
+      <section id="mapa"  >
     
       </section>
-      <span  id="help-Mapa" class="error-text" ></span>
+      <span  id="help-Mapa" class="error-text" >{{datos['form'][9].mensaje}}</span>
   </fieldset>
 
-  <fieldset>
+  <fieldset class=" {{datos['form'][8].estado}} ">
     <legend class="title">Servicios</legend>
     <label class="heading">Seleccione los servicios disponibles:</label>
     <div class="checkbox">
@@ -189,14 +205,15 @@
         Juegos para niños
       </label>
     </div>
+    <span  id="help-servicios" class="error-text" >{{datos['form'][8].mensaje}}</span>
   </fieldset>
   <fieldset >
     <legend class="title">Horarios</legend>
-    <div id=horarios>
+    <div id="horarios">
     <div id="horario-0">
       <div class="input-group">
       <label for="Dia-0">Día :</label>
-      <select  id="Dia-0" name="Dia-0"  required >
+      <select  id="Dia-0" name ="horarios[]" required class="caja-texto {{datos['form'][7].estado}} ">
         <option value="" >Selecionar día:</option>
         <option value="1">Lunes</option>
         <option value="2">Martes</option>
@@ -211,7 +228,7 @@
       <br>
       <div class="input-group">
       <label for="De-0">De :</label> 
-      <select id="De-0" name="De-0" onBlur="validarhorario('0');" required >
+      <select id="De-0"  name="horarios[]"  onBlur="validarhorario('0');" required class="caja-texto {{datos['form'][7].estado}} ">
         <option value="">Selecionar hora:</option>
         <option value="0">00:00</option>
         <option value="1">01:00</option>
@@ -242,7 +259,7 @@
     </div>
       <div class="input-group">
       <label for="Hasta-0">A :</label>
-      <select id="Hasta-0" name="Hasta-0" onBlur="validarhorario('0');" required >
+      <select id="Hasta-0" name="horarios[]" onBlur="validarhorario('0');" required class="caja-texto {{datos['form'][7].estado}} ">
         <option value="">Selecionar hora:</option>
         <option value="0">00:00</option>
         <option value="1">01:00</option>
@@ -269,7 +286,7 @@
         <option value="22">22:00</option>
         <option value="23">23:00</option>
       </select>
-      <span  id="help-Hasta-0" class="error-text" ></span>
+      <span  id="help-Hasta-0" class="error-text" >{{datos['form'][7].mensaje}}</span>
     </div>
     </div>
   </div>

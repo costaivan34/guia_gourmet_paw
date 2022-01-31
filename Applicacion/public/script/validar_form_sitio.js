@@ -88,7 +88,8 @@ inputs.forEach(function(input) {
       const coords = marker.getLngLat();
       self.longitud = coords.lng;
       self.latitud = coords.lat;
-      validarDatos("Mapa");
+      document.getElementById("longitud").value = coords.lng;
+      document.getElementById("latitud").value = coords.lat;
       }
        
       marker.on('dragend', onDragEnd);
@@ -129,7 +130,7 @@ inputs.forEach(function(input) {
     div.innerHTML = `     
       <div class="input-group">
     <label for="Dia-` + a + `">Día :</label>
-        <select  id="Dia-` + a + `" name="Dia-` + a + `"required >
+        <select  id="Dia-` + a + `"name="horarios[]" required >
           <option value="-1" >Selecionar día:</option>
           <option value="1">Lunes</option>
           <option value="2">Martes</option>
@@ -143,7 +144,7 @@ inputs.forEach(function(input) {
         </div>
       <div class="input-group">
         <label for="De-` + a + `">De :</label>
-        <select  id="De-` + a + `" name="De-` + a + `"required onBlur="validarhorario('` + a + `');">
+        <select  id="De-` + a + `"name="horarios[]" required onBlur="validarhorario('` + a + `');">
           <option value="-1">Selecionar hora:</option>
           <option value="0">00:00</option>
           <option value="1">01:00</option>
@@ -174,7 +175,7 @@ inputs.forEach(function(input) {
         </div>
         <div class="input-group">
         <label for="Hasta-` + a + `">A :</label>
-        <select  id="Hasta-` + a + `" name="Hasta-` + a + `"required onBlur="validarhorario('` + a + `');">
+        <select  id="Hasta-` + a + `"name="horarios[]"required onBlur="validarhorario('` + a + `');">
           <option value="-1">Selecionar hora:</option>
           <option value="0">00:00</option>
           <option value="1">01:00</option>

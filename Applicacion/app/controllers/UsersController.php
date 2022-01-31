@@ -49,7 +49,8 @@ class UsersController extends Controller{
         $error_count = 0;
         // Comprobar si llegaron los campos requeridos:
       //   nameUser
-      if( empty($POST['nameUser']) ){
+      $POST['nameUser'] = filter_var($POST['nameUser'], FILTER_SANITIZE_STRING);
+      if(empty($POST['nameUser']) ){
         $error_count++;
         $datos[0][0]= "";
         $datos[0][1]= "input-error";
@@ -66,8 +67,8 @@ class UsersController extends Controller{
             }
         }
    
-
       //   nombreUser
+      $POST['nombreUser'] = filter_var($POST['nombreUser'], FILTER_SANITIZE_STRING);
       if( empty($POST['nombreUser']) ){
         $error_count++;
         $datos[1][0]= "";
@@ -85,6 +86,7 @@ class UsersController extends Controller{
         }
    
       //    apellidoUser
+      $POST['apellidoUser'] = filter_var($POST['apellidoUser'], FILTER_SANITIZE_STRING);
       if( empty($POST['apellidoUser']) ){
         $error_count++;
         $datos[2][0]= "";
@@ -102,6 +104,7 @@ class UsersController extends Controller{
         }
    
      //     mailUser
+     $POST['mailUser'] = filter_var($POST['mailUser'], FILTER_SANITIZE_EMAIL);
      if( empty($POST['mailUser']) ){
         $error_count++;
         $datos[3][0]= "";
@@ -119,6 +122,7 @@ class UsersController extends Controller{
         }
    
       //   paisUser
+      $POST['paisUser'] = filter_var($POST['paisUser'], FILTER_SANITIZE_STRING);
       if( empty($POST['paisUser']) ){
         $error_count++;
         $datos[4][0]= "";
@@ -136,6 +140,7 @@ class UsersController extends Controller{
         }
    
       //   telefonoUser
+      $POST['telefonoUser'] = filter_var($POST['telefonoUser'], FILTER_SANITIZE_STRING);
       if( empty($POST['telefonoUser']) ){
         $error_count++;
         $datos[5][0]= "";
@@ -230,7 +235,8 @@ class UsersController extends Controller{
                 return  $this->new_user($datos);
                
             }else{
-             return view('/errors/not-found');
+                $datos["user"] = " " ;
+                return view('/errors/internal-error', compact('datos'));
             }
         }else{
            $this->new_user($datos);
@@ -489,15 +495,12 @@ class UsersController extends Controller{
                 $datas[1]['input'] = $data[0]->nombre;
                 $datas[2]['input'] = $data[0]->apellido;
                 $datas[3]['input'] = $data[0]->mail;
-                $datas[4]['input'] = $data[0]->pais;
-                $datas[6]['input'] = $data[0]->telefono;
-                $datas[5]['input'] = $data[0]->direccion;
                 $datas[7]['input'] = $data[0]->fotoPerfil;
                 $datos['data']  = $datas;
             $datos['sitios'] = $this->model->getSitiosUsuario( $_SESSION['user']);
             return view('/users/dashboard-sitios', compact('datos'));
         } else {
-            header('Location: /');
+            header('Location: /inicio');
             exit();
         }
     }
@@ -536,26 +539,27 @@ class UsersController extends Controller{
         ];
         session_start();
             $datos['user'] = ' ';
-            if (isset($_SESSION['user'])) {
-                $datos['user'] = $_SESSION['user'];
-                $data = $this->model->getUsuario($_SESSION['user']);
-                $datas[0]['input'] = $data[0]->nombreUsuario;
-                $datas[1]['input'] = $data[0]->nombre;
-                $datas[2]['input'] = $data[0]->apellido;
-                $datas[3]['input'] = $data[0]->mail;
-                $datas[4]['input'] = $data[0]->pais;
-                $datas[6]['input'] = $data[0]->telefono;
-                $datas[5]['input'] = $data[0]->direccion;
-                $datas[7]['input'] = $data[0]->fotoPerfil;
-                $datos['data']  = $datas;
-
-            $datos['platos'] = $this->Sitios->getPlatosFromSitios( $_GET['Sitio'] );
+        if (isset($_SESSION['user'])) {
+            $datos['user'] = $_SESSION['user'];
+            $data = $this->model->getUsuario($_SESSION['user']);
+            $datas[0]['input'] = $data[0]->nombreUsuario;
+            $datas[1]['input'] = $data[0]->nombre;
+            $datas[2]['input'] = $data[0]->apellido;
+            $datas[3]['input'] = $data[0]->mail;
+            $datas[7]['input'] = $data[0]->fotoPerfil;
+            $datos['data']  = $datas;
             $data = $this->Sitios->getNombreSitios(htmlspecialchars($_GET['Sitio']));
-            $datos['idSitio'] = $data[0]->idSitio;
-            $datos['NameSitio'] = $data[0]->nombre;
-            return view('/users/dashboard-platos', compact('datos'));
+            if(!empty($data)){
+                $datos['platos'] = $this->Sitios->getPlatosFromSitios( $_GET['Sitio'] );
+                $datos['idSitio'] = $data[0]->idSitio;
+                $datos['NameSitio'] = $data[0]->nombre;
+                return view('/users/dashboard-platos', compact('datos'));
+            }else{
+                header('Location: /inicio');
+                exit();
+            }
         } else {
-            header('Location: /');
+            header('Location: /inicio');
             exit();
         }
     }
@@ -601,14 +605,11 @@ class UsersController extends Controller{
                 $datas[1]['input'] = $data[0]->nombre;
                 $datas[2]['input'] = $data[0]->apellido;
                 $datas[3]['input'] = $data[0]->mail;
-                $datas[4]['input'] = $data[0]->pais;
-                $datas[6]['input'] = $data[0]->telefono;
-                $datas[5]['input'] = $data[0]->direccion;
                 $datas[7]['input'] = $data[0]->fotoPerfil;
                 $datos['data']  = $datas;
             return view('/users/dashboard-password', compact('datos'));
         } else {
-            header('Location: /');
+            header('Location: /inicio');
             exit();
         }
     }

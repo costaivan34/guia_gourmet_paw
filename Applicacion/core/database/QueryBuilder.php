@@ -32,7 +32,7 @@ class QueryBuilder
      */
     public function selectAll($table)
     {
-        $statement = $this->pdo->prepare("SELECT * FROM :tabla");
+        $statement = $this->pdo->prepare('SELECT * FROM :tabla');
         $statement->bindParam(':tabla', $table, PDO::PARAM_STR);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -75,7 +75,8 @@ class QueryBuilder
      *
      * Ver: http://php.net/manual/en/pdo.prepared-statemensssts.php#97162
      */
-    private function cleanParameterName($parameters)  {
+    private function cleanParameterName($parameters)
+    {
         $cleaned_params = [];
         foreach ($parameters as $name => $value) {
             $cleaned_params[str_replace('-', '', $name)] = $value;
@@ -83,7 +84,8 @@ class QueryBuilder
         return $cleaned_params;
     }
 
-    public function validarLogin($usuario) {
+    public function validarLogin($usuario)
+    {
         $statement = $this->pdo->prepare(
             "SELECT password FROM usuarios
             WHERE mail=:usuario "
@@ -110,7 +112,11 @@ class QueryBuilder
                 VALUES (:mail,:nombreUsuario ,:nombre ,:apellido,:pais ,:telefono,:passwsord, :path_img)"
             );
             $statement->bindParam(':mail', $mail, PDO::PARAM_STR);
-            $statement->bindParam(':nombreUsuario', $nombreUsuario, PDO::PARAM_STR);
+            $statement->bindParam(
+                ':nombreUsuario',
+                $nombreUsuario,
+                PDO::PARAM_STR
+            );
             $statement->bindParam(':nombre', $nombre, PDO::PARAM_STR);
             $statement->bindParam(':apellido', $apellido, PDO::PARAM_STR);
             $statement->bindParam(':pais', $pais, PDO::PARAM_STR);
@@ -118,22 +124,80 @@ class QueryBuilder
             $statement->bindParam(':passwsord', $password, PDO::PARAM_STR);
             $statement->bindParam(':path_img', $path_img, PDO::PARAM_STR);
             $statement->execute();
-           
-          $this->pdo->commit();
-            
+
+            $this->pdo->commit();
+            return 1;
         } catch (\PDOException $e) {
             // rollback the transaction
             $this->pdo->rollBack();
-        
             // show the error message
-            die($e->getMessage());
+            return 0;
         }
+    }
+
+    public function updatePassword($user, $password)
+    {
+        try {
+            $this->pdo->beginTransaction();
+            $statement = $this->pdo->prepare("UPDATE usuarios u
+            SET u.password = :pass WHERE u.mail= :user");
+            $statement->bindParam(':pass', $password, PDO::PARAM_STR);
+            $statement->bindParam(':user', $user, PDO::PARAM_STR);
+            $statement->execute();
+
+            $this->pdo->commit();
+            return 1;
+        } catch (\PDOException $e) {
+            // rollback the transaction
+            $this->pdo->rollBack();
+            // show the error message
+            return 0;
+        }
+    }
+
+    public function updateUsuario(
+        $mail,
+        $nombre,
+        $apellido,
+        $ubicacion,
+        $telefono
+    ) {
+        try {
+            $this->pdo->beginTransaction();
+            $statement = $this->pdo->prepare("UPDATE usuarios u
+            SET u.nombre = :nombre, u.apellido = :apellido,
+            u.pais = :ubicacion:,u.telefono = :telefono 
+            WHERE u.mail= :mail");
+            $statement->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+            $statement->bindParam(':apellido', $apellido, PDO::PARAM_STR);
+            $statement->bindParam(':ubicacion', $ubicacion, PDO::PARAM_STR);
+            $statement->bindParam(':telefono', $telefono, PDO::PARAM_STR);
+            $statement->bindParam(':mail', $mail, PDO::PARAM_STR);
+            $statement->execute();
+            $this->pdo->commit();
+            return 1;
+        } catch (\PDOException $e) {
+            // rollback the transaction
+            $this->pdo->rollBack();
+            // show the error message
+            return 0;
+        }
+    }
+
+    public function isFree($mail)
+    {
+        $statement = $this->pdo->prepare(
+            'SELECT * FROM `usuarios` WHERE mail=:mail '
+        );
+        $statement->bindParam(':mail', $mail, PDO::PARAM_STR);
+        $statement->execute();
+        return $statement->rowCount();
     }
 
     public function agregarConsulta($nombre, $apellido, $mail, $ftexto)
     {
         $statement = $this->pdo->prepare(
-            "INSERT INTO  consultas (mail,nombre,apellido,mensaje) VALUES (:mail,:nombre ,:apellido,:ftexto )"
+            'INSERT INTO  consultas (mail,nombre,apellido,mensaje) VALUES (:mail,:nombre ,:apellido,:ftexto )'
         );
         $statement->bindParam(':mail', $mail, PDO::PARAM_STR);
         $statement->bindParam(':nombre', $nombre, PDO::PARAM_STR);
@@ -147,47 +211,60 @@ class QueryBuilder
         }
     }
 
-   
-
-    public function agregarPlato( $namePlato, $subject,  $idSitio,
-    $IP,$IE,$IC,$IPP,$IG,$IS,$archivos,$Carac){
+    public function agregarPlato(
+        $namePlato,
+        $subject,
+        $idSitio,
+        $IP,
+        $IE,
+        $IC,
+        $IPP,
+        $IG,
+        $IS,
+        $archivos,
+        $Carac
+    ) {
         try {
             $this->pdo->beginTransaction();
-            
             $statement = $this->pdo
                 ->prepare("INSERT INTO platos(nombre, descripcion, idSitio) 
             VALUES (:namePlato,:subsject,:idSitio)");
-            $statement->bindParam(':namePlato', $namePlato, PDO::PARAM_INT);
+            $statement->bindParam(':namePlato', $namePlato, PDO::PARAM_STR);
             $statement->bindParam(':subsject', $subject, PDO::PARAM_STR);
             $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
             $statement->execute();
-            
+            //  var_dump("platos");
             $idPlato = $this->pdo->lastInsertId();
-            
+
             $this->agregarInfor(1, $IP, $idPlato);
             $this->agregarInfor(2, $IE, $idPlato);
             $this->agregarInfor(3, $IC, $idPlato);
             $this->agregarInfor(4, $IPP, $idPlato);
             $this->agregarInfor(5, $IG, $idPlato);
             $this->agregarInfor(6, $IS, $idPlato);
-
+            //   var_dump("agregarInfor");
             $this->agregarCaracteristicas($Carac, $idPlato);
-
+            //    var_dump("agregarCaracteristicas");
             $this->agregarImagenes1($archivos, $idPlato);
-
+            //  var_dump("agregarImagenes1");
             $this->pdo->commit();
-            
-    } catch (\PDOException $e) {
-        // rollback the transaction
-        $this->pdo->rollBack();
-    
-        // show the error message
-        die($e->getMessage());
+            //  var_dump("commit");
+            return 1;
+        } catch (\PDOException $e) {
+            // rollback the transaction
+            $this->pdo->rollBack();
+            var_dump('rollBack');
+            // show the error message
+            return 0;
+        }
     }
-    }
-   
-    public function agregarImagenes1($Archivos, $idPlato){
-        if (  isset($Archivos['archivosubido']) &&  is_uploaded_file($Archivos['archivosubido']['tmp_name'])) {
+
+    public function agregarImagenes1($Archivos, $idPlato)
+    {
+        if (
+            isset($Archivos['archivosubido']) &&
+            is_uploaded_file($Archivos['archivosubido']['tmp_name'])
+        ) {
             $fileTmpPath = $_FILES['archivosubido']['tmp_name'];
             $uploadFileDir = './private/plates/' . $idPlato . '/';
             mkdir($uploadFileDir, 0777, true);
@@ -196,7 +273,7 @@ class QueryBuilder
         }
         $dest_path = substr($dest_path, 1);
         $statement = $this->pdo->prepare(
-            "INSERT INTO imagenesplatos(idPlato, path) VALUES (:idPlato,:dest_path)"
+            'INSERT INTO imagenesplatos(idPlato, path) VALUES (:idPlato,:dest_path)'
         );
         $statement->bindParam(':idPlato', $idPlato, PDO::PARAM_INT);
         $statement->bindParam(':dest_path', $dest_path, PDO::PARAM_STR);
@@ -204,101 +281,125 @@ class QueryBuilder
         $statement->execute();
     }
 
-    public function agregarCaracteristicas($caract, $idPlato) {
+    public function agregarCaracteristicas($caract, $idPlato)
+    {
         foreach ($caract as $value) {
-            $datos = $this->agregarCaracteristicas($value, $idPlato);
             $statement = $this->pdo->prepare(
-            "INSERT INTO listacaractplato (idPlato,idCaract) VALUES (:idPlato,:valsue)");
+                'INSERT INTO listacaractplato (idPlato,idCaract) VALUES (:idPlato,:valsue)'
+            );
             $statement->bindParam(':idPlato', $idPlato, PDO::PARAM_INT);
             $statement->bindParam(':valsue', $value, PDO::PARAM_INT);
             $statement->execute();
         }
     }
 
-    public function agregarInfor($Info, $Valor, $idPlato) {
+    public function agregarInfor($Info, $Valor, $idPlato)
+    {
         $statement = $this->pdo->prepare(
-            "INSERT INTO valornutricional (idPlato,idInfo, valor) VALUES (:idPlato,:Info,:Valor)"
+            'INSERT INTO valornutricional (idPlato,idInfo, valor) VALUES (:idPlato,:Info,:Valor)'
         );
         $statement->bindParam(':idPlato', $idPlato, PDO::PARAM_INT);
         $statement->bindParam(':Info', $Info, PDO::PARAM_INT);
         $statement->bindParam(':Valor', $Valor, PDO::PARAM_INT);
         $statement->execute();
-        if ($statement->rowCount() > 0) {
-            return $this->pdo->lastInsertId();
-        } else {
-            return 0;
-        }
     }
-   
 
     public function agregarSitio(
         $nameSitio,
         $subject,
-        $TelefonoSitio,
+        $DireccionSitio,
+        $LocalidadSitio,
+        $ProvinciaSitio,
+        $longitud,
+        $latitud,
         $MailSitio,
+        $TelefonoSitio,
         $user,
-        $cat
+        $horarios,
+        $servicios,
+        $FILES
     ) {
-        $statement = $this->pdo
-            ->prepare("INSERT INTO sitios (nombre, descripcion, telefono, sitioWeb,idUsuario, idCategoria) 
-        VALUES (:nameSitio,:subject, :TelefonoSitio,:MailSitio, 
-        (SELECT idUsuario FROM usuarios WHERE nombreUsuario=:user) ,:cat )");
+        try {
+            $this->pdo->beginTransaction();
+            $statement = $this->pdo->prepare("INSERT INTO sitios 
+            (nombre, descripcion, telefono, sitioWeb,idUsuario, idCategoria) 
+            VALUES (:nameSitio,:subsject, :TelefonoSitio,:MailSitio, 
+            (SELECT idUsuario FROM usuarios WHERE nombreUsuario=:user) ,1)");
             $statement->bindParam(':nameSitio', $nameSitio, PDO::PARAM_STR);
-            $statement->bindParam(':subject', $subject, PDO::PARAM_STR);
-            $statement->bindParam(':TelefonoSitio', $TelefonoSitio, PDO::PARAM_STR);
-            $statement->bindParam(':MailSitio', $MailSitio, PDO::PARAM_STR);    
-            $statement->bindParam(':user', $user, PDO::PARAM_STR); 
-            $statement->bindParam(':cat', $cat, PDO::PARAM_INT); 
-        $statement->execute();
-        if ($statement->rowCount() > 0) {
-            return $this->pdo->lastInsertId();
-        } else {
+            $statement->bindParam(':subsject', $subject, PDO::PARAM_STR);
+            $statement->bindParam(
+                ':TelefonoSitio',
+                $TelefonoSitio,
+                PDO::PARAM_STR
+            );
+            $statement->bindParam(':MailSitio', $MailSitio, PDO::PARAM_STR);
+            $statement->bindParam(':user', $user, PDO::PARAM_STR);
+
+            $statement->execute();
+
+            $idSitio = $this->pdo->lastInsertId();
+           //  var_dump('agregarServicio');
+            $this->agregarServicio($servicios, $idSitio);
+            
+           //  var_dump('agregarUbicacion');
+            $this->agregarUbicacion(
+                $idSitio,
+                $DireccionSitio,
+                $LocalidadSitio,
+                $ProvinciaSitio,
+                $longitud,
+                $latitud
+            );
+           // var_dump('agregarHorarios');
+            $this->agregarHorarios($idSitio, $horarios);
+            
+            $this->agregarImagenes($idSitio,$FILES);
+
+
+            $this->pdo->commit();
+            //  var_dump("commit");
+            return $idSitio;
+        } catch (\PDOException $e) {
+            // rollback the transaction
+            $this->pdo->rollBack();
+            var_dump('rollBack');
+            //die($e->getMessage());
+            // show the error message
             return 0;
         }
     }
 
-    public function agregarServicio($idServicio, $idSitio)
+    public function agregarServicio($servicios, $idSitio)
     {
-        $statement = $this->pdo->prepare(
-            "INSERT INTO listacaractsitio(idSitio, idCaract) VALUES (:idSitio,:idServicio)"
-        );
-        $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
-        $statement->bindParam(':idServicio', $idServicio, PDO::PARAM_INT);
-        $statement->execute();
-        if ($statement->rowCount() > 0) {
-            return $this->pdo->lastInsertId();
-        } else {
-            return 0;
-        }
-    }
-    public function selectPlatosList($idSitio)
-    {
-        $statement = $this->pdo
-            ->prepare("SELECT p.nombre, p.descripcion
-         FROM platos p WHERE p.idSitio = :idSitio");
-         $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
-        $statement->execute();
-        if ($statement->rowCount() > 0) {
-            return 1;
-        } else {
-            return 0;
+        foreach ($servicios as $value) {
+            $statement = $this->pdo->prepare(
+                'INSERT INTO listacaractsitio(idSitio, idCaract) VALUES (:idSitio,:idServicio)'
+            );
+            $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
+            $statement->bindParam(':idServicio', $value, PDO::PARAM_INT);
+            $statement->execute();
         }
     }
 
-    public function agregarHorarios($idSitio, $idDia, $HDesde, $HHasta){
-        $statement = $this->pdo->prepare(
-            "INSERT INTO horario (idSitio, idDia, HDesde, HHasta) VALUES (idSitio, :idDia, :HDesde, :HHasta)"
-        );
-        $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
-        $statement->bindParam(':idDia', $idDia, PDO::PARAM_INT);
-        $statement->bindParam(':HDesde', $HDesde, PDO::PARAM_INT);
-        $statement->bindParam(':HHasta', $HHasta, PDO::PARAM_INT);
-        $statement->execute();
-        if ($statement->rowCount() > 0) {
-            return $this->pdo->lastInsertId();
-        } else {
-            return 0;
-        }
+    public function agregarHorarios($idSitio, $horarios) {
+        $x = 0;
+        while ( $x<count($horarios)):
+            $dia = $horarios[$x]; // 0 a 6
+            $de = $horarios[$x + 1]; // 0 a 23 menor que $hasta
+            $hasta = $horarios[$x + 2]; // 0 a 23 mayor que $de
+            var_dump($x);
+            $statement = $this->pdo->prepare(
+                'INSERT INTO 
+                horario (idSitio, idDia, HDesde, HHasta)
+                 VALUES (:idSitio, :idDia, :HDesde, :HHasta)'
+            );
+            $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
+            $statement->bindParam(':idDia', $dia, PDO::PARAM_INT);
+            $statement->bindParam(':HDesde', $de, PDO::PARAM_INT);
+            $statement->bindParam(':HHasta', $hasta, PDO::PARAM_INT);
+            $statement->execute();
+            $x= $x + 3;
+        endwhile;
     }
 
     public function agregarUbicacion(
@@ -317,35 +418,63 @@ class QueryBuilder
         $statement->bindParam(':direccion', $direccion, PDO::PARAM_STR);
         $statement->bindParam(':ciudad', $ciudad, PDO::PARAM_STR);
         $statement->bindParam(':provincia', $provincia, PDO::PARAM_STR);
-        $statement->bindParam(':Y', $Y, PDO::PARAM_INT);
-        $statement->bindParam(':X', $X, PDO::PARAM_INT);
+        $statement->bindParam(':Y', $Y, PDO::PARAM_STR);
+        $statement->bindParam(':X', $X, PDO::PARAM_STR);
+        $statement->execute();
+    }
+
+    public function agregarImagenes($idSitio, $Archivos){
+            //Como el elemento es un arreglos utilizamos foreach para extraer todos los valores
+            foreach ($Archivos['archivosubido']['tmp_name'] as $key => $tmp_name) {
+                //Validamos que el archivo exista
+                if ($Archivos['archivosubido']['name'][$key]) {
+                    $filename = $Archivos['archivosubido']['name'][$key]; //Obtenemos el nombre original del archivo
+                    $source = $Archivos['archivosubido']['tmp_name'][$key]; //Obtenemos un nombre temporal del archivo
+                    $directorio = './private/sites/' . $idSitio . '/'; //Declaramos un  variable con la ruta donde guardaremos los archivos
+                    //Validamos si la ruta de destino existe, en caso de no existir la creamos
+                    if (!file_exists($directorio)) {
+                        mkdir($directorio, 0777) or
+                            die(
+                                'No se puede crear el directorio de extracci&oacute;n'
+                            );
+                    }
+                    $dir = opendir($directorio); //Abrimos el directorio de destino
+                    $target_path = $directorio . '/' . $filename; //Indicamos la ruta de destino, así como el nombre del archivo
+                    //Movemos y validamos que el archivo se haya cargado correctamente
+                    //El primer campo es el origen y el segundo el destino
+                    if (move_uploaded_file($source, $target_path)) {
+                        $target_path = substr($target_path, 1);
+                        $statement = $this->pdo->prepare(
+                            'INSERT INTO imagenessitios(idSitio, path) VALUES (:idSitio,:paths)'
+                        );
+                        $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
+                        $statement->bindParam(':paths', $target_path, PDO::PARAM_STR);
+                        $statement->execute();
+                        //	echo "El archivo $filename se ha almacenado en forma exitosa.<br>";
+                    } else {
+                        //	echo "Ha ocurrido un error, por favor inténtelo de nuevo.<br>";
+                    }
+                    closedir($dir); //Cerramos el directorio de destino
+                }
+            }
+    }
+
+    public function selectPlatosList($idSitio){
+        $statement = $this->pdo->prepare("SELECT p.nombre, p.descripcion
+         FROM platos p WHERE p.idSitio = :idSitio");
+        $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
         $statement->execute();
         if ($statement->rowCount() > 0) {
-            return $this->pdo->lastInsertId();
+            return 1;
         } else {
             return 0;
         }
     }
 
-    public function agregarImagenes($idSitio, $path)
+    public function selectSitio($idSitio)
     {
         $statement = $this->pdo->prepare(
-            "INSERT INTO imagenessitios(idSitio, path) VALUES (:idSitio,:paths)"
-        );
-        $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
-        $statement->bindParam(':paths', $path, PDO::PARAM_STR);
-        $statement->execute();
-        if ($statement->rowCount() > 0) {
-            return $this->pdo->lastInsertId();
-        } else {
-            return 0;
-        }
-    }
-
-
-    public function selectSitio($idSitio) {
-        $statement = $this->pdo->prepare(
-            "SELECT * FROM sitios WHERE idSitio= :idSitio"
+            'SELECT * FROM sitios WHERE idSitio= :idSitio'
         );
         $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
         $statement->execute();
@@ -357,7 +486,7 @@ class QueryBuilder
         $statement = $this->pdo
             ->prepare("SELECT idUbicacion, direccion, ciudad, provincia, x, y FROM ubicacion
      WHERE idSitio = :idSitio");
-     $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
+        $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
@@ -373,14 +502,13 @@ class QueryBuilder
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
 
-
     public function selectListaCaractSitio($idSitio)
     {
         $statement = $this->pdo
             ->prepare("SELECT cs.nombre FROM listacaractsitio lcs 
          INNER JOIN caracteristicasitio cs  ON  lcs.idCaract = cs.idCaracteristica 
          WHERE lcs.idSitio = :idSitio");
-         $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
+        $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
         $statement->execute();
 
         return $statement->fetchAll(PDO::FETCH_CLASS);
@@ -390,8 +518,8 @@ class QueryBuilder
     {
         $statement = $this->pdo->prepare("SELECT cs.idImagen, cs.path
      FROM  imagenessitios cs WHERE cs.idSitio = :idSitio");
-     $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);        
-           
+        $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
+
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
@@ -401,7 +529,7 @@ class QueryBuilder
         $statement = $this->pdo
             ->prepare("SELECT avg(cs.valoracionSabor) as valoracionSabor,avg( cs.valoracionPrecio)as valoracionPrecio,
     avg(cs.valoracionAmbiente)as valoracionAmbiente  FROM comentariositios cs WHERE cs.idsitio = :idSitio");
-     $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
+        $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
 
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
@@ -413,9 +541,9 @@ class QueryBuilder
             ->prepare("SELECT cs.nombre, cs.descripcion,cs.fecha,cs.valoracionSabor,
                 cs.valoracionPrecio,cs.valoracionAmbiente
          FROM comentariositios cs WHERE cs.idsitio = :idSitio LIMIT :offset, :per_page");
-               $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
-               $statement->bindParam(':offset', $offset, PDO::PARAM_INT);
-               $statement->bindParam(':per_page', $per_page, PDO::PARAM_INT);
+        $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
+        $statement->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $statement->bindParam(':per_page', $per_page, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
@@ -428,19 +556,20 @@ class QueryBuilder
             ->prepare(" SELECT p.idPlato, p.nombre, ip.path FROM platos p 
      INNER JOIN imagenesplatos ip ON p.idPlato= ip.idPlato 
       WHERE p.idSitio=:idSitio ORDER BY p.idPlato  LIMIT :offset, :per_page");
-      $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
-      $statement->bindParam(':offset', $offset, PDO::PARAM_INT);
-      $statement->bindParam(':per_page', $per_page, PDO::PARAM_INT);
-      $statement->execute();
+        $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
+        $statement->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $statement->bindParam(':per_page', $per_page, PDO::PARAM_INT);
+        $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
 
-    public function selectPlatos($idSitio)  {
+    public function selectPlatos($idSitio)
+    {
         $statement = $this->pdo
             ->prepare(" SELECT p.idPlato, p.nombre, ip.path FROM platos p 
      INNER JOIN imagenesplatos ip ON p.idPlato= ip.idPlato 
       WHERE p.idSitio=:idSitio ORDER BY p.idPlato");
-          $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
+        $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
@@ -449,8 +578,8 @@ class QueryBuilder
     {
         $statement = $this->pdo->prepare(" SELECT count(*) 
     FROM $tabla p WHERE p.idSitio=:idSitio");
-    $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
-    $statement->execute();
+        $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
+        $statement->execute();
         return $statement->fetchColumn();
     }
 
@@ -480,18 +609,15 @@ class QueryBuilder
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
 
-    public function selectPlato($idSitio, $idPlato) {
-        $statement = $this->pdo
-            ->prepare("SELECT nombre, descripcion
+    public function selectPlato($idSitio, $idPlato)
+    {
+        $statement = $this->pdo->prepare("SELECT nombre, descripcion
      FROM platos  WHERE idPlato=:idPlato and idSitio=:idSitio");
-       $statement->bindParam(':idPlato', $idPlato, PDO::PARAM_INT);
-       $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
+        $statement->bindParam(':idPlato', $idPlato, PDO::PARAM_INT);
+        $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
-
- 
-
 
     //recuperar ListaInfo de plato X
     public function selectListaInfo($idListaInfo)
@@ -501,7 +627,7 @@ class QueryBuilder
      INNER JOIN valornutricional vn  ON  li.idValor = vn.idValor 
      INNER JOIN infonutricional inf  ON  vn.idInfo = inf.idInfo
      WHERE li.idListaInfo = :idListaInfo");
-     $statement->bindParam(':idListaInfo', $idListaInfo, PDO::PARAM_INT);
+        $statement->bindParam(':idListaInfo', $idListaInfo, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
@@ -513,18 +639,19 @@ class QueryBuilder
             ->prepare("SELECT cs.nombre FROM listacaractplato lcs 
     INNER JOIN caracteristicaplato cs  ON  lcs.idCaract = cs.idCaracteristica 
     WHERE lcs.idPlato = :idPlato");
-    $statement->bindParam(':idPlato', $idPlato, PDO::PARAM_INT);
+        $statement->bindParam(':idPlato', $idPlato, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
 
     //recuperar ListaCaract de plato X
-    public function selectInfo($idPlato) {
+    public function selectInfo($idPlato)
+    {
         $statement = $this->pdo
             ->prepare("SELECT i.nombre,v.valor FROM valornutricional v 
     INNER JOIN infonutricional i  ON  i.idInfo = v.idInfo 
     WHERE v.idPlato = :idPlato");
-     $statement->bindParam(':idPlato', $idPlato, PDO::PARAM_INT);
+        $statement->bindParam(':idPlato', $idPlato, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
@@ -557,82 +684,124 @@ class QueryBuilder
     public function eliminarCaracPlatos($idPlato)
     {
         $statement = $this->pdo->prepare(
-            "DELETE FROM listacaractplato WHERE idPlato =$idPlato"
+            'DELETE FROM listacaractplato WHERE idPlato =:idPlato'
         );
+        $statement->bindParam(':idPlato', $idPlato, PDO::PARAM_INT);
         $statement->execute();
     }
     public function eliminarValorPlatos($idPlato)
     {
         $statement = $this->pdo->prepare(
-            "DELETE FROM valornutricional WHERE idPlato =$idPlato"
+            'DELETE FROM valornutricional WHERE idPlato =:idPlato'
         );
+        $statement->bindParam(':idPlato', $idPlato, PDO::PARAM_INT);
         $statement->execute();
     }
 
     public function eliminarImagenesPlatos($idPlato)
     {
         $statement = $this->pdo->prepare(
-            "DELETE FROM imagenesplatos WHERE idPlato =$idPlato"
+            'DELETE FROM imagenesplatos WHERE idPlato =:idPlato'
         );
+        $statement->bindParam(':idPlato', $idPlato, PDO::PARAM_INT);
         $statement->execute();
     }
 
     public function eliminarPlatos($idPlato)
     {
-        $statement = $this->pdo->prepare(
-            "DELETE FROM platos WHERE idPlato =$idPlato"
-        );
-        $statement->execute();
+        try {
+            $this->pdo->beginTransaction();
+            $this->eliminarImagenesPlatos($idPlato);
+            $this->eliminarValorPlatos($idPlato);
+            $this->eliminarCaracPlatos($idPlato);
+
+            $statement = $this->pdo->prepare(
+                'DELETE FROM platos WHERE idPlato =:idPlato'
+            );
+
+            $statement->bindParam(':idPlato', $idPlato, PDO::PARAM_INT);
+            $statement->execute();
+            $this->pdo->commit();
+            //  var_dump("commit");
+            return 1;
+        } catch (\PDOException $e) {
+            // rollback the transaction
+            $this->pdo->rollBack();
+            var_dump('rollBack');
+            // show the error message
+            return 0;
+        }
     }
 
     public function eliminarCaractSitio($idSitio)
     {
         $statement = $this->pdo->prepare(
-            "DELETE FROM listacaractsitio WHERE idSitio =$idSitio"
+            'DELETE FROM listacaractsitio WHERE idSitio =:idSitio'
         );
+        $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
         $statement->execute();
     }
 
     public function eliminarComentarioSitios($idSitio)
     {
         $statement = $this->pdo->prepare(
-            "DELETE FROM comentariositios WHERE idSitio =$idSitio"
+            'DELETE FROM comentariositios WHERE idSitio =:idSitio'
         );
+        $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
+        $statement->execute();
     }
 
     public function eliminarHorario($idSitio)
     {
         $statement = $this->pdo->prepare(
-            "DELETE FROM horario WHERE idSitio =$idSitio"
+            'DELETE FROM horario WHERE idSitio =:idSitio'
         );
+        $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
         $statement->execute();
     }
 
     public function eliminarImagenesSitios($idSitio)
     {
         $statement = $this->pdo->prepare(
-            "DELETE FROM imagenessitios WHERE idSitio =$idSitio"
+            'DELETE FROM imagenessitios WHERE idSitio =:idSitio'
         );
+        $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
         $statement->execute();
     }
 
     public function eliminarUbicacion($idSitio)
     {
         $statement = $this->pdo->prepare(
-            "DELETE FROM ubicacion WHERE idSitio =$idSitio"
+            'DELETE FROM ubicacion WHERE idSitio =:idSitio'
         );
+        $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
         $statement->execute();
     }
 
     public function eliminarSitio($idSitio)
     {
-        $statement = $this->pdo->prepare(
-            "DELETE FROM sitios WHERE idSitio =$idSitio"
-        );
-        $statement->execute();
-        if ($statement->rowCount() > 0) {
+        try {
+            $this->pdo->beginTransaction();
+
+            $this->eliminarCaractSitio($idSitio);
+            $this->eliminarComentarioSitios($idSitio);
+            $this->eliminarImagenesSitios($idSitio);
+            $this->eliminarUbicacion($idSitio);
+            $this->eliminarHorario($idSitio);
+            $statement = $this->pdo->prepare(
+                'DELETE FROM sitios WHERE idSitio =:idSitio'
+            );
+            $statement->bindParam(':idSitio', $idSitio, PDO::PARAM_INT);
+            $statement->execute();
+            $this->pdo->commit();
+            //  var_dump("commit");
             return 1;
-        } else {
+        } catch (\PDOException $e) {
+            // rollback the transaction
+            $this->pdo->rollBack();
+            // var_dump("rollBack");
+            // show the error message
+            //die($e->getMessage());
             return 0;
         }
     }
@@ -651,13 +820,13 @@ class QueryBuilder
     WHERE s.nombre like :Clave AND u.provincia like :Provincia AND idCategoria=:Categoria
     GROUP BY idSitio
     LIMIT :offset, :per_page");
-          $Clave = "%".$Clave."%";
-          $Provincia = "%".$Provincia."%";
-         $statement->bindParam(':Clave', $Clave, PDO::PARAM_STR);
-         $statement->bindParam(':Provincia', $Provincia, PDO::PARAM_STR);
-         $statement->bindParam(':Categoria', $Categoria, PDO::PARAM_INT);
-         $statement->bindParam(':offset', $offset, PDO::PARAM_INT);
-         $statement->bindParam(':per_page', $per_page, PDO::PARAM_INT);
+        $Clave = '%' . $Clave . '%';
+        $Provincia = '%' . $Provincia . '%';
+        $statement->bindParam(':Clave', $Clave, PDO::PARAM_STR);
+        $statement->bindParam(':Provincia', $Provincia, PDO::PARAM_STR);
+        $statement->bindParam(':Categoria', $Categoria, PDO::PARAM_INT);
+        $statement->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $statement->bindParam(':per_page', $per_page, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
@@ -675,12 +844,12 @@ class QueryBuilder
     WHERE s.nombre like :Clave AND u.provincia like :Provincia
     GROUP BY idSitio 
     LIMIT :offset, :per_page");
-          $Clave = "%".$Clave."%";
-          $Provincia = "%".$Provincia."%";
-         $statement->bindParam(':Clave', $Clave, PDO::PARAM_STR);
-         $statement->bindParam(':Provincia', $Provincia, PDO::PARAM_STR);
-         $statement->bindParam(':offset', $offset, PDO::PARAM_INT);
-         $statement->bindParam(':per_page', $per_page, PDO::PARAM_INT);
+        $Clave = '%' . $Clave . '%';
+        $Provincia = '%' . $Provincia . '%';
+        $statement->bindParam(':Clave', $Clave, PDO::PARAM_STR);
+        $statement->bindParam(':Provincia', $Provincia, PDO::PARAM_STR);
+        $statement->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $statement->bindParam(':per_page', $per_page, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
@@ -698,12 +867,12 @@ class QueryBuilder
     WHERE s.nombre like :Clave  AND idCategoria=:Categoria'
     GROUP BY idSitio
     LIMIT :offset, :per_page");
-          $Clave = "%".$Clave."%";
+        $Clave = '%' . $Clave . '%';
 
-         $statement->bindParam(':Clave', $Clave, PDO::PARAM_STR);
-         $statement->bindParam(':Categoria', $Categoria, PDO::PARAM_INT);
-         $statement->bindParam(':offset', $offset, PDO::PARAM_INT);
-         $statement->bindParam(':per_page', $per_page, PDO::PARAM_INT);
+        $statement->bindParam(':Clave', $Clave, PDO::PARAM_STR);
+        $statement->bindParam(':Categoria', $Categoria, PDO::PARAM_INT);
+        $statement->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $statement->bindParam(':per_page', $per_page, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
@@ -718,10 +887,10 @@ class QueryBuilder
     WHERE s.nombre like :Clave
     GROUP BY idSitio 
     LIMIT :offset, :per_page");
-          $Clave = "%".$Clave."%";
-         $statement->bindParam(':Clave', $Clave, PDO::PARAM_STR);
-         $statement->bindParam(':offset', $offset, PDO::PARAM_INT);
-         $statement->bindParam(':per_page', $per_page, PDO::PARAM_INT);
+        $Clave = '%' . $Clave . '%';
+        $statement->bindParam(':Clave', $Clave, PDO::PARAM_STR);
+        $statement->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $statement->bindParam(':per_page', $per_page, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
@@ -738,11 +907,11 @@ class QueryBuilder
     WHERE s.nombre like :Clave AND u.provincia like :Provincia AND idCategoria=:Categoria
     GROUP BY idSitio
     ) AS Pasd");
-      $Clave = "%".$Clave."%";
-      $Provincia = "%".$Provincia."%";
-     $statement->bindParam(':Clave', $Clave, PDO::PARAM_STR);
-     $statement->bindParam(':Provincia', $Provincia, PDO::PARAM_STR);
-     $statement->bindParam(':Categoria', $Categoria, PDO::PARAM_INT);
+        $Clave = '%' . $Clave . '%';
+        $Provincia = '%' . $Provincia . '%';
+        $statement->bindParam(':Clave', $Clave, PDO::PARAM_STR);
+        $statement->bindParam(':Provincia', $Provincia, PDO::PARAM_STR);
+        $statement->bindParam(':Categoria', $Categoria, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchColumn();
     }
@@ -756,10 +925,10 @@ class QueryBuilder
     INNER JOIN imagenessitios i ON  s.idSitio = i.idSitio
     WHERE s.nombre like :Clave AND u.provincia like :Provincia
     GROUP BY idSitio) AS Pasd");
-     $Clave = "%".$Clave."%";
-     $Provincia = "%".$Provincia."%";
-    $statement->bindParam(':Clave', $Clave, PDO::PARAM_STR);
-    $statement->bindParam(':Provincia', $Provincia, PDO::PARAM_STR);
+        $Clave = '%' . $Clave . '%';
+        $Provincia = '%' . $Provincia . '%';
+        $statement->bindParam(':Clave', $Clave, PDO::PARAM_STR);
+        $statement->bindParam(':Provincia', $Provincia, PDO::PARAM_STR);
         $statement->execute();
         return $statement->fetchColumn();
     }
@@ -773,9 +942,9 @@ class QueryBuilder
     INNER JOIN imagenessitios i ON  s.idSitio = i.idSitio
     WHERE s.nombre like :Clave  AND idCategoria= :Categoria GROUP BY idSitio) AS Pasd
     ");
-       $Clave = "%".$Clave."%";
-       $statement->bindParam(':Clave', $Clave, PDO::PARAM_STR);
-       $statement->bindParam(':Categoria', $Categoria, PDO::PARAM_INT);
+        $Clave = '%' . $Clave . '%';
+        $statement->bindParam(':Clave', $Clave, PDO::PARAM_STR);
+        $statement->bindParam(':Categoria', $Categoria, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchColumn();
     }
@@ -791,26 +960,28 @@ class QueryBuilder
     WHERE s.nombre like :Clave
     GROUP BY idSitio 
     ) AS Pasd");
-    $Clave = "%".$Clave."%";
-     $statement->bindParam(':Clave', $Clave, PDO::PARAM_STR);
+        $Clave = '%' . $Clave . '%';
+        $statement->bindParam(':Clave', $Clave, PDO::PARAM_STR);
         $statement->execute();
         return $statement->fetchColumn();
     }
 
-    public function getDatosUsuario($user){
+    public function getDatosUsuario($user)
+    {
         $statement = $this->pdo->prepare(
             " SELECT `idUsuario`, `mail`, `nombreUsuario`, `nombre`, `apellido`, 
              `pais`, `telefono`, `fotoPerfil` 
             FROM `usuarios` WHERE `mail` = :user "
         );
-        
+
         $statement->bindParam(':user', $user, PDO::PARAM_STR);
         //$statement->bindParam(':params', $params, PDO::PARAM_STR);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
 
-    public function getUsuario($user) {
+    public function getUsuario($user)
+    {
         $statement = $this->pdo->prepare(
             " SELECT `idUsuario`, `mail`, `nombreUsuario`, `nombre`, 
             `apellido`, `pais`, `telefono`, `fotoPerfil` 
@@ -828,58 +999,8 @@ class QueryBuilder
      LEFT JOIN imagenessitios i ON  s.idSitio = i.idSitio
      WHERE u.nombreUsuario=:user
      GROUP BY idSitio ");
-          $statement->bindParam(':user', $user, PDO::PARAM_STR);
+        $statement->bindParam(':user', $user, PDO::PARAM_STR);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
-
-    public function updatePassword($user, $password) {
-        $statement = $this->pdo->prepare("UPDATE usuarios u
-    SET u.password = :pass WHERE u.mail= :user");
-     $statement->bindParam(':pass', $password, PDO::PARAM_STR);
-     $statement->bindParam(':user', $user, PDO::PARAM_STR);
-
-        $statement->execute();
-        if ($statement->rowCount() > 0) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
-
-    public function updateUsuario(
-        $mail,
-        $nombre,
-        $apellido,
-        $ubicacion,
-        $telefono
-    ) {
-        $statement = $this->pdo->prepare("UPDATE usuarios u
-    SET u.nombre = :nombre, u.apellido = :apellido,
-     u.pais = :ubicacion:,u.telefono = :telefono 
-    WHERE u.mail= :mail");
-     $statement->bindParam(':nombre', $nombre, PDO::PARAM_STR);
-     $statement->bindParam(':apellido', $apellido, PDO::PARAM_STR);
-     $statement->bindParam(':ubicacion', $ubicacion, PDO::PARAM_STR);
-     $statement->bindParam(':telefono', $telefono, PDO::PARAM_STR);
-     $statement->bindParam(':mail', $mail, PDO::PARAM_STR);
-
-     $statement->execute();
-        if ($statement->rowCount() > 0) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
-
-    public function isFree($mail) {
-        $statement = $this->pdo->prepare(
-            "SELECT * FROM `usuarios` WHERE mail=:mail "
-        );
-        $statement->bindParam(':mail', $mail, PDO::PARAM_STR);
-        $statement->execute();
-        return $statement->rowCount();
-       
-    }
-    
 }

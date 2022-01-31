@@ -4,12 +4,11 @@ namespace App\Models;
 
 use App\Core\Model;
 
-class Users extends Model
-{
+class Users extends Model{
+
     protected $table = 'usuarios';
 
-    public function insert(array $user)
-    {
+    public function insert(array $user){
         $this->db->insert($this->table, $user);
     }
 
@@ -32,6 +31,7 @@ class Users extends Model
     }
 
     public function validarLogin($user, $password){
+      
         $hash_BD = $this->db->validarLogin($user);
         if (password_verify( $password, $hash_BD[0]->password)) {
             return 1;

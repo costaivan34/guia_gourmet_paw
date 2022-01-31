@@ -46,23 +46,22 @@ class Plato extends Model{
     public function agregarPlato($namePlato, $subject, $idSitio,
         $IP,$IE,$IC,$IPP,$IG,$IS,$archivos,$Carac){
             $Sitio = $this->db->selectSitio($idSitio);
-            if($Sitio){
-                $this->db->agregarPlato(
-                $namePlato, $subject, $idSitio,$IP,$IE,$IC,$IPP,$IG,$IS,
-                $archivos,$Carac);
-                return 1;
-            }else{
+       //     return 1;
+            if(empty($Sitio)){
                 return 0;
+            }else{
+                 $plato = $this->db->agregarPlato(
+                    $namePlato, $subject, $idSitio,$IP,$IE,$IC,$IPP,$IG,$IS,
+                     $archivos,$Carac);
+                    // var_dump("resultado 1");
+                 return $plato;     
             }
     }
 
 
     public function deletePlato($idPlato)  {
-        $this->db->eliminarCaracPlatos($idPlato);
-        $this->db->eliminarValorPlatos($idPlato);
-        $this->db->eliminarImagenesPlatos($idPlato);
         $op4 = $this->db->eliminarPlatos($idPlato);
-        return 1;
+        return  $op4;
     }
 
     public function getPaginacionPlatos($idSitio){

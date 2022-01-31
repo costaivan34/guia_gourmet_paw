@@ -5,7 +5,7 @@
     $router->post('login', 'UsersController@validarLogin');
     $router->get('dashboard/logout', 'UsersController@cerrarLogin');
     $router->get('logout', 'UsersController@cerrarLogin');
-
+    
     $router->get('dashboard/account', 'UsersController@dash');
     $router->get('dashboard/sitios', 'UsersController@dash_sitios');
     $router->get('dashboard/plato', 'UsersController@dash_platos');
