@@ -1,116 +1,48 @@
-function mostrar_mensaje(mensaje, contenedor) {
-  document.getElementById(contenedor).textContent = mensaje
-}
 
-function validarDatos(e, id) {
-  switch (e) {
+window.addEventListener('DOMContentLoaded', function () {
 
-case "fname":
-  X = document.getElementById("fname").value;
-  if (X.length < 4) {
-    document.getElementById("fname").classList.add("input-error");
-    mostrar_mensaje("El nombre ingresado no es valido.","help-fname");
-    return false;
-  } else {
-    document.getElementById("fname").classList.remove("input-error");
-    document.getElementById("help-fname").textContent = ""
-    mostrar_mensaje("","help-fname");
-  }
-break;
-case "aname":
-    X = document.getElementById("aname").value;
-    if (X.length < 4) {
-      document.getElementById("aname").classList.add("input-error");
-      mostrar_mensaje("El apellido ingresado no es valido.","help-aname");
-      return false;
-    } else {
-      document.getElementById("aname").classList.remove("input-error");
-      document.getElementById("help-aname").textContent = ""
-      mostrar_mensaje("","help-aname");
-    }
-break;
-  case "mail":
-    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-    Mail = document.getElementById('mail').value;
-    if (!emailRegex.test(Mail)) {
-      document.getElementById('mail').classList.add('input-error');
-      mostrar_mensaje("El correo electrónico ingresado no es valido.","help-mail");
-      return false
-    } else {
-      document.getElementById('mail').classList.remove('input-error');
-      mostrar_mensaje("","help-mail");
-    }
-  break;
-  case "subject":
-    X = document.getElementById("subject").value;
-    if (X.length < 40) {
-      document.getElementById("subject").classList.add("input-error");
-      mostrar_mensaje("Debes escribir algo en la descripcion.","help-subject");
-      return false;
-    } else {
-      document.getElementById("subject").classList.remove("input-error");
-      mostrar_mensaje("","help-subject");
-    }
-break;
-default:
-  return true;
-}
-}
+  // Obtengo los inputs que quiero lanzar su validación al perder el foco
+  var inputs = document.querySelectorAll('input');
+  var textarea = document.querySelectorAll('textarea');
+  console.log(textarea)
+  textarea.forEach(function(input) {
+    input.addEventListener('blur', event => {
+          if (!input.checkValidity()) {
+            document.getElementById(input.name).classList.add("input-error");
+            document.getElementById(`help-${input.name}`).textContent = input.validationMessage
+            
+          } else {
+            document.getElementById(input.name).classList.remove("input-error");
+            document.getElementById(`help-${input.name}`).textContent = ""
+    
+          }
+    });
+  });
 
-
-function guardarConsulta() {
-  var xmlHttpRequest = new XMLHttpRequest()
-  xmlHttpRequest.onreadystatechange = function () {
-    if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
-      var response = xmlHttpRequest.responseText
-      if (xmlHttpRequest.responseText == 1) {
-        //console.log(pagina);
-        const m = document.getElementById('messageBox')
-        m.innerHTML = `<div class="alert alert-success" role="alert">
-          Mensaje enviado con exito, pronto nos contactaremos con usted.Muchas gracias.</div>`
-        //alert("Mensaje enviado con exito, pronto nos contactaremos con usted.Muchas gracias por tus comentarios!");
-        document.getElementById('fname').value = ''
-        document.getElementById('aname').value = ''
-        document.getElementById('mail').value = ''
-        document.getElementById('subject').value = ''
-        document.getElementById('messageBox').scrollIntoView()
-        setTimeout(function () {
-          m.innerHTML = ''
-        }, 2500)
-      } else {
-        const m = document.getElementById('messageBox')
-        m.innerHTML = `<div class="alert alert-danger" role="alert">
-          El mensaje no pudo ser procesado, por favor intentelo nuevamente </div>`
-        document.getElementById('messageBox').scrollIntoView()
-        setTimeout(function () {
-          m.innerHTML = ''
-        }, 2500)
-        //alert("El mensaje no pudo ser procesado, por favor intentelo nuevamente dentro de unos minutos");
-      }
-    }
-  }
-  if(validarDatos('fname') && validarDatos('aname') &&  validarDatos('mail') && validarDatos('paisUser') ){
-  var nombre = document.getElementById('fname').value
-  var apellido = document.getElementById('aname').value
-  var mail = document.getElementById('mail').value
-  var texto = document.getElementById('subject').value
-    xmlHttpRequest.send(
-      'nombre=' +
-        nombre +
-        '&apellido=' +
-        apellido +
-        '&mail=' +
-        mail +
-        '&texto=' +
-        texto,
-    )
-    event.preventDefault()
-  } else {
-    console.log("error form")
-    const m = document.getElementById("messageBox");
-    m.innerHTML = `<div class="alert alert-danger" role="alert">` + 
-    "El formulario presenta errores. Por favor, inténtalo de nuevo." + `</div>`;
-    document.getElementById('messageBox').scrollIntoView();
-    setTimeout(function () { m.innerHTML = "" }, 2500);
-  }
-}
+  // Por cada input, chequeo su validez y hago acciones en consecuencia
+  inputs.forEach(function(input) {
+      input.addEventListener('blur', event => {
+          //console.log(input.checkValidity());
+          // checkValidity() lanza la validación y decide si el valor del input 
+          //	es correcto o no.
+          console.log(input.name)
+            if (!input.checkValidity()) {
+              console.log(`Valor invalido en el input ${input.name}`);
+              document.getElementById(input.name).classList.add("input-error");
+              //  document.getElementById(input.name).reportValidity();
+              document.getElementById(`help-${input.name}`).textContent = input.validationMessage
+              // console.log(input.validationMessage);
+              // agregar clases css para que se resalte el error
+            } else {
+              console.log(`Valor CORRECTO en el input ${input.name}`);
+              console.log(`input ${input.name}`);
+              document.getElementById(input.name).classList.remove("input-error");
+              document.getElementById(`help-${input.name}`).textContent = ""
+              // agregar clases css para que se muestre valido 
+              //  o al menos borrar las clases que marcan errores
+            }
+      });
+  });
+  
+ 
+  })

@@ -156,14 +156,14 @@ nav li {
   float: left;
   display: inline-block;
   right: 0;
-  margin: 1.5vh 0 0 1vw;
+  margin: 4vh 0 0 1vw;
 }
 
 .dash {
   width: 65vw;
   float: right;
   padding-right: 4vw;
-  margin: 1.5vh 1vw 0 0;
+  margin: 4vh 1vw 0 0;
 }
 
 .dash #columna {
@@ -528,7 +528,7 @@ fieldset {
 
 .dash input,
 .dash textarea {
-  width: 60vw;
+  width: 56vw;
   resize: vertical;
   padding: 1vw;
   margin: 1vh 4vh 0vh 4vw;

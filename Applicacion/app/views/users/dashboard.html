@@ -68,16 +68,16 @@
       <span id="help-mailUser" class="error-text">{{datos['data'][3].mensaje}}</span>
     </div>
     <div class="input-group">
-      <label for="ubicacionUser">Ubicacion</label>
+      <label for="paisUser">Ubicacion</label>
       <input
-        id="ubicacionUser"
+        id="paisUser"
         type="text"
-        name="ubicacionUser"
+        name="paisUser"
         value="{{datos['data'][4].input}}"
         placeholder="Pais"
         required
       />
-      <span id="help-ubicacionUser" class="error-text">{{datos['data'][4].mensaje}}</span>
+      <span id="help-paisUser" class="error-text">{{datos['data'][4].mensaje}}</span>
     </div>
     <div class="input-group">
       <label for="telefonoUser">Telefono</label>
@@ -85,12 +85,12 @@
         id="telefonoUser"
         type="tel"
         name="telefonoUser"
-        value="{{datos['data'][6].input}}"
+        value="{{datos['data'][5].input}}"
         placeholder="telefono"
         pattern="^(\(\+?\d{2,3}\)[\*|\s|\-|\.]?(([\d][\*|\s|\-|\.]?){6})(([\d][\s|\-|\.]?){2})?|(\+?[\d][\s|\-|\.]?){8}(([\d][\s|\-|\.]?){2}(([\d][\s|\-|\.]?){2})?)?)$"
         required
       />
-      <span id="help-telefonoUser" class="error-text">{{datos['data'][6].mensaje}}</span>
+      <span id="help-telefonoUser" class="error-text">{{datos['data'][5].mensaje}}</span>
     </div>
     <input class="input-enviar" type="submit" value="Guardar" name="Enviar" />
   </form>

@@ -6,111 +6,166 @@
 <link rel="stylesheet" href="/public/css/one-sitios.css" />
 <link rel="stylesheet" href="/public/css/near-sitios.css" />
 
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+<link
+  href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css"
+  rel="stylesheet"
+/>
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
-<link rel="stylesheet"
-  href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
+<link
+  rel="stylesheet"
+  href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css"
+  type="text/css"
+/>
 
 {% endblock %} {% block title %}{{ datos.OneSitio[0].nombre }}{% endblock %} {%
 block main %}
 <article itemscope itemtype="https://schema.org/Restaurant">
- 
-    <section class="slideshow-sitio slideshow-container contenedor">
-      <ul>
-        <!-- Full-width images with number and caption text -->
-        {% for N in datos.Imagenes %} {% if loop.index-1 == 0 %}
-        <li class="mySlides fade" style="display: block;">
-          <img itemprop="image" src="{{ datos.Imagenes[ loop.index-1 ].path }}" alt="" />
-        </li>
-        {% else %}
-        <li class="mySlides fade" style="display: none;">
-          <img itemprop="image" src="{{ datos.Imagenes[ loop.index-1 ].path }}" alt="" />
-        </li>
-        {% endif %}
-        {% endfor %}
-      </ul>
-      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-      <a class="next" onclick="plusSlides(1)">&#10095;</a>
-      <!-- The dots/circles -->
-      <ul style="text-align: center;">
-        {% for N in datos.Imagenes %} {% if loop.index-1 == 0 %}
-        <li class="dot activo" onclick="currentSlide( '{{ datos.loop.index-1 }}' )"></li>
-        {% else %}
-        <li class="dot" onclick="currentSlide( '{{ datos.loop.index-1}}' )"></li>
-        {% endif %}
-        {% endfor %}
-      </ul>
-    </section>
-    <section class="contenedor ">
-      <section class="fondo">
-        <h3 itemprop="name" class="title">{{ datos.OneSitio[0].nombre }}</h3>
-        <section class=" caracteristicas">
-          <h4 title>
-            <i class="fa fa-briefcase"></i>
-            Servicios
-          </h4>
-          <ul class="fa-ul caract">
-            {% if "wifi" in datos.Caract %}
-            <li itemprop="amenityFeature" itemscope itemtype="https://schema.org/LocationFeatureSpecification">
-              <i itemprop="name" class="fa fa-wifi enable"></i>
-              WI-FI
-              <meta itemprop="value" content="True">
-            </li>
-            {% endif %} {% if "wheelchair" in datos.Caract %}
-            <li itemprop="amenityFeature" itemscope itemtype="https://schema.org/LocationFeatureSpecification">
-              <i itemprop="name" class="fa fa-wheelchair enable"></i>
-              Acceso Personas con Discapacidad
-              <meta itemprop="value" content="True">
-            </li>
-            {% endif %} {% if "aireacondicionado" in datos.Caract %}
-            <li itemprop="amenityFeature" itemscope itemtype="https://schema.org/LocationFeatureSpecification">
-              <i itemprop="name" class="fa fa-snowflake-o enable"></i>
-              Aire Acondicionado
-              <meta itemprop="value" content="True">
-            </li>
-            {% endif %} {% if "estacionamiento" in datos.Caract %}
-            <li itemprop="amenityFeature" itemscope itemtype="https://schema.org/LocationFeatureSpecification">
-              <i itemprop="name" lass="fa fa-car enable"></i>
-              Estacionamiento
-              <meta itemprop="value" content="True">
-            </li>
-            {% endif %} {% if "tv" in datos.Caract %}
-            <li itemprop="amenityFeature" itemscope itemtype="https://schema.org/LocationFeatureSpecification">
-              <i itemprop="name" class="fa fa-television enable"></i>
-              TV
-              <meta itemprop="value" content="True">
-            </li>
-            {% endif %} {% if "juegos" in datos.Caract %}
-            <li itemprop="amenityFeature" itemscope itemtype="https://schema.org/LocationFeatureSpecification">
-              <i itemprop="name" class="fa fa-child enable"></i>
-              Juegos para niños
-              <meta itemprop="value" content="True">
-            </li>
-            {% endif %}
-          </ul>
-        </section>
-        <section itemprop="openingHoursSpecification" itemscope itemtype="https://schema.org/OpeningHoursSpecification"
-          class=" horarios">
-          <h4 title>
-            <i class="fa fa-clock-o"></i>
-            Horario
-          </h4>
-          <dl class="detalles">
-            {% for N in datos.Horario %}
-            <dt itemprop="dayOfWeek" href="https://schema.org/{{ datos.Horario[loop.index-1].nombre }}"> {{
-              datos.Horario[loop.index-1].nombre }}</dt>
-            <dd>
-              <time itemprop="opens" content="{{ datos.Horario[loop.index-1].HDesde }}:00:00">{{
-                datos.Horario[loop.index-1].HDesde }}hs</time> -
-              <time itemprop="closes" content="{{ datos.Horario[loop.index-1].HHasta  }}:00:00">{{
-                datos.Horario[loop.index-1].HHasta }}hs</time>
-            </dd>
-            {% endfor %}
-          </dl>
-        </section>
+  <section class="slideshow-sitio slideshow-container contenedor">
+    <ul>
+      <!-- Full-width images with number and caption text -->
+      {% for N in datos.Imagenes %} {% if loop.index-1 == 0 %}
+      <li class="mySlides fade" style="display: block;">
+        <img
+          itemprop="image"
+          src="{{ datos.Imagenes[ loop.index-1 ].path }}"
+          alt=""
+        />
+      </li>
+      {% else %}
+      <li class="mySlides fade" style="display: none;">
+        <img
+          itemprop="image"
+          src="{{ datos.Imagenes[ loop.index-1 ].path }}"
+          alt=""
+        />
+      </li>
+      {% endif %} {% endfor %}
+    </ul>
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    <!-- The dots/circles -->
+    <ul style="text-align: center;">
+      {% for N in datos.Imagenes %} {% if loop.index-1 == 0 %}
+      <li
+        class="dot activo"
+        onclick="currentSlide( '{{ datos.loop.index-1 }}' )"
+      ></li>
+      {% else %}
+      <li class="dot" onclick="currentSlide( '{{ datos.loop.index-1}}' )"></li>
+      {% endif %} {% endfor %}
+    </ul>
+  </section>
+  <section class="contenedor">
+    <section class="fondo">
+      <h3 itemprop="name" class="title">{{ datos.OneSitio[0].nombre }}</h3>
+      <section class="caracteristicas">
+        <h4 title>
+          <i class="fa fa-briefcase"></i>
+          Servicios
+        </h4>
+        <ul class="fa-ul caract">
+          {% if "wifi" in datos.Caract %}
+          <li
+            itemprop="amenityFeature"
+            itemscope
+            itemtype="https://schema.org/LocationFeatureSpecification"
+          >
+            <i itemprop="name" class="fa fa-wifi enable"></i>
+            WI-FI
+            <meta itemprop="value" content="True" />
+          </li>
+          {% endif %} {% if "wheelchair" in datos.Caract %}
+          <li
+            itemprop="amenityFeature"
+            itemscope
+            itemtype="https://schema.org/LocationFeatureSpecification"
+          >
+            <i itemprop="name" class="fa fa-wheelchair enable"></i>
+            Acceso Personas con Discapacidad
+            <meta itemprop="value" content="True" />
+          </li>
+          {% endif %} {% if "aireacondicionado" in datos.Caract %}
+          <li
+            itemprop="amenityFeature"
+            itemscope
+            itemtype="https://schema.org/LocationFeatureSpecification"
+          >
+            <i itemprop="name" class="fa fa-snowflake-o enable"></i>
+            Aire Acondicionado
+            <meta itemprop="value" content="True" />
+          </li>
+          {% endif %} {% if "estacionamiento" in datos.Caract %}
+          <li
+            itemprop="amenityFeature"
+            itemscope
+            itemtype="https://schema.org/LocationFeatureSpecification"
+          >
+            <i itemprop="name" lass="fa fa-car enable"></i>
+            Estacionamiento
+            <meta itemprop="value" content="True" />
+          </li>
+          {% endif %} {% if "tv" in datos.Caract %}
+          <li
+            itemprop="amenityFeature"
+            itemscope
+            itemtype="https://schema.org/LocationFeatureSpecification"
+          >
+            <i itemprop="name" class="fa fa-television enable"></i>
+            TV
+            <meta itemprop="value" content="True" />
+          </li>
+          {% endif %} {% if "juegos" in datos.Caract %}
+          <li
+            itemprop="amenityFeature"
+            itemscope
+            itemtype="https://schema.org/LocationFeatureSpecification"
+          >
+            <i itemprop="name" class="fa fa-child enable"></i>
+            Juegos para niños
+            <meta itemprop="value" content="True" />
+          </li>
+          {% endif %}
+        </ul>
+      </section>
+      <section
+        itemprop="openingHoursSpecification"
+        itemscope
+        itemtype="https://schema.org/OpeningHoursSpecification"
+        class="horarios"
+      >
+        <h4 title>
+          <i class="fa fa-clock-o"></i>
+          Horario
+        </h4>
+        <dl class="detalles">
+          {% for N in datos.Horario %}
+          <dt
+            itemprop="dayOfWeek"
+            href="https://schema.org/{{ datos.Horario[loop.index-1].nombre }}"
+          >
+            {{ datos.Horario[loop.index-1].nombre }}
+          </dt>
+          <dd>
+            <time
+              itemprop="opens"
+              content="{{ datos.Horario[loop.index-1].HDesde }}:00:00"
+            >
+              {{ datos.Horario[loop.index-1].HDesde }}hs
+            </time>
+            -
+            <time
+              itemprop="closes"
+              content="{{ datos.Horario[loop.index-1].HHasta  }}:00:00"
+            >
+              {{ datos.Horario[loop.index-1].HHasta }}hs
+            </time>
+          </dd>
+          {% endfor %}
+        </dl>
       </section>
     </section>
+  </section>
 
   <section class="contenedor">
     <!-- Tab links -->
@@ -135,13 +190,21 @@ block main %}
         <section>
           <h3 class="title">Descripcion</h3>
           <hr class="separador" />
-          <p itemprop="description" class="parrafo">{{ datos.OneSitio[0].descripcion}}</p>
+          <p itemprop="description" class="parrafo">
+            {{ datos.OneSitio[0].descripcion}}
+          </p>
         </section>
         <section id="contact-form">
           <h3 class="title">Contacto</h3>
           <hr class="separador" />
           <dl class="detalles">
-            <dt itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">Direccion</dt>
+            <dt
+              itemprop="address"
+              itemscope
+              itemtype="https://schema.org/PostalAddress"
+            >
+              Direccion
+            </dt>
             <dd itemprop="streetAddress">{{ datos.Ubicacion[0].direccion }}</dd>
             <dt>Ubicacion</dt>
             <dd itemprop="addressLocality">
@@ -150,7 +213,9 @@ block main %}
             <dt>Mail</dt>
             <dd itemprop="url">{{ datos.OneSitio[0].sitioWeb }}</dd>
             <dt>Telefono</dt>
-            <dd itemprop="telephone" class="ultimo">{{ datos.OneSitio[0].telefono }}</dd>
+            <dd itemprop="telephone" class="ultimo">
+              {{ datos.OneSitio[0].telefono }}
+            </dd>
           </dl>
         </section>
       </article>
@@ -158,10 +223,17 @@ block main %}
 
     <!-- Tab content Ubicacion-->
     <section itemprop="hasMap" id="Ubicacion" class="tabcontent noactive">
-      <div itemprop="geo" itemscope itemtype="https://schema.org/GeoCoordinates" id="mapa">
+      <div
+        itemprop="geo"
+        itemscope
+        itemtype="https://schema.org/GeoCoordinates"
+        id="mapa"
+      >
         <meta itemprop="latitude" content="{{ datos.Ubicacion[0].y}}" />
         <meta itemprop="longitude" content="{{ datos.Ubicacion[0].x}}" />
-        <pre id="info">No fue posible encontrar un sitio cerca de tu ubicación. Por favor mueve el mapa para cambiar las coordenadas</pre>
+        <pre id="info">
+No fue posible encontrar un sitio cerca de tu ubicación. Por favor mueve el mapa para cambiar las coordenadas</pre
+        >
       </div>
       <script>
         var longitud = '{{ datos.Ubicacion[0].y}}'
@@ -170,14 +242,11 @@ block main %}
         var nombre = '{{ datos.OneSitio[0].nombre }}'
         var path = '{{ datos.Imagenes[0].path }}'
       </script>
-      
     </section>
     <!-- Tab content Platos-->
     <section id="Platos" class="tabcontent noactive">
       <ul id="columna">
-        <li id="fila">
-
-        </li>
+        <li id="fila"></li>
       </ul>
       <ul class="paginacion" id="paginacionPlatos"></ul>
     </section>
@@ -228,17 +297,45 @@ block main %}
         <ul class="paginacion" id="paginacionComentarios"></ul>
       </section>
 
-      <form name="comentario" method="post" action="sendComentario" class="deja-comentario">
+      <form
+        name="comentario"
+        method="post"
+        action="sendComentario"
+        class="deja-comentario"
+      >
         <div id="messageBoxResult"></div>
         <h3>¡Deja un comentario!</h3>
-        <textarea id="textoComent" name="COMMENT" rows="10" cols="50" wrap="soft" placeholder="Máximo 1000 carácteres"
-          maxlength="1000" required></textarea>
-        
-        <input id="nombreComent" type="text" name="NAME" value="" size="20" maxlength="100"
-          placeholder="Nombre (requerido)" required />
+        <textarea
+          id="textoComent"
+          name="COMMENT"
+          rows="10"
+          cols="50"
+          wrap="soft"
+          placeholder="Máximo 1000 carácteres"
+          maxlength="1000"
+          required
+        ></textarea>
 
-        <input id="mailComent" type="text" name="EMAIL" value="" size="20" maxlength="100"
-          placeholder="Correo electrónico" />
+        <input
+          id="nombreComent"
+          type="text"
+          name="NAME"
+          value=""
+          size="20"
+          maxlength="100"
+          placeholder="Nombre (requerido)"
+          required
+        />
+
+        <input
+          id="mailComent"
+          type="text"
+          name="EMAIL"
+          value=""
+          size="20"
+          maxlength="100"
+          placeholder="Correo electrónico"
+        />
 
         <ul class="valoracion2">
           <li>
@@ -253,7 +350,13 @@ block main %}
               <label for="Precio3">★</label>
               <input id="Precio4" type="radio" name="Precio" value="2" />
               <label for="Precio4">★</label>
-              <input id="Precio5" type="radio" name="Precio" value="1" checked />
+              <input
+                id="Precio5"
+                type="radio"
+                name="Precio"
+                value="1"
+                checked
+              />
               <label for="Precio5">★</label>
             </div>
           </li>
@@ -285,31 +388,52 @@ block main %}
               <label for="Ambiente3">★</label>
               <input id="Ambiente4" type="radio" name="Ambiente" value="2" />
               <label for="Ambiente4">★</label>
-              <input id="Ambiente5" type="radio" name="Ambiente" value="1" checked />
+              <input
+                id="Ambiente5"
+                type="radio"
+                name="Ambiente"
+                value="1"
+                checked
+              />
               <label for="Ambiente5">★</label>
             </div>
           </li>
         </ul>
-        <input class="input-enviar" type="submit" value="Enviar" name="Enviar" onclick="guardarComentario()" />
+        <input
+          class="input-enviar"
+          type="submit"
+          value="Enviar"
+          name="Enviar"
+          onclick="guardarComentario()"
+        />
       </form>
     </section>
   </section>
 </article>
 <!-- The Modal for plato -->
-<aside id="plato" class=" modal-plato">
+<aside id="plato" class="modal-plato">
   <!-- Modal Content for plato-->
-  <section class=" contenedor animate plato-full">
+  <section class="contenedor animate plato-full">
     <span onclick="closeModal()" class="close" title="Close Modal">
       &times;
     </span>
-    <article itemscope itemtype="https://schema.org/Recipe" class="infoBasica-plato">
+    <article
+      itemscope
+      itemtype="https://schema.org/Recipe"
+      class="infoBasica-plato"
+    >
       <section class="info-plato">
         <section class="title-plato">
           <h3 itemprop="name" class="title" id="titulo"></h3>
           <hr class="separador" />
         </section>
         <section class="descrip">
-          <img itemprop="image" id="imagen-modal" src="/public/res/2.jpg" alt="" />
+          <img
+            itemprop="image"
+            id="imagen-modal"
+            src="/public/res/2.jpg"
+            alt=""
+          />
           <h3 class="descrip-t title">Descripcion</h3>
           <hr class="separador" />
           <p itemprop="description" class="parrafo" id="descripcion"></p>
@@ -321,27 +445,70 @@ block main %}
           <hr class="separador" />
           <ul class="datos">
             <li>
-              <img title="El plato no contiene productos lacteos de origen animal"  itemprop="recipeIngredient" id="Lacteos" src="/public/svg/leche (1).svg" alt="Lacteos" />
+              <img
+                title="El plato no contiene productos lacteos de origen animal"
+                itemprop="recipeIngredient"
+                id="Lacteos"
+                src="/public/svg/leche (1).svg"
+                alt="Lacteos"
+              />
             </li>
             <li>
-              <img title="El plato no contiene productos con gluten " itemprop="recipeIngredient" id="Gluten" src="/public/svg/gluten (1).svg" alt="Gluten" />
+              <img
+                title="El plato no contiene productos con gluten "
+                itemprop="recipeIngredient"
+                id="Gluten"
+                src="/public/svg/gluten (1).svg"
+                alt="Gluten"
+              />
             </li>
             <li>
-              <img title="El plato se elabora con picante" itemprop="recipeIngredient" id="Picante" src="/public/svg/chile (1).svg" alt="Picante" />
+              <img
+                title="El plato se elabora con picante"
+                itemprop="recipeIngredient"
+                id="Picante"
+                src="/public/svg/chile (1).svg"
+                alt="Picante"
+              />
             </li>
             <li>
-              <img title="El plato se elabora sin ningun producto de origen animal "  itemprop="recipeIngredient" id="Vegano" src="/public/svg/tomate (1).svg" alt="Vegano" />
+              <img
+                title="El plato se elabora sin ningun producto de origen animal "
+                itemprop="recipeIngredient"
+                id="Vegano"
+                src="/public/svg/tomate (1).svg"
+                alt="Vegano"
+              />
             </li>
             <li>
-              <img title="El plato contiene cantidades elevadas de azucar"  itemprop="recipeIngredient" id="Azucar" src="/public/svg/sugar (1).svg" alt="Azucar" />
+              <img
+                title="El plato contiene cantidades elevadas de azucar"
+                itemprop="recipeIngredient"
+                id="Azucar"
+                src="/public/svg/sugar (1).svg"
+                alt="Azucar"
+              />
             </li>
-            <li><img title="El plato contiene cantidades elevadas de sodio"  itemprop="recipeIngredient" id="Sal" src="/public/svg/dietetico (1).svg" alt="Sal" /></li>
+            <li>
+              <img
+                title="El plato contiene cantidades elevadas de sodio"
+                itemprop="recipeIngredient"
+                id="Sal"
+                src="/public/svg/dietetico (1).svg"
+                alt="Sal"
+              />
+            </li>
           </ul>
         </section>
-        <section itemprop="nutrition" itemscope itemtype="https://schema.org/NutritionInformation" class="infonut">
+        <section
+          itemprop="nutrition"
+          itemscope
+          itemtype="https://schema.org/NutritionInformation"
+          class="infonut"
+        >
           <h3 class="title">Informacion Nutricional</h3>
           <hr class="separador" />
-          <dl class=" detalles">
+          <dl class="detalles">
             <dt itemprop="servingSize">Peso</dt>
             <dd id="Peso"></dd>
             <dt itemprop="calories">Energia</dt>

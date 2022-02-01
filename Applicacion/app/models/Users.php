@@ -11,11 +11,11 @@ class Users extends Model{
     public function insert(array $user){
         $this->db->insert($this->table, $user);
     }
-
-    public function agregarUsuario($nombreUsuario ,$nombre ,$apellido ,$mail ,$pais ,$telefono,$password,$path_img){
+    
+    public function agregarUsuario($nombreUsuario ,$nombre ,$apellido ,$mail ,$pais ,$telefono,$password,$FILES){
         $opciones = [  'cost' => 12, ];
         $password = password_hash($password, PASSWORD_BCRYPT, $opciones);
-        $datos = $this->db->agregarUsuario($mail ,$nombreUsuario ,$nombre ,$apellido ,$pais ,$telefono,$password,$path_img);
+        $datos = $this->db->agregarUsuario($mail ,$nombreUsuario ,$nombre ,$apellido ,$pais ,$telefono,$password,$FILES);
         return $datos;
     }
 

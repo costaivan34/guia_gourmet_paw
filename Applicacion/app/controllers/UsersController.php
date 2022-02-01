@@ -30,148 +30,154 @@ class UsersController extends Controller{
         return view('users', compact('users'));
     }
 
-    public function save_image($FILES){
-        $dest_path = './private/users/default/perfil.jpg';
-        if ( isset($FILES['archivosubido']) &&is_uploaded_file($FILES['archivosubido']['tmp_name'])
-        ) {
-            $fileTmpPath = $FILES['archivosubido']['tmp_name'];
-            $mail = $_POST['mailUser'];
-            $uploadFileDir = './private/users/' . $mail . '/';
-            mkdir($uploadFileDir, 0777, true);
-            $dest_path = $uploadFileDir . '/perfil.jpg';
-            move_uploaded_file($fileTmpPath, $dest_path);
-        }
-        $dest_path = substr($dest_path, 1);
-        return  $dest_path;
-    }
+   
     
-    public function verificar_params($POST,$datos){
+    public function verificar_params($POST,$FILES,$datos){
+        $extensiones = array(0=>'image/jpg',1=>'image/jpeg',2=>'image/png');
         $error_count = 0;
         // Comprobar si llegaron los campos requeridos:
-      //   nameUser
-      $POST['nameUser'] = filter_var($POST['nameUser'], FILTER_SANITIZE_STRING);
-      if(empty($POST['nameUser']) ){
-        $error_count++;
-        $datos[0][0]= "";
-        $datos[0][1]= "input-error";
-        $datos[0][2]= "Completa este campo";
+        //   nameUser
+        $POST['nameUser'] = filter_var($POST['nameUser'], FILTER_SANITIZE_STRING);
+        if( empty($POST['nameUser']) ){
+            $error_count++;
+            $datos[0]['input']= $POST['nameUser'];
+            $datos[0]['estado']= "input-error";
+            $datos[0]['mensaje']= "Completa este campo";
+            }else{
+                // si tiene mas de 4 letras
+                // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
+                $datos[0]['input'] = $POST['nameUser'];
+                if( strlen( $POST['nameUser'] ) < 4 ){
+                    $error_count++;
+                   
+                    $datos[0]['estado'] = "input-error";
+                    $datos[0]['mensaje'] = "Alarga el texto a 4 o más caracteres";
+            }
+        }
+
+         //   nombreUser
+        $POST['nombreUser'] = filter_var($POST['nombreUser'], FILTER_SANITIZE_STRING);
+        if( empty($POST['nombreUser']) ){
+            $error_count++;
+            $datos[1]['input']= $POST['nombreUser'];
+            $datos[1]['estado']= "input-error";
+            $datos[1]['mensaje']= "Completa este campo";
+            }else{
+                // si tiene mas de 4 letras
+                // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
+                $datos[1]['input'] = $POST['nombreUser'];
+                if( strlen( $POST['nombreUser'] ) < 4 ){
+                    $error_count++;
+                    
+                    $datos[1]['estado'] = "input-error";
+                    $datos[1]['mensaje'] = "Alarga el texto a 4 o más caracteres";
+            }
+        }
+     
+          //    apellidoUser
+        $POST['apellidoUser'] = filter_var($POST['apellidoUser'], FILTER_SANITIZE_STRING);
+        if( empty($POST['apellidoUser']) ){
+            $error_count++;
+            $datos[2]['input']= $POST['apellidoUser'];
+            $datos[2]['estado']= "input-error";
+            $datos[2]['mensaje']= "Completa este campo";
+            }else{
+                // si tiene mas de 4 letras
+                // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
+                $datos[2]['input'] = $POST['apellidoUser'];
+                if( strlen( $POST['apellidoUser'] ) < 4 ){
+                    $error_count++;
+                   
+                    $datos[2]['estado'] = "input-error";
+                    $datos[2]['mensaje'] = "Alarga el texto a 4 o más caracteres";
+            }
+        }
+    
+     
+        //  mailUser
+        $POST['mailUser'] = filter_var($POST['mailUser'], FILTER_SANITIZE_EMAIL);
+        if( empty($POST['mailUser']) ){
+            $error_count++;
+            $datos[3]['input'] = $POST['mailUser'];
+            $datos[3]['estado'] = "input-error";
+            $datos[3]['mensaje'] = "Completa este campo";
         }else{
-       // si tiene mas de 4 letras
-       // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
-            if(! preg_match("^[a-z0-9_-]{3,16}$^", $POST['nameUser']) ){
-                $error_count++;
-                $datos[0][0]= $POST['nameUser'];
-                $datos[0][1]= "input-error";
-                $datos[0][2]= "Debe especificar el nombre";
-                
+            // si tiene mas de 4 letras
+            // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
+            $datos[3]['input'] = $POST['mailUser'];
+            if (!filter_var($POST['mailUser'], FILTER_VALIDATE_EMAIL)) {
+                    $error_count++;
+                    $datos[3]['estado']= "input-error";
+                    $datos[3]['mensaje']= "Incluye un signo '@' en la dirección de correo electrónico.";
+            }
+        }
+        //   paisUser  
+        $POST['paisUser'] = filter_var($POST['paisUser'], FILTER_SANITIZE_STRING);
+        if( empty($POST['paisUser']) ){
+            $error_count++;
+            $datos[4]['input']= $POST['paisUser'];
+            $datos[4]['estado']= "input-error";
+            $datos[4]['mensaje']= "Completa este campo";
+            }else{
+                // si tiene mas de 4 letras
+                // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
+                $datos[4]['input'] = $POST['paisUser'];
+                if( strlen( $POST['paisUser'] ) < 4 ){
+                    $error_count++;
+                   
+                    $datos[4]['estado'] = "input-error";
+                    $datos[4]['mensaje'] = "Alarga el texto a 4 o más caracteres";
             }
         }
    
-      //   nombreUser
-      $POST['nombreUser'] = filter_var($POST['nombreUser'], FILTER_SANITIZE_STRING);
-      if( empty($POST['nombreUser']) ){
-        $error_count++;
-        $datos[1][0]= "";
-        $datos[1][1]= "input-error";
-        $datos[1][2]= "Completa este campo";
-        }else{
-       // si tiene mas de 4 letras
-       // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
-            if(! preg_match($this->patron_texto, $POST['nombreUser']) ){
-                $error_count++;
-                $datos[1][0]= $POST['nombreUser'];
-                $datos[1][1]= "input-error";
-                $datos[1][2]= "Debe especificar el nombre";
-            }
-        }
-   
-      //    apellidoUser
-      $POST['apellidoUser'] = filter_var($POST['apellidoUser'], FILTER_SANITIZE_STRING);
-      if( empty($POST['apellidoUser']) ){
-        $error_count++;
-        $datos[2][0]= "";
-        $datos[2][1]= "input-error";
-        $datos[2][2]= "Completa este campo";
-        }else{
-       // si tiene mas de 4 letras
-       // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
-            if(! preg_match($this->patron_texto, $POST['apellidoUser']) ){
-                $error_count++;
-                $datos[2][0]= $POST['apellidoUser'];
-                $datos[2][1]= "input-error";
-                $datos[2][2]= "Completa este campo";
-            }
-        }
-   
-     //     mailUser
-     $POST['mailUser'] = filter_var($POST['mailUser'], FILTER_SANITIZE_EMAIL);
-     if( empty($POST['mailUser']) ){
-        $error_count++;
-        $datos[3][0]= "";
-        $datos[3][1]= "input-error";
-        $datos[3][2]= "Completa este campo";
-        }else{
-       // si tiene mas de 4 letras
-       // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
-       if (!filter_var($POST['mailUser'], FILTER_VALIDATE_EMAIL)) {
-        $error_count++;
-                $datos[3][0]= $POST['mailUser'];
-                $datos[3][1]= "input-error";
-                $datos[3][2]= "Incluye un signo '@' en la dirección de correo electrónico.";
-            }
-        }
-   
-      //   paisUser
-      $POST['paisUser'] = filter_var($POST['paisUser'], FILTER_SANITIZE_STRING);
-      if( empty($POST['paisUser']) ){
-        $error_count++;
-        $datos[4][0]= "";
-        $datos[4][1]= "input-error";
-        $datos[4][2]= "Completa este campo";
-        }else{
-       // si tiene mas de 4 letras
-       // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
-            if(! preg_match($this->patron_texto, $POST['nameUser']) ){
-                $error_count++;
-                $datos[4][0]= $POST['paisUser'];
-                $datos[4][1]= "input-error";
-                $datos[4][2]= "Debe especificar el nombre";
-            }
-        }
-   
-      //   telefonoUser
-      $POST['telefonoUser'] = filter_var($POST['telefonoUser'], FILTER_SANITIZE_STRING);
-      if( empty($POST['telefonoUser']) ){
-        $error_count++;
-        $datos[5][0]= "";
-        $datos[5][1]= "input-error";
-        $datos[5][2]= "Completa este campo";
-        }else{
-       // si tiene mas de 4 letras
-       // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
-            if(! preg_match($this->patron_tel, $POST['nameUser']) ){
-                $error_count++;
-                $datos[5][0]= $POST['telefonoUser'];
-                $datos[5][1]= "input-error";
-                $datos[5][2]= "Haz coincidir el formato solicitado.";
-            }
-        }
-   
+ 
+        //   telefonoUser
+        $POST['telefonoUser'] = filter_var($POST['telefonoUser'], FILTER_SANITIZE_STRING);
+        if( empty($POST['telefonoUser']) ){
+          $error_count++;
+          $datos[5]['input']= $POST['telefonoUser'];
+          $datos[5]['estado']= "input-error";
+          $datos[5]['mensaje']= "Completa este campo";
+          }else{
+         // si tiene mas de 4 letras
+         // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
+         $datos[5]['input']= $POST['telefonoUser'];
+              if(! preg_match($this->patron_tel, $POST['telefonoUser']) ){
+                  $error_count++;
+      
+                  $datos[5]['estado']= "input-error";
+                  $datos[5]['mensaje']= "Haz coincidir el formato solicitado.";
+              }
+          }
+
+    
       //   passwordNueva
       if( empty($POST['passwordNueva']) ){
         $error_count++;
-        $datos[5][0]= "";
-        $datos[5][1] = "input-error";
-        $datos[5][2]= "Completa este campo";
+        $datos[6]['input']= "";
+        $datos[6]['estado']= "input-error";
+        $datos[6]['mensaje']= "Completa este campo";
         }else{
        // si tiene mas de 4 letras
        // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
         if(! preg_match($this->patron_pass,$POST['passwordNueva']) ){
             $error_count++;
-            $datos[5][0]= $POST['telefonoUser'];
-            $datos[5][1]= "input-error";
-            $datos[5][2]= "Haz coincidir el formato solicitado.";
+            $datos[6]['input']= "";
+            $datos[6]['estado']= "input-error";
+            $datos[6]['mensaje']= "Haz coincidir el formato solicitado.";
             }
+        }
+        if( !empty($FILES['archivosubido']) ){
+            if ($FILES['archivosubido']['name']) {
+                $filetype = $FILES['archivosubido']['type'];
+                if ( ! in_array( $filetype, $extensiones) ) {
+                    $error_count++;
+                    $datos[7]['input']="";
+                    $datos[7]['estado']= "input-error";
+                    $datos[7]['mensaje']= "Los Archivos deben ser imagenes";
+                  }
+            }
+       
         }
         $datos['errores'] = $error_count;
         return $datos;
@@ -184,43 +190,42 @@ class UsersController extends Controller{
         //si los parametros tienen errores
             //reenviar form new_user
         // enviar a db y insertar
-        $datos =  [ 
+        $data =  [ 
             
             ['input' => "",
-            'estado' => "",//class="" o class="input-error"
+            'estado' => "",//class="" o class="input-error"0
             'mensaje' =>"",//"mensaje de error si hay
             ],
             ['input' => "",
-            'estado' => "",//class="" o class="input-error"
+            'estado' => "",//class="" o class="input-error"1
             'mensaje' =>"",//"mensaje de error si hay
             ],
             ['input' => "",
-            'estado' => "",//class="" o class="input-error"
+            'estado' => "",//class="" o class="input-error"2
             'mensaje' =>"",//"mensaje de error si hay
             ],
             ['input' =>"",
-            'estado' => "",//class="" o class="input-error"
+            'estado' => "",//class="" o class="input-error"3
             'mensaje' =>"",//"mensaje de error si hay
             ],
             ['input' =>"",
-            'estado' => "",//class="" o class="input-error"
+            'estado' => "",//class="" o class="input-error"4
             'mensaje' =>"",//"mensaje de error si hay
             ],
             ['input' =>"",
-            'estado' => "",//class="" o class="input-error"
+            'estado' => "",//class="" o class="input-error"5
             'mensaje' =>"",//"mensaje de error si hay
             ],
             ['input' =>"",
-            'estado' => "",//class="" o class="input-error" el passwor
+            'estado' => "",//class="" o class="input-error" el passwor6
             'mensaje' =>"",//"mensaje de error si hay
             ],
-            ['errores' => 0],
+            ['errores' => 0],//7
         ];
-        $this->verificar_params($_POST,$datos);
-        $ok = $datos[7]['errores'];
-        if ( $ok == 0){
-              $dest_path =  $this->save_image($_FILES);
-          //  $dest_path = substr($dest_path, 1);
+        $data = $this->verificar_params($_POST,$_FILES,$data);
+        $ok =  $data['errores'];
+       // var_dump( $data);
+        if ($ok == 0){
             $statement = $this->model->agregarUsuario(
                 $_POST['nameUser'],
                 $_POST['nombreUser'],
@@ -229,59 +234,66 @@ class UsersController extends Controller{
                 $_POST['paisUser'],
                 $_POST['telefonoUser'],
                 $_POST['passwordNueva'],
-                $dest_path
+                $_FILES
             ); 
-            if ( $statement == 1){   
-                return  $this->new_user($datos);
-               
-            }else{
-                $datos["user"] = " " ;
-                return view('/errors/internal-error', compact('datos'));
+            if ($statement > 1){ //si valido
+                session_start();
+                $_SESSION['user'] =  $_POST['nameUser'];
+               return $this->dash();
+            }else{ //si errores
+              // var_dump("internal-error");
+              var_dump("si internal errores");
+              $datos['user']= '';
+                return view('/errors/internal-error', compact('datos'));  
             }
-        }else{
-           $this->new_user($datos);
+        } else {
+            //si formulario invalido
+            //=>> reeenviar con errores
+             //var_dump("si formulario invalido");
+            return  $this->new_user($data);
         }
+
+     
     }
 
-    public function new_user($datos = null){
-        if ($datos == null){
-            $datos = [ 
+    public function new_user($data = null){
+        if ($data == null){
+            $data = [ 
             
                 ['input' => "",
-                'estado' => "",//class="" o class="input-error"
+                'estado' => "",//class="" o class="input-error"0
                 'mensaje' =>"",//"mensaje de error si hay
                 ],
                 ['input' => "",
-                'estado' => "",//class="" o class="input-error"
+                'estado' => "",//class="" o class="input-error"1
                 'mensaje' =>"",//"mensaje de error si hay
                 ],
                 ['input' => "",
-                'estado' => "",//class="" o class="input-error"
+                'estado' => "",//class="" o class="input-error"2
                 'mensaje' =>"",//"mensaje de error si hay
                 ],
                 ['input' =>"",
-                'estado' => "",//class="" o class="input-error"
+                'estado' => "",//class="" o class="input-error"3
                 'mensaje' =>"",//"mensaje de error si hay
                 ],
                 ['input' =>"",
-                'estado' => "",//class="" o class="input-error"
+                'estado' => "",//class="" o class="input-error"4
                 'mensaje' =>"",//"mensaje de error si hay
                 ],
                 ['input' =>"",
-                'estado' => "",//class="" o class="input-error"
+                'estado' => "",//class="" o class="input-error"5
                 'mensaje' =>"",//"mensaje de error si hay
                 ],
                 ['input' =>"",
-                'estado' => "",//class="" o class="input-error" el passwor
+                'estado' => "",//class="" o class="input-error" el passwor6
                 'mensaje' =>"",//"mensaje de error si hay
                 ],
-                ['errores' => 0],
+                ['errores' => 0],//7
             ];
-          
         }
-        $datos['form']= $datos;
-        $datos['user'] = ' ';
-        // var_dump($datos);
+        $datos['form']= $data;
+        $datos['user'] = '';
+     
         return view('/users/create_user', compact('datos'));
     }
 
@@ -313,63 +325,57 @@ class UsersController extends Controller{
     public function actualizarPerfil()  {
         $datas =  [ 
             ['input' => "",
-            'estado' => "",//class="" o class="input-error"
+            'estado' => "",//class="" o class="input-error"0
             'mensaje' =>"",//"mensaje de error si hay
             ],
             ['input' => "",
-            'estado' => "",//class="" o class="input-error"
+            'estado' => "",//class="" o class="input-error"1
             'mensaje' =>"",//"mensaje de error si hay
             ],
             ['input' => "",
-            'estado' => "",//class="" o class="input-error"
+            'estado' => "",//class="" o class="input-error"2
             'mensaje' =>"",//"mensaje de error si hay
             ],
             ['input' =>"",
-            'estado' => "",//class="" o class="input-error"
+            'estado' => "",//class="" o class="input-error"3
             'mensaje' =>"",//"mensaje de error si hay
             ],
             ['input' =>"",
-            'estado' => "",//class="" o class="input-error"
+            'estado' => "",//class="" o class="input-error"4
             'mensaje' =>"",//"mensaje de error si hay
             ],
             ['input' =>"",
-            'estado' => "",//class="" o class="input-error"
+            'estado' => "",//class="" o class="input-error"5
             'mensaje' =>"",//"mensaje de error si hay
             ],
             ['input' =>"",
-            'estado' => "",//class="" o class="input-error" el passwor
+            'estado' => "",//class="" o class="input-error" el passwor6
             'mensaje' =>"",//"mensaje de error si hay
             ],
-            ['errores' => 0],
+            ['errores' => 0],//7
         ];
         session_start();
-        $datos['user'] = ' ';
+        $datos['user'] = '';
         if (isset($_SESSION['user'])) {
             $datos['user'] = $_SESSION['user'];
-            $this->verificar_params($_POST,$datos);
-            $ok = $datos[7]['errores'];
+            $_POST['nameUser'] = $_SESSION['user'];
+            $_POST['passwordNueva'] = "123456As";
+            $datas =  $this->verificar_params($_POST,$datas,null);
+            $ok = $datas['errores'];
                 if ( $ok == 0){
                     $user = $_POST['mailUser'];
                     $nombre = $_POST['nombreUser'];
                     $apellido = $_POST['apellidoUser'];
-                    $ubicacion = $_POST['ubicacionUser'];
+                    $ubicacion = $_POST['paisUser'];
                     $telefono = $_POST['telefonoUser'];
                     $statement = $this->model->updateUsuario( $user, $nombre, $apellido, $ubicacion, $telefono );
                     if ($statement == 1) {
-                      $data = $this->model->getUsuario($_SESSION['user']);
-                      $datas[0] =$data[0];
-                      $datas[1] =$data[1];
-                      $datas[2] =$data[2];
-                      $datas[3] =$data[3];
-                      $datas[4] =$data[4];
-                      $datos['data']  = $datas;
-                      return view('/users/dashboard', compact('datos'));
+                        return $this->dash();
                     } else {
                         return view('/errors/internal-error', compact('datos'));
                     }
                 }else{
-                    $datos['data']  = $datas;
-                     return view('/users/dashboard', compact('datos'));
+                     return $this->dash($datas);
                     }
                 }    
     }
@@ -387,8 +393,7 @@ class UsersController extends Controller{
         }
     }
 
-    public function cerrarLogin()
-    {
+    public function cerrarLogin()  {
         session_start();
         unset($_SESSION['user']);
         unset($datos['user']);
@@ -401,38 +406,41 @@ class UsersController extends Controller{
         return view('/sitios/NearSitios', compact('data'));
     }
 
-    public function dash(){
-        $datas =  [ 
-            ['input' => "",
-            'estado' => "",//class="" o class="input-error"
-            'mensaje' =>"",//"mensaje de error si hay
-            ],
-            ['input' => "",
-            'estado' => "",//class="" o class="input-error"
-            'mensaje' =>"",//"mensaje de error si hay
-            ],
-            ['input' => "",
-            'estado' => "",//class="" o class="input-error"
-            'mensaje' =>"",//"mensaje de error si hay
-            ],
-            ['input' =>"",
-            'estado' => "",//class="" o class="input-error"
-            'mensaje' =>"",//"mensaje de error si hay
-            ],
-            ['input' =>"",
-            'estado' => "",//class="" o class="input-error"
-            'mensaje' =>"",//"mensaje de error si hay
-            ],
-            ['input' =>"",
-            'estado' => "",//class="" o class="input-error"
-            'mensaje' =>"",//"mensaje de error si hay
-            ],
-            ['input' =>"",
-            'estado' => "",//class="" o class="input-error" el passwor
-            'mensaje' =>"",//"mensaje de error si hay
-            ],
-            ['errores' => 0],
-        ];
+    public function dash($data=null){
+        if ($data == null){
+            $data = [ 
+            
+                ['input' => "",
+                'estado' => "",//class="" o class="input-error"0
+                'mensaje' =>"",//"mensaje de error si hay
+                ],
+                ['input' => "",
+                'estado' => "",//class="" o class="input-error"1
+                'mensaje' =>"",//"mensaje de error si hay
+                ],
+                ['input' => "",
+                'estado' => "",//class="" o class="input-error"2
+                'mensaje' =>"",//"mensaje de error si hay
+                ],
+                ['input' =>"",
+                'estado' => "",//class="" o class="input-error"3
+                'mensaje' =>"",//"mensaje de error si hay
+                ],
+                ['input' =>"",
+                'estado' => "",//class="" o class="input-error"4
+                'mensaje' =>"",//"mensaje de error si hay
+                ],
+                ['input' =>"",
+                'estado' => "",//class="" o class="input-error"5
+                'mensaje' =>"",//"mensaje de error si hay
+                ],
+                ['input' =>"",
+                'estado' => "",//class="" o class="input-error" el passwor6
+                'mensaje' =>"",//"mensaje de error si hay
+                ],
+                ['errores' => 0],//7
+            ];
+        }
         session_start();
         $datos['user'] = ' ';
         if (isset($_SESSION['user'])) {
@@ -443,8 +451,7 @@ class UsersController extends Controller{
             $datas[2]['input'] = $data[0]->apellido;
             $datas[3]['input'] = $data[0]->mail;
             $datas[4]['input'] = $data[0]->pais;
-            $datas[6]['input'] = $data[0]->telefono;
-            $datas[5]['input'] = $data[0]->direccion;
+            $datas[5]['input'] = $data[0]->telefono;
             $datas[7]['input'] = $data[0]->fotoPerfil;
             $datos['data']  = $datas;
             return view('/users/dashboard', compact('datos'));

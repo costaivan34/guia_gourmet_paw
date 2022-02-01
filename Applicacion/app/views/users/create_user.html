@@ -130,17 +130,18 @@
           id="archivosubido"
           type="file"
           name="archivosubido"
+          class="caja-texto {{datos['form'][7].estado}}"
           accept="image/jpeg"
           required
         />
        
-        <span id="help-archivosubido" class="error-text"></span>
+        <span id="help-archivosubido" class="error-text">{{datos['form'][7].mensaje}}</span>
       </div>
     
     <div class="input-group">
         <label for="passwordNueva">Contraseña:</label>
       <input
-        class="caja-texto"
+      class="caja-texto {{datos['form'][6].estado}}"
         id="passwordNueva"
         type="password"
         name="passwordNueva"
@@ -155,7 +156,7 @@
     <div class="input-group">
         <label for="passwordRepeat">Confirmar Contraseña:</label>
       <input
-        class="caja-texto"
+      class="caja-texto {{datos['form'][6].estado}}"
         id="passwordRepeat"
         type="password"
         name="passwordRepeat"
@@ -163,7 +164,7 @@
         placeholder=""
         required   
       />
-      <span  id="help-passwordRepeat" class="error-text" ></span>
+      <span  id="help-passwordRepeat" class="error-text" >{{datos['form'][6].mensaje}}</span>
     </div>
       <p>
         Nota: La contraseña debe contener entre 6 y 20 caracteres, una

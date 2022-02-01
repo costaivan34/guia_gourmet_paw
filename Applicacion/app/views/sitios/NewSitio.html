@@ -30,7 +30,7 @@
         id="nameSitio"
         type="text"
         name="nameSitio"
-        value="{{datos.data[0].input}}"
+        value="{{datos['form'][0].input}}"
         class="caja-texto {{datos['form'][0].estado}} "
         placeholder="Nombre de Sitio"
         minlength="4"
@@ -51,7 +51,7 @@
         minlength="4"
         maxlength="2000"
         class="caja-texto {{datos['form'][1].estado}} "
-      >{{datos.data[1].input}}</textarea>
+      >{{datos['form'][1].input}}</textarea>
       <span  id="help-subject" class="error-text" >{{datos['form'][1].mensaje}}</span>
     </div>
 
@@ -66,7 +66,7 @@
           id="DireccionSitio"
           type="text"
           name="DireccionSitio"
-          value="{{datos.data[2].input}}"
+          value="{{datos['form'][2].input}}"
           class="caja-texto {{datos['form'][2].estado}} "
           placeholder="Direccion"
           minlength="4" 
@@ -82,7 +82,7 @@
         id="LocalidadSitio"
         type="text"
         name="LocalidadSitio"
-        value="{{datos.data[3].input}}"
+        value="{{datos['form'][3].input}}"
         class="caja-texto {{datos['form'][3].estado}} "
         placeholder="Localidad"
         minlength="4" 
@@ -97,7 +97,7 @@
         id="ProvinciaSitio"
         type="text"
         name="ProvinciaSitio"
-        value="{{datos.data[4].input}}"
+        value="{{datos['form'][4].input}}"
         class="caja-texto {{datos['form'][4].estado}} "
         placeholder="Provincia"
         minlength="4" 
@@ -113,7 +113,7 @@
         id="MailSitio"
         type="email"
         name="MailSitio"
-        value="{{datos.data[5].input}}"
+        value="{{datos['form'][5].input}}"
         placeholder="Correo Electronico"
         required
       />
@@ -126,7 +126,7 @@
         id="TelefonoSitio"
         type="tel"
         name="TelefonoSitio"
-        value="{{datos.data[6].input}}"
+        value="{{datos['form'][6].input}}"
         placeholder="Telefono"
         pattern="^(\(\+?\d{2,3}\)[\*|\s|\-|\.]?(([\d][\*|\s|\-|\.]?){6})(([\d][\s|\-|\.]?){2})?|(\+?[\d][\s|\-|\.]?){8}(([\d][\s|\-|\.]?){2}(([\d][\s|\-|\.]?){2})?)?)$"
         required
@@ -312,6 +312,7 @@
       <label for="archivosubido">Imagenes del Sitio:</label>
       <div id="preview"></div>
       <input
+      class="caja-texto {{datos['form'][10].estado}}"
       id="archivosubido"
       type="file"
       name="archivosubido[]"
@@ -319,7 +320,7 @@
       accept="image/jpeg"
         required
       />
-      <span id="help-archivosubido" class="error-text"></span>
+      <span id="help-archivosubido" class="error-text">{{datos['form'][10].mensaje}}</span>
     </div>
   <input
     class="input-enviar"

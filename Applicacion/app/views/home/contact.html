@@ -6,60 +6,100 @@
 
 <section id="topof" class="contenedor formulario">
   <section class="title">
-    <img  class="imagen-contacto" src="/public/res/contacto.png" alt="imagen de contacto" />
+    <img
+      class="imagen-contacto"
+      src="/public/res/contacto.png"
+      alt="imagen de contacto"
+    />
     <h3 class="title">¿Tenes Alguna Consulta?</h3>
     <p class="title">Comunicate con nosotros</p>
   </section>
-  <div id="messageBox"></div>
-    <section class="column">
-      <form id="contact-form">
-        <label for="fname">Nombre*</label>
-        <span  id="help-fname" class="error-text" ></span>
-        <input
-          type="text"
-          id="fname"
-          name="firstname"
-          placeholder="Nombre"
-          onBlur="validarDatos('fname');"
-          required
-        />
-        <label for="aname">Apellido*</label>
-        <span  id="help-aname" class="error-text" ></span>
-        <input
-          type="text"
-          id="aname"
-          name="lastname"
-          placeholder="Apellido"
-          onBlur="validarDatos('aname');"
-          required
-        />
-        <label for="mail">Email*</label>
-        <span  id="help-mail" class="error-text" ></span>
-        <input
-          type="email"
-          id="mail"
-          name="firstname"
-          placeholder="Mail"
-          onBlur="validarDatos('mail');"
-          required
-        />
+  <form
+    id="contact-form"
+    enctype="multipart/form-data"
+    method="post"
+    name="contact-form"
+    action="/sendConsulta"
+  >
+    <div class="input-group">
+      <label for="nombreUser">Nombre:</label>
+      <input
+        class="caja-texto {{datos['form'][0].estado}}"
+        id="nombreUser"
+        type="text"
+        name="nombreUser"
+        value="{{datos['form'][0].input}}"
+        placeholder="Nombre"
+        required
+        minlength="4"
+        maxlength="40"
+        autocorrect="on"
+      />
+      <span id="help-nombreUser" class="error-text">
+        {{datos['form'][0].mensaje}}
+      </span>
+    </div>
 
-        <label for="subject">Mensaje*</label>
-        <span  id="help-subject" class="error-text" ></span>
-        <textarea
-          id="subject"
-          name="subject"
-          placeholder="Escriba algo"
-          onBlur="validarDatos('subject');"
-          required
-        ></textarea>
-        <input
-          class="input-enviar"
-          type="button"
-          value="Enviar"
-          onclick="guardarConsulta();"
-        />
-      </form>
-    </section>
+    <div class="input-group">
+      <label for="apellidoUser">Apellido:</label>
+      <input
+        class="caja-texto {{datos['form'][1].estado}}"
+        id="apellidoUser"
+        type="text"
+        name="apellidoUser"
+        value="{{datos['form'][1].input}}"
+        placeholder="Apellido"
+        required
+        minlength="4"
+        maxlength="40"
+        autocorrect="on"
+      />
+      <span id="help-apellidoUser" class="error-text">
+        {{datos['form'][1].mensaje}}
+      </span>
+    </div>
+
+    <div class="input-group">
+      <label for="mailUser">Correo Electrónico:</label>
+      <input
+        class="caja-texto {{datos['form'][2].estado}}"
+        id="mailUser"
+        type="email"
+        name="mailUser"
+        value="{{datos['form'][2].input}}"
+        placeholder="Correo Electronico"
+        required
+      />
+      <span id="help-mailUser" class="error-text">
+        {{datos['form'][2].mensaje}}
+      </span>
+    </div>
+
+    <div class="input-group">
+      <label for="subject">Descripcion:*</label>
+      <textarea
+        id="subject"
+        name="subject"
+        placeholder="Escriba algo"
+        rows="4"
+        cols="50"
+        required
+        minlength="4"
+        maxlength="2000"
+        class="caja-texto {{datos['form'][3].estado}} "
+      >
+{{datos['form'][3].input}}</textarea
+      >
+      <span id="help-subject" class="error-text">
+        {{datos['form'][3].mensaje}}
+      </span>
+    </div>
+    <input
+      class="input-enviar"
+      type="submit"
+      value="Enviar"
+      onclick="guardarConsulta();"
+    />
+  </form>
 </section>
 {% endblock %}

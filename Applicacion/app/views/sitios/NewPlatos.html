@@ -156,7 +156,7 @@ parent() }}{% endblock %} {% block main %}
     </div>
   </fieldset>
 
-  <fieldset>
+  <fieldset class=" {{datos['form'][8].estado}} ">
     <legend class="title">Ingredientes</legend>
     <div class="input-group">
       <label class="heading">Seleccione las caracteristicas del Plato:</label>
@@ -197,6 +197,7 @@ parent() }}{% endblock %} {% block main %}
         </label>
       </div>
     </div>
+    <span  id="help-caracteristicas" class="error-text" >{{datos['form'][8].mensaje}}</span>
   </fieldset>
 
   <fieldset>
@@ -208,11 +209,12 @@ parent() }}{% endblock %} {% block main %}
         id="archivosubido"
         type="file"
         name="archivosubido"
+        class="caja-texto {{datos['form'][7].estado}} "
         accept="image/jpeg"
         required
       />
 
-      <span id="help-archivosubido" class="error-text"></span>
+      <span id="help-archivosubido" class="error-text">{{datos['form'][9].mensaje}}</span>
     </div>
   </fieldset>
   <input class="input-enviar" type="submit" value="Enviar" name="Enviar" />

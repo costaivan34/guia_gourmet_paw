@@ -95,6 +95,23 @@ class QueryBuilder
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
 
+    public function save_image($FILES){
+            $dest_path = './private/users/default/perfil.jpg';
+            if ( isset($FILES['archivosubido']) &&is_uploaded_file($FILES['archivosubido']['tmp_name']) ) {
+                $fileTmpPath = $FILES['archivosubido']['tmp_name'];
+                $mail = $_POST['mailUser'];
+                $uploadFileDir = './private/users/' . $mail . '/';
+                if (!file_exists($uploadFileDir)) {
+                    mkdir($uploadFileDir, 0777, true);
+                    $dest_path = $uploadFileDir . '/perfil.jpg';
+                    move_uploaded_file($fileTmpPath, $dest_path);
+                    $dest_path = substr($dest_path, 1);
+                }
+            }
+            return  $dest_path;
+    }
+
+
     public function agregarUsuario(
         $mail,
         $nombreUsuario,
@@ -103,10 +120,13 @@ class QueryBuilder
         $pais,
         $telefono,
         $password,
-        $path_img
+        $FILES
     ) {
         try {
             $this->pdo->beginTransaction();
+          
+            $path_img = $this->save_image($FILES);
+
             $statement = $this->pdo->prepare(
                 "INSERT INTO  usuarios (mail,nombreUsuario,nombre,apellido,pais,telefono,password,fotoPerfil) 
                 VALUES (:mail,:nombreUsuario ,:nombre ,:apellido,:pais ,:telefono,:passwsord, :path_img)"
@@ -124,12 +144,13 @@ class QueryBuilder
             $statement->bindParam(':passwsord', $password, PDO::PARAM_STR);
             $statement->bindParam(':path_img', $path_img, PDO::PARAM_STR);
             $statement->execute();
-
+            $idUser = $this->pdo->lastInsertId();
             $this->pdo->commit();
-            return 1;
+            return   $idUser;
         } catch (\PDOException $e) {
             // rollback the transaction
             $this->pdo->rollBack();
+           // die($e->getMessage());
             // show the error message
             return 0;
         }
@@ -166,7 +187,7 @@ class QueryBuilder
             $this->pdo->beginTransaction();
             $statement = $this->pdo->prepare("UPDATE usuarios u
             SET u.nombre = :nombre, u.apellido = :apellido,
-            u.pais = :ubicacion:,u.telefono = :telefono 
+            u.pais = :ubicacion,u.telefono = :telefono 
             WHERE u.mail= :mail");
             $statement->bindParam(':nombre', $nombre, PDO::PARAM_STR);
             $statement->bindParam(':apellido', $apellido, PDO::PARAM_STR);
@@ -196,17 +217,24 @@ class QueryBuilder
 
     public function agregarConsulta($nombre, $apellido, $mail, $ftexto)
     {
-        $statement = $this->pdo->prepare(
-            'INSERT INTO  consultas (mail,nombre,apellido,mensaje) VALUES (:mail,:nombre ,:apellido,:ftexto )'
-        );
-        $statement->bindParam(':mail', $mail, PDO::PARAM_STR);
-        $statement->bindParam(':nombre', $nombre, PDO::PARAM_STR);
-        $statement->bindParam(':apellido', $apellido, PDO::PARAM_STR);
-        $statement->bindParam(':ftexto', $ftexto, PDO::PARAM_STR);
-        $statement->execute();
-        if ($statement->rowCount() > 0) {
+        try {
+            $this->pdo->beginTransaction();
+            $statement = $this->pdo->prepare(
+              'INSERT INTO  consultas (mail,nombre,apellido,mensaje) 
+               VALUES (:mail,:nombre ,:apellido,:ftexto )'
+            );
+            $statement->bindParam(':mail', $mail, PDO::PARAM_STR);
+            $statement->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+            $statement->bindParam(':apellido', $apellido, PDO::PARAM_STR);
+            $statement->bindParam(':ftexto', $ftexto, PDO::PARAM_STR);
+            $statement->execute();
+            $this->pdo->commit();
+            //  var_dump("commit");
             return 1;
-        } else {
+        } catch (\PDOException $e) {
+            // rollback the transaction
+            $this->pdo->rollBack();
+            // show the error message
             return 0;
         }
     }

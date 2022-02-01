@@ -10,6 +10,7 @@ use App\Models\Plato;
 use App\Models\Users;
 
 class SitioController extends Controller{
+    
     protected $patron_pass = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$";
     protected $patron_texto = "[a-zA-ZáéíóúÁÉÍÓÚäëïöüÄËÏÖÜàèìòùÀÈÌÒÙ\s]";
     protected $patron_tel = "(\(\+?\d{2,3}\)[\*|\s|\-|\.]?(([\d][\*|\s|\-|\.]?){6})(([\d][\s|\-|\.]?){2})?|(\+?[\d][\s|\-|\.]?){8}(([\d][\s|\-|\.]?){2}(([\d][\s|\-|\.]?){2})?)?)";
@@ -52,9 +53,9 @@ class SitioController extends Controller{
    }
 
 
-    public function newOne($datos = null){
-        if ($datos == null){
-            $datos = [  
+    public function newOne($data = null){
+        if ($data == null){
+            $data = [  
                 ['input' => "",
                 'estado' => "",//class="" o class="input-error"
                 'mensaje' =>"",//"mensaje de error si hay
@@ -100,7 +101,8 @@ class SitioController extends Controller{
         }
         session_start();
         if (isset($_SESSION["user"])){
-            $datos['form']= $datos;
+          //  var_dump($data);
+            $datos['form']= $data;
             $datos["user"] =  $_SESSION["user"];
             return view('/sitios/NewSitio',compact('datos'));
         }else{
@@ -110,8 +112,9 @@ class SitioController extends Controller{
     }
   
 
-
-    public function verificar_params($POST,$datos){
+ 
+    public function verificar_params($POST,$FILES,$datos){
+        $extensiones = array(0=>'image/jpg',1=>'image/jpeg',2=>'image/png');
         $error_count = 0;
             // Comprobar si llegaron los campos requeridos:
         //   namePlato
@@ -124,11 +127,11 @@ class SitioController extends Controller{
             }else{
         // si tiene mas de 4 letras
         // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
+        $datos[0]['input'] = $POST['nameSitio'];
                 if( strlen( $POST['nameSitio'] ) < 4 ){
                     $error_count++;
-                   $datos[0]['input'] = $POST['nameSitio'];
                    $datos[0]['estado'] = "input-error";
-                   $datos[0]['mensaje'] = "Debe especificar el nombre";
+                   $datos[0]['mensaje'] = "Alarga el texto a 4 o más caracteres";
                 }
             }
         //   subject
@@ -141,11 +144,12 @@ class SitioController extends Controller{
             }else{
         // si tiene mas de 4 letras
         // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
+             $datos[1]['input']= $POST['subject'];
             if(strlen( $POST['subject']) < 40 ){
                     $error_count++;
-                    $datos[1]['input']= $POST['subject'];
+                    
                     $datos[1]['estado']= "input-error";
-                    $datos[1]['mensaje']= "Debe especificar el nombre";
+                    $datos[1]['mensaje']= "Alarga el texto a 4 o más caracteres";
                 }
             }
    
@@ -159,11 +163,11 @@ class SitioController extends Controller{
             }else{
             // si tiene mas de 4 letras
             // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
+            $datos[2]['input']= $POST['DireccionSitio'];
             if( strlen( $POST['DireccionSitio']) < 4){
                     $error_count++;
-                    $datos[2]['input']= $POST['DireccionSitio'];
                     $datos[2]['estado']= "input-error";
-                    $datos[2]['mensaje']= "Debe especificar el nombre";
+                    $datos[2]['mensaje']= "Alarga el texto a 4 o más caracteres";
                 }
             }
 
@@ -176,11 +180,12 @@ class SitioController extends Controller{
                 }else{
                     // si tiene mas de 4 letras
                     // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
+                    $datos[3]['input'] = $POST['LocalidadSitio'];
                     if( strlen( $POST['LocalidadSitio'] ) < 4 ){
                         $error_count++;
-                        $datos[3]['input']= $POST['LocalidadSitio'];
-                        $datos[3]['estado']= "input-error";
-                        $datos[3]['mensaje']= "Debe especificar el nombre";
+                       
+                        $datos[3]['estado'] = "input-error";
+                        $datos[3]['mensaje'] = "Alarga el texto a 4 o más caracteres";
                 }
             }
    
@@ -193,11 +198,12 @@ class SitioController extends Controller{
             }else{
             // si tiene mas de 4 letras
             // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
+            $datos[4]['input']= $POST['ProvinciaSitio'];
             if( strlen( $POST['ProvinciaSitio'] ) < 4 ){
                     $error_count++;
-                    $datos[4]['input']= $POST['ProvinciaSitio'];
+                   
                     $datos[4]['estado']= "input-error";
-                    $datos[4]['mensaje']= "Debe especificar el nombre";
+                    $datos[4]['mensaje']= "Alarga el texto a 4 o más caracteres";
                 }
             }
 
@@ -210,9 +216,9 @@ class SitioController extends Controller{
             }else{
                 // si tiene mas de 4 letras
                 // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
+                $datos[5]['input']= $POST['MailSitio'];
                 if (!filter_var($POST['MailSitio'], FILTER_VALIDATE_EMAIL)) {
                         $error_count++;
-                        $datos[5]['input']= $POST['MailSitio'];
                         $datos[5]['estado']= "input-error";
                         $datos[5]['mensaje']= "Incluye un signo '@' en la dirección de correo electrónico.";
                 }
@@ -226,9 +232,10 @@ class SitioController extends Controller{
               }else{
              // si tiene mas de 4 letras
              // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
+             $datos[6]['input']= $POST['TelefonoSitio'];
                   if(! preg_match($this->patron_tel, $POST['TelefonoSitio']) ){
                       $error_count++;
-                      $datos[6]['input']= $POST['TelefonoSitio'];
+          
                       $datos[6]['estado']= "input-error";
                       $datos[6]['mensaje']= "Haz coincidir el formato solicitado.";
                   }
@@ -245,7 +252,6 @@ class SitioController extends Controller{
              //  var_dump(count($POST['horarios']));
                 for ($x = 0; $x <count($POST['horarios']); $x+=3) {
                //       var_dump($x);
-                    
                     $dia = $POST['horarios'][$x];// 0 a 6
                     $de =$POST['horarios'][$x+1]; // 0 a 23 menor que $hasta
                     $hasta =$POST['horarios'][$x+2];// 0 a 23 mayor que $de
@@ -292,6 +298,7 @@ class SitioController extends Controller{
               $datos[9]['estado']= "input-error";
               $datos[9]['mensaje']= "Completa este campo";
               }else{
+                $datos[9]['input']= $POST['longitud'];
                 if (!(filter_var($POST['longitud'], FILTER_VALIDATE_FLOAT))) {
                       $error_count++;
                       $datos[9]['input']= $POST['longitud'];
@@ -307,6 +314,7 @@ class SitioController extends Controller{
                 $datos[9]['estado']= "input-error";
                 $datos[9]['mensaje']= "Completa este campo";
             }else{
+                $datos[9]['input']= $POST['latitud'];
                 if (!(filter_var($POST['latitud'], FILTER_VALIDATE_FLOAT))) {
                         $error_count++;
                         $datos[9]['input']= $POST['latitud'];
@@ -314,8 +322,20 @@ class SitioController extends Controller{
                         $datos[9]['mensaje']= "Las coordenadas ingresadas no son validas";
                 }
             }
-
-        $datos[10]['errores'] = $error_count;
+            if( !empty($FILES['archivosubido']) ){
+                foreach ($FILES['archivosubido']['tmp_name'] as $key => $tmp_name) {
+                    if ($FILES['archivosubido']['name'][$key]) {
+                        $filetype = $FILES['archivosubido']['type'][$key];
+                        if ( ! in_array( $filetype, $extensiones) ) {
+                            $error_count++;
+                            $datos[10]['input']= $POST['latitud'];
+                            $datos[10]['estado']= "input-error";
+                            $datos[10]['mensaje']= "Los Archivos deben ser imagenes";
+                          }
+                    }
+                }
+            }
+        $datos[11]['errores'] = $error_count;
    //       var_dump( $datos['errores']);
         return $datos;
     }
@@ -371,9 +391,8 @@ class SitioController extends Controller{
                     ],
                     ['errores' => 0],
                 ];
-                $data = $this->verificar_params($_POST,$data);
-                $ok =  $data[10]['errores'];
-       //           var_dump($data);
+                $data = $this->verificar_params($_POST,$_FILES,$data);
+                $ok =  $data[11]['errores'];
                 if ( $ok == 0){
                     $idSitio = $this->model->agregarSitio($_POST['nameSitio'],$_POST['subject'],
                     $_POST['DireccionSitio'],$_POST['LocalidadSitio'],$_POST['ProvinciaSitio'],
