@@ -37,20 +37,149 @@ class SitioController extends Controller{
     return view('restauranteSingle',compact('datos'));
    }
    
-   public function sendComentario(){	
-    $comentario = [ 
-        'idSitio' => $_POST['sitio'],
-        'nombre' => $_POST['nombre'],
-        'mail' => $_POST['mail'],
-        'descripcion' => $_POST['texto'],
-        'valoracionSabor' => $_POST['precio'],
-        'valoracionPrecio' => $_POST['sabor'],
-        'valoracionAmbiente' => $_POST['ambiente']
-    ];
-     $this->Comentarios->store($comentario);
-    
-    return $this->Comentarios->getPaginacionComentarios($_POST['sitio']);
-   }
+
+   public function verificar_comentario($POST, $datos){
+    $error_count = 0;
+    $POST['nombre'] = filter_var($POST['nombre'], FILTER_SANITIZE_STRING);
+    if(empty($POST['nombre']) ){
+        $error_count++;
+        $datos[0]['input'] = $POST['sitio'];
+        $datos[0]['estado'] = "input-error";
+        $datos[0]['mensaje'] = "Completa este campo";   
+        }else{
+    // si tiene mas de 4 letras
+    // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
+    $datos[0]['input'] = $POST['nombre'];
+            if( strlen( $POST['nombre'] ) < 6){
+                $error_count++;
+               $datos[0]['estado'] = "input-error";
+               $datos[0]['mensaje'] = "Alarga el texto a 4 o más caracteres";
+            }
+        }
+    //   subject
+    $POST['texto'] = filter_var($POST['texto'], FILTER_SANITIZE_STRING);
+    if( empty($POST['texto']) ){
+        $error_count++;
+        $datos[1]['input']= $POST['texto'];
+        $datos[1]['estado']= "input-error";
+        $datos[1]['mensaje']= "Completa este campo";
+        }else{
+    // si tiene mas de 4 letras
+    // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
+         $datos[1]['input']= $POST['texto'];
+        if(strlen( $POST['texto']) < 40 ){
+                $error_count++;
+                $datos[1]['estado']= "input-error";
+                $datos[1]['mensaje']= "Alarga el texto a 4 o más caracteres";
+            }
+        }
+        $POST['mail'] = filter_var($POST['mail'], FILTER_SANITIZE_EMAIL);
+        if( empty($POST['mail']) ){
+            $error_count++;
+            $datos[2]['input']= $POST['mail'];
+            $datos[2]['estado']= "input-error";
+            $datos[2]['mensaje']= "Completa este campo";
+        }else{
+            // si tiene mas de 4 letras
+            // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
+            $datos[2]['input']= $POST['mail'];
+            if (!filter_var($POST['mail'], FILTER_VALIDATE_EMAIL)) {
+                    $error_count++;
+                    $datos[2]['estado']= "input-error";
+                    $datos[2]['mensaje']= "Incluye un signo '@' en la dirección de correo electrónico.";
+            }
+        }
+        if( !empty($POST['precio']) ){
+            foreach ( ($POST['precio']) as $value) {
+                 if (!(filter_var($value, FILTER_VALIDATE_INT) === 0 || !filter_var($value, FILTER_VALIDATE_INT) === false)) {
+                    if ( ($value < 1 ) || ($value > 5  ) ){
+                         $error_count++;
+                         $datos[3]['input']="";
+                         $datos[3]['estado']= "input-error";
+                         $datos[3]['mensaje']= "La selección ingresada no es valida";
+                     }
+                 }
+             }
+         }   
+         if( !empty($POST['sabor']) ){
+            foreach ( ($POST['sabor']) as $value) {
+                 if (!(filter_var($value, FILTER_VALIDATE_INT) === 0 || !filter_var($value, FILTER_VALIDATE_INT) === false)) {
+                     if ( ($value < 1 ) || ($value > 5  ) ){
+                         $error_count++;
+                         $datos[4]['input']="";
+                         $datos[4]['estado']= "input-error";
+                         $datos[4]['mensaje']= "La selección ingresada no es valida";
+                     }
+                 }
+             }
+         }   
+         if( !empty($POST['ambiente']) ){
+            foreach ( ($POST['ambiente']) as $value) {
+                 if (!(filter_var($value, FILTER_VALIDATE_INT) === 0 || !filter_var($value, FILTER_VALIDATE_INT) === false)) {
+                    if ( ($value < 1 ) || ($value > 5  ) ){
+                         $error_count++;
+                         $datos[5]['input']="";
+                         $datos[5]['estado']= "input-error";
+                         $datos[5]['mensaje']= "La selección ingresada no es valida";
+                     }
+                 }
+             }
+         }   
+        $datos[7]['errores'] = $error_count;
+        //       var_dump( $datos['errores']);
+             return $datos;
+}
+
+
+ public function sendComentario(){	
+    $data =  [ 
+        ['input' => "",
+        'estado' => "",//class="" o class="input-error"0
+        'mensaje' =>"",//"mensaje de error si hay
+        ],
+        ['input' => "",
+        'estado' => "",//class="" o class="input-error"1
+        'mensaje' =>"",//"mensaje de error si hay
+        ],
+        ['input' => "",
+        'estado' => "",//class="" o class="input-error"3
+        'mensaje' =>"",//"mensaje de error si hay
+        ],
+        ['input' =>"",
+        'estado' => "",//class="" o class="input-error"4
+        'mensaje' =>"",//"mensaje de error si hay
+        ],
+        ['input' =>"",
+        'estado' => "",//class="" o class="input-error"5
+        'mensaje' =>"",//"mensaje de error si hay
+        ],
+        ['input' =>"",
+        'estado' => "",//class="" o class="input-error"6
+        'mensaje' =>"",//"mensaje de error si hay
+        ],
+        ['errores' => 0],
+        ];
+
+    $data = $this->verificar_comentario($_POST,$data);
+    $ok =  $data[7]['errores'];
+    if ( $ok == 0){
+        $comentario = [ 
+            'idSitio' => $_POST['sitio'],
+            'nombre' => $_POST['nombre'],
+            'mail' => $_POST['mail'],
+            'descripcion' => $_POST['texto'],
+            'valoracionSabor' => $_POST['precio'],
+            'valoracionPrecio' => $_POST['sabor'],
+            'valoracionAmbiente' => $_POST['ambiente']
+        ];
+        $this->Comentarios->store($comentario);
+        return $this->Comentarios->getPaginacionComentarios($_POST['sitio']);
+    }else{
+        return   (json_encode($data)); 
+    }
+ }
+
+
 
 
     public function newOne($data = null){
@@ -111,7 +240,6 @@ class SitioController extends Controller{
         }
     }
   
-
  
     public function verificar_params($POST,$FILES,$datos){
         $extensiones = array(0=>'image/jpg',1=>'image/jpeg',2=>'image/png');

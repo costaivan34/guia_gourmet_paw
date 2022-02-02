@@ -304,38 +304,51 @@ No fue posible encontrar un sitio cerca de tu ubicación. Por favor mueve el map
         class="deja-comentario"
       >
         <div id="messageBoxResult"></div>
-        <h3>¡Deja un comentario!</h3>
-        <textarea
-          id="textoComent"
-          name="COMMENT"
-          rows="10"
-          cols="50"
-          wrap="soft"
-          placeholder="Máximo 1000 carácteres"
-          maxlength="1000"
-          required
-        ></textarea>
-
+        <h3 class="title">¡Deja un comentario!</h3>
+        <div class="input-group">
+          <textarea
+            id="textoComent"
+            name="textoComent"
+            placeholder="Máximo 1000 carácteres"
+            rows="4"
+            cols="50"
+            required
+            minlength="4"
+            maxlength="1000"
+            class="caja-texto {{datos['form'][1].estado}} "
+          >{{datos['form'][1].input}}</textarea>
+          <span  id="help-textoComent" class="error-text" >{{datos['form'][1].mensaje}}</span>
+        </div>
+      
+        <div class="input-group">
         <input
+          class="caja-texto {{datos['form'][0].estado}}"
           id="nombreComent"
           type="text"
-          name="NAME"
+          name="nombreComent"
           value=""
-          size="20"
-          maxlength="100"
-          placeholder="Nombre (requerido)"
+          placeholder="Nombre"
           required
+          minlength="4" 
+          maxlength="40"
         />
+        <span  id="help-nombreComent" class="error-text" >{{datos['form'][0].mensaje}}</span>
+      </div>
+      <div class="input-group">
+  
+      <input
+        class="caja-texto {{datos['form'][2].estado}}"
+        id="mailComent"
+        type="email"
+        name="mailComent"
+        value="{{datos['form'][2].input}}"
+        placeholder="Correo Electronico"
+        required
+      />
+      <span  id="help-mailComent" class="error-text" >{{datos['form'][2].mensaje}}</span>
+    </div>
 
-        <input
-          id="mailComent"
-          type="text"
-          name="EMAIL"
-          value=""
-          size="20"
-          maxlength="100"
-          placeholder="Correo electrónico"
-        />
+    
 
         <ul class="valoracion2">
           <li>

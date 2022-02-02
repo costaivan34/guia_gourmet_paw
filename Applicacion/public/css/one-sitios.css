@@ -93,6 +93,7 @@ color: var(--main-color);
 
 .parrafo {
   text-align: justify;
+  overflow-wrap:break-word;
 }
 
 dl.detalles {
@@ -246,6 +247,8 @@ background-color: var(--main-color);
 .coment-text {
   /*font-family: 'Raleway', sans-serif;*/
   text-align: justify;
+  width: 50em;
+  overflow-wrap:break-word;
   font-size: 17px;
   font-weight: 400;
   line-height: 28px;
@@ -282,27 +285,36 @@ background-color: var(--main-color);
 .deja-comentario input[type='email'],
 .deja-comentario select,
 .deja-comentario textarea {
-  width: 92%;
-  padding: 8px;
-  margin-top: 6px;
-  margin-bottom: 16px;
+  width: 65vw;
+  padding: 1vw;
+  margin: 1vh 4vh 0vh 1vw;
   resize: vertical;
 }
+
+
+.deja-comentario .error-text{
+    margin: 2vh 4vh 0vh 4vw;
+
+}
+
+
+
 
 .deja-comentario input[type='submit'] {
   /* font-family: 'Hanalei Fill', cursive;*/
   background-color: var(--back-color);
-  width: 71vw;
   padding: 1vw;
   margin: 0.5vh 0 1vh 1vw;
   resize: vertical;
 }
 
 
+
 .deja-comentario input[type='submit']:hover {
   /* font-family: 'Hanalei Fill', cursive;*/
   background-color: var(--assent-color);
 }
+
 .deja-comentario {
   border: 1px solid var(--back-color);
   padding: 3%;

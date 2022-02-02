@@ -1,4 +1,45 @@
 
+window.addEventListener('DOMContentLoaded', function () {
+// Obtengo los inputs que quiero lanzar su validación al perder el foco
+var inputs = document.querySelectorAll('input','input[type="submit"]');
+var textarea = document.querySelectorAll('textarea');
+textarea.forEach(function(input) {
+  input.addEventListener('blur', event => {
+        if (!input.checkValidity()) {
+          document.getElementById(input.name).classList.add("input-error");
+          document.getElementById(`help-${input.name}`).textContent = input.validationMessage
+        } else {
+          document.getElementById(input.name).classList.remove("input-error");
+          document.getElementById(`help-${input.name}`).textContent = ""
+  
+        }
+  });
+});
+// Por cada input, chequeo su validez y hago acciones en consecuencia
+inputs.forEach(function(input) {
+    input.addEventListener('blur', event => {
+        //console.log(input.checkValidity());
+        // checkValidity() lanza la validación y decide si el valor del input 
+        //	es correcto o no.
+        console.log(input.name)
+          if (!input.checkValidity()) {
+           
+            document.getElementById(input.name).classList.add("input-error");
+            //  document.getElementById(input.name).reportValidity();
+            document.getElementById(`help-${input.name}`).textContent = input.validationMessage
+            // console.log(input.validationMessage);
+            // agregar clases css para que se resalte el error
+          } else {
+          
+            document.getElementById(input.name).classList.remove("input-error");
+            document.getElementById(`help-${input.name}`).textContent = ""
+            // agregar clases css para que se muestre valido 
+            //  o al menos borrar las clases que marcan errores
+          }
+    });
+});
+ })
+  
 
 function validarDatos(nombre, mail, texto) {
   emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i
@@ -411,34 +452,40 @@ function guardarComentario() {
   var xmlHttpRequest = new XMLHttpRequest()
   xmlHttpRequest.onreadystatechange = function () {
     if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
-      var pagina = xmlHttpRequest.responseText
-      console.log(pagina)
-      if (xmlHttpRequest.responseText >= 1) {
-        const m = document.getElementById('messageBoxResult')
-        m.innerHTML = `<div class="alert alert-success" role="alert">
-				Comentario Guardado con Exito!</div>`
-        document.getElementById('messageBoxResult').scrollIntoView()
-        setTimeout(function () {
-          m.innerHTML = ''
-        }, 5000)
-        for (i = 0; i < document.comentario.Precio.length; i++) {
-          document.comentario.Precio[i].checked = 1
-          document.comentario.Sabor[i].checked = 1
-          document.comentario.Ambiente[i].checked = 1
-        }
-        document.getElementById('nombreComent').value = ''
-        document.getElementById('mailComent').value = ''
-        document.getElementById('textoComent').value = ''
-        document.getElementById('paginacionComentarios').scrollIntoView()
-        loadComentarios(pagina, sitio)
+     
+     var pagina = (JSON.parse(xmlHttpRequest.responseText))
+     console.log("pagina"+pagina);
+      if ((typeof pagina === 'number') && (pagina > 0) ) {
+          const m = document.getElementById('messageBoxResult')
+          m.innerHTML = `<div class="alert alert-success" role="alert">
+          Comentario Guardado con Exito!</div>`
+          document.getElementById('messageBoxResult').scrollIntoView()
+          setTimeout(function () {
+            m.innerHTML = ''
+          }, 5000)
+          for (i = 0; i < document.comentario.Precio.length; i++) {
+            document.comentario.Precio[i].checked = 1
+            document.comentario.Sabor[i].checked = 1
+            document.comentario.Ambiente[i].checked = 1
+          }
+          document.getElementById('nombreComent').value = ''
+          document.getElementById('mailComent').value = ''
+          document.getElementById('textoComent').value = ''
+          document.getElementById('paginacionComentarios').scrollIntoView()
+          loadComentarios(pagina, sitio)
       } else {
-        const m = document.getElementById('messageBoxResult')
-        m.innerHTML = `<div class="alert alert-danger" role="alert">
-          El mensaje no pudo ser procesado, por favor intentelo nuevamente </div>`
-        document.getElementById('messageBoxResult').scrollIntoView()
-        setTimeout(function () {
-          m.innerHTML = ''
-        }, 2500)
+      
+        document.getElementById('nombreComent').value = pagina[0].input;
+        document.getElementById('mailComent').value =  pagina[2].input;
+        document.getElementById('textoComent').value =  pagina[1].input;
+        document.getElementById('help-nombreComent').textContent = pagina[0].mensaje;
+        document.getElementById('help-mailComent').textContent =  pagina[2].mensaje;
+        document.getElementById('help-textoComent').textContent =  pagina[1].mensaje;
+        document.getElementById('nombreComent').classList.add(pagina[0].estado);
+        document.getElementById('mailComent').classList.add(pagina[2].estado);
+        document.getElementById('textoComent').classList.add(pagina[1].estado);
+     
+      
       }
     }
   }
@@ -449,7 +496,6 @@ function guardarComentario() {
   var precio = document.querySelector('input[name=Precio]:checked').value
   var sabor = document.querySelector('input[name=Sabor]:checked').value
   var ambiente = document.querySelector('input[name=Ambiente]:checked').value
-  if (validarDatos(nombre, mail, texto)) {
     xmlHttpRequest.open('POST', 'sendComentario', true)
     xmlHttpRequest.setRequestHeader(
       'Content-type',
@@ -472,16 +518,6 @@ function guardarComentario() {
         ambiente,
     )
     event.preventDefault()
-  } else {
-    //console.log("error form")
-    const m = document.getElementById('messageBoxResult')
-    m.innerHTML =
-      `<div class="alert alert-danger" role="alert">` + mensaje + `</div>`
-    document.getElementById('messageBoxResult').scrollIntoView()
-    setTimeout(function () {
-      m.innerHTML = ''
-    }, 2500)
-  }
 }
 
 
