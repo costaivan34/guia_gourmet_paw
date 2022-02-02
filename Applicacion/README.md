@@ -24,4 +24,4 @@ Luego ingresar a http://localhost:8888/inicio
 
 ### Online
 
-Ingresar a http://laguiagourmet.freecluster.eu/index.php/inicio
+Ingresar a https://la-guia-gourmet.000webhostapp.com/inicio

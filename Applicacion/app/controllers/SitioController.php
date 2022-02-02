@@ -50,7 +50,7 @@ class SitioController extends Controller{
     // si tiene mas de 4 letras
     // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
     $datos[0]['input'] = $POST['nombre'];
-            if( strlen( $POST['nombre'] ) < 6){
+            if( strlen( $POST['nombre'] ) < 4){
                 $error_count++;
                $datos[0]['estado'] = "input-error";
                $datos[0]['mensaje'] = "Alarga el texto a 4 o más caracteres";
@@ -67,7 +67,7 @@ class SitioController extends Controller{
     // si tiene mas de 4 letras
     // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
          $datos[1]['input']= $POST['texto'];
-        if(strlen( $POST['texto']) < 40 ){
+        if(strlen( $POST['texto']) < 4 ){
                 $error_count++;
                 $datos[1]['estado']= "input-error";
                 $datos[1]['mensaje']= "Alarga el texto a 4 o más caracteres";
