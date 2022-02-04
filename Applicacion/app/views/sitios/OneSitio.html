@@ -57,10 +57,10 @@ block main %}
     </ul>
   </section>
   <section class="contenedor">
-    <section class="fondo">
-      <h3 itemprop="name" class="title">{{ datos.OneSitio[0].nombre }}</h3>
-      <section class="caracteristicas">
-        <h4 title>
+  
+      <h3 itemprop="name" class="title fondo">{{ datos.OneSitio[0].nombre }}</h3>
+      <section class="caracteristicas ">
+        <h4 class="title ">
           <i class="fa fa-briefcase"></i>
           Servicios
         </h4>
@@ -132,9 +132,9 @@ block main %}
         itemprop="openingHoursSpecification"
         itemscope
         itemtype="https://schema.org/OpeningHoursSpecification"
-        class="horarios"
+        class=" horarios "
       >
-        <h4 title>
+        <h4  class="title  " >
           <i class="fa fa-clock-o"></i>
           Horario
         </h4>
@@ -164,7 +164,7 @@ block main %}
           {% endfor %}
         </dl>
       </section>
-    </section>
+    
   </section>
 
   <section class="contenedor">

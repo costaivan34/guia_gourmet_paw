@@ -76,8 +76,7 @@
 }
 .fondo{
   background-color: var(--main-color);
-  padding: 2vw;
-  padding-bottom: 4vw;
+  margin-bottom: 2vh;
 }
 
 .tabcontent .tarjeta:hover {
@@ -132,36 +131,54 @@ dl.detalles dd {
   overflow: visible;
   padding-left: 1vw;
   padding-right: 1vw;
+  margin-left: 2vw;
 }
 
 .horarios dl.detalles dt {
   width: 2px;
-  padding-top: 1vh;
-  padding-bottom: 1vh;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
   flex: 0 0 10vw;
   text-overflow: ellipsis;
   overflow: hidden;
-  border-bottom: 1px solid var(--back-color);
+  border-bottom: 1px solid var(--assent-color);
+  background-color: var(--main-color);
 }
 
 .horarios dl.detalles dd {
-  padding-top: 1vh;
-  padding-bottom: 1vh;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  padding-left: 12vw;
   text-align: left;
   text-overflow: ellipsis;
   overflow: hidden;
-  flex: 0 0 20vw;
-  border-bottom: 1px solid var(--back-color);
+  flex: 0 0 8vw;
+  border-bottom: 1px solid var(--assent-color);
+  background-color: var(--main-color);
   display: flex;
+
 }
 
 .horarios {
   width: 40vw;
+  margin-bottom:20vh;
 }
 
 .caracteristicas {
   margin-right: 4vw;
+
 }
+
+.caracteristicas  li {
+
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  padding-left: 6vw;
+  padding-right: 6vw;
+  border-bottom: 1px solid var(--assent-color);
+  background-color: var(--main-color);
+}
+
 
 #imagen-modal {
   width: 77vw;
@@ -247,7 +264,7 @@ background-color: var(--main-color);
 .coment-text {
   /*font-family: 'Raleway', sans-serif;*/
   text-align: justify;
-  width: 50em;
+
   overflow-wrap:break-word;
   font-size: 17px;
   font-weight: 400;
@@ -504,26 +521,25 @@ input[type='radio']:checked ~ label {
 
   .horarios dl.detalles dt {
     width: 2vw;
-    padding-top: 1vh;
-    padding-bottom: 1vh;
-    flex: 0 0 40vw;
+    padding: 1vh 1vh 1vh 1vh;
+    flex: 0 0 38vw;
     text-overflow: ellipsis;
     overflow: hidden;
     border-top: none;
     border-left: none;
     border-right: none;
-    border-bottom: 1px solid #e7cf7f;
-    background-color: var(--back-color);
+    border-bottom: 1px solid var(--assent-color);
+    background-color: var(--main-color);
   }
 
   .horarios dl.detalles dd {
-    padding-top: 1vh;
-    padding-bottom: 1vh;
+    padding: 1vh 1vh 1vh 1vh;
     text-align: left;
     text-overflow: ellipsis;
     overflow: hidden;
-    flex: 0 0 40vw;
-    border-bottom: 1px solid #e7cf7f;
+    flex: 0 0 38vw;
+    border-bottom: 1px solid var(--assent-color);
+    background-color: var(--main-color);
     display: flex;
     border-top: none;
     border-left: none;
@@ -567,7 +583,8 @@ input[type='radio']:checked ~ label {
     font-size: 17px;
     font-weight: 400;
     line-height: 28px;
-    float: left;
+
+    overflow-wrap:break-word;
   }
 
   .comentario .title {
