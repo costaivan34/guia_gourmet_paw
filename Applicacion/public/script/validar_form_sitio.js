@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', function () {
 // Obtengo los inputs que quiero lanzar su validación al perder el foco
 var inputs = document.querySelectorAll('input','input[type="submit"]');
 var textarea = document.querySelectorAll('textarea');
-console.log(textarea)
+console.log(inputs)
 textarea.forEach(function(input) {
   input.addEventListener('blur', event => {
         if (!input.checkValidity()) {
@@ -50,7 +50,7 @@ inputs.forEach(function(input) {
     const map = new mapboxgl.Map({
       container: 'mapa',
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [0, 0],
+      center: [alatitud, alongitud],
       zoom: 2
     });
     map.addControl(
@@ -81,7 +81,7 @@ inputs.forEach(function(input) {
     var el = document.createElement('div')
     el.className = 'marker'
     marker = new mapboxgl.Marker(el,{draggable: true ,  color: '#00000F' })
-    .setLngLat([0, 0])
+    .setLngLat([alatitud, alongitud])
     .addTo(map);
   
       function onDragEnd() {
@@ -127,10 +127,11 @@ inputs.forEach(function(input) {
     a++;
     var div = document.createElement('div');
     div.setAttribute('id', 'horario-' + a);
+    div.setAttribute('class', 'horario');
     div.innerHTML = `     
       <div class="input-group">
     <label for="Dia-` + a + `">Día :</label>
-        <select  id="Dia-` + a + `"name="horarios[]" required >
+        <select  id="Dia-` + a + `"name="horarios[]" class=" select-dia" required onBlur="validarhorario('` + a + `');" >
           <option value="-1" >Selecionar día:</option>
           <option value="1">Lunes</option>
           <option value="2">Martes</option>
@@ -140,72 +141,20 @@ inputs.forEach(function(input) {
           <option value="6">Sabado</option>
           <option value="7">Domingo</option>
         </select>
-        <span  id="help-Dia-` + a + `" class="error-text" ></span>
+       
         </div>
       <div class="input-group">
         <label for="De-` + a + `">De :</label>
-        <select  id="De-` + a + `"name="horarios[]" required onBlur="validarhorario('` + a + `');">
-          <option value="-1">Selecionar hora:</option>
-          <option value="0">00:00</option>
-          <option value="1">01:00</option>
-          <option value="2">02:00</option>
-          <option value="3">03:00</option>
-          <option value="4">04:00</option>
-          <option value="5">05:00</option>
-          <option value="6">06:00</option>
-          <option value="7">07:00</option>
-          <option value="8">08:00</option>
-          <option value="9">09:00</option>
-          <option value="10">10:00</option>
-          <option value="11">11:00</option>
-          <option value="12">12:00</option>
-          <option value="13">13:00</option>
-          <option value="14">14:00</option>
-          <option value="15">15:00</option>
-          <option value="16">16:00</option>
-          <option value="17">17:00</option>
-          <option value="18">18:00</option>
-          <option value="19">19:00</option>
-          <option value="20">20:00</option>
-          <option value="21">21:00</option>
-          <option value="22">22:00</option>
-          <option value="23">23:00</option>
-        </select>
-        <span id="help-De-` + a + `" class="error-text" ></span>
+        <input type="time"  id="De-` + a + `"  name="horarios[]" 
+         required class="select-dia caja-texto {{datos['form'][7].estado}} " onBlur="validarhorario('` + a + `');" >
         </div>
         <div class="input-group">
         <label for="Hasta-` + a + `">A :</label>
-        <select  id="Hasta-` + a + `"name="horarios[]"required onBlur="validarhorario('` + a + `');">
-          <option value="-1">Selecionar hora:</option>
-          <option value="0">00:00</option>
-          <option value="1">01:00</option>
-          <option value="2">02:00</option>
-          <option value="3">03:00</option>
-          <option value="4">04:00</option>
-          <option value="5">05:00</option>
-          <option value="6">06:00</option>
-          <option value="7">07:00</option>
-          <option value="8">08:00</option>
-          <option value="9">09:00</option>
-          <option value="10">10:00</option>
-          <option value="11">11:00</option>
-          <option value="12">12:00</option>
-          <option value="13">13:00</option>
-          <option value="14">14:00</option>
-          <option value="15">15:00</option>
-          <option value="16">16:00</option>
-          <option value="17">17:00</option>
-          <option value="18">18:00</option>
-          <option value="19">19:00</option>
-          <option value="20">20:00</option>
-          <option value="21">21:00</option>
-          <option value="22">22:00</option>
-          <option value="23">23:00</option>
-        </select>
-        <span  id="help-Hasta-` + a + `" class="error-text" ></span>
-
+        <input type="time" id="Hasta-` + a + `" name="horarios[]"  
+        required class="select-dia caja-texto {{datos['form'][7].estado}} " onBlur="validarhorario('` + a + `');">
+        
         </div>
-  `;
+  <span  id="help-Hasta-` + a + `" class="error-text-horario" ></span>`;
     document.getElementById('horarios').appendChild(div);
     document.getElementById('horarios').appendChild(div);
     
@@ -217,28 +166,25 @@ function validarhorario(id) {
     seleccion = document.getElementById('Dia-' + id);
     Dia = seleccion.options[seleccion.selectedIndex].value;
     seleccion1 = document.getElementById('De-' + id);
-    De =  parseInt( seleccion1.options[seleccion1.selectedIndex].value);
+    De = ( seleccion1 .value);
     seleccion2 = document.getElementById('Hasta-' + id);
-    Hasta =  parseInt( seleccion2.options[seleccion2.selectedIndex].value);
+    Hasta =  ( seleccion2.value);
+    console.log("horario");
+    console.log(Dia);
+    console.log(De);
+    console.log(Hasta);
     if (seleccion.checkValidity() && seleccion1.checkValidity() && seleccion2.checkValidity()  ) {
-        if (  (De > Hasta) ) {
-        document.getElementById("Dia-" + id).classList.add("input-error");
-        document.getElementById("De-" + id).classList.add("input-error");
-        document.getElementById("help-Hasta-"+ id).textContent = "El Horario ingresado no es valido."
-        document.getElementById("Hasta-" + id).classList.add("input-error");
-        }else {
-            document.getElementById("De-"+ id).classList.remove("input-error");
-            document.getElementById("Dia-" + id).classList.remove("input-error");
-            document.getElementById("Hasta-"+ id).classList.remove("input-error");
-            document.getElementById("help-Hasta-"+ id).textContent = ""
-        
-        }
+      document.getElementById("De-"+ id).classList.remove("input-error");
+      document.getElementById("Dia-" + id).classList.remove("input-error");
+      document.getElementById("Hasta-"+ id).classList.remove("input-error");
+      document.getElementById("help-Hasta-"+ id).textContent = ""
+     
         } else {
-                document.getElementById("De-"+ id).classList.remove("input-error");
-                document.getElementById("Dia-" + id).classList.remove("input-error");
-                document.getElementById("Hasta-"+ id).classList.remove("input-error");
-                document.getElementById("help-Hasta-"+ id).textContent = ""
+          document.getElementById("Dia-" + id).classList.add("input-error");
+          document.getElementById("De-" + id).classList.add("input-error");
+          document.getElementById("help-Hasta-"+ id).textContent = "El Horario ingresado no es valido."
+          document.getElementById("Hasta-" + id).classList.add("input-error");
             
-            }
+         }
 }
 

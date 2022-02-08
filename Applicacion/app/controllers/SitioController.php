@@ -181,7 +181,6 @@ class SitioController extends Controller{
 
 
 
-
     public function newOne($data = null){
         if ($data == null){
             $data = [  
@@ -221,8 +220,9 @@ class SitioController extends Controller{
                 'estado' => "",//class="" o class="input-error"
                 'mensaje' =>"",//"mensaje de error si hay
                 ],
-                ['input' =>"",
-                'estado' => "",//class="" o class="input-error"
+                ['input' =>"-53",
+                'input1' =>"-34",
+                'estado' => "",//class="" o class="input-error" el passwor
                 'mensaje' =>"",//"mensaje de error si hay
                 ],
                 ['errores' => 0],
@@ -336,12 +336,7 @@ class SitioController extends Controller{
             }
 
           $POST['MailSitio'] = filter_var($POST['MailSitio'], FILTER_SANITIZE_EMAIL);
-            if( empty($POST['MailSitio']) ){
-                $error_count++;
-                $datos[5]['input']= $POST['MailSitio'];
-                $datos[5]['estado']= "input-error";
-                $datos[5]['mensaje']= "Completa este campo";
-            }else{
+            if(!empty($POST['MailSitio']) ){
                 // si tiene mas de 4 letras
                 // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
                 $datos[5]['input']= $POST['MailSitio'];
@@ -352,18 +347,12 @@ class SitioController extends Controller{
                 }
             }
             $POST['TelefonoSitio'] = filter_var($POST['TelefonoSitio'], FILTER_SANITIZE_STRING);
-            if( empty($POST['TelefonoSitio']) ){
-              $error_count++;
-              $datos[6]['input']= $POST['TelefonoSitio'];
-              $datos[6]['estado']= "input-error";
-              $datos[6]['mensaje']= "Completa este campo";
-              }else{
+            if(!empty($POST['TelefonoSitio']) ){
              // si tiene mas de 4 letras
              // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
              $datos[6]['input']= $POST['TelefonoSitio'];
                   if(! preg_match($this->patron_tel, $POST['TelefonoSitio']) ){
                       $error_count++;
-          
                       $datos[6]['estado']= "input-error";
                       $datos[6]['mensaje']= "Haz coincidir el formato solicitado.";
                   }
@@ -375,9 +364,6 @@ class SitioController extends Controller{
                 $datos[7]['estado']= "input-error";
                 $datos[7]['mensaje']= "Completa este campo";
             }else{
-               // si tiene mas de 4 letras
-               // Comprobar mediante una expresión regular, que sólo contiene letras y espacios:
-             //  var_dump(count($POST['horarios']));
                 for ($x = 0; $x <count($POST['horarios']); $x+=3) {
                //       var_dump($x);
                     $dia = $POST['horarios'][$x];// 0 a 6
@@ -395,12 +381,10 @@ class SitioController extends Controller{
                         if (($dia<0 || $dia>6)){
                             if (($de<0 || $de>23)){
                                 if (($hasta<0 || $hasta>23)){
-                                    if (($de > $hasta) ) {
-                                        $error_count++;
-                                        $datos[7]['input']= $POST['horarios'];
-                                        $datos[7]['estado']= "input-error";
-                                        $datos[7]['mensaje']= "Uno de los horarios ingresados no es valido";
-                                    }
+                                    $error_count++;
+                                    $datos[7]['input']= $POST['horarios'];
+                                    $datos[7]['estado']= "input-error";
+                                    $datos[7]['mensaje']= "Uno de los horarios ingresados no es valido";
                                 }
                             }
                         }
@@ -438,14 +422,14 @@ class SitioController extends Controller{
             //$POST['latitud'] = filter_var($POST['latitud'], FILTER_SANITIZE_STRING);
             if( empty($POST['latitud']) ){
                 $error_count++;
-                $datos[9]['input']= $POST['latitud'];
+                $datos[9]['input1']= $POST['latitud'];
                 $datos[9]['estado']= "input-error";
                 $datos[9]['mensaje']= "Completa este campo";
             }else{
-                $datos[9]['input']= $POST['latitud'];
+                $datos[9]['input1']= $POST['latitud'];
                 if (!(filter_var($POST['latitud'], FILTER_VALIDATE_FLOAT))) {
                         $error_count++;
-                        $datos[9]['input']= $POST['latitud'];
+                        $datos[9]['input1']= $POST['latitud'];
                         $datos[9]['estado']= "input-error";
                         $datos[9]['mensaje']= "Las coordenadas ingresadas no son validas";
                 }
@@ -470,7 +454,7 @@ class SitioController extends Controller{
 
 
     public function store(){
-     //   var_dump($_POST); 
+       var_dump($_POST); 
         session_start();
         $datos['user'] = ' ';
         if (isset($_SESSION['user'])) {
@@ -514,6 +498,7 @@ class SitioController extends Controller{
                     'mensaje' =>"",//"mensaje de error si hay
                     ],
                     ['input' =>"",
+                    'input1' =>"",
                     'estado' => "",//class="" o class="input-error" el passwor
                     'mensaje' =>"",//"mensaje de error si hay
                     ],

@@ -469,6 +469,7 @@ textarea {
   color: var(--danger-color);
 }
 
+
 textarea {
   height: 30vh;
 }
@@ -561,6 +562,24 @@ fieldset {
   margin: 1vh 4vh 0vh 4vw;
 }
 
+#horarios .select-dia{
+  height: auto;
+  padding: 1vw;
+  width: 20vw;
+  margin: 1vh 4vh 0vh 0vw;
+}
+
+.horario .input-group{
+    margin: 0vh 0vh 4vh 0vh;
+    width: 25vw;
+   
+}
+
+.horario{
+  display: flex;
+}
+
+
 .formulario label {
   margin-right: 4vw;
 }
@@ -574,13 +593,19 @@ fieldset {
 
 
 .error-text{
-
   margin: 2vh 4vh 0vh 4vw;
 }
+
+.error-text-horario{
+  margin: 2vh 4vh 0vh -1vw;
+  color: var(--danger-color);
+}
+
 
 .input-group{
   margin-bottom: 4vh;
   width: 67vw;
+  
 }
 
 #preview{
@@ -723,6 +748,11 @@ fieldset {
   .imgcontainer {
     margin: 0vw;
   }
+
+  .error-text-horario{
+    margin: 21vh -9vh 8vh -74vw;
+  }
+  
 
   .imgcontainer img {
     align-items: center;

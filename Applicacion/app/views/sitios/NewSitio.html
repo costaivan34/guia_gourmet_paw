@@ -48,7 +48,7 @@
         rows="4"
         cols="50"
         required
-        minlength="4"
+        minlength="40"
         maxlength="2000"
         class="caja-texto {{datos['form'][1].estado}} "
       >{{datos['form'][1].input}}</textarea>
@@ -71,7 +71,6 @@
           placeholder="Direccion"
           minlength="4" 
           maxlength="40"
-          
           required
         />
         <span  id="help-DireccionSitio" class="error-text" >{{datos['form'][2].mensaje}}</span>
@@ -115,7 +114,7 @@
         name="MailSitio"
         value="{{datos['form'][5].input}}"
         placeholder="Correo Electronico"
-        required
+        
       />
       <span  id="help-MailSitio" class="error-text" >{{datos['form'][5].mensaje}}</span>
     </div>
@@ -129,7 +128,7 @@
         value="{{datos['form'][6].input}}"
         placeholder="Telefono"
         pattern="^(\(\+?\d{2,3}\)[\*|\s|\-|\.]?(([\d][\*|\s|\-|\.]?){6})(([\d][\s|\-|\.]?){2})?|(\+?[\d][\s|\-|\.]?){8}(([\d][\s|\-|\.]?){2}(([\d][\s|\-|\.]?){2})?)?)$"
-        required
+        
       />
       <span  id="help-TelefonoSitio" class="error-text" >{{datos['form'][6].mensaje}}</span>
     </div>
@@ -161,7 +160,11 @@
       />
     <p class="title">Arraste el marcador a la ubicación geográfica del lugar</p>
       <section id="mapa"  >
-    
+        <script>
+          var alatitud = "{{ datos['form'][9].input }}"
+          var alongitud = "{{ datos['form'][9].input1 }}"
+
+        </script> 
       </section>
       <span  id="help-Mapa" class="error-text" >{{datos['form'][9].mensaje}}</span>
   </fieldset>
@@ -210,86 +213,34 @@
   <fieldset >
     <legend class="title">Horarios</legend>
     <div id="horarios">
-    <div id="horario-0">
-      <div class="input-group">
-      <label for="Dia-0">Día :</label>
-      <select  id="Dia-0" name ="horarios[]" required class="caja-texto {{datos['form'][7].estado}} ">
-        <option value="" >Selecionar día:</option>
-        <option value="1">Lunes</option>
-        <option value="2">Martes</option>
-        <option value="3">Miercoles</option>
-        <option value="4">Jueves</option>
-        <option value="5">Viernes</option>
-        <option value="6">Sabado</option>
-        <option value="7">Domingo</option>
-      </select>
-      <span  id="help-Dia-0" class="error-text" ></span>
+      <div id="horario-0" class="horario" >
+        <div class="input-group">
+          <label for="Dia-0">Día :</label>
+          <select  id="Dia-0" name ="horarios[]" onBlur="validarhorario('0');" required class=" select-dia caja-texto {{datos['form'][7].estado}} ">
+            <option value="" >Selecionar día:</option>
+            <option value="1">Lunes</option>
+            <option value="2">Martes</option>
+            <option value="3">Miercoles</option>
+            <option value="4">Jueves</option>
+            <option value="5">Viernes</option>
+            <option value="6">Sabado</option>
+            <option value="7">Domingo</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="De-0">De :</label> 
+          <input type="time" id="De-0"  name="horarios[]"  onBlur="validarhorario('0');" required class="select-dia caja-texto {{datos['form'][7].estado}} " >
+        </div>
+        <div class="input-group">
+          <label for="Hasta-0">A :</label>
+          <input type="time" id="Hasta-0" name="horarios[]" onBlur="validarhorario('0');" required class="select-dia caja-texto {{datos['form'][7].estado}} ">
+        </div>
+        
+        <span  id="help-Hasta-0" class="error-text-horario" >{{datos['form'][7].mensaje}}</span>
+      </div>
     </div>
-      <br>
-      <div class="input-group">
-      <label for="De-0">De :</label> 
-      <select id="De-0"  name="horarios[]"  onBlur="validarhorario('0');" required class="caja-texto {{datos['form'][7].estado}} ">
-        <option value="">Selecionar hora:</option>
-        <option value="0">00:00</option>
-        <option value="1">01:00</option>
-        <option value="2">02:00</option>
-        <option value="3">03:00</option>
-        <option value="4">04:00</option>
-        <option value="5">05:00</option>
-        <option value="6">06:00</option>
-        <option value="7">07:00</option>
-        <option value="8">08:00</option>
-        <option value="9">09:00</option>
-        <option value="10">10:00</option>
-        <option value="11">11:00</option>
-        <option value="12">12:00</option>
-        <option value="13">13:00</option>
-        <option value="14">14:00</option>
-        <option value="15">15:00</option>
-        <option value="16">16:00</option>
-        <option value="17">17:00</option>
-        <option value="18">18:00</option>
-        <option value="19">19:00</option>
-        <option value="20">20:00</option>
-        <option value="21">21:00</option>
-        <option value="22">22:00</option>
-        <option value="23">23:00</option>
-      </select>
-      <span id="help-De-0" class="error-text" ></span>
-    </div>
-      <div class="input-group">
-      <label for="Hasta-0">A :</label>
-      <select id="Hasta-0" name="horarios[]" onBlur="validarhorario('0');" required class="caja-texto {{datos['form'][7].estado}} ">
-        <option value="">Selecionar hora:</option>
-        <option value="0">00:00</option>
-        <option value="1">01:00</option>
-        <option value="2">02:00</option>
-        <option value="3">03:00</option>
-        <option value="4">04:00</option>
-        <option value="5">05:00</option>
-        <option value="6">06:00</option>
-        <option value="7">07:00</option>
-        <option value="8">08:00</option>
-        <option value="9">09:00</option>
-        <option value="10">10:00</option>
-        <option value="11">11:00</option>
-        <option value="12">12:00</option>
-        <option value="13">13:00</option>
-        <option value="14">14:00</option>
-        <option value="15">15:00</option>
-        <option value="16">16:00</option>
-        <option value="17">17:00</option>
-        <option value="18">18:00</option>
-        <option value="19">19:00</option>
-        <option value="20">20:00</option>
-        <option value="21">21:00</option>
-        <option value="22">22:00</option>
-        <option value="23">23:00</option>
-      </select>
-      <span  id="help-Hasta-0" class="error-text" >{{datos['form'][7].mensaje}}</span>
-    </div>
-    </div>
-  </div>
+
+
       <div  id="input">
       <input
       class="input-enviar"

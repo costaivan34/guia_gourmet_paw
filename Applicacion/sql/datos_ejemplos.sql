@@ -142,14 +142,14 @@ INSERT INTO `imagenessitios` (`idImagen`, `idSitio`, `path`) VALUES
 (7, 5, '/private/sites/5/1.jpg'),
 (8, 6, '/private/sites/6/1.jpg'),
 (9, 7, '/private/sites/7/1.jpg'),
-(10, 8, '/private/sites/8//portada establo.png'),
-(11, 8, '/private/sites/8//unnamed.png'),
-(12, 9, '/private/sites/9//07.jpg'),
-(13, 9, '/private/sites/9//01.jpg'),
-(14, 10, '/private/sites/10//01.jpg'),
-(15, 10, '/private/sites/10//07.jpg'),
-(16, 11, '/private/sites/11//Cerveceria-lujan-1-patio.jpg'),
-(17, 11, '/private/sites/11//IMG-20210830-WA0216-barra-fondo-patio-SI-scaled.jpeg'),
+(10, 8, '/private/sites/8//01.png'),
+(11, 8, '/private/sites/8//02.png'),
+(12, 9, '/private/sites/9//01.png'),
+(13, 9, '/private/sites/9//02.png'),
+(14, 10, '/private/sites/10//01.png'),
+(15, 10, '/private/sites/10//02.png'),
+(16, 11, '/private/sites/11//01.png'),
+(17, 11, '/private/sites/11//02.png'),
 (18, 12, '/private/sites/12//02.png'),
 (19, 12, '/private/sites/12//01.png');
 
@@ -241,10 +241,10 @@ INSERT INTO `platos` (`idPlato`, `nombre`, `descripcion`, `idSitio`) VALUES
 (15, 'Ravioles', 'Ravioli es el nombre de un tipo de pasta italiana rellena con diferentes ingredientes, generalmente replegada en forma cuadrada. Se acompañan de algún tipo de salsa, en especial de tomate, tucos, pesto o cremas.', 4),
 (16, 'Queremos Flan', 'El flan, también llamado quesillo, es un postre hecho con una natilla que se prepara con huevos enteros, leche y azúcar, que luego es refrigerada para obtener una textura cremosa y gelatinosa.', 4),
 
-(17, 'Empanadas de carne', 'Una empanada es una fina masa de pan, masa quebrada u hojaldre rellena con una preparación salada o dulce y cocida al horno o frita. El relleno puede incluir carnes rojas o blancas, pescado, verduras o fruta.', 5),
-(18, 'Pollo al horno ', 'El pollo asado, rostizado, en brasas o a la brasa es un plato genérico elaborado con un pollo expuesto directamente al fuego, que puede provenir de un hogar casero, hasta el asador profesional rotatorio.', 5),
-(19, 'Ravioles', 'Ravioli es el nombre de un tipo de pasta italiana rellena con diferentes ingredientes, generalmente replegada en forma cuadrada. Se acompañan de algún tipo de salsa, en especial de tomate, tucos, pesto o cremas.', 5),
-(20, 'Queremos Flan', 'El flan, también llamado quesillo, es un postre hecho con una natilla que se prepara con huevos enteros, leche y azúcar, que luego es refrigerada para obtener una textura cremosa y gelatinosa.', 5),
+(17, 'Helado de Crema', 'Lo que en nuestro país llamamos helado de crema americana, es lo que los italianos conocen como fior di latte. La receta clásica dice que hay que mezclar crema, leche, azúcar y algún que otro ingrediente secundario. Este sabor de helado permite armar postres riquísimos y muy variados incorporándole frutos secos, chocolate, frutos rojos, siropes frutales o caramelo. Además, es un postre sencillo y liviano para servir solo o sobre un cuadrado de brownie caliente.', 5),
+(18, 'Helado de Agua', 'El helado de agua es un helado hecho a base de agua, colorante, saborizante y azúcar, de forma alargada y con un palo que lo atraviesa para tomarlo. Se hace congelando el líquido alrededor de un palo de manera similar a una piruleta.', 5),
+(19, 'Bombon Escoces', 'Crema helada americana, rellena de dulce de leche cubierta con chocolate, decorada con crocante de maní.', 5),
+(20, 'Bombon Suizo', 'Helado de chocolate, recubierto con chocolate, decorado con crema chantilly.', 5),
 
 (21, 'Empanadas de carne', 'Una empanada es una fina masa de pan, masa quebrada u hojaldre rellena con una preparación salada o dulce y cocida al horno o frita. El relleno puede incluir carnes rojas o blancas, pescado, verduras o fruta.', 6),
 (22, 'Pollo al horno ', 'El pollo asado, rostizado, en brasas o a la brasa es un plato genérico elaborado con un pollo expuesto directamente al fuego, que puede provenir de un hogar casero, hasta el asador profesional rotatorio.', 6),
@@ -252,9 +252,9 @@ INSERT INTO `platos` (`idPlato`, `nombre`, `descripcion`, `idSitio`) VALUES
 (24, 'Queremos Flan', 'El flan, también llamado quesillo, es un postre hecho con una natilla que se prepara con huevos enteros, leche y azúcar, que luego es refrigerada para obtener una textura cremosa y gelatinosa.', 6),
 
 (25, 'Empanadas de carne', 'Una empanada es una fina masa de pan, masa quebrada u hojaldre rellena con una preparación salada o dulce y cocida al horno o frita. El relleno puede incluir carnes rojas o blancas, pescado, verduras o fruta.', 7),
-(26, 'Pollo al horno ', 'El pollo asado, rostizado, en brasas o a la brasa es un plato genérico elaborado con un pollo expuesto directamente al fuego, que puede provenir de un hogar casero, hasta el asador profesional rotatorio.', 7),
-(27, 'Ravioles', 'Ravioli es el nombre de un tipo de pasta italiana rellena con diferentes ingredientes, generalmente replegada en forma cuadrada. Se acompañan de algún tipo de salsa, en especial de tomate, tucos, pesto o cremas.', 7),
-(28, 'Queremos Flan', 'El flan, también llamado quesillo, es un postre hecho con una natilla que se prepara con huevos enteros, leche y azúcar, que luego es refrigerada para obtener una textura cremosa y gelatinosa.', 7);
+(26, 'La marinara ', 'Es la pizza más antigua, con salsa de tomate, orégano, ajo, aceite de oliva, albahaca y una pizca de sal. Su principal característica es que no tiene queso.Su nombre se debe a que los marineros la elegían para llevar a alta mar por sus propiedades de conservación.', 7),
+(27, 'La Sfincione', 'Si bien para algunos entendidos La Margherita y la Marinara son las verdaderas pizzas, el resto de Italia no se dio por aludida y dejó que en sus regiones proliferaran otros gustos. Es el caso de la Sfincione que es una pizza, esponjosa y cuadrada, de 1 cm de grosor, que es típica de la ciudad de Palermo en Sicilia. Se diferencia de la napolitana en que es una masa más gruesa y tiene forma cuadrada o rectangular. ', 7),
+(28, 'Chicago Pizza Style', 'También los inmigrantes italianos fueron los encargados de que Chicago, en Estados Unidos se convirtiera en otra legendaria ciudad pizzera. Aquí la Chicago Pizza Style tiene una masa con un poco de harina de maíz y se hornea dentro de un plato metálico cuyo fondo se cubre con aceite de oliva. Sus bordes son elevados para rellenar y el fondo está tostado para que soporte el peso del tomate y de la mozzarella.', 7);
 --
 -- Volcado de datos para la tabla `imagenesplatos`
 --
@@ -276,18 +276,18 @@ INSERT INTO `imagenesplatos` (`idImagen`, `idPlato`, `path`) VALUES
 (14, 14, '/private/plates/4/pollo.jpg'),
 (15, 15, '/private/plates/4/ravioles.jpg'),
 (16, 16, '/private/plates/4/flan.jpg'),
-(17, 17, '/private/plates/5/empanadas.jpg'),
-(18, 18, '/private/plates/5/pollo.jpg'),
-(19, 19, '/private/plates/5/ravioles.jpg'),
-(20, 20, '/private/plates/5/flan.jpg'),
+(17, 17, '/private/plates/5/crema.jpg'),
+(18, 18, '/private/plates/5/agua.jpg'),
+(19, 19, '/private/plates/5/escoces.jpg'),
+(20, 20, '/private/plates/5/suizo.jpg'),
 (21, 21, '/private/plates/6/empanadas.jpg'),
 (22, 22, '/private/plates/6/pollo.jpg'),
 (23, 23, '/private/plates/6/ravioles.jpg'),
 (24, 24, '/private/plates/6/flan.jpg'),
 (25, 25, '/private/plates/7/empanadas.jpg'),
-(26, 26, '/private/plates/7/pollo.jpg'),
-(27, 27, '/private/plates/7/ravioles.jpg'),
-(28, 28, '/private/plates/7/flan.jpg');
+(26, 26, '/private/plates/7/marinara.jpg'),
+(27, 27, '/private/plates/7/Sfincione.jpg'),
+(28, 28, '/private/plates/7/Chicago Pizza Style.jpg');
 
 
 --
