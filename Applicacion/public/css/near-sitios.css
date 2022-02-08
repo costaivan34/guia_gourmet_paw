@@ -53,6 +53,7 @@
   height: 24vh;
   border-bottom-left-radius: 2vw;
   border-bottom-right-radius: 2vw;
+  object-fit: cover;
 
 }
 

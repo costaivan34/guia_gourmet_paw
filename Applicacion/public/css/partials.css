@@ -190,10 +190,12 @@ nav li {
   height: 32vh;
   border-top-left-radius: 2vw;
   border-top-right-radius: 2vw;
+  object-fit: cover;
 }
 
 .User-Img {
   width: 20vw;
+  object-fit: cover;
 }
 
 .plus-text {
@@ -210,6 +212,7 @@ nav li {
   width: 77vw;
   height: 84vh;
   border-radius: 1em;
+  object-fit: cover;
 }
 
 .prev,
@@ -284,12 +287,14 @@ nav li {
 .imgcontainer {
   display: block;
   margin: 1em;
+  object-fit: cover;
 }
 
 .imgcontainer img {
   align-items: center;
   width: 20%;
   padding: 0 30vw 0 30vw;
+  object-fit: cover;
 }
 
 /* The Close Button (x) */
@@ -316,6 +321,7 @@ nav li {
 .nav-logo img {
   height: 15vh;
   width: 20vw;
+  object-fit: cover;
 }
 
 #page-active {
@@ -379,6 +385,7 @@ nav li {
   height: 25vh;
   border-top-left-radius: 2vw;
   border-top-right-radius: 2vw;
+  object-fit: cover;
 }
 
 .tarjeta h3 {
@@ -620,7 +627,7 @@ fieldset {
   max-width: 20vw;
   max-height: 20vh;
   padding:  1vh 4vw 0 0vw;
- 
+  object-fit: cover;
 }
 
 
@@ -747,6 +754,7 @@ fieldset {
 
   .imgcontainer {
     margin: 0vw;
+    object-fit: cover;
   }
 
   .error-text-horario{
@@ -758,6 +766,7 @@ fieldset {
     align-items: center;
     width: 60%;
     padding: 0 18vw 0 18vw;
+    object-fit: cover;
   }
 
   .close {
@@ -793,6 +802,7 @@ fieldset {
   .nav-logo img {
     height: 20vh;
     width: 80vw;
+    object-fit: cover;
   }
 
   .title {
@@ -820,6 +830,7 @@ fieldset {
 
   .User-Img {
     width: 80vw;
+    object-fit: cover;
   }
 
   .dash {
@@ -849,6 +860,7 @@ fieldset {
     height: 30vh;
     border-top-left-radius: 1em;
     border-top-right-radius: 1em;
+    object-fit: cover;
   }
 
   .dash input,
@@ -883,6 +895,7 @@ fieldset {
 
   .encabezado img {
     margin-left: 0em;
+    object-fit: cover;
   }
 
   .mySlides {
@@ -893,6 +906,7 @@ fieldset {
   .slideshow-container img {
     width: 85vw;
     height: 40vh;
+    object-fit: cover;
   }
 
   #columna {
@@ -923,6 +937,7 @@ fieldset {
     height: 30vh;
     border-top-left-radius: 1em;
     border-top-right-radius: 1em;
+    object-fit: cover;
   }
 
   .tarjeta h3 {

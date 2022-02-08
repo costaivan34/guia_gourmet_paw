@@ -201,6 +201,7 @@ dl.detalles dd {
 .datos img {
   height: 8vh;
   width: 8vw;
+  object-fit: cover;
 }
 
 .plato-full {
@@ -472,6 +473,7 @@ input[type='radio']:checked ~ label {
   .datos img {
     height: 20vh;
     width: 20vw;
+    object-fit: cover;
   }
   .datos li {
     height: 20vh;
