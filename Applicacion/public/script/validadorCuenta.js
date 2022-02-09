@@ -10,19 +10,19 @@ window.addEventListener('DOMContentLoaded', function () {
           //console.log(input.checkValidity());
           // checkValidity() lanza la validación y decide si el valor del input 
           //	es correcto o no.
-          console.log(input.name)
+          console.log(input.name);
             if (!input.checkValidity()) {
               console.log(`Valor invalido en el input ${input.name}`);
               document.getElementById(input.name).classList.add("input-error");
               //  document.getElementById(input.name).reportValidity();
-              document.getElementById(`help-${input.name}`).textContent = input.validationMessage
+              document.getElementById(`help-${input.name}`).textContent = input.validationMessage;
               // console.log(input.validationMessage);
               // agregar clases css para que se resalte el error
             } else {
               console.log(`Valor CORRECTO en el input ${input.name}`);
               console.log(`input ${input.name}`);
               document.getElementById(input.name).classList.remove("input-error");
-              document.getElementById(`help-${input.name}`).textContent = ""
+              document.getElementById(`help-${input.name}`).textContent = "";
               // agregar clases css para que se muestre valido 
               //  o al menos borrar las clases que marcan errores
             }
@@ -56,14 +56,14 @@ window.addEventListener('DOMContentLoaded', function () {
     xmlHttpRequest.onreadystatechange = function () {
       if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
         document.getElementById("ubicacionUser").classList.remove("input-error");
-        document.getElementById(`help-ubicacionUser`).textContent = ""
+        document.getElementById(`help-ubicacionUser`).textContent = "";
       }else{
         document.getElementById("ubicacionUser").classList.add("input-error");
-        document.getElementById(`help-ubicacionUser`).textContent = "El país ingresado no es valido"
+        document.getElementById(`help-ubicacionUser`).textContent = "El país ingresado no es valido";
       }
     } 
-    paisUser = document.getElementById('ubicacionUser').value
-    xmlHttpRequest.open('GET', `https://restcountries.com/v3.1/name/${paisUser}?fullText=true`, true)
+    paisUser = document.getElementById('ubicacionUser').value;
+    xmlHttpRequest.open('GET', `https://restcountries.com/v3.1/name/${paisUser}?fullText=true`, true);
     xmlHttpRequest.send();
     event.preventDefault();
   }

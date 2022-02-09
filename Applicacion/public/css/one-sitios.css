@@ -111,7 +111,7 @@ dl.detalles dt {
   text-overflow: ellipsis;
   overflow: hidden;
   border-bottom: 1px solid var(--main-color);
-  /* font-family: 'Abril Fatface', cursive;*/
+ 
 }
 
 dl.detalles dd {
@@ -136,8 +136,7 @@ dl.detalles dd {
 
 .horarios dl.detalles dt {
   width: 2px;
-  padding-top: 2vh;
-  padding-bottom: 2vh;
+  padding: 2vh 0 2vh 0;
   flex: 0 0 10vw;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -146,9 +145,7 @@ dl.detalles dd {
 }
 
 .horarios dl.detalles dd {
-  padding-top: 2vh;
-  padding-bottom: 2vh;
-  padding-left: 12vw;
+  padding: 2vh 6vw 2vh 8vw;
   text-align: left;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -170,11 +167,7 @@ dl.detalles dd {
 }
 
 .caracteristicas  li {
-
-  padding-top: 2vh;
-  padding-bottom: 2vh;
-  padding-left: 6vw;
-  padding-right: 6vw;
+  padding:  2vh 6vw 2vh 6vw ;
   border-bottom: 1px solid var(--assent-color);
   background-color: var(--main-color);
 }
@@ -194,8 +187,7 @@ dl.detalles dd {
 .datos li {
   height: 10vh;
   width: 10vw;
-  margin-left: 1vw;
-  margin-top: 1vw;
+  margin: 1vw 0 0 1vw;
 }
 
 .datos img {
@@ -253,19 +245,16 @@ background-color: var(--main-color);
 }
 
 .coment-nombre {
-  /*font-family: sans-serif;*/
   font-size: 17px;
   font-weight: 600;
   width: 2em;
   text-align: left;
-  margin: 0vw;
-  margin-top: 2vh;
+  margin:  2vh 0vw 0vw 0vw;
 }
 
 .coment-text {
   /*font-family: 'Raleway', sans-serif;*/
   text-align: justify;
-
   overflow-wrap:break-word;
   font-size: 17px;
   font-weight: 400;
@@ -280,12 +269,12 @@ background-color: var(--main-color);
 
 .valoracion {
   top: 0;
-  margin-top: 0%;
+  margin: 0 31vw  ; 
   display: inline;
   height: 5%;
   width: 40vw;
   float: right;
-  margin-right: 31vw;
+
 }
 
 .valoracion li {
@@ -312,11 +301,7 @@ background-color: var(--main-color);
 
 .deja-comentario .error-text{
     margin: 2vh 4vh 0vh 4vw;
-
 }
-
-
-
 
 .deja-comentario input[type='submit'] {
   /* font-family: 'Hanalei Fill', cursive;*/
@@ -329,7 +314,6 @@ background-color: var(--main-color);
 
 
 .deja-comentario input[type='submit']:hover {
-  /* font-family: 'Hanalei Fill', cursive;*/
   background-color: var(--assent-color);
 }
 
@@ -498,7 +482,6 @@ input[type='radio']:checked ~ label {
     overflow: hidden;
     border: 1px solid #e7cf7f;
     background-color: var(--main-color);
-    /* font-family: 'Abril Fatface', cursive;*/
   }
 
   dl.detalles dd {
@@ -527,11 +510,8 @@ input[type='radio']:checked ~ label {
     flex: 0 0 38vw;
     text-overflow: ellipsis;
     overflow: hidden;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: 1px solid var(--assent-color);
-    background-color: var(--main-color);
+
+
   }
 
   .horarios dl.detalles dd {
@@ -539,13 +519,8 @@ input[type='radio']:checked ~ label {
     text-align: left;
     text-overflow: ellipsis;
     overflow: hidden;
-    flex: 0 0 38vw;
-    border-bottom: 1px solid var(--assent-color);
-    background-color: var(--main-color);
+    flex: 0 0 32vw;
     display: flex;
-    border-top: none;
-    border-left: none;
-    border-right: none;
   }
 
   .horarios {

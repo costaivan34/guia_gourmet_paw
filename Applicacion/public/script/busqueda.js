@@ -1,12 +1,12 @@
 window.addEventListener('DOMContentLoaded', function () {
-console.log(clave)
-console.log(categoria)
-console.log(provincia)
-  event.preventDefault()
-  getProvincias()
-  getCategorias()
-  pagina    = 1
-  buscadorBuscame(clave, categoria, provincia, pagina)
+console.log(clave);
+console.log(categoria);
+console.log(provincia);
+  event.preventDefault();
+  getProvincias();
+  getCategorias();
+  pagina    = 1;
+  buscadorBuscame(clave, categoria, provincia, pagina);
 })
 
 function getQueryVariable(variable) {
@@ -23,33 +23,33 @@ function getQueryVariable(variable) {
 
 
 function ejecutar() {
-  clave =     document.getElementById('palabraClave').value
-  categoria = document.getElementById('categorias').value
-  provincia = document.getElementById('provincias').value
-  pagina    = 1
-  console.log(clave)
-console.log(categoria)
-console.log(provincia)
-  buscadorBuscame(clave, categoria, provincia, pagina)
+  clave =     document.getElementById('palabraClave').value;
+  categoria = document.getElementById('categorias').value;
+  provincia = document.getElementById('provincias').value;
+  pagina    = 1;
+  console.log(clave);
+console.log(categoria);
+console.log(provincia);
+  buscadorBuscame(clave, categoria, provincia, pagina);
 }
 
 function getDatos() {
   if (!(getQueryVariable("clave") == false)
     ||!(getQueryVariable("categoria") == false)
     ||!(getQueryVariable("provincia") == false)){
-      console.log("aca")
-    clave = ''
-    categoria = 0
-    provincia = 'TODAS'
-    pagina = 1
+      console.log("aca");
+    clave = '';
+    categoria = 0;
+    provincia = 'TODAS';
+    pagina = 1;
     buscadorBuscame(clave, categoria, provincia, pagina)
   }else{
-    console.log("alla")
-    clave = getQueryVariable("clave")
-    categoria = getQueryVariable("categoria") 
-    provincia = getQueryVariable("provincia")
-    pagina = 1
-    buscadorBuscame(clave, categoria, provincia, pagina)
+    console.log("alla");
+    clave = getQueryVariable("clave");
+    categoria = getQueryVariable("categoria") ;
+    provincia = getQueryVariable("provincia");
+    pagina = 1;
+    buscadorBuscame(clave, categoria, provincia, pagina);
   }
   
 }
@@ -58,54 +58,54 @@ function getCategorias() {
   var xmlHttpRequest = new XMLHttpRequest()
   xmlHttpRequest.onreadystatechange = function () {
     if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
-      var respuesta = JSON.parse(xmlHttpRequest.responseText)
+      var respuesta = JSON.parse(xmlHttpRequest.responseText);
       //  console.log(respuesta);
-      var opcion = document.createElement('option')
-      var elemento = document.getElementById('categorias')
+      var opcion = document.createElement('option');
+      var elemento = document.getElementById('categorias');
       while (elemento.firstChild) {
-        elemento.removeChild(elemento.firstChild)
+        elemento.removeChild(elemento.firstChild);
       }
-      opcion = document.createElement('option')
-      opcion.value = 0
-      opcion.text = 'Selecionar Categoria:'
-      document.getElementById('categorias').appendChild(opcion)
+      opcion = document.createElement('option');
+      opcion.value = 0;
+      opcion.text = 'Selecionar Categoria:';
+      document.getElementById('categorias').appendChild(opcion);
 
       for (cat of respuesta) {
-        opcion = document.createElement('option')
-        opcion.value = cat.idCategoria
-        opcion.text = cat.nombre
-        document.getElementById('categorias').appendChild(opcion)
+        opcion = document.createElement('option');
+        opcion.value = cat.idCategoria;
+        opcion.text = cat.nombre;
+        document.getElementById('categorias').appendChild(opcion);
       }
     }
   }
 
-  xmlHttpRequest.open('GET', 'categorias', true)
+  xmlHttpRequest.open('GET', 'categorias', true);
 
-  xmlHttpRequest.send()
+  xmlHttpRequest.send();
 
-  event.preventDefault()
+  event.preventDefault();
 }
 
 function getProvincias() {
-  var xmlHttpRequest = new XMLHttpRequest()
+  var xmlHttpRequest = new XMLHttpRequest();
   xmlHttpRequest.onreadystatechange = function () {
     if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
       var respuesta = JSON.parse(xmlHttpRequest.responseText)
-      var opcion = document.createElement('option')
-      var elemento = document.getElementById('provincias')
+      var opcion = document.createElement('option');
+      var elemento = document.getElementById('provincias');
       while (elemento.firstChild) {
-        elemento.removeChild(elemento.firstChild)
+        elemento.removeChild(elemento.firstChild);
       }
-      opcion = document.createElement('option')
-      opcion.value = 'TODAS'
-      opcion.text = 'Selecionar Ubicación:'
-      document.getElementById('provincias').appendChild(opcion)
+      opcion = document.createElement('option');
+      opcion.value = 'TODAS';
+      opcion.text = 'Selecionar Ubicación:';
+      document.getElementById('provincias').appendChild(opcion);
       opcion1 = document.createElement('option')
       for (provincia of respuesta.provincias) {
-        opcion = document.createElement('option')
-        opcion.value = provincia.nombre
-        opcion.text = provincia.nombre
-        document.getElementById('provincias').appendChild(opcion)
+        opcion = document.createElement('option');
+        opcion.value = provincia.nombre;
+        opcion.text = provincia.nombre;
+        document.getElementById('provincias').appendChild(opcion);
       }
     }
   }
@@ -113,9 +113,9 @@ function getProvincias() {
     'GET',
     'https://apis.datos.gob.ar/georef/api/provincias?orden=nombre',
     true,
-  )
-  xmlHttpRequest.send()
-  event.preventDefault()
+  );
+  xmlHttpRequest.send();
+  event.preventDefault();
 }
 
 function agregarSitioPaginacion(
@@ -125,18 +125,18 @@ function agregarSitioPaginacion(
   provincia,
   pagina,
 ) {
-  clave2 = '"' + clave + '"'
-  provincia2 = '"' + provincia + '"'
+  clave2 = '"' + clave + '"';
+  provincia2 = '"' + provincia + '"';
   if (respuesta.Paginacion > '1') {
    
     if (pagina != 1) {
-      var ElementoPagina = document.createElement('li')
+      var ElementoPagina = document.createElement('li');
       ElementoPagina.innerHTML =
         "<input type='button' id='inicio' onclick='buscadorBuscame(" +
-        clave2 +',' +categoria +',' + provincia2 +   ',' +   1 +  ")' value='<<'>"
-       document.getElementById('paginacionPlatos').appendChild(ElementoPagina)
+        clave2 +',' +categoria +',' + provincia2 +   ',' +   1 +  ")' value='<<'>";
+       document.getElementById('paginacionPlatos').appendChild(ElementoPagina);
 
-      var ElementoPagina = document.createElement('li')
+      var ElementoPagina = document.createElement('li');
       ElementoPagina.innerHTML =
         "<input type='button' id='inicio' onclick='buscadorBuscame(" +
         clave2 +
@@ -146,30 +146,30 @@ function agregarSitioPaginacion(
         provincia2 +
         ',' +
         (pagina - 1) +
-        ")'  value='<'>"
-      document.getElementById('paginacionPlatos').appendChild(ElementoPagina)
+        ")'  value='<'>";
+      document.getElementById('paginacionPlatos').appendChild(ElementoPagina);
     }
     for (var i = 1; i <= respuesta.Paginacion; i++) {
       if (pagina == i) {
-        ElementoPagina = document.createElement('li')
+        ElementoPagina = document.createElement('li');
         ElementoPagina.innerHTML =
           "<input type='button' id='page-active' onclick='buscadorBuscame(" +
-          clave2 + ',' + categoria + ',' +  provincia2 + ',' +  i +  ")' value='" +    i +  "'>"
-        document.getElementById('paginacionPlatos').appendChild(ElementoPagina)
+          clave2 + ',' + categoria + ',' +  provincia2 + ',' +  i +  ")' value='" +    i +  "'>";
+        document.getElementById('paginacionPlatos').appendChild(ElementoPagina);
       } else {
         if (i >= pagina - 3 && i <= pagina + 3) {
-          ElementoPagina = document.createElement('li')
+          ElementoPagina = document.createElement('li');
           ElementoPagina.innerHTML =
             "<input type='button' id='inicio' onclick='buscadorBuscame(" +
-            clave2 +',' + categoria + ',' +  provincia2 + ',' + i +  ")' value='" +   i +  "'>"
+            clave2 +',' + categoria + ',' +  provincia2 + ',' + i +  ")' value='" +   i +  "'>";
           document
             .getElementById('paginacionPlatos')
-            .appendChild(ElementoPagina)
+            .appendChild(ElementoPagina);
         }
       }
     }
       if (pagina != respuesta.Paginacion) {
-        ElementoPagina = document.createElement('li')
+        ElementoPagina = document.createElement('li');
         ElementoPagina.innerHTML =
           "<input type='button' id='inicio' onclick='buscadorBuscame(" +
           clave2 +
@@ -179,13 +179,13 @@ function agregarSitioPaginacion(
           provincia2 +
           ',' +
           (pagina + 1) +
-          ")' value='>'>"
-        document.getElementById('paginacionPlatos').appendChild(ElementoPagina)
-        ElementoPagina = document.createElement('li')
+          ")' value='>'>";
+        document.getElementById('paginacionPlatos').appendChild(ElementoPagina);
+        ElementoPagina = document.createElement('li');
         ElementoPagina.innerHTML =
           "<input type='button' id='inicio' onclick='buscadorBuscame(" +
-          clave2 + ',' + categoria + ',' +  provincia2 + ',' + respuesta.Paginacion +  ")'  value='>>'>"
-        document.getElementById('paginacionPlatos').appendChild(ElementoPagina)
+          clave2 + ',' + categoria + ',' +  provincia2 + ',' + respuesta.Paginacion +  ")'  value='>>'>";
+        document.getElementById('paginacionPlatos').appendChild(ElementoPagina);
       }
      
      
@@ -194,78 +194,78 @@ function agregarSitioPaginacion(
 }
 
 function agregarSitio(respuesta) {
-  var pMarker = document.createElement('p')
-  var i = document.createElement('i')
-  i.className = 'fa fa-map-marker'
-  pMarker.appendChild(i)
+  var pMarker = document.createElement('p');
+  var i = document.createElement('i');
+  i.className = 'fa fa-map-marker';
+  pMarker.appendChild(i);
   var textNode1 = document.createTextNode(
     respuesta.ciudad + ', ' + respuesta.provincia,
-  )
-  pMarker.appendChild(textNode1)
+  );
+  pMarker.appendChild(textNode1);
 
-  var pComent = document.createElement('p')
-  var i1 = document.createElement('i')
-  i1.className = 'fa fa-commenting'
-  pComent.appendChild(i1)
-  var textNode2 = document.createTextNode(respuesta.Ncomentarios)
-  pComent.appendChild(textNode2)
-  var img = document.createElement('img')
-  img.src = respuesta.path
+  var pComent = document.createElement('p');
+  var i1 = document.createElement('i');
+  i1.className = 'fa fa-commenting';
+  pComent.appendChild(i1);
+  var textNode2 = document.createTextNode(respuesta.Ncomentarios);
+  pComent.appendChild(textNode2);
+  var img = document.createElement('img');
+  img.src = respuesta.path;
 
-  var aNombre = document.createElement('a')
-  aNombre.href = '/resto?Sitio=' + respuesta.idSitio
-  var h3nombre = document.createElement('h3')
-  h3nombre.className = 'title'
-  var textNode = document.createTextNode(respuesta.nombre)
-  h3nombre.appendChild(textNode)
-  aNombre.appendChild(h3nombre)
+  var aNombre = document.createElement('a');
+  aNombre.href = '/resto?Sitio=' + respuesta.idSitio;
+  var h3nombre = document.createElement('h3');
+  h3nombre.className = 'title';
+  var textNode = document.createTextNode(respuesta.nombre);
+  h3nombre.appendChild(textNode);
+  aNombre.appendChild(h3nombre);
 
-  var divPlates = document.createElement('div')
-  divPlates.className = 'plates-text'
-  divPlates.appendChild(img)
-  divPlates.appendChild(aNombre)
-  divPlates.appendChild(pMarker)
+  var divPlates = document.createElement('div');
+  divPlates.className = 'plates-text';
+  divPlates.appendChild(img);
+  divPlates.appendChild(aNombre);
+  divPlates.appendChild(pMarker);
 
   var divTarjeta = document.createElement('div')
-  divTarjeta.className = 'tarjeta'
-  divTarjeta.appendChild(divPlates)
-  document.getElementById('columna').appendChild(divTarjeta)
+  divTarjeta.className = 'tarjeta';
+  divTarjeta.appendChild(divPlates);
+  document.getElementById('columna').appendChild(divTarjeta);
 }
 
 function buscadorBuscame(clave, categoria, provincia, pagina) {
-  var xmlHttpRequest = new XMLHttpRequest()
-  var elemento = document.getElementById('columna')
-  var elemento2 = document.getElementById('paginacionPlatos')
-  var pR = document.createElement('p')
-  pR.className = 'error'
+  var xmlHttpRequest = new XMLHttpRequest();
+  var elemento = document.getElementById('columna');
+  var elemento2 = document.getElementById('paginacionPlatos');
+  var pR = document.createElement('p');
+  pR.className = 'error';
   var textNode2 = document.createTextNode(
     '--------------No hay resultados-------------',
-  )
-  pR.appendChild(textNode2)
+  );
+  pR.appendChild(textNode2);
   while (elemento.firstChild) {
-    elemento.removeChild(elemento.firstChild)
+    elemento.removeChild(elemento.firstChild);
   }
   while (elemento2.firstChild) {
-    elemento2.removeChild(elemento2.firstChild)
+    elemento2.removeChild(elemento2.firstChild);
   }
   xmlHttpRequest.onreadystatechange = function () {
     if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
       // console.log(xmlHttpRequest.responseText);
-      var respuesta = JSON.parse(xmlHttpRequest.responseText)
+      var respuesta = JSON.parse(xmlHttpRequest.responseText);
       //   console.log( respuesta.AllSitios);
       if (respuesta.Paginacion == '0') {
-        elemento.appendChild(pR)
+        elemento.appendChild(pR);
       } else {
         for (r in respuesta.AllSitios) {
-          agregarSitio(respuesta.AllSitios[r])
+          agregarSitio(respuesta.AllSitios[r]);
         }
-        agregarSitioPaginacion(respuesta, clave, categoria, provincia, pagina)
+        agregarSitioPaginacion(respuesta, clave, categoria, provincia, pagina);
       }
     } else if (
       (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 400) ||
       (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 500)
     ) {
-      elemento.appendChild(pR)
+      elemento.appendChild(pR);
     }
   }
   xmlHttpRequest.open(
@@ -279,8 +279,8 @@ function buscadorBuscame(clave, categoria, provincia, pagina) {
       '&Pagina=' +
       pagina,
     true,
-  )
+  );
   //console.log("buscar?Clave="+clave+"&Provincia='"+provincia+"'&Categoria="+categoria+"&Pagina="+pagina);
-  xmlHttpRequest.send()
-  event.preventDefault()
+  xmlHttpRequest.send();
+  event.preventDefault();
 }

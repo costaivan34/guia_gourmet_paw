@@ -12,10 +12,10 @@ textarea.forEach(function(input) {
   input.addEventListener('blur', event => {
         if (!input.checkValidity()) {
           document.getElementById(input.name).classList.add("input-error");
-          document.getElementById(`help-${input.name}`).textContent = input.validationMessage
+          document.getElementById(`help-${input.name}`).textContent = input.validationMessage;
         } else {
           document.getElementById(input.name).classList.remove("input-error");
-          document.getElementById(`help-${input.name}`).textContent = ""
+          document.getElementById(`help-${input.name}`).textContent = "";
   
         }
   });
@@ -31,14 +31,14 @@ inputs.forEach(function(input) {
             console.log(`Valor invalido en el input ${input.name}`);
             document.getElementById(input.name).classList.add("input-error");
             //  document.getElementById(input.name).reportValidity();
-            document.getElementById(`help-${input.name}`).textContent = input.validationMessage
+            document.getElementById(`help-${input.name}`).textContent = input.validationMessage;
             // console.log(input.validationMessage);
             // agregar clases css para que se resalte el error
           } else {
             console.log(`Valor CORRECTO en el input ${input.name}`);
             console.log(`input ${input.name}`);
             document.getElementById(input.name).classList.remove("input-error");
-            document.getElementById(`help-${input.name}`).textContent = ""
+            document.getElementById(`help-${input.name}`).textContent = "";
             // agregar clases css para que se muestre valido 
             //  o al menos borrar las clases que marcan errores
           }
@@ -59,9 +59,9 @@ inputs.forEach(function(input) {
         mapboxgl: mapboxgl
       })
     );
-    map.addControl(new mapboxgl.NavigationControl())
-    map.addControl(new mapboxgl.FullscreenControl())
-    map.addControl(new mapboxgl.GeolocateControl())
+    map.addControl(new mapboxgl.NavigationControl());
+    map.addControl(new mapboxgl.FullscreenControl());
+    map.addControl(new mapboxgl.GeolocateControl());
   
     const canvas = map.getCanvasContainer();
   
@@ -78,8 +78,8 @@ inputs.forEach(function(input) {
       ]
     };
   
-    var el = document.createElement('div')
-    el.className = 'marker'
+    var el = document.createElement('div');
+    el.className = 'marker';
     marker = new mapboxgl.Marker(el,{draggable: true ,  color: '#00000F' })
     .setLngLat([alatitud, alongitud])
     .addTo(map);
@@ -116,7 +116,7 @@ inputs.forEach(function(input) {
   
   function quitar_horario() {
   if (a>0){
-    input = document.getElementById('horario-' + a)
+    input = document.getElementById('horario-' + a);
     padre = input.parentNode;
     padre.removeChild(input);
     a--;
@@ -146,12 +146,12 @@ inputs.forEach(function(input) {
       <div class="input-group">
         <label for="De-` + a + `">De :</label>
         <input type="time"  id="De-` + a + `"  name="horarios[]" 
-         required class="select-dia caja-texto {{datos['form'][7].estado}} " onBlur="validarhorario('` + a + `');" >
+         required class="select-time caja-texto {{datos['form'][7].estado}} " onBlur="validarhorario('` + a + `');" >
         </div>
         <div class="input-group">
         <label for="Hasta-` + a + `">A :</label>
         <input type="time" id="Hasta-` + a + `" name="horarios[]"  
-        required class="select-dia caja-texto {{datos['form'][7].estado}} " onBlur="validarhorario('` + a + `');">
+        required class="select-time caja-texto {{datos['form'][7].estado}} " onBlur="validarhorario('` + a + `');">
         
         </div>
   <span  id="help-Hasta-` + a + `" class="error-text-horario" ></span>`;
@@ -182,7 +182,7 @@ function validarhorario(id) {
         } else {
           document.getElementById("Dia-" + id).classList.add("input-error");
           document.getElementById("De-" + id).classList.add("input-error");
-          document.getElementById("help-Hasta-"+ id).textContent = "El Horario ingresado no es valido."
+          document.getElementById("help-Hasta-"+ id).textContent = "El Horario ingresado no es valido.";
           document.getElementById("Hasta-" + id).classList.add("input-error");
             
          }

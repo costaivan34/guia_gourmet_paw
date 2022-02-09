@@ -15,7 +15,7 @@ function pasarFoto() {
   } else {
     posicionActual++;
   }
-  showSlides(posicionActual)
+  showSlides(posicionActual);
 }
 
 function retrocederFoto() {
@@ -25,7 +25,7 @@ function retrocederFoto() {
   } else {
       posicionActual--;
   }
-  showSlides(posicionActual)
+  showSlides(posicionActual);
 }
 
 // Thumbnail image controls

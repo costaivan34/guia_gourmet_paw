@@ -10,7 +10,6 @@ window.addEventListener("DOMContentLoaded", function () {
 	xmlHttpRequest.onreadystatechange=function() {
 		if (xmlHttpRequest.readyState==4 && xmlHttpRequest.status==200) { 
      var respuesta =JSON.parse( xmlHttpRequest.responseText );
-    
       var opcion = document.createElement("option");
       var elemento  = document.getElementById("categorias");
       while (elemento.firstChild) {

@@ -12,6 +12,7 @@
   animation-name: fade;
   animation-duration: 1.5s;
 }
+
 @-webkit-keyframes fade {
   from {
     opacity: 0.4;
@@ -114,9 +115,7 @@ a {
   color: #000;
   text-decoration: none;
   font-size: 1.2vw;
-  padding-right: 2vw;
-  padding-bottom: 2vw;
-  padding-top: 2vw;
+  padding: 2vw 2vw 2vw 0vw;
 }
 
 a:hover {
@@ -132,6 +131,10 @@ nav ul {
 nav li {
   display: inline;
   margin-left: 2vw;
+}
+
+.ham {
+  display: none;
 }
 
 #nombreUsuario:hover {
@@ -270,6 +273,7 @@ nav li {
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
 }
+
 .modal-content {
   margin: 1vh auto 1vh auto; /* 5% from the top, 15% from the bottom and centered */
   border: 1px solid #888;
@@ -324,6 +328,7 @@ nav li {
   object-fit: cover;
 }
 
+
 #page-active {
   background-color: var(--main-color);
   border: unset;
@@ -347,9 +352,7 @@ nav li {
   color: var(--assent-color);
   text-decoration: none;
   font-size: 1em;
-  padding-right: 1vw;
-  padding-bottom: 1vw;
-  padding-top: 1vw;
+  padding: 1vw 1vw 1vw 1vw;
   margin: 4vh 0vw 1vh 0vw;
   cursor: pointer;
 }
@@ -377,6 +380,14 @@ nav li {
 
 .tarjeta:hover .title {
   color: var(--back-color);
+}
+.tarjeta img {
+  background-size: cover;
+  width: 80vw;
+  height: 30vh;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+  object-fit: cover;
 }
 
 .tarjeta img {
@@ -418,7 +429,6 @@ nav li {
   height: 100%; /* Full height */
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
-
   overflow: auto;
 }
 
@@ -483,8 +493,7 @@ textarea {
 
 label {
   padding: 1vw;
-  margin-top: 1vh;
-  margin-bottom: 1vh;
+  margin: 1vh 0 1vh 0;
   color: var(--assent-color);
 }
 
@@ -494,7 +503,7 @@ fieldset {
 
 
 .formulario .input-enviar {
-  width: 69vw;
+  width: 70vw;
 }
 
 .input-enviar {
@@ -550,7 +559,7 @@ fieldset {
 }
 
 .dash .input-enviar {
-  width: 62vw;
+  width: 58vw;
   padding: 1vw;
 }
 
@@ -570,6 +579,13 @@ fieldset {
 }
 
 #horarios .select-dia{
+  height: auto;
+  padding: 1.1vw;
+  width: 20vw;
+  margin: 1vh 4vh 0vh 0vw;
+}
+
+#horarios .select-time{
   height: auto;
   padding: 1vw;
   width: 20vw;
@@ -664,7 +680,27 @@ fieldset {
   }
 
   nav li {
+    display: inline;
+    margin-left: 0vw;
+  }
+
+  .topnav li {display: none;}
+ .ham {
     display: block;
+  }
+
+
+  .topnav .responsive {position: relative;}
+ .ham {
+    position: absolute;
+    right: 8vw;
+    top: 6vh;
+  }
+
+  .topnav.responsive li {
+    float: none;
+    display: block;
+    text-align: left;
   }
 
   a {
@@ -672,13 +708,7 @@ fieldset {
     font-size: 6vw;
   }
 
-  #paisUser {
-    width: 92%;
-    padding: 12px;
 
-    resize: vertical;
-    margin: 1em;
-  }
 
   .error-text{
     font-size: 4vw;
@@ -744,11 +774,9 @@ fieldset {
   .modal-content {
     background-color: var(--back-color);
     margin: 2vw auto 2vw auto;
-    border: 1px solid #888;
     width: 2vw;
     height: 30em;
     padding: 2vw;
-    border: 3px solid #e7cf7f;
     display: block;
   }
 
@@ -757,10 +785,7 @@ fieldset {
     object-fit: cover;
   }
 
-  .error-text-horario{
-    margin: 21vh -9vh 8vh -74vw;
-  }
-  
+ 
 
   .imgcontainer img {
     align-items: center;
@@ -772,32 +797,25 @@ fieldset {
   .close {
     position: absolute;
     right: 1em;
-    top: 3;
-    color: #000;
+    top: 5vh;
     font-size: 35px;
     font-weight: bold;
   }
 
   #ToTheTop {
-    height: 1;
-    width: 1;
+    height: 0;
+    width: 0;
     color: var(--main-color);
-    border-left: 8vw solid transparent;
-    border-right: 8vw solid transparent;
-    border-bottom: 15vw solid gray;
+    border-left: 0vw solid transparent;
+    border-right: 0vw solid transparent;
+    border-bottom: 0vw solid gray;
     position: fixed;
-    bottom: 5vw;
-    right: 3vw;
+    bottom: 0vw;
+    right: 0vw;
     cursor: pointer;
-    z-index: 400;
+    z-index: -200;
   }
 
-  #ToTheTop:hover {
-    border-left: 8.5vw solid transparent;
-    border-right: 8.5vw solid transparent;
-    border-bottom: 15.5vw solid var(--assent-color);
-    z-index: 400;
-  }
 
   .nav-logo img {
     height: 20vh;
@@ -836,7 +854,6 @@ fieldset {
   .dash {
     width: 80vw;
     float: none;
-
     margin: 4vw 4vw -2vh 4vw;
     padding: 4vw;
   }
@@ -873,7 +890,6 @@ fieldset {
   .dash select {
     height: auto;
     padding: 1vw;
-    height: auto;
     width: 20vw;
     margin: 1vh 0 2vh 0vw;
     padding: 1vw;
@@ -919,10 +935,8 @@ fieldset {
   }
 
   .tarjeta {
-    box-shadow: 0 4px 8px 0 rgba(245, 146, 135, 0.8); /* this adds the "card" effect */
     padding: 0.5vw;
     text-align: center;
-    background-color: var(--main-color);
     border-top-left-radius: 1em;
     border-top-right-radius: 1em;
     border-bottom-left-radius: 1em;
@@ -959,15 +973,17 @@ fieldset {
   }
 
   .prev,
-  .next {
-    position: absolute;
-    top: 70vh;
-    width: 4vw;
+  .next { 
+    position: relative;
+    top: -20vh;
+    width: auto;
     padding: 2.5vw;
-    border-radius: 20%;
+    transition: 0.6s ease;
+    border-radius: 40%;
   }
+
   .next {
-    right: 7vw;
+    left: 62vw;
   }
 
   .dot {
@@ -992,12 +1008,42 @@ fieldset {
   }
 
   .paginacion input {
-    color: #000;
     text-decoration: none;
     font-size: 1em;
-    padding-right: 1em;
-    padding-bottom: 1em;
-    padding-top: 1em;
+    padding: 1em;
     margin: 1em 0em 1em 0em;
   }
+
+  #horarios .select-dia{
+    height: auto;
+    width: 75vw;
+    padding: 2vw;
+    margin: 1vh 0 1vh 4vw;
+  }
+  
+  
+  #horarios .select-time{
+    height: auto;
+    width: 70vw;
+    padding: 2vw;
+    margin: 1vh 0 1vh 4vw;
+  }
+
+
+  .horario .input-group{
+    margin-bottom: 4vh;
+    width: 70vw;
+     
+  }
+
+  .horario{
+    display: block;
+  }
+
+  #preview{
+    margin: 4vh 4vw 0 4vw;
+    width: 72vw;
+    padding: 1vw;
+  }
+
 }

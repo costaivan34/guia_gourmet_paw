@@ -1,6 +1,3 @@
-window.addEventListener("DOMContentLoaded", function () {
-
-});
 
 function openLoginModal() {
   document.getElementById('id01').style.display='block';
@@ -58,3 +55,12 @@ xmlHttpRequest.open("GET","logout",true);
 	event.preventDefault();
 	}
 
+/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+function myFunction() {
+	var x = document.getElementById("myTopnav");
+	if (x.className === "topnav") {
+	  x.className += " responsive";
+	} else {
+	  x.className = "topnav";
+	}
+  }

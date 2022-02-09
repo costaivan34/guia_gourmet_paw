@@ -9,19 +9,19 @@ inputs.forEach(function(input) {
         //console.log(input.checkValidity());
         // checkValidity() lanza la validación y decide si el valor del input 
         //	es correcto o no.
-        console.log(input.name)
+        console.log(input.name);
           if (!input.checkValidity()) {
             console.log(`Valor invalido en el input ${input.name}`);
             document.getElementById(input.name).classList.add("input-error");
             //  document.getElementById(input.name).reportValidity();
-            document.getElementById(`help-${input.name}`).textContent = input.validationMessage
+            document.getElementById(`help-${input.name}`).textContent = input.validationMessage;
             // console.log(input.validationMessage);
             // agregar clases css para que se resalte el error
           } else {
             console.log(`Valor CORRECTO en el input ${input.name}`);
             console.log(`input ${input.name}`);
             document.getElementById(input.name).classList.remove("input-error");
-            document.getElementById(`help-${input.name}`).textContent = ""
+            document.getElementById(`help-${input.name}`).textContent = "";
             // agregar clases css para que se muestre valido 
             //  o al menos borrar las clases que marcan errores
           }
@@ -51,17 +51,17 @@ document.getElementById("archivosubido").onchange = function(e) {
 
 
 function validarpassword() {
-        passwordNueva = document.getElementById('passwordNueva').value
-        passwordRepeat = document.getElementById('passwordRepeat').value
+        passwordNueva = document.getElementById('passwordNueva').value;
+        passwordRepeat = document.getElementById('passwordRepeat').value;
     if ( passwordRepeat != passwordNueva ) {
        //  console.log(`Valor invalido en el input passwordRepeat`);
         document.getElementById("passwordRepeat").classList.add("input-error");
         //  document.getElementById(input.name).reportValidity();
-        document.getElementById(`help-passwordRepeat`).textContent = `Las contraseñas no coinciden`
+        document.getElementById(`help-passwordRepeat`).textContent = `Las contraseñas no coinciden`;
     }else{
       console.log(`Valor valido en el input passwordRepeat`);
       document.getElementById("passwordRepeat").classList.remove("input-error");
-      document.getElementById(`help-passwordRepeat`).textContent = ""
+      document.getElementById(`help-passwordRepeat`).textContent = "";
     }
   
 }
@@ -71,44 +71,44 @@ function validarpais() {
   xmlHttpRequest.onreadystatechange = function () {
     if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
       document.getElementById("paisUser").classList.remove("input-error");
-      document.getElementById(`help-paisUser`).textContent = ""
+      document.getElementById(`help-paisUser`).textContent = "";
     }else{
       document.getElementById("paisUser").classList.add("input-error");
-      document.getElementById(`help-paisUser`).textContent = "El país ingresado no es valido"
+      document.getElementById(`help-paisUser`).textContent = "El país ingresado no es valido";
     }
   } 
   paisUser = document.getElementById('paisUser').value
-  xmlHttpRequest.open('GET', `https://restcountries.com/v3.1/name/${paisUser}?fullText=true`, true)
+  xmlHttpRequest.open('GET', `https://restcountries.com/v3.1/name/${paisUser}?fullText=true`, true);
   xmlHttpRequest.send();
   event.preventDefault();
 }
 
 
 function validarmail() {
-  mailUser = document.getElementById('mailUser')
+  mailUser = document.getElementById('mailUser');
   if (mailUser.checkValidity()) {
-  var xmlHttpRequest = new XMLHttpRequest()
+  var xmlHttpRequest = new XMLHttpRequest();
   xmlHttpRequest.onreadystatechange = function () {
     if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
       if (xmlHttpRequest.responseText == 0) {
-        console.log(`El mail ok`)
+        console.log(`El mail ok`);
       document.getElementById("mailUser").classList.remove("input-error");
-      document.getElementById(`help-mailUser`).textContent = ""
+      document.getElementById(`help-mailUser`).textContent = "";
     }else{
-      console.log(`El mail ingresado ya está en uso`)
+      console.log(`El mail ingresado ya está en uso`);
       document.getElementById("mailUser").classList.add("input-error");
-      document.getElementById(`help-mailUser`).textContent = `El mail ingresado ya está en uso`
+      document.getElementById(`help-mailUser`).textContent = `El mail ingresado ya está en uso`;
     }
   }
   } 
-  mailUser = document.getElementById('mailUser').value
+  mailUser = document.getElementById('mailUser').value;
   xmlHttpRequest.open('GET', '/mail?mailUser='+mailUser, true);
   xmlHttpRequest.send();
   event.preventDefault();
   } else {
     console.log(`Valor invalido en el input ${input.name}`);
     document.getElementById('mailUser').classList.add("input-error");
-    document.getElementById(`help-mailUser`).textContent = input.validationMessage
+    document.getElementById(`help-mailUser`).textContent = input.validationMessage;
   }
   
 }

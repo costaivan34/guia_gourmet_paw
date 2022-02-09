@@ -7,19 +7,19 @@ window.addEventListener('DOMContentLoaded', function () {
           //console.log(input.checkValidity());
           // checkValidity() lanza la validación y decide si el valor del input 
           //	es correcto o no.
-          console.log(input.name)
+          console.log(input.name);
             if (!input.checkValidity()) {
               console.log(`Valor invalido en el input ${input.name}`);
               document.getElementById(input.name).classList.add("input-error");
               //  document.getElementById(input.name).reportValidity();
-              document.getElementById(`help-${input.name}`).textContent = input.validationMessage
+              document.getElementById(`help-${input.name}`).textContent = input.validationMessage;
               // console.log(input.validationMessage);
               // agregar clases css para que se resalte el error
             } else {
               console.log(`Valor CORRECTO en el input ${input.name}`);
               console.log(`input ${input.name}`);
               document.getElementById(input.name).classList.remove("input-error");
-              document.getElementById(`help-${input.name}`).textContent = ""
+              document.getElementById(`help-${input.name}`).textContent = "";
               // agregar clases css para que se muestre valido 
               //  o al menos borrar las clases que marcan errores
             }
@@ -34,16 +34,16 @@ window.addEventListener('DOMContentLoaded', function () {
 function validarpassActual() {
   passwordAntigua = document.getElementById('passwordAntigua')
   if (passwordAntigua.checkValidity()) {
-  var xmlHttpRequest = new XMLHttpRequest()
+  var xmlHttpRequest = new XMLHttpRequest();
   xmlHttpRequest.onreadystatechange = function () {
     if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
       if(xmlHttpRequest.responseText == 1) {
       document.getElementById("passwordAntigua").classList.remove("input-error");
-      document.getElementById(`help-passwordAntigua`).textContent = ""
+      document.getElementById(`help-passwordAntigua`).textContent = "";
     }else{
       console.log(`La contraseña ingresada no es válida`)
       document.getElementById("passwordAntigua").classList.add("input-error");
-      document.getElementById(`help-passwordAntigua`).textContent = `La contraseña ingresada no es válida`
+      document.getElementById(`help-passwordAntigua`).textContent = `La contraseña ingresada no es válida`;
     }
   }
   } 
@@ -55,24 +55,24 @@ function validarpassActual() {
   event.preventDefault();
   } else {
     document.getElementById('passwordAntigua').classList.add("input-error");
-    document.getElementById(`help-passwordAntigua`).textContent = "La contraseña ingresada no es válida"
+    document.getElementById(`help-passwordAntigua`).textContent = "La contraseña ingresada no es válida";
   }
   
 }
 
   
   function validarpassword() {
-          passwordNueva = document.getElementById('passwordNueva').value
-          passwordRepeat = document.getElementById('passwordRepeat').value
+          passwordNueva = document.getElementById('passwordNueva').value;
+          passwordRepeat = document.getElementById('passwordRepeat').value;
       if ( passwordRepeat != passwordNueva ) {
          //  console.log(`Valor invalido en el input passwordRepeat`);
           document.getElementById("passwordRepeat").classList.add("input-error");
           //  document.getElementById(input.name).reportValidity();
-          document.getElementById(`help-passwordRepeat`).textContent = `Las contraseñas no coinciden`
+          document.getElementById(`help-passwordRepeat`).textContent = `Las contraseñas no coinciden`;
       }else{
         console.log(`Valor valido en el input passwordRepeat`);
         document.getElementById("passwordRepeat").classList.remove("input-error");
-        document.getElementById(`help-passwordRepeat`).textContent = ""
+        document.getElementById(`help-passwordRepeat`).textContent = "";
       }
     
   }
