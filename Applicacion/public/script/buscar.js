@@ -5,14 +5,6 @@ window.addEventListener("DOMContentLoaded", function () {
   });
 
 
-  function getDatos(){
-    clave = document.getElementById("palabraClave").value;
-    categoria = document.getElementById("categorias").value;
-    provincia = document.getElementById("provincias").value;
-    pagina =1;
-   window.location.replace("/buscar?Clave="+ clave +"&Provincia="+ provincia +"&Categoria="+categoria+"&Pagina="+pagina);   
-  }
-
   function getCategorias(){
 	var xmlHttpRequest=new XMLHttpRequest();
 	xmlHttpRequest.onreadystatechange=function() {

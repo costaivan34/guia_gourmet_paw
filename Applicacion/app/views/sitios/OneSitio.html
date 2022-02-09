@@ -42,8 +42,8 @@ block main %}
       </li>
       {% endif %} {% endfor %}
     </ul>
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    <a id="prev" class="prev" onclick="retrocederFoto()">&#10094;</a>
+    <a id="next" class="next" onclick="pasarFoto()">&#10095;</a>
     <!-- The dots/circles -->
     <ul style="text-align: center;">
       {% for N in datos.Imagenes %} {% if loop.index-1 == 0 %}

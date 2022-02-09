@@ -668,20 +668,20 @@ class SitioController extends Controller{
         }else{
             $datos["user"] = " ";
         }
-        if( (isset($_GET['Clave'])) ){
+        if( (isset($_GET['clave'])) ){
             $Clave =htmlspecialchars ($_GET['clave']);
             $datos['clave'] = $Clave;
         }else{
             $datos['clave'] = '';
         }
-        if( (isset($_GET['provincia'])) ){
-            $Provincia =  (htmlspecialchars($_GET['provincia']));
+        if( (isset($_GET['provincias'])) ){
+            $Provincia =  (htmlspecialchars($_GET['provincias']));
             $datos['provincia'] = $Provincia;
         }else{
             $datos['provincia'] = 'TODAS';
         }
-        if((isset($_GET['categoria'])) ){
-            $Categoria =  (htmlspecialchars($_GET['categoria']));
+        if((isset($_GET['categorias'])) ){
+            $Categoria =  (htmlspecialchars($_GET['categorias']));
             $datos['categoria'] = $Categoria;
         }else{
             $datos['categoria'] = 0;
