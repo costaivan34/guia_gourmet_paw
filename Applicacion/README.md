@@ -15,7 +15,6 @@
 Ejecutar:
 
 ```
-
 cd Applicacion/
 php -S localhost:8888
 ```
