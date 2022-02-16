@@ -15,7 +15,7 @@
 Ejecutar:
 
 ```
-git clone https://github.com/costaivan34/guia_gourmet_paw
+
 cd Applicacion/
 php -S localhost:8888
 ```
