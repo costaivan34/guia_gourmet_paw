@@ -232,9 +232,6 @@ INSERT INTO `platos` (`idPlato`, `nombre`, `descripcion`, `idSitio`) VALUES
 (8, 'Queremos Flan', 'El flan, también llamado quesillo, es un postre hecho con una natilla que se prepara con huevos enteros, leche y azúcar, que luego es refrigerada para obtener una textura cremosa y gelatinosa.', 2),
 
 (9, 'Empanadas de carne', 'Una empanada es una fina masa de pan, masa quebrada u hojaldre rellena con una preparación salada o dulce y cocida al horno o frita. El relleno puede incluir carnes rojas o blancas, pescado, verduras o fruta.', 3),
-(10, 'Pollo al horno ', 'El pollo asado, rostizado, en brasas o a la brasa es un plato genérico elaborado con un pollo expuesto directamente al fuego, que puede provenir de un hogar casero, hasta el asador profesional rotatorio.', 3),
-(11, 'Ravioles', 'Ravioli es el nombre de un tipo de pasta italiana rellena con diferentes ingredientes, generalmente replegada en forma cuadrada. Se acompañan de algún tipo de salsa, en especial de tomate, tucos, pesto o cremas.', 3),
-(12, 'Queremos Flan', 'El flan, también llamado quesillo, es un postre hecho con una natilla que se prepara con huevos enteros, leche y azúcar, que luego es refrigerada para obtener una textura cremosa y gelatinosa.', 3),
 
 (13, 'Empanadas de carne', 'Una empanada es una fina masa de pan, masa quebrada u hojaldre rellena con una preparación salada o dulce y cocida al horno o frita. El relleno puede incluir carnes rojas o blancas, pescado, verduras o fruta.', 4),
 (14, 'Pollo al horno ', 'El pollo asado, rostizado, en brasas o a la brasa es un plato genérico elaborado con un pollo expuesto directamente al fuego, que puede provenir de un hogar casero, hasta el asador profesional rotatorio.', 4),
@@ -254,7 +251,12 @@ INSERT INTO `platos` (`idPlato`, `nombre`, `descripcion`, `idSitio`) VALUES
 (25, 'Empanadas de carne', 'Una empanada es una fina masa de pan, masa quebrada u hojaldre rellena con una preparación salada o dulce y cocida al horno o frita. El relleno puede incluir carnes rojas o blancas, pescado, verduras o fruta.', 7),
 (26, 'La marinara ', 'Es la pizza más antigua, con salsa de tomate, orégano, ajo, aceite de oliva, albahaca y una pizca de sal. Su principal característica es que no tiene queso.Su nombre se debe a que los marineros la elegían para llevar a alta mar por sus propiedades de conservación.', 7),
 (27, 'La Sfincione', 'Si bien para algunos entendidos La Margherita y la Marinara son las verdaderas pizzas, el resto de Italia no se dio por aludida y dejó que en sus regiones proliferaran otros gustos. Es el caso de la Sfincione que es una pizza, esponjosa y cuadrada, de 1 cm de grosor, que es típica de la ciudad de Palermo en Sicilia. Se diferencia de la napolitana en que es una masa más gruesa y tiene forma cuadrada o rectangular. ', 7),
-(28, 'Chicago Pizza Style', 'También los inmigrantes italianos fueron los encargados de que Chicago, en Estados Unidos se convirtiera en otra legendaria ciudad pizzera. Aquí la Chicago Pizza Style tiene una masa con un poco de harina de maíz y se hornea dentro de un plato metálico cuyo fondo se cubre con aceite de oliva. Sus bordes son elevados para rellenar y el fondo está tostado para que soporte el peso del tomate y de la mozzarella.', 7);
+(28, 'Chicago Pizza Style', 'También los inmigrantes italianos fueron los encargados de que Chicago, en Estados Unidos se convirtiera en otra legendaria ciudad pizzera. Aquí la Chicago Pizza Style tiene una masa con un poco de harina de maíz y se hornea dentro de un plato metálico cuyo fondo se cubre con aceite de oliva. Sus bordes son elevados para rellenar y el fondo está tostado para que soporte el peso del tomate y de la mozzarella.', 7),
+
+(29, 'Asado Argentino', 'La Parrillada es uno de los platos argentinos por excelencia, su técnica consiste en asar lentamente diversos cortes de carne sobre una parrilla, a las brasas.', 3),
+(30, 'Hamburguesa', 'Una hamburguesa es un sándwich hecho a base de carne molida o de origen vegetal, aglutinada en forma de filete cocinado a la parrilla o a la plancha, aunque también puede freírse u hornearse.Se presenta en un pan ligero partido en dos que posee forma de óvalo. Suele estar acompañada de aros de cebolla, hojas de lechuga, alguna rodaja de tomate, láminas de encurtidos y papas fritas. Se suele aliñar con algún condimento, como puede ser la salsa de tomate, la mostaza, el relish, el kétchup o la mayonesa, entre otros.', 3),
+(31, 'Picada', 'Se denomina picada a un entrante típico de la gastronomía de Argentina y Uruguay, que se compone de varios alimentos servidos en pequeñas cantidades, ', 3);
+
 --
 -- Volcado de datos para la tabla `imagenesplatos`
 --
@@ -269,9 +271,6 @@ INSERT INTO `imagenesplatos` (`idImagen`, `idPlato`, `path`) VALUES
 (7, 7, '/private/plates/2/pollo.jpg'),
 (8, 8, '/private/plates/2/flan.jpg'),
 (9, 9, '/private/plates/3/empanadas.jpg'),
-(10, 10, '/private/plates/3/pollo.jpg'),
-(11, 11, '/private/plates/3/ravioles.jpg'),
-(12, 12, '/private/plates/3/flan.jpg'),
 (13, 13, '/private/plates/4/empanadas.jpg'),
 (14, 14, '/private/plates/4/pollo.jpg'),
 (15, 15, '/private/plates/4/ravioles.jpg'),
@@ -287,8 +286,10 @@ INSERT INTO `imagenesplatos` (`idImagen`, `idPlato`, `path`) VALUES
 (25, 25, '/private/plates/7/empanadas.jpg'),
 (26, 26, '/private/plates/7/marinara.jpg'),
 (27, 27, '/private/plates/7/Sfincione.jpg'),
-(28, 28, '/private/plates/7/Chicago Pizza Style.jpg');
-
+(28, 28, '/private/plates/7/Chicago Pizza Style.jpg'),
+(29, 29, '/private/plates/29//1.jpg'),
+(30, 30, '/private/plates/30//1.jpg'),
+(31, 31, '/private/plates/31//1.jpg');
 
 --
 -- Volcado de datos para la tabla `comentariositios`
@@ -437,42 +438,9 @@ INSERT INTO `valornutricional` (`idValor`, `idPlato`, `idInfo`, `valor`) VALUES
 (51, 9, 5, 17),
 (52, 9, 1, 60),
 (53, 9, 4, 6),
-(54, 9, 6, 193),
+(54, 9, 6, 193);
 
 
-
-(55, 10, 2, 1102),
-(56,10, 3, 20),
-(57, 10, 5, 17),
-(58, 10, 1, 60),
-(59, 10, 4, 6),
-(60, 10, 6, 193),
-
-
-
-(61, 11, 2, 1102),
-(62, 11, 3, 20),
-(63, 11, 5, 17),
-(64, 11, 1, 60),
-(65,11, 4, 6),
-(66, 11, 6, 193),
-
-
-
-(67, 12, 2, 1102),
-(68, 12, 3, 20),
-(69, 12, 5, 17),
-(70, 12, 1, 60),
-(71, 12, 4, 6),
-(72, 12, 6, 193),
-
-
-(73, 12, 2, 1102),
-(74, 12, 3, 20),
-(75, 12, 5, 17),
-(76, 12, 1, 60),
-(77, 12, 4, 6),
-(78, 12, 6, 193);
 
 
 --
@@ -488,11 +456,7 @@ INSERT INTO `listacaractplato`(`idListaCaract`,`idPlato`, `idCaract`) VALUES
 (6,6,1),
 (7,7,5),
 (8,8,1),
-(9,9,2),
-(10,10,1),
-(11,11,3),
-(12,12,2),
-(13,13,1);
+(9,9,2);
 
 
 COMMIT;
