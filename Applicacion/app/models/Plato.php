@@ -9,13 +9,6 @@ class Plato extends Model{
     protected $n_per_plato = 6;
 
 
-    public function getAll()
-    {
-        $todos = $this->db->selectAllPlato('plato');
-        $All = json_decode(json_encode($todos), true);
-        return $All;
-    } 
-   
     public function getAllPlatos($idSitio, $page){
         $offset = ($page - 1) * $this->n_per_plato;
         $Platos = $this->db->selectAllPlatos(

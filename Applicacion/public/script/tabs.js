@@ -374,44 +374,25 @@ function setPlatoModal(respuesta, info, img, lista, caract) {
     console.log(caract[c].nombre)
     if (caract[c].nombre == 'Picante') {
       var Picante = document.getElementById('Picante');
-      Picante.src = '/public/svg/chile (1).svg';
-      title="Agregar nuevo Sitio";
-    } else {
-      var Picante = document.getElementById('Picante');
       Picante.src = '/public/svg/chile.svg';
-    }
+    } 
     if (caract[c].nombre == 'Lacteos') {
       var Lacteos = document.getElementById('Lacteos');
       Lacteos.src = '/public/svg/leche.svg';
-    } else {
-      var Lacteos = document.getElementById('Lacteos');
-      Lacteos.src = '/public/svg/leche (1).svg';
     }
     if (caract[c].nombre == 'Gluten') {
       var Gluten = document.getElementById('Gluten');
-      Gluten.src = '/public/svg/gluten (1).svg';
-    } else {
-      var Gluten = document.getElementById('Gluten');
       Gluten.src = '/public/svg/gluten.svg';
-    }
+    } 
     if (caract[c].nombre == 'Vegano') {
       var Vegano = document.getElementById('Vegano');
-      Vegano.src = '/public/svg/tomate (1).svg';
-    } else {
-      var Vegano = document.getElementById('Vegano');
       Vegano.src = '/public/svg/tomate.svg';
-    }
+    } 
     if (caract[c].nombre == 'Azucar') {
       var Azucar = document.getElementById('Azucar');
-      Azucar.src = '/public/svg/sugar (1).svg';
-    } else {
-      var Azucar = document.getElementById('Azucar');
       Azucar.src = '/public/svg/sugar.svg';
-    }
+    } 
     if (caract[c].nombre == 'Sal') {
-      var Sal = document.getElementById('Sal');
-      Sal.src = '/public/svg/dietetico (1).svg';
-    } else {
       var Sal = document.getElementById('Sal');
       Sal.src = '/public/svg/dietetico.svg';
     }

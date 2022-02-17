@@ -14,18 +14,6 @@ class Comentario extends Model{
         $this->db->insert('comentariositios', $comentario);
     }
 
-
-    public function getAll(){
-        $todos = $this->db->selectAllSitios();
-        $All = json_decode(json_encode($todos), True);
-        return $All; 
-    }
-
-    public function getOne($idSitio){
-        $basic = $this->db->selectSitio($idSitio);
-        $basicSitio = (json_encode($basic,true));    
-        return $basic;
-    }
    
     public function getPaginacionComentarios($idSitio){
         //  $offset = ($pagenro-1) * $n_per_coment;

@@ -45,7 +45,6 @@ class Users extends Model{
     }
 
 
-
     public function getUsuario($user){
         $datos = $this->db->getUsuario($user);
         //$datos = (json_encode($datos,true)); 
